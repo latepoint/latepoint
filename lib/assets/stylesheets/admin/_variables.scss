@@ -1,0 +1,194 @@
+$logo-color: #1d7bff;
+$brand-primary: #1d7bff;
+$brand-dark: #2D303A;
+$body-bg: #fff;
+$faded-bg: #f3f3f3;
+$sidebar-bg: #fff;
+$element-bg: #F5F6FA;
+$color-faded: #788291;
+$border-color-strong: #d2d4d7;
+$border-color-main: #e4e5e7;
+$border-color-sub: #f2f3f3;
+// FONTS & TYPOGRAPHY
+
+$body-font-family: "latepoint", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
+$headings-font-family: "latepoint", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
+$mono-font-family: "latepoint-mono", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
+
+$images-path: '/wp-content/plugins/latepoint/public/images';
+$fonts-path: '/wp-content/plugins/latepoint/public/fonts';
+
+// -- Sizes
+
+$font-size-menu-base: 17px;
+$headings-font-size: 26px;
+
+// $body-color: #2D303A;
+$body-color: #41444b;
+$body-color-dark: #2e3036;
+$body-color-light: #b0b0b0;
+
+
+$headings-font-weight-normal: 400;
+$headings-font-weight-bold: 400;
+$headings-font-weight-black: 600;
+
+$mono-font-weight-normal: 400;
+$mono-font-weight-bold: 400;
+$headings-color: #1f222b;
+
+$link-color: $brand-primary;
+$letter-spacing: normal;
+$content-padding: 30px;
+
+// CALENDAR
+$period_height: 20px;
+
+// SIDE PANEL
+$side-panel-width: 420px;
+$side-panel-offset: 0px;
+$side-panel-border-radius: 0px;
+$side-panel-padding-y: 20px;
+$side-panel-padding-x: 30px;
+$top-bar-bg: #fff;
+$top-bar-height: 58px;
+
+// SIDE MENU
+$side-menu-width: 210px;
+
+// -- Light
+$side-menu-text-color: $headings-color;
+$side-menu-link-color: #333;
+$side-menu-icon-color: $brand-primary;
+$side-menu-bg: $body-bg;
+$side-menu-item-hover-bg: #ebedf1;
+$side-menu-active-item-bg: #ebedf1;
+
+// -- Dark
+$side-menu-dark-link-color: #9398b7;
+$side-menu-dark-icon-color: #3a58dc;
+$side-menu-dark-bg: #040a27;
+$top-bar-mobile-height: 58px;
+$floating-sub-menu-dark-bg: $brand-primary;
+// GLOBALS
+
+$widget-padding: 30px;
+
+$calendar-year-color: #eee;
+
+// -- Shadows
+$box-shadow: 0 5px 15px -5px rgba(115, 125, 146, 0.11), 0 1px 2px 0 rgba(160, 170, 185, 0.6);
+$box-shadow-hover: 0 15px 30px 0 rgba(108, 120, 143, 0.2), 0 1px 3px 0 rgba(170, 179, 197, 0.9);
+$box-shadow-main: 0 1px 2px rgba(0,0,0,0.2);
+
+// -- Border Radius
+$border-radius-xs: 6px;
+$border-radius-sm: 6px;
+$border-radius: 6px;
+$border-radius-lg: 6px;
+
+$border-radius-btn: 6px;
+$border-radius-btn-lg: 6px;
+$border-radius-btn-sm: 6px;
+
+$lightbox-border-radius: 6px;
+
+$border-color-lightest: #F4F4F4;
+$border-color-light: #ddd;
+
+
+// TABLES
+$table-row-highlight-bg: #f3f4f7;
+$table-row-highlight-border: $border-color-main;
+$table-heading-border-color: $border-color-main;
+
+// TOOLTIPS
+$tooltip-border-radius: 5px;
+
+// FORMS
+
+$form-controls-border-color: #cecfd8;
+$form-controls-background-color: #f1f3f7;
+$form-controls-border-radius: 5px;
+$form-controls-color: #32373c;
+$form-controls-label-color: #444756;
+$form-controls-select-height: auto;
+$form-controls-select-height-small: auto;
+$form-controls-placeholder-color: #a4a6a9;
+$form-controls-font-weight: $body-font-weight-normal;
+
+$form-controls-padding-x: 6px;
+$form-controls-padding-y: 7px;
+
+$form-controls-border-color-error: #b55959;
+$form-controls-color-error: #872727;
+$form-controls-background-error: #b55959;
+$form-controls-label-color-error: #bf6666;
+
+// BUTTONS
+$button-shadow-size: 0px 1px 2px 0px;
+$button-font-size: 15px;
+
+// primary
+$button-primary-bg-color: #1e7bff;
+$button-primary-border-color: #1e7bff;
+$button-primary-shadow-color: transparent;
+$button-primary-text-color: #fff;
+$button-primary-outline-text-color: #1e7bff;
+$button-primary-hover-bg-color: #456ef6;
+$button-primary-hover-border-color: #456ef6;
+
+// danger
+$button-danger-bg-color: #ef6b6b;
+$button-danger-border-color: #ef6b6b;
+$button-danger-shadow-color: transparent;
+$button-danger-text-color: #fff;
+$button-danger-outline-color: #de5959;
+$button-danger-hover-bg-color: #FB7F7F;
+$button-danger-hover-border-color: #FB7F7F;
+
+// success
+$button-success-bg-color: #2ebd6f;
+$button-success-border-color: #2ebd6f;
+$button-success-shadow-color: transparent;
+$button-success-text-color: #fff;
+$button-success-outline-color: #1ea55b;
+$button-success-hover-bg-color: #42d083;
+$button-success-hover-border-color: #42d083;
+
+// warning
+$button-warning-bg-color: #e2c99b;
+$button-warning-border-color: #e2c99b;
+$button-warning-shadow-color: transparent;
+$button-warning-text-color: #534220;
+$button-warning-outline-color: #534220;
+$button-warning-hover-bg-color: #fde1ac;
+$button-warning-hover-border-color: #fde1ac;
+
+// secondary
+$button-secondary-bg-color: #e9eaed;
+$button-secondary-border-color: #e9eaed;
+$button-secondary-shadow-color: transparent;
+$button-secondary-text-color: #252C39;
+$button-secondary-outline-color: #b6bac9;
+$button-secondary-hover-bg-color: #dcdee4;
+$button-secondary-hover-border-color: #dcdee4;
+
+// white
+$button-white-bg-color: #fff;
+$button-white-border-color: #e9ebf0;
+$button-white-shadow-color: rgba(0,0,0,0.1);
+$button-white-text-color: $body-color;
+$button-white-outline-color: #fff;
+$button-white-hover-bg-color: #eee;
+$button-white-hover-border-color: #fff;
+
+// booking form preview
+$calendar-day-box-bg: #eefdec;
+$calendar-timeline-off-bg: #e6e9ef;
+$timeblock-available-bg: #8fe286;
+$timeblock-tick-height: 24px;
+
+
+// order form
+$order-item-padding: 15px;

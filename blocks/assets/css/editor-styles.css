@@ -1,0 +1,200 @@
+/*lb - latepoint block*/
+.editor-sidebar{
+    --wp-admin-theme-color: #007cba;
+}
+.components-panel__body.is-opened>.components-panel__body-title{
+    margin-bottom: 10px;
+}
+.lb-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+}
+.lb-row-block{
+    display: block;
+    & + .lb-row-block{
+        margin-top: 10px;
+    }
+}
+
+.lb-label{
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.4;
+    text-transform: uppercase;
+}
+
+.lb-color-settings-dropdown{
+    width: 100%;
+}
+.lb-color-settings-w{
+    .components-button{
+        padding: 0;
+        border-radius: 50%;
+        height: auto;
+    }
+    .component-color-indicator{
+        width: 28px;
+        height: 28px;
+    }
+}
+
+.lb-general-tabs{
+    & > .components-tab-panel__tabs {
+        .lb-tab-head{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+        }
+        .components-button {
+            flex: 1;
+            justify-content: center;
+            height: 60px;
+
+            &.active-tab {
+                border-bottom: 2px solid var(--wp-admin-theme-color);
+                color: var(--wp-admin-theme-color);
+                z-index: 2;
+            }
+        }
+    }
+}
+
+.lb-tabs{
+    .components-button{
+        height: 30px;
+        background: #efefef;
+    }
+    .active-tab{
+        background: var(--wp-admin-theme-color);
+        color: #fff;
+    }
+    .components-tab-panel__tab-content{
+        padding: 20px;
+        border: 1px solid #efefef;
+    }
+}
+
+.lb-toggle-group{
+    button{
+        border: 1px solid #efefef;
+    }
+}
+
+.lb-boxcontrol {
+    .components-unit-control{
+        margin-bottom: 0;
+    }
+    .components-range-control:last-child{
+        margin-bottom: 0 !important;
+    }
+}
+
+
+
+
+
+button.latepoint-block-reset {
+    color: var(--wp-admin-theme-color);
+    &:disabled{
+        color: #ccc;
+        opacity: 1;
+    }
+    .dashicons-image-rotate {
+        width: 10px;
+        height: 10px;
+        font-size: 10px;
+    }
+}
+
+
+.latepoint-block-popup{
+    width: 100%;
+    position: relative;
+}
+
+.latepoint-block-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    button.latepoint-block-popup-edit{
+        margin: 0;
+        height: 28px;
+        width: 28px;
+        padding: 5px;
+        border: 1px solid #e6e7e9;
+        border-radius: 14px;
+        color: #50575e;
+        min-width: initial;
+    }
+    .latepoint-block-header-actions{
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+}
+
+.latepoint-block-popup-options{
+    position: relative;
+    top: 15px;
+    width: 100%;
+    border-radius: 2px;
+    padding: 16px;
+    margin-bottom: 40px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    background: #fff;
+}
+
+.components-base-control__field .latepoint-control-two-columns{
+    align-items: center;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 0;
+}
+
+.latepoint-control-label{
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.4;
+    text-transform: uppercase;
+}
+
+
+.latepoint-unit-selector{
+    display: flex;
+    gap: 5px;
+    .components-button{
+        box-shadow: none !important;
+        font-size: 10px;
+        justify-content: center;
+        text-align: center;
+        text-shadow: none;
+        text-transform: uppercase;
+        width: 100%;
+        cursor: pointer;
+        padding: 0;
+        color: #50575e;
+        &:hover, &.is-primary:hover{
+            background: none;
+            color: var(--wp-admin-theme-color);
+        }
+
+        &.is-primary{
+            background: unset;
+            color: var(--wp-admin-theme-color);
+            box-shadow: unset;
+            font-weight: 600;
+        }
+    }
+}
+.lb-resource-title{
+    margin: 0 0 10px !important;
+}
+
+.lb-boxshadow-actions{
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: -25px;
+}

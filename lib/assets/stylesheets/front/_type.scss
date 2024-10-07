@@ -1,0 +1,20 @@
+/*!
+ * Copyright (c) 2023 LatePoint LLC. All rights reserved.
+ */
+
+
+@font-face{
+  font-family:"latepoint";
+  src: url("#{$fonts-path}/latepoint-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face{
+  font-family:"latepoint";
+  src: url("#{$fonts-path}/latepoint-semibold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: block;
+}

@@ -1,0 +1,245 @@
+// List of bundles on bundles index in admin
+.os-bundles-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 30px;
+  align-items: flex-start;
+  grid-auto-rows: 1fr;
+  .os-bundle-wrapper {
+    position: relative;
+    &.os-bundle-status-disabled {
+      opacity: 0.7;
+      .os-bundle-header {
+        box-shadow: inset 0px 3px 0px 0px #ca1616;
+        .bundle-name {
+          color: #ca1616;
+        }
+      }
+    }
+  }
+  .os-bundle {
+    background-color: #fff;
+    border: 1px solid $border-color-main;
+    border-bottom-color: darken($border-color-main, 15%);
+    border-radius: $border-radius;
+    position: relative;
+    z-index: 3;
+    .os-form-w {
+      padding: 0px;
+      margin: 0px;
+      background-color: transparent;
+    }
+  }
+
+
+  .os-bundle-header {
+    padding: 15px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    text-align: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .bundle-hidden {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      color: #e83c3c;
+      font-size: 15px;
+    }
+
+    .bundle-image {
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 20px;
+      img {
+        height: 40px;
+        width: auto;
+        display: block;
+      }
+    }
+
+    .bundle-name {
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0;
+      color: $headings-color;
+      text-align: left;
+    }
+    .bundle-price {
+      font-weight: $body-font-weight-bold;
+      font-size: floor($font-size-base * 1.2);
+      color: $brand-primary;
+    }
+  }
+
+
+  .os-bundle-body {
+    padding-bottom: 56px;
+    .selected-count {
+      background-color: #fff6c7;
+      border: 1px solid #e0be0d;
+      color: #c18018;
+      border-radius: 4px;
+      font-size: floor($font-size-base * 0.8);
+      padding: 3px 5px;
+      line-height: 1.1;
+      &.selected-count-all {
+        background-color: #ceffce;
+        border-color: #15c340;
+        color: #0e8e25;
+      }
+    }
+    .os-bundle-services-wrapper {
+      padding: 20px;
+      .label {
+        color: $body-color-light;
+        font-weight: $body-font-weight-bold;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .bundle-services {
+      }
+      .bundle-service {
+        display: flex;
+        align-items: flex-start;
+        font-weight: $body-font-weight-bold;
+        justify-content: space-between;
+        & + .bundle-service {
+          margin-top: 10px;
+        }
+      }
+    }
+    .bundle-info-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+  }
+
+  .os-bundle-foot {
+    padding: 10px;
+    padding-top: 0px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .os-bundle-shadow {
+    z-index: 2;
+    position: absolute;
+    left: 6px;
+    right: 6px;
+    bottom: -3px;
+    height: 6px;
+    box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.4);
+    border-radius: 0 0 3px 3px;
+    background-color: #fff;
+    & + .os-bundle-shadow {
+      bottom: -7px;
+      z-index: 1;
+      left: 10px;
+      right: 10px;
+      box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  .assign-agent-btn {
+    display: inline-block;
+    vertical-align: middle;
+
+  }
+
+  .bundle-agents-avatars {
+    vertical-align: middle;
+    padding: 10px 0px;
+    display: inline-block;
+    img {
+      width: 35px;
+      height: auto;
+      border-radius: 40px;
+      display: inline-block;
+    }
+    img + img {
+      margin-left: 10px;
+    }
+    img:last-child {
+      margin-right: 30px;
+    }
+  }
+
+
+  // ADD SERVICE BUTTON
+  .create-bundle-link-w {
+    border: 4px dotted rgba(0,0,0,0.1);
+    border-radius: 6px;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    display: block;
+    outline: none;
+    box-shadow: none;
+    min-height: 200px;
+    align-self: stretch;
+
+    .create-bundle-link-i {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .add-bundle-graphic-w {
+      width: 90px;
+      height: 90px;
+      position: relative;
+      margin: 0px auto;
+      .add-bundle-plus {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        border-radius: 50%;
+        height: 30px;
+        width: 30px;
+        background-color: $brand-primary;
+        box-shadow: 0px 0px 0px 10px rgba(208, 213, 220, 0.3);
+        color: #fff;
+        transform: translate(-50%, -50%);
+        transition: all 0.2s cubic-bezier(.25,1.4,.5,1.35);
+        i {
+          position: absolute;
+          display: block;
+          top: 50%;
+          left: 50%;
+          font-size: 12px;
+          transform: translate(-45%, -47%);
+          transition: all 0.2s ease;
+        }
+      }
+    }
+    .add-bundle-label {
+      color: $brand-primary;
+      font-weight: $body-font-weight-bold;
+      font-size: $font-size-base * 1.2;
+      margin-top: 20px;
+      transition: all 0.2s cubic-bezier(.25,1.4,.5,1.35);
+    }
+    &:hover {
+      border-color: $brand-primary;
+      border-style: solid;
+      .add-bundle-plus {
+        box-shadow: 0px 0px 0px 20px rgba(208, 213, 220, 0.3);
+        transform: translate(-50%, -50%) scale(1.3);
+        i {
+        }
+      }
+      .add-bundle-label {
+        transform: translateY(5px);
+      }
+    }
+  }
+}

@@ -1,0 +1,272 @@
+$dark-bg: #181c2b;
+$dark-bg-1: #1d2132;
+$dark-bg-2: #23273b;
+$dark-border-1: lighten($dark-bg, 5%);
+$dark-border-2: lighten($dark-bg, 10%);
+$dark-color-1: #eeeffc;
+$dark-color-2: #858699;
+$dark-color-3: #535667;
+$dark-icon-color: #3653d1;
+$dark-brand-primary: #3653d1;
+
+body.latepoint-admin.latepoint-dark {
+  color: $dark-color-1;
+  h1, h2, h3, h4, h5 {
+    color: #fff;
+  }
+
+  .os-categories-ordering-w .os-category-w,
+  .os-category-parent-w.gu-mirror .os-category-w {
+    background-color: $dark-bg-1;
+    box-shadow: 0 10px 30px 0 rgba(0,0,0,0.1), 0 1px 2px 0 rgba(0,0,0,0.2);
+  }
+  .item-in-category-w {
+    background-color: $dark-bg-1;
+    border-color: darken($dark-bg, 1%);
+    .os-category-item-meta {
+      background-color: $dark-bg;
+    }
+  }
+
+  .os-categories-ordering-w .os-category-w .os-category-head .os-category-items-meta, .os-category-parent-w.gu-mirror .os-category-w .os-category-head .os-category-items-meta,
+  .os-categories-ordering-w .os-category-w .os-category-head .os-category-items-count, .os-category-parent-w.gu-mirror .os-category-w .os-category-head .os-category-items-count{
+    background-color: $dark-bg;
+  }
+
+  .os-form-sub-header.sub-level {
+    h3 {
+      background-color: $dark-bg;
+      color: $dark-color-2;
+    }
+    &:after {
+      background-color: $dark-bg-1;
+    }
+  }
+
+
+  .os-services-list {
+    .create-service-link-w {
+      border-color: $dark-border-1;
+      .add-service-graphic-w .add-service-plus {
+        background-color: $dark-brand-primary;
+        box-shadow: 0px 0px 0px 10px $dark-bg-1;
+      }
+      .add-service-label {
+        color: $dark-brand-primary;
+      }
+    }
+    .os-service {
+      background-color: $dark-bg-1;
+      box-shadow: 0 10px 30px 0 darken($dark-bg, 5%), 0 1px 2px 0 darken($dark-bg, 10%);
+    }
+    .os-service-header .service-name {
+      color: $dark-color-1;
+    }
+    .os-service-body {
+      .os-service-agents .agents-avatars .agent-avatar {
+        box-shadow: 0px 0px 0px 3px $dark-bg-1;
+      }
+      .os-service-agents .agents-avatars .agents-more {
+        background-color: $dark-bg;
+        color: $dark-color-2;
+      }
+      .os-service-agents .value strong,
+      .os-service-info .value strong {
+        color: $dark-brand-primary;
+      }
+    }
+  }
+
+  .os-table-w.os-table-compact .os-table tr th {
+    background-color: $dark-bg;
+    border-color: $dark-border-2;
+  }
+  .os-table-w.os-table-compact .os-table tr td {
+    border-color: $dark-border-2;
+  }
+  .os-scrollable-table-w .os-table-w.os-table-compact .os-table tr td:first-child, .os-scrollable-table-w .os-table-w.os-table-compact .os-table tr th:first-child {
+    box-shadow: inset -1px 0px 0px 0px $dark-border-2;
+  }
+  body.latepoint-admin.latepoint-dark .os-scrollable-table-w .os-table-w.os-table-compact .os-table tr td:first-child, body.latepoint-admin.latepoint-dark .os-scrollable-table-w .os-table-w.os-table-compact .os-table tr th:first-child {
+    box-shadow: inset -1px 0px 0px 0px $dark-border-2;
+  }
+  .os-scrollable-table-w {
+    border-color: $dark-border-2;
+  }
+  .os-table-w.os-table-compact .os-table tbody tr:hover td {
+    background-color: $dark-bg;
+  }
+  .os-table tbody tr td {
+    background-color: $dark-bg;
+    border-color: $dark-border-2;
+  }
+
+  .latepoint-btn {
+    &.latepoint-btn-primary {
+      background-color: $dark-brand-primary;
+    }
+    &.latepoint-btn-secondary {
+      background-color: $dark-bg-2;
+      color: $dark-color-1;
+    }
+  }
+
+  .agent-day-availability-w .agent-timeslot.is-off {
+    background-image: repeating-linear-gradient(90deg, $dark-bg, $dark-bg 2px, #873e3e 2px, #873e3e 3px)
+  }
+
+
+
+  .appointment-box-squared {
+    border-bottom-color: $dark-border-1;
+    .appointment-service-name {
+      color: $dark-color-1;
+    }
+    .appointment-main-info .appointment-main-info-i .appointment-date-i .appointment-date {
+      color: $dark-color-2;
+    }
+    .appointment-date-w .appointment-time {
+      color: $dark-brand-primary;
+    }
+
+    .appointment-main-info .appointment-link {
+      color: $dark-brand-primary;
+    }
+  }
+  .os-widget-daily-bookings {
+    border-right-color: $dark-border-1;
+  }
+  .os-widget {
+    .stats-tab-info {
+      background-color: $dark-bg-1;
+      color: $dark-color-2;
+    }
+    .stats-tab-value {
+      color: $dark-color-1;
+      .stats-change .stats-change-value {
+        color: $dark-color-3;
+      }
+    }
+    .stats-tab-label {
+      color: $dark-color-2;
+    }
+    .os-widget-header {
+      border-bottom-color: $dark-border-1;
+      &.with-actions {
+        select {
+          background-color: $dark-bg-1;
+          color: $dark-color-1;
+          border-color: $dark-border-2;
+        }
+
+        .os-widget-header-actions .os-date-range-picker {
+          background-color: $dark-bg-1;
+          color: $dark-color-1;
+          border-color: $dark-border-2;
+
+          span {
+            color: $dark-color-1;
+          }
+        }
+      }
+    }
+  }
+
+  .os-table-w.os-table-compact .os-table tr td .os-with-avatar .os-clickable-popup-trigger {
+    background-color: $dark-bg-1;
+  }
+  .os-table-w.os-table-compact .os-table tr th .os-form-group .os-form-control,
+  .os-table-w.os-table-compact .os-table tr th .os-date-range-picker {
+    background-color: $dark-bg-1;
+    color: $dark-color-1;
+    border-color: $dark-border-2;
+  }
+
+
+  .latepoint-top-bar-w .latepoint-top-iconed-link {
+    color: $dark-icon-color;
+  }
+
+  .agent-day-bookings-timeline-compact-w .timeslot.with-tick .tick {
+    background-color: $dark-border-2;
+  }
+
+
+  .timeline-type-toggle {
+    border-color: $dark-border-2;
+    .timeline-type-option {
+      color: $dark-color-2;
+
+      &.active {
+        background-color: $dark-bg;
+        border-color: $dark-brand-primary;
+        color: $dark-brand-primary;
+        box-shadow: 0px 0px 0px 1px $dark-brand-primary;
+      }
+
+    }
+  }
+
+  ul.os-page-tabs {
+    li a {
+      color: $dark-color-3;
+    }
+    li.os-page-tab-active a {
+      color: $dark-color-1;
+
+    }
+  }
+
+  .latepoint-side-menu-w {
+    background-color: $dark-bg;
+    border-right-color: $dark-border-1;
+    &.side-menu-full .back-to-wp-link-w .back-to-wp-link {
+      background-color: $dark-bg;
+      border-color: $dark-brand-primary;
+      color: $dark-brand-primary;
+    }
+    ul.side-menu > li.has-children:after {
+      color: $dark-color-3;
+    }
+    ul.side-menu > li:hover:not(.menu-item-is-active) > a {
+      background-color: lighten($dark-bg, 10%);
+    }
+    ul.side-menu > li.menu-item-is-active > a {
+      background-color: lighten($dark-bg, 10%);
+    }
+    ul.side-menu > li > a {
+      color: $dark-color-1;
+      > i {
+        color: $dark-icon-color;
+      }
+    }
+    ul.side-menu > li.menu-spacer.with-label {
+      &:after {
+        background-color: $dark-border-1;
+      }
+
+      span {
+        background-color: $dark-bg;
+      }
+    }
+  }
+
+  .latepoint-all-wrapper {
+    .latepoint-content-w {
+      background-color: $dark-bg;
+    }
+    .latepoint-top-bar-w {
+      background-color: $dark-bg;
+      border-bottom-color: $dark-border-1;
+      .latepoint-top-iconed-link .notifications-count {
+        border-color: $dark-bg;
+      }
+      .latepoint-top-search-w .latepoint-top-search {
+        background-color: $dark-bg;
+      }
+    }
+    .page-header-w {
+      border-bottom-color: $dark-border-1;
+    }
+  }
+}

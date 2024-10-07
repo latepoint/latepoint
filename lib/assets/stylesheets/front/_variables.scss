@@ -1,0 +1,49 @@
+$brand-primary: var(--latepoint-brand-primary);
+$color-faded: #7c85a3;
+
+// Fonts
+$body-font-family: "latepoint", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
+$headings-font-family: "latepoint", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
+$mono-font-family: "latepoint", 'SF Mono', SFMono-Regular, ui-monospace, 'DejaVu Sans Mono', Menlo, Consolas, monospace;
+
+
+$letter-spacing: 1px;
+$letter-spacing-lg: 2px;
+
+$border-radius: 0px;
+$border-radius-sm: 0px;
+$border-radius-md: 0px;
+$border-radius-lg: 0px;
+
+$body-font-weight-normal: 400;
+$body-font-weight-bold: 600;
+$headings-font-weight-normal: 600;
+$headings-font-weight-bold: 600;
+
+$mono-font-weight-normal: 600;
+$mono-font-weight-bold: 600;
+
+// Forms
+$form-input-border-color: #cad2e0;
+$form-controls-border-radius: 0px;
+$form-controls-color: #32373c;
+$form-controls-select-height: auto;
+
+$form-input-border-color-invalid: #eb3a3a;
+
+$headings-color: #14161d;
+$body-color: var(--latepoint-body-color);
+
+$border-color-light: #f1f1f1;
+$border-color-lightest: #f9f9f9;
+
+$rounded-borders-radius: 8px;
+$item-border-color: #E5E7EE;
+$calendar-day-box-bg: #eefdec;
+$calendar-timeline-off-bg: #e6e9ef;
+$timeblock-available-bg: #8fe286;
+$timeblock-tick-height: 24px;
+
+$images-path: '/wp-content/plugins/latepoint/public/images';
+$fonts-path: '/wp-content/plugins/latepoint/public/fonts';
+$calendar-timeslot-height: 44px;

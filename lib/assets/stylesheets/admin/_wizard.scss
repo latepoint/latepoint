@@ -1,0 +1,897 @@
+@mixin wizard-next-button-override(){
+  background-color: #236bff !important;
+  padding: 10px 12px 10px 16px !important;
+  border: none!important;
+  i {
+  }
+  &:focus {
+    background-color: #407fff !important;
+  }
+  &:hover {
+    background-color: #1d5fe8 !important;
+  }
+}
+@mixin wizard-prev-button-override(){
+  padding: 10px 16px 10px 12px !important;
+  background-color: #f5f6fb!important;
+  box-shadow: none!important;
+  border: none!important;
+  &:hover {
+    background-color: #e9ebf3!important;
+  }
+}
+
+
+.os-wizard-setup-w {
+  margin: 40px auto;
+  width: 540px;
+  position: relative;
+  animation: 0.5s cubic-bezier(.25, 1.3, .5, 1.15) 0s wizardWrapperAnimation;
+  animation-fill-mode: both;
+  .iti--separate-dial-code .iti__selected-dial-code {
+    padding-top: 0!important;
+  }
+
+  .os-wizard-close-trigger {
+    border-radius: 4px;
+    position: absolute;
+    top: -25px;
+    line-height: 1.2;
+    right: 0px;
+    font-size: 14px;
+    color: #b71638;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding: 2px 4px;
+    &:hover {
+      background-color: #fff3f3;
+    }
+
+    span {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    i {
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 5px;
+      font-size: 16px;
+    }
+  }
+
+  &.is-sub-editing {
+    .os-wizard-footer {
+      display: none;
+    }
+  }
+
+  .os-wizard-setup-i {
+    display: flex;
+
+    .os-wizard-steps-w {
+      flex: 0 0 220px;
+      border-right: 1px solid rgba(0, 0, 0, 0.05);
+      text-align: left;
+
+      .logo-w {
+        background-color: $brand-primary;
+        padding: 18px;
+        padding-left: 30px;
+
+        img {
+          width: 35px;
+          height: auto;
+        }
+      }
+
+      .os-wizard-steps {
+        padding-top: 20px;
+      }
+
+      .os-wizard-step {
+        padding: 20px 20px 20px 30px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+        .ws-number {
+          color: $brand-primary;
+          text-transform: uppercase;
+          font-weight: $body-font-weight-bold;
+          letter-spacing: 2px;
+          margin-bottom: 3px;
+          font-size: $font-size-base * 0.9;
+          opacity: 0.5;
+        }
+
+        .ws-name {
+          font-size: $font-size-base * 1.2;
+          color: #0E3280;
+          opacity: 0.4;
+          font-weight: $body-font-weight-bold;
+        }
+
+        &.current {
+          .ws-number {
+            color: $brand-primary;
+            opacity: 1;
+          }
+
+          .ws-name {
+            opacity: 1;
+          }
+        }
+
+        &.complete {
+          .ws-number {
+            color: #52B69A;
+            opacity: 1;
+          }
+
+          .ws-name {
+            text-decoration: line-through;
+          }
+        }
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+
+    .os-wizard-step-content-w {
+      flex: 1;
+
+      .os-wizard-next-btn {
+        .latepoint-icon {
+          transition: transform 0.2s ease;
+        }
+
+        &:hover {
+          .latepoint-icon {
+            transform: translateX(3px);
+          }
+        }
+      }
+
+      .os-wizard-prev-btn {
+        .latepoint-icon {
+          transition: transform 0.2s ease;
+        }
+
+        &:hover {
+          .latepoint-icon {
+            transform: translateX(-3px);
+          }
+        }
+      }
+
+      .os-wizard-step-content {
+        padding: 20px 0px;
+
+
+        .os-image-selector-w .os-image-selector-trigger {
+          border-radius: 6px;
+        }
+
+        .side-by-side-buttons {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-top: 20px;
+          > button i {
+            transition: transform 0.2s ease;
+          }
+
+          > .latepoint-btn-primary {
+            margin-left: auto;
+            @include wizard-next-button-override();
+            flex: 0;
+            &:hover {
+              i {
+              }
+            }
+          }
+
+          > .latepoint-btn-secondary {
+            flex: 0;
+            @include wizard-prev-button-override();
+
+            &:hover {
+              i {
+                transform: translateX(-3px);
+              }
+            }
+          }
+
+        }
+      }
+    }
+  }
+
+  .os-wizard-sub-header {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: floor($headings-font-size * 0.6);
+    margin-bottom: 20px;
+    margin-top: 0px;
+    display: inline-block;
+    background-color: #80808b;
+    color: #fff;
+    padding: 2px 8px 2px;
+    border-radius: 4px;
+  }
+
+  .os-wizard-header {
+    font-size: floor($headings-font-size * 1.65);
+    margin: 10px 0px 15px 0px;
+  }
+
+  .os-wizard-desc {
+    color: $body-color;
+    margin-bottom: 30px;
+    font-size: floor($font-size-base * 1.2);
+    line-height: 1.3;
+  }
+
+  .os-form-w {
+    margin: 0px;
+
+    form > .os-form-group:last-child {
+      margin-bottom: 0px;
+    }
+  }
+
+  &.step-intro {
+
+    .os-wizard-step-content {
+      padding: 70px;
+    }
+
+    .os-wizard-steps-w {
+      display: none;
+    }
+
+    .os-wizard-footer {
+      display: none;
+    }
+
+    .os-wizard-logo-w {
+      margin-bottom: 50px;
+
+      .latepoint-icon {
+        font-size: 40px;
+        color: $logo-color;
+      }
+    }
+
+    .latepoint-btn {
+      padding: 15px 0px !important;
+      border: none !important;
+      display: inline-flex;
+      align-items: center;
+
+      span {
+        border-bottom: 1px solid $brand-primary;
+        font-size: 22px;
+      }
+
+      i {
+        margin-left: 20px;
+      }
+    }
+  }
+
+  &.step-work_periods {
+    .os-time-group {
+    }
+    .weekday-schedule-w .ws-day-name {
+      color: $headings-color;
+    }
+  }
+
+
+  &.step-complete {
+    .os-wizard-close-trigger {
+      display: none;
+    }
+    .os-wizard-complete-icon-w {
+      width: 70px;
+      height: 70px;
+      background-color: #7be690;
+      background-image: linear-gradient(45deg, #57e8b1, #65ffd8);
+      line-height: 70px;
+      text-align: center;
+      font-size: 42px;
+      color: #ffffff;
+      margin-bottom: 40px;
+      box-shadow: 0px 0px 0px 11px #e3fff5;
+      border-radius: 50px;
+    }
+
+    .shortcode-example {
+      padding: 0px 4px;
+      display: inline-block;
+      background-color: #fff6d4;
+      color: #000;
+    }
+
+    .os-wizard-steps-w {
+      display: none;
+    }
+
+    .os-wizard-footer {
+      display: none;
+    }
+
+    .latepoint-btn {
+      padding: 15px 0px !important;
+      border: none !important;
+      display: inline-flex;
+      align-items: center;
+
+      span {
+        border-bottom: 1px solid $brand-primary;
+        font-size: 22px;
+      }
+
+      i {
+        margin-left: 20px;
+      }
+    }
+  }
+
+  &.step-agents {
+    .agent-boxes {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-gap: 30px;
+
+      .agent-box-w {
+        background-color: #fff;
+        border-radius: $border-radius;
+        border: 1px solid $border-color-main;
+        padding: 15px;
+        text-align: center;
+        cursor: pointer;
+        position: relative;
+        transition: all 0.2s ease;
+
+        &.os-loading {
+          &:after {
+            @include loading-circle($brand-primary, 82px);
+            top: 50px;
+            transform: translateX(-50%);
+          }
+        }
+
+        &:nth-child(n+4) {
+          margin-top: 5%;
+        }
+
+        &:nth-child(3n+3) {
+          margin-right: 0px;
+        }
+
+        &:hover {
+          border-color: $brand-primary;
+          transform: translateY(-3px);
+          box-shadow: 0px 0px 0px 1px $brand-primary;
+
+          .agent-avatar {
+          }
+
+          .agent-name {
+            color: $brand-primary;
+          }
+
+          .agent-edit-icon,
+          .agent-remove-trigger {
+            opacity: 1;
+            transform: translateX(0px);
+          }
+        }
+      }
+
+      .agent-avatar {
+        width: 70px;
+        height: 70px;
+        background-size: cover;
+        background-position: center center;
+        margin: 0px auto;
+        margin-bottom: 10px;
+        border-radius: 50%;
+        transition: all 0.2s ease;
+      }
+
+      .agent-name {
+        font-weight: $body-font-weight-bold;
+        color: $headings-color;
+        font-size: floor($font-size-base * 1.2);
+        line-height: 1.4;
+        transition: all 0.2s ease;
+      }
+
+      .agent-edit-icon {
+        transform: translateX(10px);
+        display: block;
+        position: absolute;
+        line-height: 1;
+        top: 0px;
+        left: 0px;
+        color: $brand-primary;
+        font-size: 14px;
+        padding: 5px;
+        opacity: 0;
+        transition: all 0.2s ease;
+
+        &:hover {
+          transform: scale(1.3);
+          opacity: 1;
+        }
+      }
+
+      .agent-remove-trigger {
+        transform: translateX(-10px);
+        display: block;
+        color: #E88181;
+        font-size: 14px;
+        padding: 5px;
+        line-height: 1;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        cursor: pointer;
+        opacity: 0;
+        transition: all 0.2s ease;
+
+        &:hover {
+          color: #ff2222;
+          transform: scale(1.3);
+        }
+      }
+    }
+
+    .add-agent-box {
+      border: 3px dotted #E0E6EB;
+      text-align: center;
+      padding: 15px;
+      cursor: pointer;
+      margin: 0px;
+      transition: all 0.2s ease;
+      border-radius: 6px;
+
+      &:nth-child(n+4) {
+        margin-top: 5%;
+      }
+
+      &.os-loading {
+        .add-agent-plus {
+          color: rgba(255, 255, 255, 0.4);
+
+          &:after {
+            @include loading-circle($brand-primary, 42px);
+          }
+        }
+
+        animation: animate_appointment_small_box 0.8s ease infinite;
+      }
+
+      .add-agent-graphic-w {
+        width: 70px;
+        height: 70px;
+        margin: 0px auto;
+        margin-bottom: 10px;
+        position: relative;
+
+        .add-agent-graphic {
+          position: relative;
+          overflow: hidden;
+          width: 70px;
+          height: 70px;
+          border-radius: 50%;
+
+          .add-agent-head {
+            border-radius: 50%;
+            height: 30px;
+            width: 30px;
+            background-color: #eaeef4;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+          }
+
+          .add-agent-body {
+            border-radius: 50%;
+            height: 65px;
+            width: 65px;
+            background-color: #eaeef4;
+            position: absolute;
+            left: 50%;
+            top: 75%;
+            transform: translate(-50%, -0%);
+          }
+        }
+
+        .add-agent-plus {
+          position: absolute;
+          top: 25%;
+          left: 55%;
+          border-radius: 50%;
+          height: 18px;
+          width: 18px;
+          background-color: $brand-primary;
+          box-shadow: 0px 0px 0px 10px rgba(#BDD6FC, 0.3);
+          color: #fff;
+          transition: all 0.2s ease;
+
+          i {
+            position: absolute;
+            display: block;
+            top: 50%;
+            left: 50%;
+            font-size: 10px;
+            transform: translate(-45%, -47%);
+          }
+        }
+      }
+
+      .add-agent-label {
+        color: $brand-primary;
+        font-weight: $body-font-weight-bold;
+        font-size: $font-size-base * 1.2;
+      }
+
+      &:hover {
+        border-color: $brand-primary;
+        transform: translateY(-3px);
+
+        .add-agent-plus {
+          transform: scale(1.3);
+          box-shadow: 0px 0px 0px 12px rgba(#BDD6FC, 0.3);
+        }
+      }
+    }
+  }
+
+  &.step-services {
+    .sub-header {
+      text-align: center;
+      font-size: floor($headings-font-size * 0.9);
+      margin-bottom: -13px;
+      margin-top: 20px;
+
+      span {
+        display: inline-block;
+        padding: 0px 10px;
+        background-color: #fff;
+      }
+    }
+
+    .os-agents-selector {
+      border-radius: 6px;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      margin-bottom: 20px;
+      border: 2px solid rgb(243, 245, 247);
+      padding: 15px;
+      display: flex;
+
+      .agent {
+        flex: 0 0 29%;
+        background-color: #F3F5F7;
+        border: 2px solid #F3F5F7;
+        border-radius: 6px;
+        margin: 2%;
+        padding: 15px 10px;
+        text-align: center;
+        cursor: pointer;
+        position: relative;
+
+        &:before {
+          border-radius: 4px;
+          background-color: #fff;
+          color: #fff;
+          padding: 2px;
+          font-size: 12px;
+          @include latepointfont_admin('\e904');
+          position: absolute;
+          top: 15px;
+          left: 7px;
+          display: block;
+          transform: translateY(-50%);
+          box-shadow: inset 0px 0px 0px 2px $border-color-light;
+        }
+
+        &:hover {
+          border-color: $brand-primary;
+        }
+
+        &.active {
+          border-color: $brand-primary;
+          background-color: #F1F5FF;
+
+          &:before {
+            background-color: $brand-primary;
+            box-shadow: none;
+          }
+
+          .agent-name {
+            color: darken($brand-primary, 10%);
+          }
+
+          &:hover {
+            background-color: #fff;
+          }
+        }
+      }
+
+      .agent-avatar {
+        background-size: cover;
+        background-position: center center;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin: 0px auto;
+        margin-bottom: 10px;
+      }
+
+      .agent-name {
+        font-weight: $body-font-weight-bold;
+        color: $body-color-dark;
+        font-size: $font-size-base * 1.1;
+      }
+    }
+
+    .service-boxes {
+      .service-box-w {
+        padding: 13px;
+        background-color: #fff;
+        border-radius: $border-radius;
+        border: 1px solid $border-color-main;
+        margin-bottom: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        position: relative;
+
+        &.os-loading {
+          &:after {
+            @include loading-circle($brand-primary, 15px);
+            right: 4px;
+            left: auto;
+            transform: translateY(-50%);
+          }
+
+          .service-remove-trigger {
+            color: transparent;
+          }
+        }
+
+        &:hover {
+          border-color: $brand-primary;
+          box-shadow: 0px 0px 0px 1px $brand-primary;
+          transform: translateY(-3px);
+
+          .service-image {
+          }
+
+          .service-name {
+          }
+        }
+
+        .service-image-placeholder {
+          width: 40px;
+          height: 40px;
+          position: relative;
+
+          &:before {
+            @include latepointfont_admin("\e958");
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            color: #dde1e9;
+            transform: translate(-50%, -50%);
+            font-size: 30px;
+          }
+        }
+
+        .service-image {
+          width: 40px;
+          height: 40px;
+          background-size: cover;
+          transition: all 0.2s ease;
+        }
+
+        .service-name {
+          font-weight: $body-font-weight-bold;
+          color: $headings-color;
+          font-size: $font-size-base * 1.2;
+          margin-right: auto;
+          margin-left: 15px;
+          transition: all 0.2s ease;
+        }
+
+        .service-agents {
+
+        }
+
+        &:last-child {
+          margin-bottom: 0px;
+        }
+      }
+
+      .add-service-box {
+        padding: 13px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        border: 3px dotted #E0E6EB;
+        transition: all 0.2s ease;
+        border-radius: 6px;
+
+        &.os-loading {
+          .add-service-plus {
+            color: rgba(255, 255, 255, 0.4);
+
+            &:after {
+              @include loading-circle($brand-primary, 42px);
+            }
+          }
+
+          animation: animate_appointment_small_box 0.8s ease infinite;
+        }
+
+        .add-service-graphic-w {
+          width: 40px;
+          height: 40px;
+          position: relative;
+
+          .add-service-plus {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border-radius: 50%;
+            height: 18px;
+            width: 18px;
+            background-color: $brand-primary;
+            box-shadow: 0px 0px 0px 10px rgba(#BDD6FC, 0.3);
+            color: #fff;
+            transform: translate(-50%, -50%);
+
+            i {
+              position: absolute;
+              display: block;
+              top: 50%;
+              left: 50%;
+              font-size: 10px;
+              transform: translate(-45%, -47%);
+            }
+          }
+        }
+
+        .add-service-label {
+          color: $brand-primary;
+          font-weight: $body-font-weight-bold;
+          font-size: $font-size-base * 1.2;
+          margin-left: 15px;
+        }
+
+        &:hover {
+          border-color: $brand-primary;
+          transform: translateY(-3px);
+        }
+      }
+
+      .service-agents {
+        display: flex;
+
+        .agents-avatars {
+          flex: 1;
+          position: relative;
+          display: flex;
+          align-items: center;
+
+          .agent-avatar {
+            width: 22px;
+            height: 22px;
+            display: block;
+            background-size: cover;
+            border-radius: 30px;
+            box-shadow: 0px 0px 0px 2px #fff;
+
+            & + .agent-avatar {
+              margin-left: -2px;
+            }
+          }
+
+          .agents-more {
+            background-color: #fff;
+            padding: 2px 3px;
+            z-index: 4;
+            font-size: $font-size-base * 0.8;
+            font-weight: $body-font-weight-bold;
+            border-radius: 0px;
+            line-height: 1.1;
+            white-space: nowrap;
+            margin-left: -5px;
+          }
+        }
+      }
+
+      .service-remove-trigger {
+        color: #E88181;
+        font-size: 10px;
+        line-height: 1;
+        margin-left: 20px;
+        cursor: pointer;
+        transition: all 0.1s ease;
+
+        &:hover {
+          color: #ff2222;
+          transform: scale(1.4);
+        }
+      }
+    }
+  }
+
+  .os-wizard-footer {
+    padding: 30px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .latepoint-btn {
+      border-radius: 0px;
+      padding: 15px 25px;
+      font-weight: $body-font-weight-bold;
+    }
+
+    .os-wizard-next-btn,
+    .os-wizard-prev-btn {
+      text-decoration: none;
+      box-shadow: none;
+
+      &:hover, &:focus {
+        text-decoration: none;
+        box-shadow: none;
+      }
+    }
+
+    .os-wizard-next-btn {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      @include wizard-next-button-override();
+    }
+
+    .os-wizard-prev-btn {
+      margin-right: auto;
+      display: flex;
+      align-items: center;
+      @include wizard-prev-button-override();
+
+      i {
+      }
+    }
+
+    > a {
+      box-shadow: none;
+      text-decoration: none;
+
+      i, span {
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      i + span {
+      }
+
+      span + i {
+      }
+    }
+  }
+}

@@ -1,0 +1,40 @@
+.os-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-left: -7px;
+  margin-right: -7px;
+}
+.os-col-8 {
+  flex: 0 0 66.6%;
+  padding: 0px 7px;
+}
+.os-col-4 {
+  flex: 0 0 33.3%;
+  padding: 0px 7px;
+}
+.os-col-3 {
+  flex: 0 0 25%;
+  padding: 0px 7px;
+}
+.os-col-9 {
+  flex: 0 0 75%;
+  padding: 0px 7px;
+}
+.os-col-6 {
+  flex: 0 0 50%;
+  padding: 0px 7px;
+}
+.os-col-12 {
+  flex: 0 0 100%;
+  padding: 0px 7px;
+}
+
+
+@media (max-width: 600px){
+  .os-col-sm-12 {
+    flex: 0 0 100%;
+    padding: 0px 7px;
+  }
+}

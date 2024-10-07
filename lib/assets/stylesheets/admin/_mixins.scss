@@ -1,0 +1,542 @@
+@mixin remove-block-x(){
+  position: absolute;
+  right: 1px;
+  top: 1px;
+  transform: translate(50%, -50%);
+  font-size: 16px;
+  color: #fff;
+  background-color: #eb3a3a;
+  border: 3px solid #fff;
+  text-decoration: none;
+  padding: 0px 2px;
+  line-height: 26px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  text-align: center;
+  display: none;
+  z-index: 3;
+  opacity: 1;
+  &:hover {
+    background-color: #af0000;
+  }
+  i {
+      vertical-align: middle;
+      line-height: 20px;
+      display: block;
+  }
+  &.os-loading {
+    &:after {
+      display: block;
+      content: "";
+      width: 19px;
+      height: 19px;
+      border-bottom: 2px solid #dc5858;
+      border-left: 2px solid #dc5858;
+      border-top: 2px solid #dc5858;
+      border-right: 2px solid rgba(255,255,255,0);
+      border-radius: 20px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: os-loading 700ms infinite linear;
+    }
+    i {
+        color: transparent;
+    }
+  }
+}
+
+@mixin tooltip(){
+  display: none;
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  background-color: #111;
+  color: #fff;
+  font-size: floor($font-size-base * 1);
+  font-weight: $body-font-weight-bold;
+  padding: 10px 15px;
+  z-index: 9999;
+  white-space: nowrap;
+  border-radius: $tooltip-border-radius;
+  animation: 0.2s cubic-bezier(.45,1.1,.4,1) 0s toolTipOpen;
+  animation-fill-mode: both;
+  line-height: 1;
+}
+
+@mixin latepointfont_admin($content:""){
+  font-family: 'latepointIconsAdmin' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: $content;
+}
+
+
+@mixin font-headers(){
+  font-family: $headings-font-family;
+  font-weight: $headings-font-weight-normal;
+}
+
+
+@mixin white-box(){
+  background-color: #fff;
+  border-radius: $border-radius-sm;
+  border: 1px solid $border-color-main;
+}
+
+@mixin white-box-stack(){
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-bottom-color: #bbb;
+  box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.05);
+}
+
+@mixin loading-circle($color: #fff, $width: 14px){
+  display: block;
+  content: "";
+  width: $width!important;
+  height: $width!important;
+  border-bottom: 2px solid $color;
+  border-left: 2px solid $color;
+  border-top: 2px solid $color;
+  border-right: 2px solid rgba(255,255,255,0);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: os-loading 700ms infinite linear;
+  background-color: transparent!important;
+  z-index: 999;
+}
+
+
+@mixin minutes-label(){
+  padding: 4px 8px 5px;
+  line-height: 1;
+  background-color: #fff;
+  color: #1d2023;
+  font-size: floor($font-size-base * 0.9);
+  font-weight: $body-font-weight-bold;
+  white-space: nowrap;
+  border: 1px solid #000;
+  border-radius: 4px;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.33), 0px 2px 6px rgba(0,0,0,0.1);
+}
+
+@mixin minutes-label-not-available(){
+  background-color: #f04739;
+  color: #fff;
+  border-color: #c51809 !important;
+}
+
+@mixin avatar($size: 30px){
+  background-size: cover;
+  background-position: center center;
+  width: $size;
+  height: $size;
+  display: block;
+  border-radius: 50%;
+}
+
+
+@mixin logo($size: 20px, $color: $brand-primary){
+  $move_y: $size + calc($size/2);
+  $move_x: - calc($size / 2);
+  display: block;
+  width: $size;
+  height: $size;
+  background-color: $color;
+  content: "";
+  box-shadow: $size $size 0px $color, 0px $size 0px $color, $move_y $move_x 0px $color;
+  margin-bottom: $size;
+  margin-right: $size;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Bootstrap functions
+//
+// Utility mixins and functions for evalutating source code across our variables, maps, and mixins.
+
+// Ascending
+// Used to evaluate Sass maps like our grid breakpoints.
+@mixin _assert-ascending($map, $map-name) {
+  $prev-key: null;
+  $prev-num: null;
+  @each $key, $num in $map {
+    @if $prev-num == null {
+      // Do nothing
+    } @else if not comparable($prev-num, $num) {
+      @warn "Potentially invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} whose unit makes it incomparable to #{$prev-num}, the value of the previous key '#{$prev-key}' !";
+    } @else if $prev-num >= $num {
+      @warn "Invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} which isn't greater than #{$prev-num}, the value of the previous key '#{$prev-key}' !";
+    }
+    $prev-key: $key;
+    $prev-num: $num;
+  }
+}
+
+// Starts at zero
+// Another grid mixin that ensures the min-width of the lowest breakpoint starts at 0.
+@mixin _assert-starts-at-zero($map) {
+  $values: map-values($map);
+  $first-value: nth($values, 1);
+  @if $first-value != 0 {
+    @warn "First breakpoint in `$grid-breakpoints` must start at 0, but starts at #{$first-value}.";
+  }
+}
+
+// Replace `$search` with `$replace` in `$string`
+// Used on our SVG icon backgrounds for custom forms.
+//
+// @author Hugo Giraudel
+// @param {String} $string - Initial string
+// @param {String} $search - Substring to replace
+// @param {String} $replace ('') - New value
+// @return {String} - Updated string
+@function str-replace($string, $search, $replace: "") {
+  $index: str-index($string, $search);
+
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+
+  @return $string;
+}
+
+// Color contrast
+@function color-yiq($color) {
+  $r: red($color);
+  $g: green($color);
+  $b: blue($color);
+
+  $yiq: (($r * 299) + ($g * 587) + ($b * 114)) / 1000;
+
+  @if ($yiq >= 150) {
+    @return #111;
+  } @else {
+    @return #fff;
+  }
+}
+
+// Retreive color Sass maps
+@function color($key: "blue") {
+  @return map-get($colors, $key);
+}
+
+@function theme-color($key: "primary") {
+  @return map-get($theme-colors, $key);
+}
+
+@function gray($key: "100") {
+  @return map-get($grays, $key);
+}
+
+// Request a theme color level
+@function theme-color-level($color-name: "primary", $level: 0) {
+  $color: theme-color($color-name);
+  $color-base: if($level > 0, #000, #fff);
+  $level: abs($level);
+
+  @return mix($color-base, $color, $level * $theme-color-interval);
+}
+
+
+
+
+
+// Framework grid generation
+//
+// Used only by Bootstrap to generate the correct number of grid classes given
+// any value of `$grid-columns`.
+
+@mixin make-grid-columns($columns: $grid-columns, $gutter: $grid-gutter-width, $breakpoints: $grid-breakpoints) {
+  // Common properties for all breakpoints
+  %grid-column {
+    position: relative;
+    width: 100%;
+    min-height: 1px; // Prevent columns from collapsing when empty
+    padding-right: calc($gutter / 2);
+    padding-left: calc($gutter / 2);
+  }
+
+  @each $breakpoint in map-keys($breakpoints) {
+    $infix: breakpoint-infix($breakpoint, $breakpoints);
+
+    // Allow columns to stretch full width below their breakpoints
+    @for $i from 1 through $columns {
+      .os-col#{$infix}-#{$i} {
+        @extend %grid-column;
+      }
+    }
+    .os-col#{$infix},
+    .os-col#{$infix}-auto {
+      @extend %grid-column;
+    }
+
+    @include media-breakpoint-up($breakpoint, $breakpoints) {
+      // Provide basic `.os-col-{bp}` classes for equal-width flexbox columns
+      .os-col#{$infix} {
+        flex-basis: 0;
+        flex-grow: 1;
+        max-width: 100%;
+      }
+      .os-col#{$infix}-auto {
+        flex: 0 0 auto;
+        width: auto;
+        max-width: none; // Reset earlier grid tiers
+      }
+
+      @for $i from 1 through $columns {
+        .os-col#{$infix}-#{$i} {
+          @include make-col($i, $columns);
+        }
+      }
+
+      .order#{$infix}-first {
+        order: -1;
+      }
+
+      @for $i from 1 through $columns {
+        .order#{$infix}-#{$i} {
+          order: $i;
+        }
+      }
+
+      // `$columns - 1` because offsetting by the width of an entire row isn't possible
+      @for $i from 0 through ($columns - 1) {
+        @if not ($infix == "" and $i == 0) { // Avoid emitting useless .offset-0
+          .offset#{$infix}-#{$i} {
+            @include make-col-offset($i, $columns);
+          }
+        }
+      }
+    }
+  }
+}
+
+/// Grid system
+//
+// Generate semantic grid columns with these mixins.
+
+@mixin make-container() {
+  width: 100%;
+  padding-right: calc($grid-gutter-width / 2);
+  padding-left: calc($grid-gutter-width / 2);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
+// For each breakpoint, define the maximum width of the container in a media query
+@mixin make-container-max-widths($max-widths: $container-max-widths, $breakpoints: $grid-breakpoints) {
+  @each $breakpoint, $container-max-width in $max-widths {
+    @include media-breakpoint-up($breakpoint, $breakpoints) {
+      max-width: $container-max-width;
+    }
+  }
+}
+
+@mixin make-row() {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: calc($grid-gutter-width / -2);
+  margin-left: calc($grid-gutter-width / -2);
+}
+
+@mixin make-col-ready() {
+  position: relative;
+  // Prevent columns from becoming too narrow when at smaller grid tiers by
+  // always setting `width: 100%;`. This works because we use `flex` values
+  // later on to override this initial width.
+  width: 100%;
+  min-height: 1px; // Prevent collapsing
+  padding-right: calc($grid-gutter-width / 2);
+  padding-left: calc($grid-gutter-width / 2);
+}
+
+@mixin make-col($size, $columns: $grid-columns) {
+  flex: 0 0 percentage(calc($size / $columns));
+  // Add a `max-width` to ensure content within each column does not blow out
+  // the width of the column. Applies to IE10+ and Firefox. Chrome and Safari
+  // do not appear to require this.
+  max-width: percentage(calc($size / $columns));
+}
+
+@mixin make-col-offset($size, $columns: $grid-columns) {
+  $num: calc($size / $columns);
+  margin-left: if($num == 0, 0, percentage($num));
+}
+
+
+@mixin clearfix() {
+  &::after {
+    display: block;
+    clear: both;
+    content: "";
+  }
+}
+
+
+
+// Breakpoint viewport sizes and media queries.
+//
+// Breakpoints are defined as a map of (name: minimum width), order from small to large:
+//
+//    (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px)
+//
+// The map defined in the `$grid-breakpoints` global variable is used as the `$breakpoints` argument by default.
+
+// Name of the next breakpoint, or null for the last breakpoint.
+//
+//    >> breakpoint-next(sm)
+//    md
+//    >> breakpoint-next(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
+//    md
+//    >> breakpoint-next(sm, $breakpoint-names: (xs sm md lg xl))
+//    md
+@function breakpoint-next($name, $breakpoints: $grid-breakpoints, $breakpoint-names: map-keys($breakpoints)) {
+  $n: index($breakpoint-names, $name);
+  @return if($n < length($breakpoint-names), nth($breakpoint-names, $n + 1), null);
+}
+
+// Minimum breakpoint width. Null for the smallest (first) breakpoint.
+//
+//    >> breakpoint-min(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
+//    576px
+@function breakpoint-min($name, $breakpoints: $grid-breakpoints) {
+  $min: map-get($breakpoints, $name);
+  @return if($min != 0, $min, null);
+}
+
+// Maximum breakpoint width. Null for the largest (last) breakpoint.
+// The maximum value is calculated as the minimum of the next one less 0.1.
+//
+//    >> breakpoint-max(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
+//    767px
+@function breakpoint-max($name, $breakpoints: $grid-breakpoints) {
+  $next: breakpoint-next($name, $breakpoints);
+  @return if($next, breakpoint-min($next, $breakpoints) - 1px, null);
+}
+
+// Returns a blank string if smallest breakpoint, otherwise returns the name with a dash infront.
+// Useful for making responsive utilities.
+//
+//    >> breakpoint-infix(xs, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
+//    ""  (Returns a blank string)
+//    >> breakpoint-infix(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
+//    "-sm"
+@function breakpoint-infix($name, $breakpoints: $grid-breakpoints) {
+  @return if(breakpoint-min($name, $breakpoints) == null, "", "-#{$name}");
+}
+
+// Media of at least the minimum breakpoint width. No query for the smallest breakpoint.
+// Makes the @content apply to the given breakpoint and wider.
+@mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
+  $min: breakpoint-min($name, $breakpoints);
+  @if $min {
+    @media (min-width: $min) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+// Media of at most the maximum breakpoint width. No query for the largest breakpoint.
+// Makes the @content apply to the given breakpoint and narrower.
+@mixin media-breakpoint-down($name, $breakpoints: $grid-breakpoints) {
+  $max: breakpoint-max($name, $breakpoints);
+  @if $max {
+    @media (max-width: $max) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+// Media that spans multiple breakpoint widths.
+// Makes the @content apply between the min and max breakpoints
+@mixin media-breakpoint-between($lower, $upper, $breakpoints: $grid-breakpoints) {
+  $min: breakpoint-min($lower, $breakpoints);
+  $max: breakpoint-max($upper, $breakpoints);
+
+  @if $min != null and $max != null {
+    @media (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+  } @else if $max == null {
+    @include media-breakpoint-up($lower) {
+      @content;
+    }
+  } @else if $min == null {
+    @include media-breakpoint-down($upper) {
+      @content;
+    }
+  }
+}
+
+// Media between the breakpoint's minimum and maximum widths.
+// No minimum for the smallest breakpoint, and no maximum for the largest one.
+// Makes the @content apply only to the given breakpoint, not viewports any wider or narrower.
+@mixin media-breakpoint-only($name, $breakpoints: $grid-breakpoints) {
+  $min: breakpoint-min($name, $breakpoints);
+  $max: breakpoint-max($name, $breakpoints);
+
+  @if $min != null and $max != null {
+    @media (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+  } @else if $max == null {
+    @include media-breakpoint-up($name) {
+      @content;
+    }
+  } @else if $min == null {
+    @include media-breakpoint-down($name) {
+      @content;
+    }
+  }
+}
+
+@mixin slot-tooltip-info(){
+  position: absolute;
+  top: 0px;
+  left: 50%;
+  transform: translate3d(-50%, -100%, 0);
+  background-color: #111;
+  padding: 4px 6px;
+  color: #fff;
+  font-weight: $body-font-weight-bold;
+  display: none;
+  white-space: nowrap;
+  z-index: 9999;
+  font-size: floor($font-size-base * 1);
+  animation: 0.1s ease latepointAvailabilityPopup;
+  animation-fill-mode: both;
+}

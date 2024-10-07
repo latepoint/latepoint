@@ -1,0 +1,96 @@
+.os-ordered-steps-description {
+  color: $color-faded;
+  font-size: $body-font-size-m;
+  padding-bottom: 20px;
+}
+.os-ordered-steps {
+  position: relative;
+}
+.os-ordered-step {
+  background-color: #fff;
+  border-bottom: 1px solid #e8e8e8;
+  &:last-child {
+    border-bottom: none;
+  }
+  &.is-expanded {
+    .os-ordered-step-expand{
+      transform: rotate(-90deg);
+    }
+    .os-ordered-step-children {
+      display: block;
+    }
+  }
+  .os-ordered-step-info {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 10px 0;
+  }
+  .os-ordered-step-expand {
+    padding: 5px;
+    font-size: 16px;
+    line-height: 1;
+    margin-left: auto;
+    cursor: pointer;
+    border-radius: 4px;
+    &:hover {
+      background-color: #eee;
+    }
+  }
+  .os-ordered-step-drag {
+    font-size: 16px;
+    padding: 5px;
+    line-height: 1;
+    cursor: pointer;
+    border-radius: 4px;
+    &:hover {
+      background-color: #eee;
+    }
+  }
+  .os-ordered-step-name {
+    font-family: $headings-font-family;
+    font-size: $headings-font-size-m;
+    font-weight: $headings-font-weight-bold;
+  }
+  .os-ordered-step-children {
+    display: none;
+    padding: 10px 30px;
+    border-top: 1px solid $border-color-lightest;
+  }
+
+}
+.os-ordered-step-child-info {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px;
+  .os-ordered-step-drag {
+    font-size: 14px;
+    padding: 4px;
+  }
+  .os-ordered-step-child-name {
+    font-family: $headings-font-family;
+    font-size: $headings-font-size-s;
+    font-weight: $headings-font-weight-bold;
+  }
+}
+
+.os-ordered-steps .os-ordered-step, .gu-mirror.os-ordered-step{
+  &.gu-mirror.os-ordered-step {
+  }
+}
+
+.gu-mirror.os-ordered-step-child {
+  box-shadow: 0 20px 50px 0 rgba(159,166,181,0.4), 0 2px 1px 0 rgba(119,128,147,0.20);
+  border-radius: 6px;
+  background-color: #fff;
+}
+.gu-mirror.os-ordered-step {
+  box-shadow: 0 20px 50px 0 rgba(159,166,181,0.4), 0 2px 1px 0 rgba(119,128,147,0.20);
+  border-color: #ddd;
+  border-bottom-color: #999;
+  border-radius: 6px;
+  .os-ordered-step-info {
+    padding: 10px;
+  }
+}

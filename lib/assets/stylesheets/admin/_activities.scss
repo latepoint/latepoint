@@ -1,0 +1,266 @@
+.user-link-with-avatar {
+  text-decoration: none;
+  border: none !important;
+  display: inline-flex;
+  align-items: center;
+
+  .ula-avatar {
+    margin-right: 8px;
+    width: 20px;
+    height: 20px;
+    border-radius: 40px;
+    background-size: cover;
+    background-position: center center;
+  }
+
+  .ula-name {
+    vertical-align: middle;
+    text-decoration: underline;
+    margin-right: 5px;
+  }
+
+  span {
+    display: block;
+  }
+
+  .latepoint-icon {
+    visibility: hidden;
+  }
+
+  &:hover {
+    .latepoint-icon {
+      visibility: visible;
+    }
+  }
+}
+
+
+.activity-status-wrapper {
+  padding: 0 0 15px 0;
+
+  .activity-status-content {
+    text-transform: capitalize;
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    font-weight: $body-font-weight-bold;
+    font-size: $body-font-size-xs;
+    min-width: 400px;
+    text-align: left;
+    position: relative;
+    background-color: #f8f8f8;
+    border-left: 4px solid #f8f8f8;
+    color: $headings-color;
+
+    .status-item {
+      position: relative;
+      & + .status-item {
+        margin-left: 10px;
+        border-left: 1px solid #ddd;
+        padding-left: 10px;
+      }
+
+      strong {
+        font-weight: $body-font-weight-black;
+      }
+    }
+  }
+
+  &.status-success .activity-status-content {
+    background-color: #eeffed;
+    border-left-color: #0d7f24;
+    color: #0d7f24;
+    .status-item {
+      border-left-color: #c9edc7;
+    }
+  }
+
+  &.status-error .activity-status-content {
+    background-color: #fff1f1;
+    border-left-color: #f64545;
+    color: #7c1a1a;
+    strong {
+      color: #330303;
+    }
+    .status-item {
+      border-left-color: #f4d8d8;
+    }
+  }
+}
+
+.activity-preview-wrapper {
+  position: relative;
+
+  > h3 {
+    margin-bottom: 10px;
+    font-size: 22px;
+  }
+
+  .activity-to-run {
+    padding: 5px 0px;
+
+    .os-form-group.os-form-toggler-group {
+      margin-bottom: 0px;
+    }
+
+    label {
+      font-size: 18px;
+      color: $headings-color;
+    }
+
+    &:not(:last-child) {
+      border-bottom: 1px solid $border-color-lightest;
+    }
+  }
+
+  .activity-preview-error {
+    padding: 15px;
+    font-size: ($font-size-base * 1.2);
+    font-weight: $body-font-weight-bold;
+    background-color: #fff5e5;
+    color: #8f6b3e;
+    border-radius: 6px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .activity-preview-content-wrapper {
+    transition: opacity 0.3s ease;
+  }
+
+  pre {
+    margin: 0;
+  }
+
+  &.os-loading {
+    .activity-preview-content-wrapper {
+      opacity: 0;
+    }
+
+    &:before {
+      @include loading-circle($brand-primary, 20px);
+      top: 50px;
+    }
+  }
+
+  .activity-preview-to {
+    display: flex;
+    font-weight: $body-font-weight-bold;
+    margin-bottom: 10px;
+
+    .os-label {
+      color: $color-faded;
+      display: block;
+      margin-right: 5px;
+    }
+
+    .os-value {
+      display: block;
+
+      & + .os-label {
+        margin-left: 10px;
+        padding-left: 10px;
+        border-left: 1px solid #eee;
+      }
+    }
+  }
+
+  .activity-preview-subject {
+    display: flex;
+    font-size: floor($headings-font-size * 0.8);
+    font-weight: $body-font-weight-bold;
+    margin-bottom: 5px;
+
+    .os-label {
+      color: $color-faded;
+      display: block;
+      margin-right: 5px;
+    }
+
+    .os-value {
+      display: block;
+      flex: 1;
+    }
+  }
+
+  &.type-email_sent {
+    padding: 0px;
+
+    .activity-preview-content-wrapper {
+    }
+  }
+
+  &.type-sms_sent {
+    .activity-preview-content-wrapper {
+      padding: 20px;
+      margin: 0px auto;
+      width: 340px;
+      padding-right: 50px;
+      border: 14px solid #e1e1e5;
+      border-bottom: none;
+      padding-bottom: 40px;
+      border-radius: 60px 60px 0px 0px;
+    }
+
+    .activity-preview-to {
+      margin-bottom: 20px;
+    }
+
+    .activity-preview-content {
+      padding: 22px;
+      border-radius: 20px 20px 20px 0px;
+      display: inline-block;
+      background-color: #54a7ff;
+      background-image: linear-gradient(45deg, #004fff, transparent);
+      box-shadow: 0px 1px 4px #b4dbff;
+      color: #fff;
+      font-size: floor($font-size-base * 1.1);
+      font-weight: $body-font-weight-bold;
+
+    }
+  }
+}
+
+.activities-index {
+  .activity-type-error {
+    .activity-column-name {
+      background-color: #ffe8e8;
+
+      > div {
+        position: relative;
+        padding-left: 20px;
+        font-weight: $body-font-weight-bold;
+        color: #b80000;
+
+        &:before {
+          color: #b80000;
+          @include latepointfont_admin("\e94e");
+          position: absolute;
+          font-size: 14px;
+          left: 0px;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+      }
+    }
+  }
+}
+
+.view-activity-link {
+  position: relative;
+
+  &.os-loading {
+    color: transparent !important;
+    border-bottom-color: transparent !important;
+
+    &:focus {
+      box-shadow: none;
+      outline: none;
+    }
+
+    &:before {
+      @include loading-circle($brand-primary, 14px);
+      z-index: 9999;
+    }
+  }
+}

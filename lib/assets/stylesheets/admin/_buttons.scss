@@ -1,0 +1,348 @@
+body.latepoint-admin {
+  .latepoint-btn {
+    padding: 8px 12px;
+    background-color: $button-primary-bg-color;
+    box-shadow: $button-shadow-size $button-primary-shadow-color;
+    border: 1px solid $button-primary-border-color;
+    color: $button-primary-text-color;
+    border-radius: $border-radius-btn;
+    text-decoration: none;
+    font-weight: $body-font-weight-bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    white-space: nowrap;
+    line-height: 1.2;
+    font-size: $button-font-size;
+
+
+    &:hover, &:focus {
+      outline: none;
+      background-color: $button-primary-hover-bg-color;
+      border-color: $button-primary-hover-bg-color;
+    }
+
+
+    // --------------
+    // COLORS
+    // --------------
+
+    &.latepoint-btn-secondary {
+      background-color: $button-secondary-bg-color;
+      color: $button-secondary-text-color;
+      border-color: $button-secondary-border-color;
+      box-shadow: $button-shadow-size $button-secondary-shadow-color;
+      &.latepoint-btn-link {
+        border-color: $button-secondary-border-color;
+      }
+      &:hover {
+        background-color: $button-secondary-hover-bg-color;
+        border-color: $button-secondary-hover-bg-color;
+      }
+    }
+
+    &.latepoint-btn-danger {
+      background-color: $button-danger-bg-color;
+      color: $button-danger-text-color;
+      box-shadow: $button-shadow-size $button-danger-shadow-color;
+      border-color: $button-danger-border-color;
+      &.latepoint-btn-link {
+        border-color: $button-danger-border-color;
+      }
+      &:focus, &:active {
+        background-color: $button-danger-bg-color;
+      }
+      &:hover {
+        background-color: $button-danger-hover-bg-color;
+        border-color: $button-danger-hover-bg-color;
+      }
+    }
+
+    &.latepoint-btn-success {
+      background-color: $button-success-bg-color;
+      color: $button-success-text-color;
+      box-shadow: $button-shadow-size $button-success-shadow-color;
+      border-color: $button-success-border-color;
+      &.latepoint-btn-link {
+        border-color: $button-success-border-color;
+      }
+      &:focus, &:active {
+        background-color: $button-success-bg-color;
+      }
+      &:hover {
+        background-color: $button-success-hover-bg-color;
+        border-color: $button-success-hover-bg-color;
+      }
+    }
+
+    &.latepoint-btn-white {
+      background-color: $button-white-bg-color;
+      color: $button-white-text-color;
+      box-shadow: $button-shadow-size $button-white-shadow-color;
+      border-color: $button-white-border-color;
+      border-bottom-color: darken($button-white-border-color, 8%);
+      &.latepoint-btn-link {
+        border-color: $button-white-border-color;
+      }
+      &:focus, &:active {
+        background-color: $button-white-bg-color;
+      }
+      &:hover {
+        background-color: $button-white-hover-bg-color;
+        border-color: $button-white-hover-bg-color;
+      }
+    }
+
+
+    // --------------
+    // STYLES
+    // --------------
+
+    &.latepoint-btn-link {
+      border: none;
+      border-radius: 0px;
+      padding-left: 0px;
+      padding-right: 0px;
+      background-color: transparent;
+      color: $brand-primary;
+    }
+
+
+    &.latepoint-btn-outline {
+      background-color: transparent;
+      color: $button-primary-outline-text-color;
+      border: 1px solid $button-primary-border-color;
+      &.latepoint-btn-outline-dotted {
+        border-style: dotted;
+      }
+      &:hover, &:focus {
+        border-color: darken($brand-primary, 10%);
+        color: $brand-primary;
+        background-color: transparent;
+      }
+      &.latepoint-btn-danger {
+        background-color: transparent;
+        color: $button-danger-outline-color;
+        border-color: $button-danger-outline-color;
+        &:hover, &:focus {
+          border-color: darken($button-danger-outline-color, 10%);
+          color: darken($button-danger-outline-color, 10%);
+        }
+      }
+      &.latepoint-btn-secondary {
+        border: 1px solid #ccc;
+        background-color: transparent;
+        color: #444;
+        &:hover, &:focus {
+          border-color: darken(#ccc, 10%);
+          color: darken(#444, 10%);
+          background-color: transparent;
+        }
+      }
+      &.latepoint-btn-grey {
+        color: $headings-color;
+        border: 1px solid rgba(0,0,0,0.1);
+        background-color: #fff;
+        box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+        border-bottom-color: rgba(0,0,0,0.25);
+        &:hover, &:focus {
+          border-color: darken(#ccc, 10%);
+          color: darken(#444, 10%);
+          background-color: #fff;
+        }
+      }
+    }
+
+    &.latepoint-btn-block {
+      display: block;
+      width: 100%;
+      text-align: center;
+    }
+
+    &.latepoint-btn-rounded {
+      border-radius: 30px;
+    }
+
+    // --------------
+    // SIZES
+    // --------------
+
+    &.latepoint-btn-md {
+      padding: 10px 16px 10px;
+      font-size: floor($font-size-base * 1.15);
+      border-radius: $border-radius-btn-sm;
+      gap: 10px;
+      i {
+        font-size: 13px;
+      }
+      i + span {
+      }
+    }
+    &.latepoint-btn-lg {
+      padding: 12px 20px;
+      font-size: floor($font-size-base * 1.2);
+      border-radius: $border-radius-btn-lg;
+      gap: 5px;
+      i {
+        line-height: inherit;
+      }
+      i + span {
+      }
+    }
+    &.latepoint-btn-sm {
+      padding: 4px 6px 5px;
+      font-size: floor($font-size-base * 0.9);
+      border-radius: $border-radius-btn-sm;
+      gap: 5px;
+      i, span {
+        vertical-align: middle;
+      }
+      i + span {
+      }
+    }
+
+
+
+    span {
+      display: inline-block;
+    }
+    i {
+      display: inline-block;
+    }
+    &.latepoint-btn-just-icon {
+      i {
+        display: block;
+      }
+    }
+    i + span {
+    }
+    span + i {
+    }
+
+
+
+    // --------------
+    // LOADING STATE
+    // --------------
+
+    &.os-loading {
+      color: transparent!important;
+      position: relative;
+      span, i {
+        color: transparent!important;
+        border-color: transparent!important;
+      }
+      &:after {
+        display: block;
+        content: "";
+        width: 14px;
+        height: 14px;
+        border-bottom: 2px solid $button-primary-text-color;
+        border-left: 2px solid $button-primary-text-color;
+        border-top: 2px solid $button-primary-text-color;
+        border-right: 2px solid transparent;
+        border-radius: 20px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation: os-loading 700ms infinite linear;
+        background-color: transparent!important;
+      }
+      &.latepoint-btn-danger{
+        &:after {
+          border-bottom-color: $button-danger-text-color;
+          border-left-color: $button-danger-text-color;
+          border-top-color: $button-danger-text-color;
+          border-right-color: transparent;
+        }
+      }
+      &.latepoint-btn-white{
+        &:after {
+          border-bottom-color: $button-white-text-color;
+          border-left-color: $button-white-text-color;
+          border-top-color: $button-white-text-color;
+          border-right-color: transparent;
+        }
+      }
+      &.latepoint-btn-secondary{
+        &:after {
+          border-bottom-color: $button-secondary-text-color;
+          border-left-color: $button-secondary-text-color;
+          border-top-color: $button-secondary-text-color;
+          border-right-color: transparent;
+        }
+      }
+      &.latepoint-btn-outline{
+        &:after {
+          border-bottom-color: $button-primary-border-color;
+          border-left-color: $button-primary-border-color;
+          border-top-color: $button-primary-border-color;
+          border-right-color: transparent;
+        }
+      }
+      &.latepoint-btn-link {
+        &:after {
+          border-bottom-color: $button-primary-border-color;
+          border-left-color: $button-primary-border-color;
+          border-top-color: $button-primary-border-color;
+          border-right-color: transparent;
+        }
+      }
+    }
+  }
+
+  .latepoint-link {
+    display: inline-block;
+    border-bottom: 1px solid $brand-primary;
+    color: $brand-primary;
+    position: relative;
+    outline: none;
+    box-shadow: none;
+    text-decoration: none;
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+    i {
+      display: inline-block;
+      margin-right: 5px;
+    }
+    span {
+      display: inline-block;
+    }
+    &.os-loading {
+      i, .latepoint-icon {
+        color: transparent!important;
+      }
+      &:before {
+        @include loading-circle($brand-primary, 12px);
+        left: 6px;
+      }
+    }
+  }
+}
+
+
+// Booking Button
+.latepoint-book-button-wrapper {
+  &.latepoint-book-button-align-center {
+    text-align: center;
+  }
+  &.latepoint-book-button-align-right {
+    text-align: right;
+  }
+  &.latepoint-book-button-align-left {
+    text-align: left;
+  }
+  &.latepoint-book-button-align-justify {
+    text-align: center;
+    .latepoint-book-button {
+      display: block;
+    }
+  }
+}
+.latepoint-book-button {
+  @include latepoint-book-button();
+}

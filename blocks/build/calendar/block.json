@@ -1,0 +1,36 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "latepoint/calendar",
+  "version": "1.0.0",
+  "title": "Latepoint calendar",
+  "category": "latepoint",
+  "icon": "calendar-alt",
+  "description": "Generates a calendar of events for LatePoint",
+  "attributes": {
+    "caption": {
+      "type": "string",
+      "default": "Latepoint Calendar"
+    },
+    "date": {
+      "type": "string"
+    },
+    "show_services": {
+      "type": "string"
+    },
+    "show_agents": {
+      "type": "string"
+    },
+    "show_locations": {
+      "type": "string"
+    },
+    "view": {
+      "type": "string"
+    }
+  },
+  "supports": {
+    "html": false
+  },
+  "textdomain": "latepoint",
+  "editorScript": "file:index.js"
+}

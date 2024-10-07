@@ -1,0 +1,713 @@
+/*!
+ * Copyright (c) 2024 LatePoint LLC. All rights reserved.
+ */
+
+
+// CALENDAR - FULL MONTH
+.os-weekdays {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  column-gap: 15px;
+  .weekday {
+    text-transform: uppercase;
+    font-size: floor($font-size-base * 0.8);
+    color: $color-faded;
+    font-weight: $body-font-weight-bold;
+    letter-spacing: $letter-spacing-lg;
+    width: 14.2%;
+    text-align: center;
+    padding: 5px 0px;
+    &.weekday-6, &.weekday-7 {
+      color: var(--latepoint-calendar-weekday-label-color);
+      background-color: var(--latepoint-calendar-weekday-label-bg);
+    }
+  }
+}
+
+.os-current-month-label-w {
+  position: relative;
+  .os-month-prev-btn,
+  .os-month-next-btn {
+    position: absolute;
+    border: none;
+    font-size: 12px;
+    background-color: transparent!important;
+    box-shadow: none;
+    outline: none;
+    color: #111;
+    top: 55%;
+    transform: translateY(-50%);
+    padding: 0px;
+    margin: 0px;
+    line-height: 1;
+    vertical-align: middle;
+    display: inline-block;
+    cursor: pointer;
+    &:focus-visible {
+      outline: 2px solid $brand-primary!important;
+    }
+    &.os-loading {
+      color: transparent!important;
+      span, i {
+        color: transparent!important;
+      }
+      &:after {
+        display: block;
+        content: "";
+        width: 14px;
+        height: 14px;
+        border-bottom: 2px solid $body-color;
+        border-left: 2px solid $body-color;
+        border-top: 2px solid $body-color;
+        border-right: 2px solid rgba(0,0,0,0);
+        border-radius: 20px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation: os-loading 700ms infinite linear;
+      }
+    }
+    &:hover {
+      color: $brand-primary;
+    }
+    &:focus {
+      outline: none;
+    }
+    &.disabled {
+      color: rgba(0,0,0,0.1);
+    }
+  }
+  .os-month-prev-btn {
+    left: 10px;
+  }
+  .os-month-next-btn {
+    right: 10px;
+  }
+  .os-current-month-label {
+    text-align: center;
+    font-weight: $body-font-weight-bold;
+    font-size: $body-font-size-m;
+    margin-bottom: 10px;
+    color: $body-color;
+    .current-year {
+      display: inline-block;
+      vertical-align: middle;
+      color: color-mix(in srgb, $body-color 40%, transparent);
+      margin-left: 5px;
+    }
+    .current-month {
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+}
+
+
+.os-monthly-calendar-days-w {
+  display: none;
+  &.active {
+    display: block;
+  }
+  &.hide-if-single-slot {
+    .os-day {
+      &:hover {
+        .os-day-box {
+          .os-day-number {
+          }
+        }
+      }
+      &.os-not-available {
+        .os-day-number {
+        }
+        .os-day-status {
+          //display: none;
+        }
+      }
+      &.os-one-slot-only {
+        .os-day-number {
+        }
+        .os-day-status {
+          display: none;
+        }
+      }
+      &.selected {
+
+        &:after {
+          $size: 14px;
+          @include latepointfont("\e903");
+          background-color: $brand-primary;
+          box-shadow: 0px 0px 0px 2px #fff;
+          border-radius: 50%;
+          width: 14px;
+          line-height: 14px;
+          height: 14px;
+          bottom: 50%;
+          left: 50%;
+          font-size: 10px;
+          text-align: center;
+          position: absolute;
+          color: #fff;
+          transform: translate(11px, -10px);
+        }
+      }
+    }
+  }
+}
+
+.step-datepicker-w {
+  padding: 0px 10px 10px;
+}
+.step-datepicker-w, .reschedule-calendar-datepicker {
+  .dp-capacity {
+    @include slot-tooltip-info();
+  }
+  .time-selector-w:not(.style-timeline) {
+    .dp-timepicker-trigger:not(.selected):hover {
+      .dp-capacity {
+        display: block;
+      }
+    }
+  }
+}
+.os-monthly-calendar-days {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 12px;
+  .os-day {
+    text-align: center;
+    font-size: $body-font-size-m;
+    font-weight: $body-font-weight-bold;
+    cursor: pointer;
+    position: relative;
+    &:focus-visible {
+      outline: 2px solid $brand-primary;
+    }
+    &.week-day-6,
+    &.week-day-7 {
+    }
+    &.os-day-next-month,
+    &.os-day-prev-month {
+      color: #B7BCCB;
+      background-color: #fff;
+    }
+    &.os-day-current {
+      .os-day-box {
+        background-color: $calendar-day-box-bg;
+        // border: 1px solid #ececf1;
+      }
+      &.os-not-available {
+        cursor: not-allowed;
+        .os-day-box {
+          background-color: transparent;
+          .os-day-status {
+            background-color: #f7f7f7;
+          }
+          .os-day-number {
+            color: #adadae;
+          }
+        }
+        &.selected {
+          .os-day-box {
+            background-color: #ec7376;
+            .os-day-status {
+            }
+            .os-day-number {
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+    &.os-day-passed {
+      .os-day-box {
+        background-color: transparent;
+        .os-day-number {
+          color: #bdc5da;
+        }
+      }
+    }
+    &.os-not-in-allowed-period {
+      .os-day-box {
+        background-color: #f7f8fb;
+        .os-day-number {
+          color: #bdc5da;
+        }
+      }
+    }
+    &.os-today {
+      .os-day-box {
+        background-color: #fff6cb;
+        border-color: #fff6cb;
+      }
+    }
+
+    // MONTH SETTINGS
+    &.os-month-next,
+    &.os-month-prev {
+      .os-day-box {
+        opacity: 0.6;
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+
+    &.os-one-slot-only {
+      .os-day-status {
+      }
+    }
+
+    .os-day-box {
+      padding: 8px 5px;
+      // border: 1px solid #ececf1;
+      position: relative;
+
+    }
+    .os-available-slots-tooltip {
+      @include slot-tooltip-info();
+    }
+    .os-day-number {
+      color: $headings-color;
+      transition: all 0.1s ease;
+    }
+    .os-day-status {
+      transition: all 0.1s ease;
+    }
+    &:hover {
+      .os-day-box {
+        .os-day-number {
+          top: 40%;
+          transform: translateY(-2px) scale(1.2);
+          white-space: nowrap;
+        }
+        &:hover {
+          .os-available-slots-tooltip {
+            display: block;
+          }
+        }
+      }
+      .os-day-status {
+        height: 6px;
+        left: 3px;
+        right: 3px;
+      }
+    }
+    &.selected {
+      .os-day-box {
+        background-color: $brand-primary;
+        border-color: transparent;
+        color: #fff;
+        opacity: 1;
+        .os-day-number {
+          color: #fff;
+          transform: scale(1.2);
+        }
+        .os-day-status {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+
+.os-day-status {
+  margin: 0px;
+  height: 4px;
+  position: absolute;
+  border-radius: 0px;
+  overflow: hidden;
+  bottom: 3px;
+  left: 8px;
+  right: 8px;
+  background-color: $calendar-timeline-off-bg;
+  .day-available {
+    background-color: $timeblock-available-bg;
+    top: 0px;
+    bottom: 0px;
+    position: absolute;
+    z-index: 1;
+    min-width: 3px;
+  }
+}
+
+// TIME SLOTS
+
+
+.times-header {
+  color: #16171d;
+  font-size: floor($font-size-base * 1.1);
+  font-weight: $body-font-weight-normal;
+  text-align: center;
+  padding-bottom: 10px;
+  span {
+    color: $brand-primary;
+    border-bottom: 1px dotted $brand-primary;
+  }
+}
+
+.os-dates-w {
+  margin: 0px;
+}
+.os-times-w {
+  position: relative;
+}
+.timeslots {
+  display: flex;
+  justify-content: space-between;
+
+  .not-working-message {
+    flex: 1;
+    padding: 3px 5px;
+    text-align: center;
+    background-color: #f7e8e8;
+    color: #752f2f;
+    font-weight: $body-font-weight-bold;
+  }
+}
+
+// styled as a set of boxes with time labels
+.dp-timebox {
+  white-space: nowrap;
+  text-align: center;
+  padding: 6px 3px;
+  line-height: 1.2;
+  background-color: #d6ffd1;
+  font-size: floor($font-size-base * 1);
+  color: $headings-color;
+  cursor: pointer;
+  font-weight: $body-font-weight-bold;
+  position: relative;
+  width: auto!important;
+  max-width: none!important;
+  &:focus-visible {
+    outline: 2px solid $brand-primary;
+  }
+  .dp-tick,
+  .dp-success-label {
+    display: none!important;
+  }
+  &:hover {
+    background-color: #c0fbb8;
+  }
+  &.is-off,
+  &.is-booked {
+    color: #b3b3b3;
+    background-color: #f7f7f7;
+    box-shadow: none;
+    cursor: not-allowed;
+  }
+  &.selected {
+    background-color: $brand-primary;
+    color: #fff;
+    box-shadow: none;
+    &:after {
+      $size: 14px;
+      @include latepointfont("\e903");
+      background-color: $brand-primary;
+      box-shadow: 0px 0px 0px 2px #fff;
+      border-radius: 50%;
+      width: 14px;
+      line-height: 14px;
+      height: 14px;
+      top: -5px;
+      right: -5px;
+      font-size: 10px;
+      text-align: center;
+      position: absolute;
+      color: #fff;
+      animation: 0.2s ease 0s selectedSlotCheckmark;
+      animation-fill-mode: both;
+    }
+  }
+}
+
+.time-selector-w {
+  display: none;
+  margin-top: 20px;
+  margin-left: -2px;
+  margin-right: -2px;
+  &.hide-not-available-slots {
+    .dp-timebox {
+      &.is-off, &.is-booked {
+        display: none;
+      }
+    }
+  }
+  .th-timezone {
+    text-transform: uppercase;
+    font-size: floor($font-size-base * 0.7);
+    letter-spacing: 0.5px;
+    margin-top: 4px;
+    strong {
+      color: $color-faded;
+    }
+  }
+  &.style-timebox{
+    margin-top: 20px;
+    .timeslots {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 10px;
+      &.slots-not-available {
+        grid-template-columns: repeat(1, 1fr)!important;
+      }
+      .not-working-message {
+        border-radius: 4px;
+        padding: 6px;
+      }
+      .dp-timebox {
+        .dp-label-capacity {
+          display: none;
+        }
+        &.is-off {
+          display: none;
+        }
+      }
+    }
+    .times-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      padding-top: 10px;
+      .times-header-label {
+        flex: 1;
+        margin: 0px 15px;
+        white-space: nowrap;
+      }
+      .th-line {
+        height: 1px;
+        flex: 1;
+        background-color: rgba(0,0,0,0.1);
+        content: "";
+      }
+    }
+  }
+  &.style-timeline{
+    padding-bottom: 30px;
+    flex-wrap: no-wrap;
+  }
+  &.with-end-time {
+    &.time-system-12 {
+      .timeslots {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .dp-timebox {
+        span.dp-label-end-time {
+          opacity: 0.7;
+        }
+      }
+    }
+    &.time-system-24 {
+      .timeslots {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .dp-timebox {
+        span.dp-label-end-time {
+          opacity: 0.7;
+        }
+      }
+    }
+  }
+  &.without-end-time {
+    &.time-system-12 {
+      .timeslots {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .dp-timebox {
+      }
+    }
+    &.time-system-24 {
+      .timeslots {
+        grid-template-columns: repeat(5, 1fr);
+      }
+      .dp-timebox {
+      }
+    }
+  }
+}
+
+
+// styled as a band with timeslots
+.dp-timeslot {
+  height: $timeblock-tick-height;
+  flex-grow: 1;
+  margin: 0px;
+  box-shadow: inset 1px 0px 0px 0px #fff, inset -1px 0px 0px 0px #fff;
+  border-radius: 0px;
+  position: relative;
+  cursor: pointer;
+  background-color: $timeblock-available-bg;
+
+  &:focus-visible {
+    outline: 2px solid $brand-primary;
+  }
+  &:first-child {
+  }
+  &:last-child {
+  }
+  &:first-child {
+    &:last-child {
+    }
+  }
+  .dp-tick {
+    position: absolute;
+    display: block;
+    top: $timeblock-tick-height + 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: floor($font-size-base * 0.55);
+    text-align: center;
+    color: rgba(0,0,0,0.4);
+    text-transform: uppercase;
+    line-height: 1.4;
+    font-weight: $body-font-weight-bold;
+    letter-spacing: 1px;
+    strong {
+      display: block;
+      color: rgba(0,0,0,1);
+      font-size: floor($font-size-base * 0.75);
+      line-height: 1;
+      letter-spacing: 0px;
+      white-space: nowrap;
+    }
+  }
+  .dp-success-label {
+    color: rgba(255,255,255,0.8);
+    display: block;
+    text-align: center;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: floor($font-size-base * 0.7);
+  }
+  .dp-label {
+    display: none;
+    text-align: center;
+    padding: 7px 8px 7px 8px;
+    line-height: 1;
+    background-color: #04bb03;
+    color: #fff;
+    font-size: floor($font-size-base * 0.85);
+    font-weight: $body-font-weight-bold;
+    position: absolute;
+    left: 50%;
+    top: -8px;
+    transform: translate(-50%, -100%);
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    z-index: 10;
+  }
+  .dp-label-capacity {
+    display: block;
+    color: rgba(255,255,255,0.8);
+    text-align: center;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: floor($font-size-base * 0.7);
+  }
+  &.selected:not(.is-booked),
+  &.selected:not(.is-off) {
+    background-color: $brand-primary;
+    z-index: 4;
+    .dp-label-capacity {
+      display: none;
+    }
+    &:hover {
+      background-color: $brand-primary;
+    }
+    &:after {
+      content: "";
+      position: absolute;
+      width: 1px;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 0px;
+      bottom: 0px;
+      background-color: $brand-primary;
+      display: none;
+    }
+    .dp-label {
+      top: -3px;
+      background-color: $brand-primary;
+      color: #fff;
+      display: block;
+
+    }
+    &:before {
+      background-color: $brand-primary;
+      display: block;
+      width: 10px;
+      height: 10px;
+      transform:  translateX(-50%) rotate(45deg);
+      top: -12px;
+      left: 50%;
+    }
+  }
+  &:not(.is-off),
+  &:not(.is-booked) {
+    &:hover {
+    }
+  }
+  &.is-booked {
+    background-color: $calendar-timeline-off-bg;
+    margin: 0px;
+    cursor: not-allowed;
+    + .dp-timeslot:not(.is-booked) {
+    }
+    &:before {
+      background-color: #E42806;
+    }
+    .dp-label {
+      background-color: #E42806;
+    }
+    &:hover {
+      background-color: #E42806;
+    }
+  }
+  &.is-off {
+    background-color: $calendar-timeline-off-bg;
+    margin: 0px;
+    border-color: #fff;
+    max-width: 25%;
+    cursor: not-allowed;
+    + .dp-timeslot:not(.is-booked) {
+    }
+    &:before {
+      background-color: #E42806;
+    }
+    .dp-label {
+      background-color: #E42806;
+    }
+    &:hover {
+      background-color: $calendar-timeline-off-bg;
+      .dp-label {
+        display: none;
+      }
+    }
+  }
+  &.with-tick {
+    &:after {
+      content: "";
+      position: absolute;
+      width: 1px;
+      left: 50%;
+      height: 3px;
+      bottom: -7px;
+      background-color: rgba(0,0,0,0.4);
+    }
+  }
+  &:hover {
+    background-color: #04bb03;
+    &:before {
+      top: 0px;
+    }
+    .dp-label {
+      display: block;
+    }
+  }
+}

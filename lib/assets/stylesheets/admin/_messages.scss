@@ -1,0 +1,62 @@
+.latepoint-message {
+  border-radius: $border-radius-lg;
+  &.latepoint-message-success {
+    padding: 10px 15px;
+    font-weight: $body-font-weight-bold;
+    margin-bottom: 15px;
+    background: #aeffbe;
+    color: #258432;
+    text-align: center;
+  }
+  &.latepoint-message-error {
+    padding: 10px 15px;
+    font-weight: $body-font-weight-bold;
+    margin-bottom: 15px;
+    color: #820b0b;
+    text-align: center;
+    background-color: #ffdede;
+    border: 1px solid #eeb9b9;
+    border-bottom-color: #e5a5a5;
+    box-shadow: 0px 1px 1px rgba(255, 19, 19, 0.15);
+  }
+  &.latepoint-message-info {
+    padding: 10px 15px;
+    font-weight: $body-font-weight-bold;
+    margin-bottom: 15px;
+    background: #d5dcff;
+    color: #181b2d;
+    text-align: center;
+  }
+  &.latepoint-message-subtle {
+    padding: 10px 15px;
+    font-weight: $body-font-weight-bold;
+    margin-bottom: 20px;
+    background: #f6f3ec;
+    color: #857c74;
+    border-left: 2px solid #e9e4db;
+    border-radius: 0;
+    &:last-child {
+      margin-bottom: 0px;
+    }
+    strong {
+      color: $link-color;
+      background-color: #fff;
+      padding: 0px 3px;
+      border-radius: 4px;
+    }
+  }
+  &.latepoint-message-warning {
+    padding: 10px;
+    font-weight: $body-font-weight-bold;
+    margin-bottom: 15px;
+    background: #f7f2dd;
+    color: #61583e;
+    text-align: center;
+    border: 1px solid #dfcb9e;
+    box-shadow: 0px 2px 4px rgba(64, 55, 40, 0.05);
+  }
+  h3 {
+    margin-top: 0px;
+    margin-bottom: 5px;
+  }
+}

@@ -1,0 +1,174 @@
+.os-reminders-w {
+}
+.os-reminder-form {
+	position: relative;
+	& + .os-reminder-form {
+		margin-top: 15px;
+	}
+	.os-form-message-w.status-success {
+		display: none;
+	}
+	.os-remove-reminder {
+		position: absolute;
+		right: 0px;
+		top: 0px;
+		transform: translate(50%, -50%);
+		font-size: 14px;
+		color: $body-color;
+		text-decoration: none;
+		display: block;
+		padding: 0px 2px;
+		line-height: 18px;
+		width: 18px;
+		border-radius: 20px;
+		background-color: #fff;
+		box-shadow: $box-shadow;
+		text-align: center;
+		vertical-align: middle;
+		transition: all 0.2s ease;
+		display: none;
+		&:hover {
+			color: #dc5858;
+			transform: translate(50%, -50%) rotate(90deg);
+		}
+		i {
+			vertical-align: middle;
+			line-height: 18px;
+		}
+		&.os-loading {
+	    &:after {
+	      display: block;
+	      content: "";
+	      width: 19px;
+	      height: 19px;
+	      border-bottom: 2px solid #dc5858;
+	      border-left: 2px solid #dc5858;
+	      border-top: 2px solid #dc5858;
+	      border-right: 2px solid rgba(255,255,255,0);
+	      border-radius: 20px;
+	      position: absolute;
+	      top: 50%;
+	      left: 50%;
+	      transform: translate(-50%, -50%);
+	      animation: os-loading 700ms infinite linear;
+	    }
+	    i {
+	    	color: transparent;
+	    }
+		}
+	}
+	&:hover {
+		.os-remove-reminder {
+			display: block;
+		}
+	}
+	.os-reminder-form-info {
+		display: flex;
+		cursor: pointer;
+		align-items: center;
+		position: relative;
+		padding-left: 25px;
+		&:before {
+		  $size: 3px;
+		  content: "";
+		  width: $size;
+		  height: $size;
+		  background-color: rgba($brand-primary, 1);
+		  box-shadow: ($size * 2) ($size * 2) 0px rgba($brand-primary, 0.6),
+		              0px ($size * 2) 0px rgba($brand-primary, 0.6),
+		              0px ($size * 4) 0px rgba($brand-primary, 0.3),
+		              ($size * 2) ($size * 6) 0px rgba($brand-primary, 0.7),
+		              ($size * 2) ($size * 4) 0px rgba($brand-primary, 0.4);
+		  position: absolute;
+		  top: -2px;
+		  left: 0px;
+		}
+		&:hover {
+			.os-reminder-name {
+				color: $brand-primary;
+			}
+		}
+		&.os-reminder-required {
+			.os-reminder-type {
+				&:after {
+					position: absolute;
+					content: "*";
+					color: #BC0000;
+					top: 50%;
+					right: -15px;
+					transform: translateY(-50%);
+					line-height: 1;
+					font-size: 18px;
+					display: block;
+				}
+			}
+		}
+		.os-reminder-drag {
+			font-size: 16px;
+			padding: 5px;
+			padding-left: 0px;
+			color: $brand-primary;
+			margin-right: 10px;
+			line-height: 1;
+	    cursor: -moz-grab;
+	    cursor: -webkit-grab;
+	    cursor: grab;
+		  &:before {
+		    @include latepointfont_admin("\e92b");
+		  }
+		}
+		.os-reminder-name {
+			margin-right: 10px;
+			font-size: floor($font-size-base * 1.3);
+			font-weight: $body-font-weight-bold;
+		}
+		.os-reminder-type {
+			color: $color-faded;
+			position: relative;
+		}
+		.os-reminder-edit-btn {
+			margin-left: auto;
+			font-size: 16px;
+			color: $brand-primary;
+		}
+	}
+	.os-reminder-form-params {
+		display: none;
+		padding-top: 20px;
+		margin-top: 10px;
+		border-top: 1px solid rgba(0,0,0,0.05);
+	}
+	.os-reminder-form-i {
+		padding: 20px;
+		background-color: #fff;
+		box-shadow: $box-shadow;
+		border-radius: $border-radius;
+		.os-form-group {
+			margin-bottom: 20px;
+			&:first-child {
+				flex: 1;
+			}
+			+ .os-form-group {
+			}
+			&.os-form-checkbox-group {
+			}
+			&.os-form-select-group {
+				label {
+				}
+			}
+			&.os-form-checkbox-group {
+				label {
+				}
+			}
+		}
+		button {
+		}
+	}
+	.os-reminder-type-select {
+	}
+	&.os-is-editing {
+		.os-reminder-form-params {
+			display: block;
+		}
+	}
+}

@@ -1,0 +1,28 @@
+{
+  "name": "latepoint",
+  "version": "1.0.0",
+  "dependencies": {
+    "@emotion/styled": "^11.10.5",
+    "@wordpress/icons": "^9.15.0",
+    "chart.js": "^3.8.0",
+    "daterangepicker": "^3.0.5",
+    "dragula": "^3.7.2",
+    "inputmask": "^5.0.7",
+    "intl-tel-input": "^17.0.19",
+    "jquery.json-viewer": "^1.5.0",
+    "medium-editor": "^5.23.3",
+    "moment": "^2.29.4",
+    "pickr-widget": "^0.3.6",
+    "sprintf-js": "^1.1.2",
+    "util": "^0.12.5"
+  },
+  "devDependencies": {
+    "@wordpress/scripts": "25.1.0",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  },
+  "scripts": {
+    "build": "wp-scripts build --webpack-src-dir=blocks/src --output-path=blocks/build",
+    "start": "wp-scripts start --webpack-src-dir=blocks/src --output-path=blocks/build"
+  }
+}

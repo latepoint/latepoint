@@ -1,0 +1,41 @@
+.latepoint-w {
+  font-family: $body-font-family;
+  font-weight: $body-font-weight-normal;
+  font-size: $font-size-base;
+
+  h1, h2, h3, h4, h5, h6 {
+  	font-family: $headings-font-family;
+  	font-weight: $headings-font-weight-normal;
+  }
+
+  .latepoint-section-heading-w {
+  	display: flex;
+  	justify-content: space-between;
+  	align-items: center;
+  	border-bottom: 1px solid rgba(0,0,0,0.05);
+  	margin-bottom: 20px;
+  	padding: 10px 0px;
+  	margin-top: 20px;
+		.latepoint-section-heading {
+			margin: 0px;
+			padding: 0px;
+		}
+		.heading-extra {
+			font-weight: $body-font-weight-bold;
+			color: $color-faded;
+		}
+  }
+}
+
+
+
+.latepoint-tab-triggers {
+
+}
+
+.latepoint-tab-content {
+	display: none;
+	&.active {
+		display: block;
+	}
+}

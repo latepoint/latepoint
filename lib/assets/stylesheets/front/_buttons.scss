@@ -1,0 +1,253 @@
+.latepoint-btn {
+  padding: 9px 14px;
+  background-color: $brand-primary;
+  color: #fff;
+  border-radius: $border-radius;
+  text-decoration: none!important;
+  font-weight: $body-font-weight-bold;
+  display: inline-block;
+  box-shadow: none;
+  border: none;
+  line-height: 1.2;
+  cursor: pointer;
+  &:hover, &:focus {
+    outline: none;
+    color: #fff!important;
+    background-color: color-mix(in srgb,var(--latepoint-brand-primary),#000 10%);
+    box-shadow: none;
+  }
+  &.latepoint-btn-danger {
+    background-color: #FB7F7F;
+    color: #fff;
+    &.latepoint-btn-link {
+      background-color: transparent;
+      border-color: transparent;
+      span, i {
+        color: #d83838;
+      }
+      span {
+        border-bottom: 1px solid #d83838;
+      }
+
+      &.os-loading, &.os-loading:hover, &.os-loading:focus {
+        color: transparent!important;
+        background-color: transparent;
+        &:after {
+          border-bottom: 2px solid #d83838;
+          border-left: 2px solid #d83838;
+          border-top: 2px solid #d83838;
+        }
+      }
+      &:hover:not(.os-loading), &:focus:not(.os-loading) {
+        color: #d83838!important;
+        background-color: transparent;
+        span, i {
+          color: #d83838!important;
+        }
+      }
+    }
+    &:focus, &:active {
+      color: #fff;
+      background-color: #FB7F7F;
+    }
+    &:hover {
+      background-color: darken(#FB7F7F, 10%);
+    }
+  }
+  &.latepoint-btn-primary {
+    background-color: $brand-primary;
+    color: #fff;
+    span {
+      color: #fff;
+    }
+    i {
+      color: #fff;
+    }
+
+    &.latepoint-btn-outline {
+      background-color: transparent;
+      color: $brand-primary;
+      border: 1px solid $brand-primary;
+      &:hover, &:focus {
+        border-color: color-mix(in srgb,var(--latepoint-brand-primary),#000 10%);
+        color: $brand-primary;
+        background-color: transparent;
+      }
+      &.latepoint-btn-primary {
+        &.os-loading {
+          &:after {
+            border-bottom-color: $brand-primary;
+            border-left-color: $brand-primary;
+            border-top-color: $brand-primary;
+          }
+        }
+      }
+      span, i {
+        color: $brand-primary;
+      }
+    }
+    &.latepoint-btn-link {
+      background-color: transparent;
+      color: $brand-primary;
+      border-color: transparent;
+      padding-left: 0px;
+      padding-right: 0px;
+      span, i {
+        color: $brand-primary;
+      }
+      span {
+        border-bottom: 1px solid $brand-primary;
+      }
+      &.os-loading, &.os-loading:hover, &.os-loading:focus {
+        color: transparent!important;
+        &:after {
+          border-bottom: 2px solid $brand-primary;
+          border-left: 2px solid $brand-primary;
+          border-top: 2px solid $brand-primary;
+        }
+      }
+      &:hover:not(.os-loading), &:focus:not(.os-loading) {
+        color: $brand-primary!important;
+        span, i {
+          color: $brand-primary!important;
+        }
+      }
+    }
+  }
+  &.latepoint-btn-grey {
+    background-color: #eee;
+    color: #111!important;
+  }
+  &.latepoint-btn-white {
+    background-color: #fff;
+    color: #111!important;
+    &.latepoint-btn-link {
+      background-color: transparent;
+      color: #fff;
+      border-color: transparent;
+      padding-left: 0px;
+      padding-right: 0px;
+      span, i {
+        color: #fff;
+      }
+      span {
+        border-bottom: 1px solid #fff;
+      }
+      &.os-loading, &.os-loading:hover, &.os-loading:focus {
+        color: transparent!important;
+        &:after {
+          border-bottom: 2px solid #fff;
+          border-left: 2px solid #fff;
+          border-top: 2px solid #fff;
+        }
+      }
+      &:hover:not(.os-loading), &:focus:not(.os-loading) {
+        color: #fff!important;
+        span, i {
+          color: #fff!important;
+        }
+      }
+    }
+  }
+
+  &.latepoint-btn-block {
+    display: block;
+    text-align: center;
+  }
+
+
+  &.os-loading {
+    color: transparent!important;
+    position: relative;
+    span, i {
+      color: transparent!important;
+      border-bottom-color: transparent!important;
+    }
+    &:focus {
+      color: transparent!important;
+      span, i {
+        color: transparent!important;
+        border-bottom-color: transparent!important;
+      }
+    }
+    &:after {
+      display: block;
+      content: "";
+      width: 14px!important;
+      height: 14px!important;
+      border-bottom: 2px solid #fff;
+      border-left: 2px solid #fff;
+      border-top: 2px solid #fff;
+      border-right: 2px solid rgba(255,255,255,0);
+      border-radius: 20px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: os-loading 700ms infinite linear;
+      background-color: transparent!important;
+    }
+    &.latepoint-btn-white,
+    &.latepoint-btn-secondary {
+      &:after {
+        border-bottom: 2px solid $body-color;
+        border-left: 2px solid $body-color;
+        border-top: 2px solid $body-color;
+        border-right: 2px solid rgba(0,0,0,0);
+      }
+    }
+  }
+
+  &.latepoint-btn-secondary {
+    background-color: #EDEFF6;
+    color: #252C39;
+    &.latepoint-btn-link {
+      border-color: 2px solid #111;
+    }
+    &:hover, &:focus {
+      outline: none;
+      color: #252C39!important;
+      background-color: darken(#EDEFF6, 10%);
+      box-shadow: none;
+    }
+  }
+
+  span {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1.5;
+  }
+  i {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  i + span {
+    margin-left: 6px;
+  }
+  span + i {
+    margin-left: 6px;
+  }
+}
+
+
+// Booking Button
+.latepoint-book-button-wrapper {
+  &.latepoint-book-button-align-center {
+    text-align: center;
+  }
+  &.latepoint-book-button-align-right {
+    text-align: right;
+  }
+  &.latepoint-book-button-align-left {
+    text-align: left;
+  }
+  &.latepoint-book-button-align-justify {
+    text-align: center;
+    .latepoint-book-button {
+      display: block;
+    }
+  }
+}
+.latepoint-book-button {
+  @include latepoint-book-button();
+}

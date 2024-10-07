@@ -1,0 +1,258 @@
+/*!
+ * Copyright (c) 2023 LatePoint LLC. All rights reserved.
+ */
+
+.role-users-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 20px;
+}
+.role-user-wrapper {
+  background-color: #fff;
+  box-shadow: $box-shadow;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  .ru-meta-permissions {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    background-color: #8371dd;
+    color: #fff;
+    padding: 3px 4px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 9px;
+    font-weight: $body-font-weight-bold;
+    display: flex;
+    align-items: center;
+    .latepoint-icon {
+      font-size: 10px;
+      margin-right: 3px;
+    }
+  }
+  &:hover {
+    box-shadow: 0px 0px 0px 3px $brand-primary;
+    border-color: transparent;
+    &:before {
+      @include latepointfont_admin("\e919");
+      display: block;
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      font-size: 12px;
+      color: $brand-primary;
+    }
+  }
+  & + .role-user-wrapper {
+  }
+  .ru-main-info {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+  }
+  .ru-meta-info {
+    border-top: 1px solid $border-color-lightest;
+    padding: 10px 15px;
+    display: flex;
+    font-size: floor($font-size-base * 0.9);
+    color: $color-faded;
+    .ru-meta-connected-user {
+      i {
+        margin-right: 5px;
+        font-size: 12px;
+      }
+    }
+    .ru-meta-connected-user {
+      strong {
+        color: $body-color;
+        font-weight: $body-font-weight-bold;
+      }
+      .latepoint-icon-checkmark {
+        color: #2fa05c;
+      }
+      .latepoint-icon-eye-off {
+      }
+      a {
+        text-decoration: none;
+        border-bottom: 1px dotted $link-color;
+        &:hover {
+          border-bottom-style: solid;
+        }
+      }
+    }
+    a {
+      text-decoration: none;
+      margin-left: 4px;
+      span {
+        border-bottom: 1px dotted $link-color;
+      }
+      i {
+        font-size: 10px;
+      }
+      i + span, span + i {
+        margin-left: 2px;
+      }
+    }
+  }
+  .ru-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 40px;
+    background-size: cover;
+    background-position: center center;
+    margin-right: 20px;
+  }
+  .ru-wp-user-name {
+    padding-bottom: 5px;
+    .ru-name {
+      font-size: floor($font-size-base * 1.3);
+      font-weight: $body-font-weight-black;
+      line-height: 1.2;
+    }
+    .ru-email {
+      margin-top: 5px;
+      color: $color-faded;
+      font-size: floor($font-size-base * 0.9);
+    }
+  }
+  .ru-user-links {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    a {
+      margin-left: 10px;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      span {
+        border-bottom: 1px dotted $link-color;
+      }
+      i {
+        margin-left: 5px;
+      }
+      & + a {
+        margin-left: 15px;
+        padding-left: 15px;
+        border-left: 1px solid $border-color-main;
+      }
+    }
+  }
+}
+
+.os-form-block .os-form-block-i .role-actions-grid {
+  .role-actions-item {
+    padding: 10px 0;
+    border-bottom: 1px solid $border-color-main;
+    display: flex;
+    align-items: center;
+    &:last-child {
+      border-bottom: none;
+    }
+    &:hover {
+      border-bottom-color: #aaa;
+      .role-actions-group-name {
+        transform: translateX(5px);
+      }
+      .role-actions-group-description {
+      }
+      h3 {
+        color: $brand-primary;
+      }
+    }
+    &:has(+.role-actions-item:hover){
+      border-bottom-color: #aaa;
+    }
+  }
+  .role-actions-group-name {
+    margin-right: auto;
+    transition: all 0.2s ease;
+  }
+  .role-actions-group-description {
+    color: $color-faded;
+  }
+  h3 {
+    margin: 0;
+    transition: all 0.2s ease;
+    line-height: 1.5;
+  }
+  .role-toggler-wrapper {
+    min-width: 100px;
+    padding-left: 10px;
+    margin-left: 10px;
+    border-left: 1px solid $border-color-lightest;
+  }
+}
+
+.role-user-edit-form {
+  .role-actions-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    margin-bottom: 30px;
+    h3 {
+      margin-bottom: 5px;
+      font-size: floor($headings-font-size * 0.65);
+      border-bottom: 1px solid $border-color-lightest;
+      padding-bottom: 5px;
+    }
+  }
+  .ru-user-meta {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    .ru-role {
+      padding: 2px 4px;
+      border-radius: 4px;
+      background-color: #e4e4e4;
+      color: #444;
+      font-weight: $body-font-weight-bold;
+      font-size: floor($font-size-base * 0.8);
+      margin-right: 8px;
+    }
+    .ru-wp-user-link {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      span {
+        border-bottom: 1px dotted $link-color;
+      }
+      i {
+        margin-left: 4px;
+        font-size: 10px;
+      }
+    }
+  }
+  .role-actions-action {
+    .role-toggler-wrapper {
+      + .role-toggler-wrapper {
+      }
+    }
+  }
+  .ru-main-info {
+    padding-bottom: 20px;
+    display: flex;
+    align-items: center;
+  }
+  .ru-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    background-size: cover;
+    background-position: center center;
+    margin-right: 20px;
+  }
+  .ru-wp-user-name {
+    padding-bottom: 5px;
+    .ru-name {
+      font-size: floor($font-size-base * 1.6);
+      font-weight: $body-font-weight-black;
+      line-height: 1.4;
+    }
+    .ru-email {
+      color: $color-faded;
+      font-size: floor($font-size-base * 0.9);
+    }
+  }
+}

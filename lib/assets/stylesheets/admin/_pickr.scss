@@ -1,0 +1,267 @@
+// Constants
+$box-shadow-app: 0px 20px 60px rgba(0, 0, 0, 0.2), 0px 5px 30px rgba(0, 0, 0, 0.4);
+$color-input-fields: #f8f8f8;
+
+// Colors
+$color-blue-hover: #4370f4;
+
+$color-red-active: #f44250;
+$color-red-hover: #db3d49;
+
+$color-gray-light: #c4c4c4;
+$color-gray-default: #808080;
+
+$color-rainbow: linear-gradient(to bottom,
+    hsl(0, 100%, 50%),
+    hsl(60, 100%, 50%),
+    hsl(120, 100%, 50%),
+    hsl(180, 100%, 50%),
+    hsl(240, 100%, 50%),
+    hsl(300, 100%, 50%),
+    hsl(360, 100%, 50%));
+
+// Box shadows
+$box-shadow-small: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+
+// Border radius
+
+// Inline SVG muster
+$icon-transparency: url('data:image/svg+xml;utf8, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2 2"><path fill="white" d="M1,0H2V1H1V0ZM0,1H1V2H0V1Z"/><path fill="gray" d="M0,0H1V1H0V0ZM1,1H2V2H1V1Z"/></svg>');
+$icon-x: url('data:image/svg+xml;utf8, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" stroke="%2342445A" stroke-width="5px" stroke-linecap="round"><path d="M45,45L5,5"></path><path d="M45,5L5,45"></path></svg>');
+
+@mixin pseudo-reset {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+}
+
+@mixin transparency-background {
+    &::before {
+        @include pseudo-reset;
+        width: 100%;
+        height: 100%;
+        background: $icon-transparency;
+        background-size: 0.5em;
+        border-radius: $border-radius;
+        z-index: -1;
+    }
+}
+
+
+.pickr {
+    position: relative;
+    overflow: visible;
+}
+
+.pickr .pcr-button {
+    position: relative;
+    height: 18px;
+    width: 18px;
+    border-radius: 9px;
+    cursor: pointer;
+    background: transparent;
+    transition: background-color 0.3s;
+    @include transparency-background;
+
+    &::after {
+        @include pseudo-reset;
+        height: 100%;
+        width: 100%;
+        background: $icon-x no-repeat center;
+        background-size: 70%;
+        opacity: 0;
+    }
+
+    &.clear::after {
+        opacity: 1;
+    }
+
+    &.disabled {
+        cursor: not-allowed;
+    }
+}
+
+.pcr-app {
+    z-index: 999;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    box-shadow: $box-shadow-app;
+    top: 5px;
+    height: 15em;
+    width: 220px;
+    max-width: 220px;
+    padding: 15px;
+    border-radius: $border-radius;
+    background: #fff;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s;
+
+    &.visible {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+.pcr-app .pcr-interaction {
+    display: flex;
+    align-items: center;
+
+    > * {
+    }
+
+    input {
+        padding: 10px;
+        border: none;
+        outline: none;
+        font-size: $body-font-size-m;
+        text-align: center;
+        cursor: pointer;
+        color: $color-gray-light;
+        background: $color-input-fields;
+        border-radius: $border-radius;
+
+        &:hover {
+            color: $color-gray-default;
+        }
+    }
+
+    .pcr-result {
+        color: $color-gray-default;
+        text-align: left;
+        flex-grow: 1;
+        min-width: 1em;
+        transition: all 0.2s;
+        border-radius: $border-radius;
+        background: $color-input-fields;
+        cursor: text;
+        padding-left: 0.8em;
+
+        &:focus {
+            color: $brand-primary;
+        }
+
+        &::selection {
+            background: $brand-primary;
+            color: #fff;
+        }
+    }
+
+    .pcr-type.active {
+        color: #fff;
+        background: $brand-primary;
+    }
+
+    .pcr-clear,
+    .pcr-save {
+        color: #fff;
+        width: 100%;
+    }
+
+    .pcr-save {
+        background: $brand-primary;
+        display: none;
+
+        &:hover {
+            background: $color-blue-hover;
+            color: #fff;
+        }
+    }
+
+    .pcr-clear {
+        background: $color-red-active;
+
+        &:hover {
+            background: $color-red-hover;
+            color: #fff;
+        }
+    }
+}
+
+.pcr-app .pcr-selection {
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 1;
+
+    .pcr-picker {
+        position: absolute;
+        height: 18px;
+        width: 18px;
+        border: 2px solid #fff;
+        border-radius: 100%;
+        user-select: none;
+        cursor: -moz-grab;
+        cursor: -webkit-grabbing;
+    }
+
+    .pcr-color-preview {
+        position: relative;
+        z-index: 1;
+        width: 2em;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        @include transparency-background;
+
+        .pcr-last-color {
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border-radius: $border-radius $border-radius 0 0;
+        }
+
+        .pcr-current-color {
+            border-radius: 0 0 $border-radius $border-radius;
+        }
+
+        .pcr-last-color,
+        .pcr-current-color {
+            background: transparent;
+            width: 100%;
+            height: 50%;
+        }
+    }
+
+    .pcr-color-palette,
+    .pcr-color-chooser,
+    .pcr-color-opacity {
+        position: relative;
+        user-select: none;
+    }
+
+    .pcr-color-palette {
+        flex-grow: 0.9;
+        z-index: 1;
+
+        .pcr-palette {
+            height: 100%;
+            border-radius: $border-radius;
+            @include transparency-background;
+        }
+    }
+
+    .pcr-color-chooser,
+    .pcr-color-opacity {
+
+        .pcr-picker {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .pcr-slider {
+            width: 12px;
+            height: 100%;
+            border-radius: $border-radius;
+        }
+    }
+
+    .pcr-color-chooser .pcr-slider {
+        background: $color-rainbow;
+    }
+
+    .pcr-color-opacity .pcr-slider {
+        background: linear-gradient(to bottom, transparent, black), $icon-transparency;
+        background-size: 100%, 50%;
+    }
+}

@@ -1,0 +1,88 @@
+// Container widths
+//
+// Set the container width, and override it for fixed navbars in media queries.
+
+@if $enable-grid-classes {
+  .container {
+    @include make-container();
+    @include make-container-max-widths();
+  }
+}
+
+// Fluid container
+//
+// Utilizes the mixin meant for fixed width containers, but with 100% width for
+// fluid, full width layouts.
+
+@if $enable-grid-classes {
+  .container-fluid {
+    @include make-container();
+  }
+}
+
+// Row
+//
+// Rows contain and clear the floats of your columns.
+
+@if $enable-grid-classes {
+  .os-row {
+    @include make-row();
+  }
+
+  // Remove the negative margin from default .os-row, then the horizontal padding
+  // from all immediate children columns (to prevent runaway style inheritance).
+  .no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+
+    > .os-col,
+    > [class*="os-col-"] {
+      padding-right: 0;
+      padding-left: 0;
+    }
+  }
+}
+
+// Columns
+//
+// Common styles for small and large grid columns
+
+@if $enable-grid-classes {
+  @include make-grid-columns();
+}
+
+
+
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+  $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+  @include media-breakpoint-up($breakpoint, $grid-breakpoints) {
+    .os-col#{$infix}-br {
+      border-right: 1px solid $border-color-sub;
+      padding-right: 30px;
+      & + div[class*="os-col-"] {
+        padding-left: 30px;
+      }
+    }
+    .os-col#{$infix}-pr {
+      padding-right: 20px;
+      & + div[class*="os-col-"] {
+        padding-left: 20px;
+      }
+    }
+  }
+}
+
+
+.os-dashboard-row {
+  display: flex;
+  .os-dashboard-column {
+    flex: 1;
+    & + .os-dashboard-column {
+      margin-left: $content-padding;
+    }
+    &.os-fit {
+      flex: 0;
+    }
+  }
+}

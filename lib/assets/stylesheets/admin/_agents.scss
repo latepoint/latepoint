@@ -1,0 +1,603 @@
+.selected-agent-info-w {
+  display: flex;
+  align-items: center;
+  padding-bottom: 15px;
+  .avatar-w {
+    img {
+      width: 45px;
+      height: auto;
+      border-radius: 50px;
+      display: block;
+    }
+  }
+
+  .info-name {
+    font-size: $headings-font-size * 0.6;
+    font-weight: $body-font-weight-bold;
+    margin-bottom: 10px;
+  }
+
+  .info-w {
+    padding-left: 20px;
+    .info-name {
+      margin-top: 0px;
+      margin-bottom: 0px;
+      color: $brand-primary;
+    }
+    .latepoint-btn {
+      & + .latepoint-btn {
+        margin-left: 6px;
+      }
+    }
+  }
+}
+
+.agent-info-w {
+  &.selected {
+    .agents-selector-w {
+    }
+    .selected-agent-info-w {
+    }
+  }
+  &.selecting {
+    .agents-selector-w {
+    }
+    .agent-info-change-agent-btn {
+      display: none;
+    }
+    .selected-agent-info-w {
+      display: none;
+    }
+  }
+}
+.os-agents-list-w {
+  box-shadow: 0px 10px 70px rgba(0,0,0,0.5);
+  border-radius: 4px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  width: 400px;
+  .agents-header {
+    margin: 0px;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+  .agents-footer {
+    padding: 10px 20px;
+    text-align: center;
+    border-top: 1px solid rgba(0,0,0,0.05);
+    display: flex;
+    .latepoint-btn:last-child {
+      margin-left: auto;
+    }
+  }
+}
+.os-agents-list {
+  height: 240px;
+  overflow-y: scroll;
+  display: flex;
+  flex-wrap: wrap;
+  .os-agent {
+    flex: 0 0 33.3%;
+    box-sizing: border-box;
+    align-items: center;
+    padding: 15px 15px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    border-right: 1px solid rgba(0,0,0,0.05);
+    text-align: center;
+    cursor: pointer;
+    &:hover {
+      background-color: rgba(0,0,0,0.05);
+      .agent-name {
+        color: $brand-primary;
+      }
+    }
+
+    &.selected {
+      .agent-avatar {
+        position: relative;
+        box-shadow: 0px 0px 0px 4px $brand-primary;
+        &:before {
+          content: "\e904";
+          @include latepointfont_admin();
+          color: $brand-primary;
+          position: absolute;
+          top: -3px;
+          right: -14px;
+          width: 20px;
+          height: 20px;
+          font-size: 12px;
+          padding: 2px;
+          background-color: $brand-primary;
+          color: #fff;
+          text-align: center;
+          line-height: 20px;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+  .agent-avatar {
+    border-radius: 50%;
+    height: 40px;
+    margin-bottom: 10px;
+    display: inline-block;
+    img {
+      width: 40px;
+      height: auto;
+      border-radius: 50%;
+      box-shadow: 0 0 0 2px #fff;
+    }
+  }
+  .agent-name {
+    margin: 0px;
+  }
+
+}
+
+
+.disabled-items-wrapper {
+  margin-top: 40px;
+  &:not(.is-open) {
+    .disabled-items-boxes {
+      display: none;
+    }
+  }
+  .disabled-items-open-trigger {
+    font-size: $body-font-size-m;
+    color: $color-faded;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid $border-color-lightest;
+    border-bottom: 1px solid $border-color-lightest;
+    padding: 20px 0;
+    cursor: pointer;
+    margin-bottom: 20px;
+    &:hover {
+      border-top-color: $border-color-strong;
+      border-bottom-color: $border-color-strong;
+      color: $headings-color;
+    }
+  }
+}
+
+.index-agent-boxes {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 30px;
+  grid-auto-rows: 1fr;
+  .agent-box-w {
+    background-color: #fff;
+    border: 1px solid $border-color-main;
+    padding: 20px 25px;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    text-decoration: none;
+    display: block;
+    border-radius: $border-radius-sm;
+    &.agent-status-disabled {
+      box-shadow: inset 0px 3px 0px 0px #ffbcbc;
+      border-top-color: #ffbcbc;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      .agent-schedule, .agent-schedule-info {
+        opacity: 0.4;
+      }
+      .agent-name {
+        color: #ca1616;
+        opacity: 0.7;
+      }
+      .agent-avatar {
+        opacity: 0.7;
+      }
+    }
+    &:nth-child(4n+4) {
+      margin-right: 0px;
+    }
+    &:hover {
+      box-shadow: 0px 0px 0px 2px $brand-primary;
+      border-color: $brand-primary;
+      .schedule-day.is-on:before {
+        transform: translateX(-50%) scale(1.4);
+      }
+      .agent-avatar {
+        transform: scale(1.1);
+      }
+      .agent-name {
+      }
+      .agent-edit-icon,
+      .agent-remove-trigger {
+        display: block;
+      }
+    }
+  }
+
+  .agent-info-w {
+    display: flex;
+    align-items: center;
+    .agent-info {
+      text-align: left;
+      flex: 1;
+    }
+  }
+
+  .agent-schedule {
+    display: flex;
+    padding: 15px 0px;
+    border-bottom: 1px solid $border-color-sub;
+    border-top: 1px solid $border-color-sub;
+    margin-top: 15px;
+    .schedule-day {
+      position: relative;
+      flex: 1;
+      text-align: center;
+      padding-top: 15px;
+      font-size: floor($font-size-base * 0.7);
+      color: #d4d5e1;
+      & + .schedule-day {
+        border-left: 1px solid $border-color-sub;
+      }
+      &:before {
+        position: absolute;
+        top: 0px;
+        left: 50%;
+        transform: translateX(-50%);
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 10px;
+        background-color: #d4d5e1;
+        transform-origin: center center;
+        transition: transform 0.2s ease;
+      }
+      &.is-on {
+        color: $body-color;
+        &:before {
+          background-color: #59d193;
+        }
+      }
+    }
+  }
+
+  .agent-avatar {
+    flex: 0 0 65px;
+    width: 65px;
+    height: 65px;
+    background-size: cover;
+    background-position: center center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    margin-right: 20px;
+  }
+
+  .agent-name {
+    font-weight: $body-font-weight-bold;
+    color: $headings-color;
+    font-size: floor($font-size-base * 1.3);
+    transition: all 0.2s ease;
+    margin-bottom: 3px;
+  }
+  .agent-phone {
+    color: $color-faded;
+    font-size: floor($font-size-base * 0.9);
+  }
+  .agent-edit-icon {
+    display: none;
+    position: absolute;
+    line-height: 1;
+    top: 0px;
+    left: 0px;
+    color: $brand-primary;
+    font-size: 14px;
+    padding: 5px;
+    opacity: 0.8;
+    &:hover {
+      transform: scale(1.3);
+      opacity: 1;
+    }
+  }
+  .agent-schedule-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .agent-today-info {
+      color: $color-faded;
+      font-size: floor($font-size-base * 0.9);
+      text-align: left;
+      padding-top: 15px;
+      .today-status {
+        border-radius: $border-radius-lg;
+        display: inline-block;
+        padding: 2px 5px;
+        color: #fff;
+        background-color: #85d7ad;
+        font-size: floor($font-size-base * 0.8);
+        margin-left: 4px;
+        &.is-off-duty {
+        color: #fff;
+        background-color: #ef7a7a;
+        }
+      }
+      .today-schedule {
+        font-weight: $body-font-weight-bold;
+        color: $body-color-dark;
+        font-size: floor($font-size-base * 0.9);
+        margin-top: 4px;
+        span {
+          display: inline-block;
+          margin-right: 10px;
+        }
+      }
+    }
+    .today-bookings {
+      color: $color-faded;
+      font-size: floor($font-size-base * 0.9);
+      border-left: 1px solid $border-color-sub;
+      padding: 15px 0px 0px 15px;
+    }
+    .today-bookings-count {
+      font-weight: $body-font-weight-bold;
+      color: $body-color-dark;
+      font-size: floor($font-size-base * 1.3);
+      margin-top: 4px;
+    }
+  }
+  .agent-remove-trigger {
+    color: #E88181;
+    font-size: 14px;
+    padding: 5px;
+    line-height: 1;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    cursor: pointer;
+    display: none;
+    &:hover {
+      color: #ff2222;
+      transform: scale(1.3);
+    }
+  }
+}
+// ADD SERVICE BUTTON
+.create-agent-link-w {
+  border: 4px dotted rgba(0,0,0,0.1);
+  border-radius: 6px;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+  display: block;
+  outline: none;
+  box-shadow: none;
+  min-height: 150px;
+
+  .create-agent-link-i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+  }
+
+  .add-agent-graphic-w {
+    width: 80px;
+    height: 80px;
+    position: relative;
+    margin: 0px auto;
+    .add-agent-plus {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      border-radius: 50%;
+      height: 30px;
+      width: 30px;
+      background-color: $brand-primary;
+      box-shadow: 0px 0px 0px 15px rgba(208, 213, 220, 0.3);
+      color: #fff;
+      transform: translate(-50%, -50%);
+      transition: all 0.2s cubic-bezier(.25,1.4,.5,1.35);
+      i {
+        position: absolute;
+        display: block;
+        top: 50%;
+        left: 50%;
+        font-size: 12px;
+        transform: translate(-45%, -47%);
+        transition: all 0.2s ease;
+      }
+    }
+  }
+  .add-agent-label {
+    color: $headings-color;
+    font-weight: $body-font-weight-bold;
+    font-size: floor($font-size-base * 1.2);
+    margin-top: 5px;
+    transition: all 0.2s cubic-bezier(.25,1.4,.5,1.35);
+  }
+  &:hover {
+    border-color: $brand-primary;
+    border-style: solid;
+    .add-agent-plus {
+      box-shadow: 0px 0px 0px 15px rgba(208, 213, 220, 0.3);
+      transform: translate(-50%, -50%) scale(1.2);
+      i {
+      }
+    }
+    .add-agent-label {
+      transform: translateY(5px);
+    }
+  }
+}
+
+.os-agent-highlights {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.os-agent-highlight {
+  background-color: #fff;
+  transition: all 0.2s ease;
+  flex: 0 0 30%;
+  margin-bottom: 20px;
+  h4 {
+    padding: 0px;
+    margin-top: 0px;
+    color: $brand-primary;
+    margin-bottom: 15px;
+  }
+  .os-agent-highlight-fields {
+    display: flex;
+    justify-content: space-between;
+    .os-form-group {
+      flex: 1;
+      margin-bottom: 0px;
+      &:first-child {
+        flex: 0 0 60px;
+        margin-right: 20px;
+      }
+    }
+  }
+}
+.os-agent-add-highlight {
+  padding: 20px;
+  border: 3px dotted rgba(0, 0, 0, 0.1);
+  border-radius: $border-radius-xs;
+  transition: all 0.2s ease;
+  flex: 0 0 150px;
+  margin-bottom: 20px;
+}
+
+.os-mini-agent-profile-w {
+  padding: 20px;
+  .os-ma-agent-info-w {
+    display: flex;
+    align-items: flex-start;
+    .os-ma-avatar {
+      flex: 0 0 80px;
+      height: 80px;
+      border-radius: 80px;
+      background-size: cover;
+      background-position: center center;
+    }
+    .os-ma-agent-info {
+      padding-left: 20px;
+      .ma-agent-name {
+        font-size: floor($headings-font-size * 0.9);
+        font-weight: $body-font-weight-bold;
+        margin-bottom: 8px;
+        a {
+          text-decoration: none;
+          box-shadow: none;
+          outline: none;
+          font-size: 17px;
+          margin-left: 8px;
+        }
+      }
+      .ma-agent-info-list-item {
+        margin-bottom: 3px;
+        span {
+          color: $color-faded;
+          margin-right: 2px;
+        }
+      }
+    }
+  }
+
+  .agent-schedule-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-top: 1px solid $border-color-sub;
+    margin-top: 10px;
+    .agent-today-info {
+      color: $color-faded;
+      font-size: floor($font-size-base * 0.9);
+      text-align: left;
+      padding: 10px 0px;
+      .today-status {
+        display: inline-block;
+        padding: 2px 5px;
+        color: #fff;
+        background-color: #85d7ad;
+        font-size: floor($font-size-base * 0.8);
+        margin-left: 4px;
+        border-radius: 4px;
+        font-weight: $body-font-weight-bold;
+        &.is-off-duty {
+        color: #fff;
+        background-color: #ef7a7a;
+        }
+      }
+      .today-schedule {
+        font-weight: $body-font-weight-bold;
+        color: $body-color-dark;
+        margin-top: 4px;
+        font-size: floor($font-size-base * 1.1);
+        span {
+          display: block;
+          margin-bottom: 5px;
+        }
+      }
+    }
+    .today-bookings {
+      color: $color-faded;
+      font-size: floor($font-size-base * 0.9);
+      padding: 10px 0px;
+    }
+    .today-bookings-count {
+      font-weight: $body-font-weight-bold;
+      color: $body-color-dark;
+      font-size: floor($font-size-base * 1.1);
+      margin-top: 4px;
+    }
+  }
+
+
+  .agent-timeline-w {
+    padding: 0px 5px;
+    .agent-timeline {
+      height: 16px;
+      background-color: #F2F5F8;
+      position: relative;
+      box-shadow: 0px 0px 0px 5px #F2F5F8;
+      .booking-block {
+        height: 16px;
+        z-index: 3;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        box-shadow: 0px 0px 0px 1px #f2f5f8;
+        background-color: rgba(0,0,0,0.2);
+        transition: height 0.15s ease;
+        &.os-loading {
+          &:after {
+            @include loading-circle(#fff);
+          }
+        }
+        &:hover {
+          height: 20px;
+        }
+        .appointment-box-small {
+          position: absolute;
+          top: 0px;
+          left: 50%;
+          transform: translate(-50%, -120%);
+          visibility: hidden;
+          opacity: 0;
+          transition: all 0.2s ease;
+        }
+        &:hover {
+          .appointment-box-small {
+            transform: translate(-50%, -105%);
+            visibility: visible;
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+}

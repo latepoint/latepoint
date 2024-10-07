@@ -1,0 +1,164 @@
+@keyframes selectedSlotCheckmark {
+  0% { transform: rotate(-65deg) scale(0.5); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
+@keyframes latepointFadeUp {
+  0% { transform: translate3d(0, 40px, 0); opacity: 0; }
+  100% { transform: translate3d(0, 0px, 0); opacity: 1; }
+}
+
+@keyframes up10op {
+  0% { transform: translate3d(0, 10px, 0); opacity: 0 }
+  100% { transform: translate3d(0, 0px, 0); opacity: 1 }
+}
+@keyframes up10 {
+  0% { transform: translate3d(0, 10px, 0); }
+  100% { transform: translate3d(0, 0px, 0); }
+}
+@keyframes up20op {
+  0% { transform: translate3d(0, 20px, 0); opacity: 0 }
+  100% { transform: translate3d(0, 0px, 0); opacity: 1 }
+}
+@keyframes rotateScale {
+  0% { transform: scale(0.4) rotate(-90deg); opacity: 0 }
+  100% { transform: scale(1) rotate(0deg); opacity: 1 }
+}
+@keyframes up20 {
+  0% { transform: translate3d(0, 20px, 0); }
+  100% { transform: translate3d(0, 0px, 0); }
+}
+
+@keyframes up40 {
+  0% { transform: translate3d(0, 20px, 0); }
+  100% { transform: translate3d(0, 0px, 0); }
+}
+
+
+@keyframes latepointMessage {
+  0% { transform: translate3d(0, -10px, 0); opacity: 0; }
+  100% { transform: translate3d(0, 0px, 0); opacity: 1; }
+}
+
+
+
+@keyframes latepointFadeDown {
+  0% { transform: translate3d(0, -40px, 0); opacity: 0; }
+  100% { transform: translate3d(0, 0px, 0); opacity: 1; }
+}
+
+@keyframes agentBio {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes osLightboxAnimation {
+  0% { transform: translate3d(0, 10%, 0); opacity: 0; }
+  100% { transform: translate3d(0, 0, 0); opacity: 1; }
+}
+
+@keyframes latepointAvailabilityPopup {
+  0% { transform: translate3d(-50%, -60%, 0px); opacity: 0; }
+  100% { transform: translate3d(-50%, -115%, 0px); opacity: 1; }
+}
+
+@keyframes latepointAvailabilityPopupY {
+  0% { transform: translate3d(0%, -60%, 0px); opacity: 0; }
+  100% { transform: translate3d(0%, -115%, 0px); opacity: 1; }
+}
+
+@keyframes latepointNextBtn {
+  0% { transform: translate3d(-15px, 0px, 0) scale(0.9); opacity: 0; }
+  100% { transform: translate3d(0, 0px, 0) scale(1); opacity: 1; }
+}
+
+@keyframes latepointPrevBtn {
+  0% { transform: translate3d(15px, 0px, 0) scale(0.9); opacity: 0; }
+  100% { transform: translate3d(0, 0px, 0) scale(1); opacity: 1; }
+}
+
+.latepoint-login-form-w {
+	animation: 0.6s cubic-bezier(.45,1.1,.4,1) 0s both latepointFadeUp;
+}
+
+.os-step-tab-content {
+	animation: 0.3s cubic-bezier(.45,1.1,.4,1.2) 0s both latepointFadeUp;
+}
+
+.os-password-reset-form-w {
+	animation: 0.3s cubic-bezier(.45,1.1,.4,1.2) 0s both latepointFadeUp;
+}
+
+.os-item-details-popup {
+	animation: 0.4s cubic-bezier(.45,1.3,.6,1) 0s both agentBio;
+}
+
+.item-details-popup-content-i {
+	animation: 0.4s cubic-bezier(.45,1.1,.4,1) 0s both latepointFadeUp;
+}
+.item-details-popup-head {
+	h3 {
+		animation: 0.4s cubic-bezier(.45,1.1,.4,1) 0s both latepointFadeDown;
+	}
+	.item-details-popup-title {
+		animation: 0.4s cubic-bezier(.45,1.1,.4,1) 0s both latepointFadeDown;
+	}
+}
+
+.item-details-popup-feature-value {
+		animation: 0.4s cubic-bezier(0, 1, 0.51, 1) 0.05s both latepointFadeUp;
+}
+.item-details-popup-feature-label {
+		animation: 0.4s cubic-bezier(0, 1, 0.51, 1) 0.1s both latepointFadeUp;
+}
+
+.latepoint-lightbox-i {
+	transform-origin: center center;
+	animation: 0.5s cubic-bezier(0, 1, 0.51, 1) 0s both osLightboxAnimation;
+}
+
+.latepoint-message {
+  animation: 0.15s cubic-bezier(.45,1.3,.6,1.1) 0s both latepointMessage;
+}
+
+.a-up-10 {
+  animation: 0.4s cubic-bezier(.25, 1.4, .5, 1) 0s up10op;
+  animation-fill-mode: both;
+}
+.a-up-10-opaque {
+  animation: 0.4s cubic-bezier(.25, 1.4, .5, 1) 0s up10;
+  animation-fill-mode: both;
+}
+.a-up-20 {
+  animation: 0.4s cubic-bezier(.25, 1.4, .5, 1) 0s up20op;
+  animation-fill-mode: both;
+}
+.a-up-20-opaque {
+  animation: 0.4s cubic-bezier(.25, 1.4, .5, 1) 0s up20;
+  animation-fill-mode: both;
+}
+.a-up-40-opaque {
+  animation: 0.6s cubic-bezier(.35, 1.2, .7, 1) 0s up40;
+  animation-fill-mode: both;
+}
+.a-rotate-scale {
+  animation: 0.7s cubic-bezier(.25, 1.4, .5, 1.35) 0s rotateScale;
+  animation-fill-mode: both;
+}
+.a-delay-1 {
+  animation-delay: 0.05s;
+}
+.a-delay-2 {
+  animation-delay: 0.1s;
+}
+.a-delay-3 {
+  animation-delay: 0.15s;
+}
+.a-delay-4 {
+  animation-delay: 0.2s;
+}
+
+@keyframes os-loading-gradient {
+  0%   { background-position: 0 0; }
+  100% { background-position: -200% 0; }
+}

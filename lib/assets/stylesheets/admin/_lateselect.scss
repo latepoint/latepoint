@@ -1,0 +1,142 @@
+.lateselect-w {
+  min-width: 150px;
+  position: relative;
+  font-weight: $body-font-weight-bold;
+  font-size: $font-size-base;
+  border-radius: $form-controls-border-radius;
+  user-select: none;
+  .ls-placeholder {
+    display: none;
+    color: $color-faded;
+    font-weight: $body-font-weight-bold;
+    order: 1;
+    padding: 2px 3px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border: 1px solid transparent;
+    &:last-child {
+      display: block;
+    }
+  }
+  .ls-selected-items-w {
+    min-height: 36px;
+    border: 1px solid #ccd1d9;
+    border-radius: $form-controls-border-radius;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 5px 0px 0px 5px;
+    cursor: pointer;
+    &:hover {
+      border-color: #99a2b1;
+    }
+    .ls-item {
+      padding: 2px 7px 2px 2px;
+      border-radius: 10px;
+      border: 1px solid #1462d0;
+      background-color: #ecf2ff;
+      color: #1265dc;
+      margin-right: 5px;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      .os-late-quantity-selector-w {
+        margin-left: 10px;
+        display: flex;
+        align-items: center;
+
+        .os-late-quantity-selector {
+          font-size: 10px;
+          cursor: pointer;
+          color: rgba(0,0,0,0.8);
+          background-color: #cfdaff;
+          border-radius: 4px;
+          padding: 3px 3px;
+          line-height: 1;
+          width: 15px;
+          text-align: center;
+          display: block;
+          &.minus {
+            &:before {
+              @include latepointfont_admin("\e96d");
+            }
+          }
+          &.plus {
+            &:before {
+              @include latepointfont_admin("\e902");
+            }
+          }
+          &:hover {
+            color: #fff;
+            background-color: $brand-primary;
+          }
+        }
+        .os-late-quantity-selector-input {
+          width: 22px;
+          padding: 1px 1px 2px;
+          min-height: auto;
+          font-size: floor($font-size-base * 0.8);
+          text-align: center;
+          display: block;
+          border-color: #b0befd;
+          margin: 0px 3px;
+        }
+      }
+      span {
+        display: block;
+        vertical-align: middle;
+        &.latepoint-icon {
+          font-size: 14px;
+          padding: 2px;
+          border-radius: 6px;
+          &:hover {
+            background-color: #c1d4ff;
+          }
+        }
+      }
+      span + span {
+        margin-left: 3px;
+      }
+    }
+  }
+  .ls-all-items-w {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0px;
+    right: 0px;
+    background-color: #fff;
+    z-index: 999;
+    border: 1px solid #ababbf;
+    border-bottom-color: darken(#aaacb9, 5%);
+    border-top: none;
+    border-radius: 0px 0px $form-controls-border-radius $form-controls-border-radius;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15), 0px 3px 10px rgba(0, 0, 0, 0.1);
+    max-height: 235px;
+    overflow: auto;
+    .ls-item {
+      border-bottom: 1px solid #eee;
+      padding: 8px 10px;
+      &.selected {
+        color: $color-faded;
+      }
+      &:last-child {
+        border-bottom: none;
+      }
+      &:hover:not(.selected) {
+        background-color: #e9eeff;
+        color: $brand-primary;
+        cursor: pointer;
+      }
+    }
+  }
+  &.ls-selecting {
+    .ls-all-items-w {
+      display: block;
+    }
+    .ls-selected-items-w {
+      border-color: #ababbf;
+      border-radius: $form-controls-border-radius $form-controls-border-radius 0px 0px;
+    }
+  }
+}

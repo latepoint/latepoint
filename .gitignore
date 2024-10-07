@@ -1,0 +1,8 @@
+node_modules/
+/vendor/
+composer.phar
+.idea
+.nova
+.DS_Store
+.phpintel
+/public

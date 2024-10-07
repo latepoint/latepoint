@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "latepoint/customer-dashboard",
+  "version": "1.0.0",
+  "title": "Customer Dashboard",
+  "category": "latepoint",
+  "icon": "schedule",
+  "description": "Generates a customer dashboard for LatePoint",
+  "attributes": {
+    "caption": {
+      "type": "string",
+      "default": "Customer Dashboard"
+    },
+    "hide_new_appointment_ui": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "supports": {
+    "html": false
+  },
+  "textdomain": "latepoint",
+  "editorScript": "file:index.js"
+}

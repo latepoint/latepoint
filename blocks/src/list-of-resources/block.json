@@ -1,0 +1,177 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "latepoint/list-of-resources",
+  "version": "1.0.0",
+  "title": "List of Resources",
+  "category": "latepoint",
+  "icon": "feedback",
+  "description": "Generates a list of bookable resources by type for LatePoint",
+  "attributes": {
+    "id": {
+      "type": "string"
+    },
+    "items": {
+      "type": "string",
+      "default": "services"
+    },
+    "columns": {
+      "type": "string",
+      "default": "4"
+    },
+    "button_caption": {
+      "type": "string",
+      "default": "Book Now"
+    },
+    "hide_summary": {
+      "type": "boolean",
+      "default": false
+    },
+    "hide_side_panel": {
+      "type": "boolean",
+      "default": false
+    },
+    "selected_agent": {
+      "type": "string"
+    },
+    "selected_service": {
+      "type": "string"
+    },
+    "selected_service_category": {
+      "type": "string"
+    },
+    "selected_location": {
+      "type": "string"
+    },
+    "selected_start_date": {
+      "type": "string"
+    },
+    "selected_start_time": {
+      "type": "string"
+    },
+    "selected_duration": {
+      "type": "string"
+    },
+    "selected_total_attendees": {
+      "type": "string"
+    },
+    "limit": {
+      "type": "string"
+    },
+    "item_ids": {
+      "type": "string"
+    },
+    "group_ids": {
+      "type": "string"
+    },
+
+    "source_id": {
+      "type": "string"
+    },
+    "calendar_start_date": {
+      "type": "string"
+    },
+    "show_services": {
+      "type": "string"
+    },
+    "show_service_categories": {
+      "type": "string"
+    },
+    "show_agents": {
+      "type": "string"
+    },
+    "show_locations": {
+      "type": "string"
+    },
+    "card_padding": {
+      "type": "string"
+    },
+    "card_box_shadow": {
+      "type": "string"
+    },
+    "card_border_style": {
+      "type": "string"
+    },
+    "card_border_radius": {
+      "type": "string"
+    },
+    "card_border_width": {
+      "type": "string"
+    },
+    "card_border_color": {
+      "type": "string"
+    },
+    "card_border_color_hover": {
+      "type": "string"
+    },
+    "card_bg_color_hover": {
+      "type": "string"
+    },
+    "card_text_color": {
+      "type": "string"
+    },
+    "card_bg_color": {
+      "type": "string"
+    },
+    "card_text_color_hover": {
+      "type": "string"
+    },
+    "is_inherit": {
+      "type": "boolean",
+      "default": false
+    },
+    "button_bg_color": {
+      "type": "string"
+    },
+    "bg_color_hover": {
+      "type": "string"
+    },
+    "button_text_color": {
+      "type": "string"
+    },
+    "text_color_hover": {
+      "type": "string"
+    },
+    "border_color": {
+      "type": "string"
+    },
+    "border_color_hover": {
+      "type": "string"
+    },
+    "padding": {
+      "type": "string"
+    },
+    "font_family":{
+      "type": "string"
+    },
+    "button_font_size": {
+      "type": "string"
+    },
+    "text_transform": {
+      "type": "string"
+    },
+    "font_weight": {
+      "type": "string"
+    },
+    "line_height": {
+      "type": "string"
+    },
+    "letter_spacing": {
+      "type": "string"
+    },
+    "button_border_radius": {
+      "type": "string"
+    },
+    "border_style": {
+      "type": "string"
+    },
+    "border_width": {
+      "type": "string"
+    }
+  },
+  "supports": {
+    "html": false
+  },
+  "textdomain": "latepoint",
+  "editorScript": "file:index.js"
+}

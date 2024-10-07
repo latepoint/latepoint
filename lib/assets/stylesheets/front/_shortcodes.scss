@@ -1,0 +1,91 @@
+/*!
+ * Copyright (c) 2022 LatePoint LLC. All rights reserved.
+ */
+
+.latepoint-resources-items-w {
+  display: grid;
+  margin: 40px 0px;
+  align-items: start;
+  &.resources-columns-2 {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 50px;
+  }
+  &.resources-columns-3 {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 40px;
+  }
+  &.resources-columns-4 {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 30px;
+  }
+  &.resources-columns-5 {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 20px;
+  }
+  .resource-item {
+    box-shadow: 0 2px 18px -6px rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    background-color: #fff;
+    transition: all 0.2s ease;
+    &.ri-centered {
+      text-align: center;
+    }
+    &:hover {
+      box-shadow: 0 5px 24px -9px rgba(0, 0, 0, 0.4), 0 3px 6px 0 rgba(0, 0, 0, 0.2);
+      transform: translateY(-2px);
+    }
+    .ri-avatar {
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      background-position: center center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      margin: 0 auto 20px auto;
+    }
+    .ri-map {
+      margin: -20px -20px 0 -20px;
+      margin-bottom: 25px;
+    }
+    .ri-media {
+      padding-bottom: 75%;
+      margin: -20px -20px 0 -20px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: bottom center;
+      margin-bottom: 25px;
+    }
+    .ri-name {
+      h3 {
+        margin: 10px 0px;
+        font-size: floor($headings-font-size * 1.5);
+      }
+    }
+    .ri-title {
+      color: $brand-primary;
+      font-weight: $body-font-weight-bold;
+      font-size: $font-size-base;
+    }
+    .ri-price {
+      color: $brand-primary;
+      font-weight: $body-font-weight-bold;
+      font-size: $font-size-base;
+      margin-bottom: 10px;
+    }
+    .ri-description {
+      color: $color-faded;
+      font-size: $font-size-base;
+      font-weight: $body-font-weight-normal;
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .ri-external-link {
+      margin-left: 3px;
+      display: inline-block;
+    }
+    .ri-buttons {
+      margin-top: 20px;
+    }
+  }
+
+}

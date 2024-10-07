@@ -1,0 +1,67 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "latepoint/book-form",
+  "version": "1.0.0",
+  "title": "Booking Form",
+  "category": "latepoint",
+  "icon": "feedback",
+  "description": "Generates a booking form for LatePoint",
+  "attributes": {
+    "hide_summary": {
+      "type": "boolean",
+      "default": false
+    },
+    "hide_side_panel": {
+      "type": "boolean",
+      "default": false
+    },
+    "selected_agent": {
+      "type": "string"
+    },
+    "selected_service": {
+      "type": "string"
+    },
+    "selected_service_category": {
+      "type": "string"
+    },
+    "selected_location": {
+      "type": "string"
+    },
+    "selected_start_date": {
+      "type": "string"
+    },
+    "selected_start_time": {
+      "type": "string"
+    },
+    "selected_duration": {
+      "type": "string"
+    },
+    "selected_total_attendees": {
+      "type": "string"
+    },
+    "source_id": {
+      "type": "string"
+    },
+    "calendar_start_date": {
+      "type": "string"
+    },
+    "show_services": {
+      "type": "string"
+    },
+    "show_service_categories": {
+      "type": "string"
+    },
+    "show_agents": {
+      "type": "string"
+    },
+    "show_locations": {
+      "type": "string"
+    }
+  },
+  "supports": {
+    "html": false
+  },
+  "textdomain": "latepoint",
+  "editorScript": "file:index.js"
+}

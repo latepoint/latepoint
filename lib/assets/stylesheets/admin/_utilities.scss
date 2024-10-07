@@ -1,0 +1,125 @@
+.text-nowrap {
+  white-space: nowrap;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.os-row-align-center {
+  align-items: center;
+}
+
+.time-left {
+  &.left-days {
+    color: #bb6767;
+  }
+
+  &.left-hours {
+    color: #bb6767;
+  }
+
+  &.left-minutes {
+    color: #bb6767;
+  }
+
+  &.is-past {
+    color: $color-faded;
+  }
+}
+
+.info-hover-activate {
+  color: $brand-primary;
+  text-decoration: none;
+  font-size: 14px;
+  position: relative;
+  margin: 0px 5px;
+
+  i {
+
+  }
+
+  span {
+    display: none;
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    background-color: #111;
+    color: #fff;
+    font-weight: $body-font-weight-bold;
+    font-size: $font-size-base * 0.9;
+    padding: 3px 8px;
+    border-radius: $border-radius-sm;
+    white-space: nowrap;
+  }
+
+  &:hover {
+    span {
+      display: block;
+    }
+  }
+}
+
+
+.os-mb-1 {
+  margin-bottom: 10px;
+}
+
+.os-mb-2 {
+  margin-bottom: 20px;
+}
+
+.os-mb-3 {
+  margin-bottom: 30px;
+}
+
+.os-mb-4 {
+  margin-bottom: 40px;
+}
+
+.os-mt-1 {
+  margin-top: 10px;
+}
+
+.os-mt-2 {
+  margin-top: 20px;
+}
+
+.os-mt-3 {
+  margin-top: 30px;
+}
+
+.os-mt-4 {
+  margin-top: 40px;
+}
+
+.os-p-1 {
+  padding: 10px;
+}
+
+.os-p-2 {
+  padding: 20px;
+}
+
+.os-p-3 {
+  padding: 30px;
+}
+
+.os-p-4 {
+  padding: 40px;
+}
+
+.dashicons-latepoint {
+  &:before {
+    @include latepointfont_admin("\e969");
+  }
+}

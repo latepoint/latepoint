@@ -1,0 +1,14 @@
+os-output-target
+	- "lightbox", "side-panel", or jquery selector (e.g. .element, or #element)
+os-success-action
+	- "reload", "redirect"
+os-redirect-to
+	- 
+os-output-target
+	- 
+os-before-after
+	- 
+os-after-call
+	- 
+os-pass-this
+	- 

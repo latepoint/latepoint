@@ -1,0 +1,689 @@
+@keyframes osLightboxMobileAnimation {
+  0% { transform: translate3d(0%, 10%, 0px) scale(0.9); opacity: 0; }
+  100% { transform: translate3d(0%, 0%, 0px) scale(1); opacity: 1; }
+}
+
+@media (min-width: 601px) and (max-width: 1050px){
+  .latepoint-w {
+    // side panel open and summary open
+    &.latepoint-with-summary:not(.latepoint-hide-side-panel){
+      .latepoint-form-w {
+        border-right: none!important;
+      }
+      .latepoint-lightbox-i,
+      &.latepoint-inline-form .latepoint-booking-form-element {
+      }
+      .latepoint-summary-w {
+        display: none!important;
+      }
+      .latepoint-summary-w .summary-header {
+        text-align: left;
+        span {
+          margin-left: 15px;
+        }
+      }
+      &.latepoint-summary-is-open {
+        .latepoint-summary-w {
+          animation: 0.4s cubic-bezier(0.45, 1, 0.4, 1.1) 0ms LatepointSlideUpMobileSummary;
+          animation-fill-mode: both;
+        }
+
+        .latepoint-booking-form-element .latepoint-form-w .latepoint-heading-w .latepoint-lightbox-summary-trigger {
+          display: block;
+        }
+        &.show-summary-on-mobile {
+          .latepoint-booking-form-element:before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.3);
+            z-index: 3;
+          }
+          .latepoint-lightbox-summary-trigger {
+            display: block;
+          }
+          .latepoint-summary-w {
+            display: block!important;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 300px;
+            width: auto;
+            flex: 1;
+            border-radius: 0;
+            bottom: auto;
+            z-index: 4;
+            overflow: auto;
+            box-shadow: 0px 10px 28px -5px rgba(0,0,0,0.4), 0px 2px 3px 0px rgba(0,0,0,0.4);
+            max-height: 80vh;
+            transform: translate3d(-50%,-50%, 0);
+            .summary-header {
+              .latepoint-lightbox-summary-trigger {
+                padding: 3px 5px;
+                line-height: 1.2;
+              }
+            }
+            .summary-header > div {
+              justify-content: flex-start;
+            }
+            .summary-header span {
+              margin-left: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .latepoint-lightbox-w.latepoint-border-radius-rounded .latepoint-lightbox-i {
+    border-radius: 0;
+  }
+  .latepoint-booking-form-element .os-monthly-calendar-days .os-day.week-day-1 .os-available-slots-tooltip,
+  .latepoint-booking-form-element .os-monthly-calendar-days .os-day.week-day-7 .os-available-slots-tooltip {
+    transform: none;
+    animation: 0.1s ease latepointAvailabilityPopupY;
+    animation-fill-mode: both;
+  }
+  .latepoint-booking-form-element .os-monthly-calendar-days .os-day.week-day-7 .os-available-slots-tooltip {
+    left: auto;
+    right: 0;
+  }
+  .latepoint-booking-form-element .os-monthly-calendar-days .os-day.week-day-1 .os-available-slots-tooltip {
+    left: 0;
+  }
+
+  .latepoint-w {
+    &.latepoint-lightbox-form {
+      height: 100%;
+    }
+    .latepoint-booking-form-element {
+      flex: 1;
+      .latepoint-form-w  {
+        width: 100%;
+        flex: 1;
+      }
+    }
+  }
+
+  .summary-header {
+    .checkout-from-summary-panel-btn-wrapper {
+      display: none;
+    }
+  }
+
+  .checkout-from-summary-panel-btn-wrapper {
+    &.os-mobile-only {
+      display: block;
+      padding: 10px 25px;
+      background-color: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      + .os-summary-contents-inner {
+        padding-top: 10px;
+      }
+    }
+  }
+  .le-day-view-wrapper .le-day-schedule-wrapper {
+    padding: 30px 15px;
+  }
+  .latepoint-calendar-controls {
+    flex-wrap: wrap;
+    .le-navigation .le-today {
+      display: none;
+    }
+    .le-week, .le-month {
+      white-space: nowrap;
+      flex: 0 0 100%;
+      text-align: center;
+    }
+    .le-filter {
+      padding: 10px 12px;
+      span {
+        display: none;
+      }
+    }
+    .le-range-selector {
+      margin-left: 0;
+    }
+    .le-navigation-wrapper {
+      margin-left: auto;
+      border-left: none;
+    }
+  }
+  .latepoint-calendar-week .le-day-weekday-wrapper {
+    position: relative;
+    top: 0;
+  }
+  .latepoint-calendar-filters .le-filters-label {
+    display: none;
+  }
+  .latepoint-calendar-wrapper.show-filters .latepoint-calendar-filters {
+    display: block;
+    .os-form-group + .os-form-group {
+      margin-top: 10px;
+    }
+    select {
+      display: block;
+      width: 100%;
+    }
+  }
+  .latepoint-calendar-week {
+    overflow-x: auto;
+    padding-left: 0;
+    padding-bottom: 10px;
+    grid-template-columns: 200px 200px 200px 200px 200px 200px 200px;
+    .le-day-wrapper {
+      flex: 0 0 100px;
+    }
+  }
+  .latepoint-calendar-month {
+    grid-template-columns: 200px 200px 200px 200px 200px 200px 200px;
+    overflow-x: scroll;
+  }
+  .latepoint-calendar-week .le-day-wrapper:first-child .day-schedule-timeslot-value {
+    display: none;
+  }
+  .le-day-view-wrapper .le-day-info-section {
+    padding: 20px 15px;
+  }
+  .le-day-view-wrapper .le-day-info-section .le-day-info .le-day-number {
+    font-size: $font-size-base * 3;
+  }
+  .le-day-view-wrapper .le-day-info-section .le-day-filters-wrapper {
+    margin-left: 15px;
+    padding-left: 15px;
+  }
+  .le-day-view-wrapper .le-day-info-section .le-day-heading {
+    margin-bottom: 7px;
+    font-size: floor($font-size-base * 1.4);
+  }
+  .latepoint-lightbox-w .latepoint-lightbox-i .latepoint-lightbox-close {
+    top: 5px;
+    right: 5px;
+  }
+.latepoint-clean-body.with-pattern > .latepoint-w {
+  padding: 0px;
+}
+  .latepoint-w {
+    .manage-booking-wrapper {
+      margin: 0;
+      .manage-booking-controls {
+        padding: 10px;
+        gap: 10px;
+      }
+      .manage-booking-inner {
+        padding: 20px;
+        padding-top: 60px;
+      }
+    }
+  }
+
+
+  .latepoint-resources-items-w {
+    display: block;
+    .resource-item {
+      margin-bottom: 20px;
+    }
+  }
+
+  .os-items {
+    .os-item {
+      &.with-details {
+        .os-item-i {
+          .os-item-img-w {
+            transform-origin: center center;
+            transform: translateY(-8px) scale(0.9);
+          }
+          .os-item-name-w {
+            transform: translateY(-18px);
+          }
+          .os-item-details-popup-btn {
+            opacity: 1;
+            transform: translateY(-7px);
+            span {
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .latepoint-w .latepoint-booking-form-element.latepoint-border-radius-rounded .latepoint-summary-w {
+    border-radius: 0px!important;
+  }
+  .latepoint-w {
+    .os-form-group.os-form-phonefield-group .iti__selected-dial-code {
+      font-size: 16px!important;
+    }
+    &.latepoint-with-summary {
+      .latepoint-summary-w .summary-header {
+        text-align: left;
+        >div {
+          justify-content: flex-start;
+        }
+        span {
+        }
+      }
+      &.latepoint-summary-is-open {
+        .latepoint-summary-w {
+          animation: 0.4s cubic-bezier(0.45, 1, 0.4, 1.1) 0ms LatepointSlideUpMobileSummary;
+          animation-fill-mode: both;
+        }
+
+        .latepoint-booking-form-element .latepoint-form-w .latepoint-heading-w .latepoint-lightbox-summary-trigger {
+          display: block;
+        }
+        &.show-summary-on-mobile {
+          .latepoint-booking-form-element:before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.3);
+            z-index: 3;
+          }
+          .latepoint-lightbox-summary-trigger {
+            display: block;
+          }
+          .latepoint-summary-w {
+            display: block!important;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: auto;
+            flex: 1;
+            border-radius: 0;
+            bottom: auto;
+            z-index: 4;
+            overflow: auto;
+            box-shadow: 0px 10px 28px -5px rgba(0,0,0,0.4), 0px 2px 3px 0px rgba(0,0,0,0.4);
+            max-height: 90vh;
+            max-width: 90vw;
+            min-width: 80vw;
+            transform: translate3d(0,-50%, 0);
+            .latepoint-lightbox-summary-trigger {
+              line-height: 1;
+              padding: 5px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .latepoint-w .latepoint-booking-form-element.latepoint-border-radius-rounded {
+    border-radius: 0px;
+  }
+  .latepoint-w.latepoint-with-summary.latepoint-summary-is-open.show-summary-on-mobile .latepoint-booking-form-element.latepoint-border-radius-rounded .latepoint-summary-w {
+    border-radius: $rounded-borders-radius;
+  }
+  .qr-code-on-full-summary {
+    display: none!important;
+  }
+
+  .customer-bookings-tiles, .customer-orders-tiles {
+    grid-template-columns: 1fr;
+  }
+  .latepoint-booking-form-element .step-verify-w .coupon-code-wrapper-on-verify .coupon-code-input-w input.coupon-code-input {
+    font-size: 16px!important;
+  }
+  .latepoint-w {
+    .latepoint-booking-form-element .latepoint-progress ul li {
+      margin: 0px 3px;
+    }
+    .latepoint-booking-form-element .latepoint-form-w .latepoint-footer .latepoint-btn {
+      padding: 10px;
+    }
+    .latepoint-booking-form-element .os-items .os-item .os-item-i .os-item-child-count {
+      display: none;
+    }
+    &.latepoint-hide-side-panel .latepoint-booking-form-element .step-datepicker-w {
+      padding: 0px;
+    }
+    &.latepoint-hide-side-panel {
+      .latepoint-booking-form-element {
+        .os-items.os-as-grid .os-item .os-item-i .os-item-img-w.os-with-avatar {
+          padding: 5px;
+        }
+        .latepoint-form-w {
+          .latepoint-body {
+            padding-left: 15px;
+            padding-right: 15px;
+          }
+        }
+      }
+    }
+    .os-form-group {
+      &.os-form-textfield-group{
+        textarea,
+        select,
+        input[type="password"],
+        input[type="email"],
+        input[type="number"],
+        input[type="text"],
+        input[type="tel"] {
+          &.os-form-control {
+            font-size: floor($font-size-base * 1.2)!important;
+          }
+        }
+      }
+    }
+    .customer-bookings-tiles .customer-booking {
+      flex: 1;
+    }
+    .customer-dashboard-tabs {
+      overflow-x: auto;
+      a {
+        margin: 0px 0px;
+        text-align: center;
+        white-space: nowrap;
+        & + a {
+          margin-left: 15px;
+        }
+        &:after {
+          bottom: 0px;
+          top: auto;
+          height: 0px;
+          width: 100%;
+        }
+        &.active {
+          &:after {
+            height: 3px;
+          }
+        }
+      }
+    }
+    .latepoint-section-heading-w .heading-extra {
+      display: none;
+    }
+    .latepoint-customer-timezone-selector-w .os-form-group.os-form-select-group {
+      display: block;
+      label {
+        margin-bottom: 5px;
+      }
+      select {
+        width: 100%!important;
+      }
+    }
+
+    .dp-timeslot {
+      height: 30px;
+      .dp-tick {
+        top: 40px;
+      }
+    }
+    &.latepoint-summary-is-open.show-summary-on-mobile {
+      .latepoint-booking-form-element.current-step-booking__datepicker .latepoint-side-panel {
+        display: none;
+      }
+    }
+    .latepoint-booking-form-element {
+      display: block;
+      height: 100%;
+
+      &.hidden-buttons {
+        .latepoint-form-w .latepoint-body {
+        }
+      }
+
+      .latepoint-timezone-selector-w {
+      }
+      &.step-content-loading {
+        .latepoint-timezone-selector-w {
+          display: none!important;
+        }
+      }
+
+      &.addon-timezone-selector-active {
+        .os-dates-w {
+          padding-top: 40px;
+        }
+      }
+
+      .lp-options.lp-options-grid {
+        justify-content: space-evenly;
+        &.lp-options-grid-three .lp-option {
+        }
+      }
+      .step-datepicker-w {
+        padding: 10px 0px;
+      }
+      .step-payment-w .payment-total-info {
+        flex-direction: column;
+        align-items: center;
+        .payment-deposit-price-w,
+        .payment-total-price-w {
+          padding: 8px 0px;
+        }
+        .coupon-code-trigger-w {
+          margin-bottom: 5px;
+          a {
+            margin-left: 0px;
+          }
+        }
+        .coupon-code-input-w {
+          margin-left: 0px!important;
+          input.coupon-code-input {
+            font-size: floor($font-size-base * 1.2)!important;
+            -webkit-appearance: none;
+            width: 155px!important;
+            border-radius: 0px!important;
+          }
+        }
+      }
+      .step-services-w {
+        ul.os-services li a {
+          padding: 5px 10px;
+        }
+        ul.os-services li a .service-price-w {
+          padding-left: 5px;
+          margin-left: 5px;
+        }
+        ul.os-services li a .service-img-w {
+          margin-right: 10px;
+        }
+        .os-item-category-w .os-item-category-info .os-item-category-services-count {
+          display: none;
+        }
+        .os-service-durations li .os-duration-value {
+          font-size: 32px;
+        }
+      }
+      .os-weekdays {
+        grid-gap: 12px;
+      }
+      .os-monthly-calendar-days {
+        grid-gap: 12px;
+      }
+      .os-monthly-calendar-days .os-day {
+        .os-day-number {
+          top: 45%;
+        }
+      }
+      .step-confirmation-w .confirmation-info-w .confirmation-app-info {
+      }
+      .step-confirmation-w .confirmation-info-w .confirmation-customer-info {
+      }
+      .latepoint-side-panel {
+        display: none;
+        width: 100%;
+        flex: 1;
+      }
+      .latepoint-form-w {
+        .item-quantity-selector-w .item-quantity-selector-input {
+          font-size: 16px!important;
+        }
+
+        .latepoint-heading-w {
+          padding-left: 15px!important;
+          padding-right: 15px!important;
+        }
+        .latepoint-body {
+          padding: 15px;
+          max-height: 100dvh;
+          &:after {
+          }
+        }
+        .os-item-details-popup {
+        }
+        .latepoint-footer {
+        }
+        .os-item-details-popup .item-details-popup-content {
+          padding: 40px 15px;
+          .item-details-popup-features {
+            margin-bottom: 20px;
+          }
+        }
+      }
+
+      &.current-step-booking__datepicker {
+        .latepoint-side-panel {
+          position: absolute;
+          top: 59px;
+          z-index: 999;
+          left: 0px;
+          right: 0px;
+          display: block;
+          flex: 1;
+          padding: 0px;
+          border: none!important;
+          background-color: #fff;
+          .latepoint-step-desc-w,
+          .latepoint-questions,
+          .latepoint-progress {
+            display: none!important;
+          }
+          .latepoint-timezone-selector-w {
+            margin-top: 0px;
+            padding: 10px 15px;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            .os-form-group {
+              display: flex;
+              align-items: center;
+              label {
+                margin-bottom: 0px;
+                margin-right: 10px;
+                white-space: nowrap;
+                flex: 1;
+              }
+              select {
+                text-align-last: left;
+                text-align: center;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .latepoint-summary-w {
+      display: none!important;
+    }
+    .latepoint-form-w {
+      height: 100%;
+      .latepoint-heading-w {
+        padding-left: 15px!important;
+      }
+      .latepoint-body {
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+      .latepoint-footer {
+
+      }
+    }
+    .latepoint-lightbox-i {
+      transform: none;
+      animation: 0.4s cubic-bezier(0, 1, 0.51, 1) 0s both osLightboxMobileAnimation;
+      max-height: 100dvh;
+      height: 100dvh;
+    }
+    &.front-lightbox {
+      .latepoint-lightbox-i {
+        max-height: 100dvh;
+      }
+    }
+  }
+  .latepoint-lightbox-w {
+    grid-template-columns: 1fr!important;
+  }
+  body.admin-bar {
+    .latepoint-w {
+      .latepoint-lightbox-i {
+      }
+    }
+  }
+  @keyframes osLightboxAnimation {
+    0% { transform: translate3d(0%, -40%, 0px) scale(1.2); opacity: 0; }
+    100% { transform: translate3d(0%, -50%, 0px) scale(1); opacity: 1; }
+  }
+}
+@media (min-width: 601px) and (max-width: 959px){
+  .latepoint-lightbox-w {
+    &.latepoint-with-summary {
+      &.latepoint-summary-is-open {
+        .latepoint-booking-form-element {
+        }
+        .latepoint-summary-w {
+          display: flex;
+        }
+        .latepoint-form-w {
+          border-right: 1px solid rgba(0,0,0,0.1);
+        }
+        &.latepoint-hide-side-panel {
+        }
+        &:not(.latepoint-hide-side-panel) {
+        }
+      }
+    }
+  }
+}
+@media (min-width: 960px){
+  .latepoint-w {
+
+    .summary-boxes-columns {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      column-gap: 20px;
+      .summary-box {
+        flex: 1 1 35%;
+      }
+    }
+
+    &.latepoint-with-summary {
+      &.latepoint-summary-is-open {
+        .latepoint-booking-form-element {
+        }
+        .latepoint-summary-w {
+          display: flex;
+        }
+        .latepoint-form-w {
+          border-right: 1px solid rgba(0,0,0,0.1);
+        }
+        &.latepoint-hide-side-panel {
+          grid-template-columns: min-content;
+        }
+      }
+    }
+  }
+  .latepoint-inline-form {
+    &.latepoint-with-summary {
+      &.latepoint-summary-is-open {
+        .latepoint-booking-form-element {
+        }
+        &.latepoint-hide-side-panel {
+          .latepoint-booking-form-element {
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,170 @@
+/*!
+ * Copyright (c) 2023 LatePoint LLC. All rights reserved.
+ */
+
+.latepoint-admin {
+
+
+  .latecheckbox-w {
+
+    .latecheckbox-options-w {
+      display: none;
+    }
+  }
+
+  .latecheckbox {
+    display: flex;
+    gap: 5px;
+    align-items: baseline;
+    padding: 7px 5px 7px 10px;
+    border-radius: 6px;
+    font-size: $font-size-base;
+    font-weight: $body-font-weight-bold;
+    border: 1px solid $border-color-light;
+    position: relative;
+    cursor: pointer;
+    text-decoration: none;
+    color: $headings-color;
+    line-height: 1;
+
+    &:after {
+      @include latepointfont_admin("\e911");
+      align-self: center;
+      display: block;
+    }
+
+    &:hover {
+      border-color: $headings-color;
+    }
+    &:focus {
+      box-shadow: none;
+    }
+    &.is-active {
+      background-color: #eff0f5;
+      border-color: #eff0f5;
+      .filter-value {
+        background-color: #dddfe8;
+      }
+      &:after {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  .filter-label {
+
+  }
+
+  .filter-value {
+    background-color: #eff0f8;
+    font-size: floor(0.9 * $font-size-base);
+    padding: 2px 5px;
+    border-radius: 4px;
+  }
+}
+
+.latecheckbox-options-w {
+  position: absolute;
+  z-index: 9999;
+  background-color: #fff;
+  box-shadow: 0 2px 6px 0 rgba(0,0,0,0.15), 0 1px 2px 0 rgba(0,0,0,0.3);
+  border-radius: 6px;
+  padding: 10px;
+  .select-all-wrapper {
+    display: flex;
+    gap: 7px;
+    font-size: $font-size-base;
+    padding-top: 8px;
+    border-radius: 0;
+    border-top: 1px solid $border-color-light;
+  }
+  .latecheckbox-filter-input-w {
+    margin-bottom: 5px;
+    display: flex;
+    gap: 7px;
+    align-items: center;
+    padding-left: 5px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $border-color-light;
+    .latecheckbox-filter-input {
+      line-height: 1;
+      padding: 5px 6px;
+      border-color: $border-color-strong;
+      border-radius: 6px;
+      font-size: $font-size-base;
+      flex: 1;
+      &::placeholder {
+        color: $color-faded;
+      }
+      &:focus {
+        box-shadow: none;
+        border-color: $brand-primary;
+      }
+    }
+  }
+  .latecheckbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-bottom: 1px;
+    &:not(:last-child) {
+    }
+    .latecheckbox-group-options {
+      padding-left: 15px;
+    }
+  }
+  .latecheckbox-options {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: $font-size-base;
+    max-height: 200px;
+    overflow-y: auto;
+    .latecheckbox-group-heading {
+      background-color: #f8f8f8;
+      border-radius: 4px;
+      color: $color-faded;
+      font-weight: $body-font-weight-bold;
+      display: flex;
+      font-size: $font-size-base;
+      gap: 10px;
+      label {
+        color: $color-faded;
+      }
+    }
+    .latecheckbox-option {
+      .late-label {
+
+      }
+      &.hidden {
+        display: none;
+      }
+    }
+  }
+  label {
+    font-weight: $body-font-weight-bold;
+    color: $headings-color;
+    display: flex;
+    gap: 7px;
+    align-items: center;
+    padding: 5px;
+    border-radius: 6px;
+    &:hover {
+      background-color: #f8f8f8;
+    }
+    span {
+      white-space: nowrap;
+      display: block;
+    }
+    .late-avatar {
+      width: 20px;
+      height: 20px;
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      border-radius: 50%;
+    }
+    input[type="checkbox"]{
+    }
+  }
+}

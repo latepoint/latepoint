@@ -1,0 +1,298 @@
+.latepoint-w {
+  .os-form-w {
+    background-color: #fff;
+    padding: 30px;
+    margin: 20px 0px;
+  }
+  .os-form-group {
+    margin-bottom: 15px!important;
+    position: relative;
+
+    // Select & text/textarea fields
+    &.os-form-select-group,
+    &.os-form-textfield-group{
+      .os-form-control,
+      input.os-form-control {
+        position: relative!important;
+        display: block!important;
+        box-shadow: none!important;
+        border: 1px solid $form-input-border-color!important;
+        padding: 12px 10px 12px 10px!important;
+        border-radius: $form-controls-border-radius!important;
+        background-color: #fff!important;
+        width: 100%;
+        color: $form-controls-color;
+        line-height: 1.2;
+        font-size: $font-size-base!important;
+        font-weight: $body-font-weight-normal!important;
+        transition: all 0.2s ease;
+        height: auto;
+        margin: 0px;
+        &:focus {
+          background-color: #fff!important;
+          border-color: #5779ef!important;
+          outline: none;
+          box-shadow: none;
+        }
+      }
+      textarea,
+      input[type="number"],
+      input[type="email"],
+      input[type="password"],
+      input[type="text"],
+      input[type="tel"] {
+        -webkit-appearance: none;
+      }
+      &.os-invalid {
+        label {
+          color: #d56e67!important;
+        }
+        .os-form-control,
+        input.os-form-control {
+          border-color: $form-input-border-color-invalid!important;
+          &::placeholder {
+            color: #e38888 !important;
+          }
+          &:focus {
+            border-color: #c10505 !important;
+          }
+        }
+      }
+    }
+
+    // Select field
+    &.os-form-select-group {
+      label {
+        display: block!important;
+        font-size: $font-size-base;
+        margin: 0px;
+      }
+      select.os-form-control {
+        height: $form-controls-select-height!important;
+      }
+    }
+
+    // Checkbox field
+    &.os-form-checkbox-group {
+      label {
+        padding: 0px;
+        border-radius: $form-controls-border-radius;
+        display: flex;
+        align-items: center;
+        color: $body-color;
+        vertical-align: middle;
+        margin: 0px;
+        font-weight: $body-font-weight-bold;
+        font-size: $font-size-base;
+        cursor: pointer;
+        &:hover {
+        }
+        input.os-form-checkbox {
+          display: inline-block;
+          margin-right: 10px;
+          vertical-align: middle;
+          border-radius: $form-controls-border-radius;
+          box-shadow: none;
+          border-color: #aaa;
+        }
+        a {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    // Text/Textarea fields
+    &.os-form-textfield-group{
+      label {
+        display: block;
+        margin-bottom: 1px;
+        line-height: 1.1;
+        cursor: default;
+        font-size: floor($font-size-base * 0.8)!important;
+        color: #AFB8D6!important;
+        font-weight: $body-font-weight-normal!important;
+        position: absolute!important;
+        top: 5px;
+        left: 10px;
+        z-index: 2;
+        opacity: 0;
+        transform: translateY(-3px);
+        transition: all 0.2s ease;
+      }
+      .os-form-control,
+      input.os-form-control {
+        input.os-form-control {
+          z-index: 1;
+        }
+        &::placeholder {
+          color: #AFB8D6;
+        }
+        &.os-framed-field {
+          height: floor(($font-size-base * 1.3) + 12px + 12px + 4px)!important;
+          &.invalid, &.braintree-hosted-fields-invalid {
+            border-color: #f16161!important;
+          }
+        }
+      }
+      &.has-value {
+        label {
+          opacity: 1!important;
+          transform: translateY(0)!important;
+        }
+        textarea.os-form-control,
+        input.os-form-control {
+          padding: 19px 10px 5px 10px!important;
+        }
+      }
+    }
+
+    // Phone Number Fields
+    &.os-form-phonefield-group{
+      border: 1px solid $form-input-border-color;
+      border-radius: $form-controls-border-radius;
+      label {
+      }
+
+      &:has(.os-form-control:focus){
+        border-color: $brand-primary;
+      }
+
+      .iti__selected-dial-code {
+        color: $form-controls-color;
+        font-weight: $body-font-weight-normal;
+        font-size: $font-size-base!important;
+        white-space: nowrap;
+        margin-left: 4px;
+        line-height: 1.2;
+      }
+
+      &.os-invalid {
+        border-color: $form-input-border-color-invalid;
+
+        &:has(.os-form-control:focus){
+          border-color: $form-input-border-color-invalid;
+        }
+      }
+
+      .iti__selected-flag {
+        padding: 12px 4px 12px 10px ;
+        transition: all 0.2s ease;
+      }
+
+      .os-form-control,
+      input.os-form-control {
+        border: none!important;
+        &.os-mask-phone {
+          padding-left: 0px!important;
+          border-left: none!important;
+
+          &.invalid {
+            border-color: #f16161 !important;
+          }
+        }
+      }
+
+      &:not(.has-value){
+        .iti.iti--allow-dropdown {
+          align-items: center;
+        }
+        .iti__selected-flag {
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
+      }
+      &.has-value {
+        .iti__selected-flag {
+          padding-top: 19px;
+          padding-bottom: 5px;
+        }
+        input.os-form-control {
+          &.os-mask-phone {
+            padding-left: 0px!important;
+            padding-top: 18px !important;
+          }
+        }
+      }
+    }
+  }
+
+  .os-form-buttons {
+    &.os-flex {
+      display: flex;
+      align-items: center;
+      &.os-space-between {
+        justify-content: space-between;
+      }
+    }
+    .os-form-group {
+      display: inline-block;
+      margin-bottom: 0px!important;
+      .latepoint-btn {
+        margin-right: 5px;
+      }
+    }
+  }
+
+  .os-form-header {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    h2, h3, h4 {
+      margin-bottom: 5px;
+      margin-top: 0px;
+    }
+  }
+
+  .os-form-desc {
+    color: rgba(0,0,0,0.7);
+  }
+
+
+  .os-image-container {
+    border: 5px solid #fff;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
+    border-radius: 6px;
+    max-width: 100px;
+    margin-bottom: 10px;
+    min-height: 50px;
+    img {
+      border-radius: 4px;
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  }
+
+  .settings-image-selector {
+    margin: 20px 0px;
+  }
+
+  .os-form-message-w {
+    padding: 12px 20px;
+    background-color: #f9f9f9;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: $body-font-weight-bold;
+    border-radius: $form-controls-border-radius;
+    ul {
+      list-style: none;
+      margin: 0px;
+      padding: 0px;
+      li {
+        margin-bottom: 10px;
+        &:last-child {
+          margin-bottom: 0px;
+        }
+      }
+    }
+    &.status-error {
+      background-color: #fff4f4;
+      color: #d00c0c;
+      border: 2px solid #f75160;
+    }
+    &.status-success {
+      background-color: #e0fbd1;
+      color: #437724;
+    }
+  }
+}

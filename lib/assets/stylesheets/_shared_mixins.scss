@@ -1,0 +1,52 @@
+/*!
+ * Copyright (c) 2023 LatePoint LLC. All rights reserved.
+ */
+
+
+@mixin latepoint-book-button {
+  line-height: 1em;
+  //display: inline-block;
+  //background-color: $brand-primary;
+  //padding: 10px 20px;
+  //font-weight: $body-font-weight-bold;
+  //color: #fff;
+  //font-size: 16px;
+  //line-height: 1.2;
+  //border: none;
+  //box-shadow: none;
+  //border-radius: 0px;
+  //text-decoration: none;
+  //outline: none;
+  cursor: pointer;
+  transition: initial;
+  &:focus,
+  &:hover {
+    //box-shadow: none;
+    //background-color: color-mix(in srgb,var(--latepoint-brand-primary),#fff 10%);;
+    //color: #fff;
+    //text-decoration: none;
+  }
+
+  &.os-loading {
+    transition: all .2s linear;
+    color: transparent!important;
+    position: relative;
+    &:after {
+      display: block;
+      content: "";
+      width: 14px!important;
+      height: 14px!important;
+      border-bottom: 2px solid #fff;
+      border-left: 2px solid #fff;
+      border-top: 2px solid #fff;
+      border-right: 2px solid rgba(255,255,255,0);
+      border-radius: 20px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: os-loading 700ms infinite linear;
+      background-color: transparent!important;
+    }
+  }
+}

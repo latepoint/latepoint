@@ -1,0 +1,21 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "latepoint/customer-login",
+  "version": "1.0.0",
+  "title": "Customer Login",
+  "category": "latepoint",
+  "icon": "lock",
+  "description": "Generates a customer login form",
+  "attributes": {
+    "caption": {
+      "type": "string",
+      "default": "Customer Login"
+    }
+  },
+  "supports": {
+    "html": false
+  },
+  "textdomain": "latepoint",
+  "editorScript": "file:index.js"
+}

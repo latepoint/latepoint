@@ -1,0 +1,132 @@
+/*!
+ * Copyright (c) 2024 LatePoint LLC. All rights reserved.
+ */
+
+
+  .os-step-tabs {
+    display: flex;
+    color: $color-faded;
+    margin-bottom: 20px;
+    font-weight: $body-font-weight-bold;
+    font-size: floor($font-size-base);
+    line-height: floor($font-size-base);
+    justify-content: space-between;
+    align-items: flex-end;
+    box-shadow: 0px 1px 0px 0px #E2E5EF;
+    height: floor($font-size-base + 20);
+    .os-step-tab {
+      transition: all 0.2s ease;
+      text-align: center;
+      padding: 8px 0px;
+      position: relative;
+      line-height: floor($font-size-base);
+      font-size: floor($font-size-base);
+      &:hover {
+        cursor: pointer;
+        color: $body-color;
+      }
+      &:before {
+        position: absolute;
+        content: "";
+        background-color: $brand-primary;
+        height: 2px;
+        left: 0px;
+        bottom: -1px;
+        width: 0%;
+      }
+      &.active {
+        color: $body-color;
+        font-size: floor($font-size-base * 1.1);
+        line-height: floor($font-size-base);
+        padding-bottom: 12px;
+        padding-top: 8px;
+        &:before {
+          width: 100%;
+        }
+      }
+    }
+  }
+  .step-customer-logged-in-header-w {
+    display: flex;
+    color: #898C98;
+    margin-bottom: 20px;
+    font-weight: $body-font-weight-bold;
+    font-size: floor($font-size-base);
+    line-height: floor($font-size-base);
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #E2E5EF;
+    height: floor($font-size-base + 20);
+    span {
+      display: block;
+      margin-right: 5px;
+      margin-left: auto;
+    }
+    a {
+      display: block;
+      color: $brand-primary;
+      text-decoration: underline;
+    }
+    div {
+      color: $body-color;
+      font-size: floor($font-size-base * 1.1);
+      line-height: floor($font-size-base);
+      padding-bottom: 12px;
+      padding-top: 8px;
+      position: relative;
+      &:before {
+        position: absolute;
+        content: "";
+        background-color: $brand-primary;
+        height: 2px;
+        left: 0px;
+        bottom: -1px;
+        width: 100%;
+        transition: all 0.2s ease;
+      }
+    }
+  }
+  .os-form-buttons {
+    align-items: flex-start;
+  }
+  .os-password-reset-form-holder {
+    .os-password-reset-form-w {
+      padding: 20px;
+      border: 1px solid #aaa;
+      box-shadow: 0px 1px 2px rgba(0,0,0,0.1), 0px 5px 10px rgba(0,0,0,0.05);
+      margin-bottom: 15px;
+    }
+    h4 {
+      margin: 0px;
+      margin-bottom: 5px;
+      padding: 0px;
+    }
+    p {
+      margin-bottom: 10px;
+    }
+    .os-form-message-w {
+      margin-bottom: 10px;
+      margin-top: 10px;
+    }
+  }
+  .os-step-existing-customer-login-w {
+    margin-bottom: 10px;
+    .step-forgot-password-btn {
+      text-decoration: underline;
+      padding-top: 0px;
+      padding-bottom: 0px;
+    }
+    .step-login-existing-customer-btn {
+      padding: 10px 20px;
+      line-height: 1.2;
+      font-size: floor($font-size-base * 1.1);
+      position: relative;
+      i {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 22px;
+      }
+    }
+  }

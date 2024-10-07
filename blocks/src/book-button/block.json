@@ -1,0 +1,130 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "latepoint/book-button",
+  "version": "1.0.0",
+  "title": "Booking Button",
+  "category": "latepoint",
+  "icon": "button",
+  "description": "Generates a booking button for LatePoint",
+  "attributes": {
+    "id" : {
+      "type": "string"
+    },
+    "caption": {
+      "type": "string",
+      "default": "Book Appointment"
+    },
+    "hide_summary": {
+      "type": "boolean",
+      "default": false
+    },
+    "hide_side_panel": {
+      "type": "boolean",
+      "default": false
+    },
+    "selected_agent": {
+      "type": "string"
+    },
+    "selected_service": {
+      "type": "string"
+    },
+    "selected_service_category": {
+      "type": "string"
+    },
+    "selected_location": {
+      "type": "string"
+    },
+    "selected_start_date": {
+      "type": "string"
+    },
+    "selected_start_time": {
+      "type": "string"
+    },
+    "selected_duration": {
+      "type": "string"
+    },
+    "selected_total_attendees": {
+      "type": "string"
+    },
+
+    "is_inherit": {
+      "type": "boolean",
+      "default": false
+    },
+    "bg_color": {
+      "type": "string"
+    },
+    "bg_color_hover": {
+      "type": "string"
+    },
+    "text_color": {
+      "type": "string"
+    },
+    "text_color_hover": {
+      "type": "string"
+    },
+    "border_color": {
+      "type": "string"
+    },
+    "border_color_hover": {
+      "type": "string"
+    },
+    "padding": {
+      "type": "string"
+    },
+    "font_family":{
+      "type": "string"
+    },
+    "font_size": {
+      "type": "string"
+    },
+    "text_transform": {
+      "type": "string"
+    },
+    "font_weight": {
+      "type": "string"
+    },
+    "line_height": {
+      "type": "string"
+    },
+    "letter_spacing": {
+      "type": "string"
+    },
+    "border_radius": {
+      "type": "string"
+    },
+    "border_style": {
+      "type": "string"
+    },
+    "border_width": {
+      "type": "string"
+    },
+    "align": {
+      "type": "string"
+    },
+    "source_id": {
+      "type": "string"
+    },
+    "calendar_start_date": {
+      "type": "string"
+    },
+    "show_services": {
+      "type": "string"
+    },
+    "show_service_categories": {
+      "type": "string"
+    },
+    "show_agents": {
+      "type": "string"
+    },
+    "show_locations": {
+      "type": "string"
+    }
+  },
+  "supports": {
+    "html": false
+  },
+  "textdomain": "latepoint",
+  "editorScript": "file:index.js"
+}

@@ -1,0 +1,559 @@
+@keyframes os-loading {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(180deg);
+    opacity: 0.2;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+    opacity: 1;
+  }
+}
+
+@keyframes osTextUpdated {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes os-rotating {
+  0% {
+    transform: rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(360deg);
+    opacity: 0.5;
+  }
+}
+
+@keyframes animate_appointment_small_box{
+  0%{
+    opacity: 0.8;
+  }
+  50%{
+    opacity: 0.4;
+  }
+  100%{
+    opacity: 0.8;
+  }
+}
+
+
+@keyframes toolTipOpen {
+  0% { transform: translate3d(-50%, -30%, 0); opacity: 0; }
+  100% { transform: translate3d(-50%, -50%, 0); opacity: 1; }
+}
+
+@keyframes notificationAnimation {
+  0% { transform: translate3d(0, -30px, 0) scale(0.6); opacity: 0; }
+  100% { transform: translate3d(0, 0px, 0) scale(1); opacity: 1; }
+}
+
+@keyframes quickAvailability {
+  0% { transform: translate3d(40px, 0px, 0); opacity: 0; }
+  100% { transform: translate3d(0, 0px, 0); opacity: 1; }
+}
+
+@keyframes wizardWrapperAnimation {
+  0% { transform: translate3d(0, 30px, 0); opacity: 0; }
+  100% { transform: translate3d(0, 0px, 0); opacity: 1; }
+}
+
+@keyframes contentUp {
+  0% { transform: translate3d(0, 20px, 0); opacity: 0; }
+  100% { transform: translate3d(0, 0px, 0); opacity: 1; }
+}
+
+@keyframes right20 {
+  0% { transform: translate3d(-20px, 0px, 0); opacity: 0; }
+  100% { transform: translate3d(0, 0px, 0); opacity: 1; }
+}
+
+
+@keyframes up20 {
+  0% { transform: translate3d(0, 20px, 0); opacity: 0; }
+  100% { transform: translate3d(0, 0px, 0); opacity: 1; }
+}
+
+
+@keyframes up20o {
+  0% { transform: translate3d(0, 20px, 0); }
+  100% { transform: translate3d(0, 0px, 0); }
+}
+
+@keyframes up10 {
+  0% { transform: translate3d(0, 10px, 0); opacity: 0; }
+  100% { transform: translate3d(0, 0px, 0); opacity: 1; }
+}
+
+
+@keyframes down20 {
+  0% { transform: translate3d(0, -20px, 0); opacity: 0; }
+  100% { transform: translate3d(0, 0px, 0); opacity: 1; }
+}
+
+@keyframes down10 {
+  0% { transform: translate3d(0, -10px, 0); opacity: 0; }
+  100% { transform: translate3d(0, 0px, 0); opacity: 1; }
+}
+
+@keyframes upcomingBoxAnimation {
+  0% { transform: translate3d(40px, 0px, 0); opacity: 0; }
+  100% { transform: translate3d(0, 0px, 0); opacity: 1; }
+}
+
+@keyframes calendarOpenAnimation {
+  0% { transform: translate3d(0, -15px, 0px); opacity: 0; }
+  100% { transform: translate3d(0, 0px, 0); opacity: 1; }
+}
+
+@keyframes timePeriodAnimation {
+  0% { transform: translate3d(0, -70px, 0px) scaleY(0.2); opacity: 0; }
+  100% { transform: translate3d(0, 0px, 0) scaleY(1); opacity: 1; }
+}
+
+@keyframes textAnimations {
+  0% { transform: translate3d(0, 30px, 0); opacity: 0; }
+  100% { transform: translate3d(0, 0px, 0); opacity: 1; }
+}
+
+@keyframes genericLabelAnimation {
+  0% { transform: translate3d(-50%, -15px, 0); opacity: 0; }
+  100% { transform: translate3d(-50%, 0px, 0); opacity: 1; }
+}
+
+@keyframes inputPop{
+  50%  {
+    transform: scale(1.3);
+  }
+}
+
+@keyframes selectedCheckmark{
+  0% { transform: translate3d(0, -50%px, 0) rotate(30deg); opacity: 0; }
+  100% { transform: translate3d(0, -50%, 0) rotate(0deg); opacity: 1; }
+}
+
+@keyframes successCheckmark{
+  0% { transform:  rotate(-90deg) scale(0.5); opacity: 0; }
+  100% { transform:  rotate(0deg) scale(1); opacity: 1; }
+}
+
+.latepoint-user-info-dropdown {
+  animation: 0.2s cubic-bezier(0.05, 0.45, 0.1, 1.1) 0s down10;
+  animation-fill-mode: both;
+}
+
+.order-item-booking-data-form-inner {
+  animation: 0.2s cubic-bezier(0.05, 0.45, 0.1, 1.1) 0s down10;
+  animation-fill-mode: both;
+}
+
+.step-drag span {
+  animation: 0.2s cubic-bezier(0.05, 0.45, 0.1, 1.1) 0s genericLabelAnimation;
+  animation-fill-mode: both;
+}
+
+.step-body {
+  animation: 0.2s cubic-bezier(0.05, 0.45, 0.1, 1) 0s down10;
+  animation-fill-mode: both;
+}
+
+.os-wizard-setup-w .os-form-w{
+  animation: 0.3s cubic-bezier(0.05, 0.45, 0.1, 1.2) 0s textAnimations;
+  animation-fill-mode: both;
+}
+
+.os-wizard-complete-btn {
+  animation: 0.3s cubic-bezier(0.05, 0.45, 0.1, 1.2) 0.15s textAnimations;
+  animation-fill-mode: both;
+}
+
+.os-wizard-sub-header {
+  animation: 0.3s cubic-bezier(0.05, 0.45, 0.1, 1.2) 0s textAnimations;
+  animation-fill-mode: both;
+}
+.os-wizard-header {
+  animation: 0.3s cubic-bezier(0.05, 0.45, 0.1, 1.2) 0.05s textAnimations;
+  animation-fill-mode: both;
+}
+.os-wizard-desc {
+  animation: 0.3s cubic-bezier(0.05, 0.45, 0.1, 1.2) 0.1s textAnimations;
+  animation-fill-mode: both;
+}
+
+.os-wizard-complete-icon-w {
+  animation: 1s cubic-bezier(0.05, 0.45, 0.1, 1.4) 0.2s successCheckmark;
+  animation-fill-mode: both;
+}
+
+.os-wizard-step-content-i {
+  animation: 0.3s cubic-bezier(0.05, 0.45, 0.1, 1.2) 0.15s textAnimations;
+  animation-fill-mode: both;
+}
+
+.ws-period {
+    animation: 0.2s cubic-bezier(0.05, 0.45, 0.1, 1.2) 0s timePeriodAnimation;
+    animation-fill-mode: both;
+}
+
+.ws-period.animate-filled-in {
+  .os-form-control {
+    animation: inputPop 0.4s ease 1;
+  }
+}
+.as-period.animate-filled-in {
+  .os-form-control {
+    animation: inputPop 0.4s ease 1;
+  }
+}
+
+.quick-order-form-w {
+  .ws-period {
+    animation: none;
+  }
+}
+
+.latepoint-content-w {
+  &.os-loading {
+    &:after {
+      @include loading-circle($brand-primary);
+    }
+    animation:animate_appointment_small_box 0.8s ease infinite;
+  }
+}
+
+.daterangepicker {
+  animation: 0.25s cubic-bezier(.45,1.1,.4,1) 0s calendarOpenAnimation;
+  animation-fill-mode: both;
+}
+
+.os-widget-upcoming-appointments {
+}
+
+
+.appointment-box-large {
+  animation: 0.25s cubic-bezier(.45,1.1,.4,1) 0s wizardWrapperAnimation;
+  animation-fill-mode: both; 
+  $count: 5;
+  @for $i from 0 to $count {
+    &:nth-child(#{$i + 1}) {
+      animation: 0.6s cubic-bezier(.45,1.1,.4,1) #{$i*100}ms wizardWrapperAnimation;
+      animation-fill-mode: both;
+    }
+  }
+}
+
+.os-booking-tiny-boxes-w {
+}
+
+.addons-boxes-w {
+  animation: 0.4s cubic-bezier(.45,1.1,.4,1) 0s wizardWrapperAnimation;
+  animation-fill-mode: both;
+}
+
+@keyframes osSidePanelAnimation {
+  0% { transform: translateX(120px); opacity: 0; }
+  100% { transform: translateX(0px); opacity: 1; }
+}
+
+@keyframes right10 {
+  0% { transform: translateX(-10px); opacity: 0; }
+  100% { transform: translateX(0px); opacity: 1; }
+}
+@keyframes right40 {
+  0% { transform: translateX(-40px); opacity: 0; }
+  100% { transform: translateX(0px); opacity: 1; }
+}
+
+@keyframes left20 {
+  0% { transform: translateX(20px);  }
+  100% { transform: translateX(0px);  }
+}
+
+.booking-activity-log-panel-w {
+  animation: 0.2s cubic-bezier(0, 1, 0.51, 1) 0s both quickAvailability;
+}
+
+.latepoint-side-panel-w {
+  .latepoint-side-panel-i {
+    transform-origin: center center;
+    animation: 0.5s cubic-bezier(0, 1, 0.51, 1) 0s both osSidePanelAnimation;
+  }
+}
+
+.latepoint-template-variables,
+.latepoint-layout-template-variables {
+  transform-origin: center center;
+  animation: 0.4s cubic-bezier(0, 1, 0.51, 1) 0s both right40;
+}
+
+.os-notifications:not(.os-relative) .item {
+    animation: 0.25s cubic-bezier(0, 1, 0.51, 1.1) 0s notificationAnimation;
+    animation-fill-mode: both;
+}
+
+.os-widget-top-agents {
+}
+
+
+.os-widget-animated {
+  animation: 0.4s cubic-bezier(.45,1.1,.4,1) 0s wizardWrapperAnimation;
+  animation-fill-mode: both;
+}
+
+.white-box, .os-togglable-item-w {
+  animation: 0.4s cubic-bezier(0.45, 1, 0.2, 1) 0s up20;
+  animation-fill-mode: both;
+}
+
+.quick-order-form-w {
+}
+
+.index-agent-boxes .agent-box-w, .index-agent-boxes .create-agent-link-w {
+  animation: 0.4s cubic-bezier(.45,1.1,.4,1) 0s wizardWrapperAnimation;
+  animation-fill-mode: both;
+  $count: 10;
+  @for $i from 0 to $count {
+    &:nth-child(#{$i + 1}) {
+      animation: 0.4s cubic-bezier(.45,1.2,.8,1) #{$i*30}ms wizardWrapperAnimation;
+      animation-fill-mode: both;
+    }
+  }
+}
+
+
+.os-locations-list .os-location, .os-locations-list .create-location-link-w {
+  animation: 0.4s cubic-bezier(.45,1.1,.4,1) 0s wizardWrapperAnimation;
+  animation-fill-mode: both;
+  $count: 10;
+  @for $i from 0 to $count {
+    &:nth-child(#{$i + 1}) {
+      animation: 0.4s cubic-bezier(.45,1.2,.8,1) #{$i*30}ms wizardWrapperAnimation;
+      animation-fill-mode: both;
+    }
+  }
+}
+
+.os-item-category-w {
+  animation: 0.6s cubic-bezier(.45,1.1,.4,1) 0s wizardWrapperAnimation;
+  animation-fill-mode: both;
+  $count: 3;
+  @for $i from 0 to $count {
+    &:nth-child(#{$i + 1}) {
+      animation: 0.6s cubic-bezier(.45,1.1,.4,1) #{$i*100}ms wizardWrapperAnimation;
+      animation-fill-mode: both;
+    }
+  }
+}
+
+@keyframes osLightboxAnimation {
+  0% { transform: translate3d(0, 10%, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+.latepoint-lightbox-i {
+  transform-origin: center center;
+  animation: 0.5s cubic-bezier(0, 1, 0.2, 1) 0s both osLightboxAnimation;
+}
+.os-custom-field-form-i {
+}
+
+.os-custom-field-form-params {
+  animation: 0.2s cubic-bezier(0, 1, 0.51, 1) 0s down10;
+  animation-fill-mode: both;
+}
+
+.quick-availability-per-day-w {
+  animation: 0.2s cubic-bezier(0, 1, 0.51, 1) 0s quickAvailability;
+  animation-fill-mode: both;
+}
+
+
+/* Form Blocks */
+
+.os-section-header, .os-notifications-control-bar {
+  animation: 0.4s cubic-bezier(0.45, 1, 0.2, 1) 0s wizardWrapperAnimation;
+  animation-fill-mode: both;
+}
+
+.os-default-fields {
+  animation: 0.4s cubic-bezier(0.45, 1, 0.2, 1) 0s wizardWrapperAnimation;
+  animation-fill-mode: both;
+}
+
+.os-form-blocks-w {
+  animation: 0.4s cubic-bezier(0.45, 1, 0.2, 1) 0s wizardWrapperAnimation;
+  animation-fill-mode: both;
+}
+
+.process-action-form.is-editing {
+  animation: 0.4s cubic-bezier(0.45, 1, 0.2, 1) 0s up20;
+  animation-fill-mode: both;
+}
+
+.os-togglable-item-body {
+  animation: 0.3s cubic-bezier(0.45, 1, 0.2, 1) 0s down10;
+  animation-fill-mode: both;
+}
+
+.os-add-box {
+  animation: 0.4s cubic-bezier(0.45, 1, 0.2, 1) 0s wizardWrapperAnimation;
+  animation-fill-mode: both;
+}
+
+.os-form-block-params {
+  animation: 0.4s cubic-bezier(0.45, 1, 0.2, 1) 0s down20;
+  animation-fill-mode: both;
+}
+
+
+
+@keyframes pulseInUse {
+  0% {
+    background-color: #fff;
+    box-shadow: 0px 0px 0px 4px #d5ffe8;
+  }
+  100% {
+    background-color: #dbffee;
+    box-shadow: 0px 0px 0px 0px #b7ffd8;
+  }
+}
+
+.os-table-w .in-table-time-left {
+  .time-left {
+    &.is-now {
+      animation: 1s ease 0s pulseInUse infinite;
+    }
+  }
+}
+
+
+
+@keyframes lateTooltipDown {
+  0% { transform: translate3d(-50%, -120%, 0); opacity: 0; }
+  100% { transform: translate3d(-50%, -100%, 0); opacity: 1; }
+}
+
+.late-tooltip {
+  animation: 0.15s cubic-bezier(.45,1.1,.7,1) 0s lateTooltipDown;
+  animation-fill-mode: both;
+}
+
+.iti__country-list {
+  animation: 0.15s cubic-bezier(.45,1.1,.7,1) 0s right10;
+  animation-fill-mode: both;
+}
+
+.new-version-message, .active-license-info {
+  animation: 0.25s cubic-bezier(.45,1.1,.7,1.1) 0s up10;
+  animation-fill-mode: both;
+}
+
+.list-upcoming-bookings-w,
+.calendar-wrapper,
+.calendar-week-agent-w,
+.monthly-calendar-wrapper
+{
+}
+
+
+
+@keyframes pulseErrorPill {
+  0% {
+    background-color: #ff9784;
+    box-shadow: 0px 1px 0px 0px rgba(#ff8a8a, 0.5),
+                0px 0px 0px 0px rgba(#ff8a8a, 0.55),
+                0px 0px 0px 0px rgba(#ff8a8a, 0.5),
+                inset 0px 2px 0px 0px rgba(255, 255, 255, 0.2);
+  }
+  100% {
+    background-color: #ff320c;
+    box-shadow: 0px 1px 0px 0px rgba(#ff8a8a, 0.5),
+                0px 0px 0px 7px rgba(#ff8a8a, 0.0),
+                0px 0px 0px 12px rgba(#ff8a8a, 0.0),
+                inset 0px 2px 0px 0px rgba(255, 255, 255, 0.2);
+  }
+}
+
+@keyframes pulseSuccessBtn {
+  0% {
+    background-color: #79b512;
+    box-shadow: 0px 1px 0px 0px rgba(#8be78d, 0.5),
+                0px 0px 0px 0px rgba(#8be78d, 0.55),
+                0px 0px 0px 0px rgba(#8be78d, 0.55);
+  }
+  100% {
+    background-color: #8aca1c;
+    box-shadow: 0px 1px 0px 0px rgba(#8be78d, 0.5),
+                0px 0px 0px 7px rgba(#8be78d, 0.0),
+                0px 0px 0px 12px rgba(#8be78d, 0.0);
+  }
+}
+
+@keyframes pulseSuccessPill {
+  0% {
+    background-color: #c0ffcb;
+    box-shadow: 0px 1px 0px 0px rgba(#8be78d, 0.5),
+                0px 0px 0px 0px rgba(#8be78d, 0.55),
+                0px 0px 0px 0px rgba(#8be78d, 0.55),
+                inset 0px 2px 0px 0px rgba(255, 255, 255, 0.4);
+  }
+  100% {
+    background-color: #28ff4f;
+    box-shadow: 0px 1px 0px 0px rgba(#8be78d, 0.5),
+                0px 0px 0px 7px rgba(#8be78d, 0.0),
+                0px 0px 0px 12px rgba(#8be78d, 0.0),
+                inset 0px 2px 0px 0px rgba(255, 255, 255, 0.4);
+  }
+}
+@keyframes pulseInfoPill {
+  0% {
+    background-color: #c0d9ff;
+    box-shadow: 0px 1px 0px 0px rgba(#8ba8e7, 0.5),
+                0px 0px 0px 0px rgba(#8ba8e7, 0.55),
+                0px 0px 0px 0px rgba(#8ba8e7, 0.55),
+                inset 0px 2px 0px 0px rgba(255, 255, 255, 0.4);
+  }
+  100% {
+    background-color: #288cff;
+    box-shadow: 0px 1px 0px 0px rgba(#8ba8e7, 0.5),
+                0px 0px 0px 7px rgba(#8ba8e7, 0.0),
+                0px 0px 0px 12px rgba(#8ba8e7, 0.0),
+                inset 0px 2px 0px 0px rgba(255, 255, 255, 0.4);
+  }
+}
+
+.os-form-message-w.status-error {
+  &:before {
+    animation: 1s ease 0s pulseErrorPill infinite;
+  }
+}
+
+.os-form-message-w.status-success {
+  &:before {
+    animation: 1s ease 0s pulseSuccessPill infinite;
+  }
+}
+
+.os-notifications .item {
+  &.item-type-error:before {
+    animation: 1s ease 0s pulseErrorPill infinite;
+  }
+  &.item-type-success:before {
+    animation: 1s ease 0s pulseSuccessPill infinite;
+  }
+}
+
+body.latepoint-admin .new-version-message .version-check-icon,
+body.latepoint-admin .active-license-info .version-check-icon {
+  animation: 1s ease 0s pulseSuccessPill infinite;
+}

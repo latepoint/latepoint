@@ -1,0 +1,545 @@
+.customer-info-w {
+  &.selected {
+    .customer-edit-form-w {
+      display: none;
+    }
+    .customers-selector-search-w {
+      display: none;
+    }
+    .customers-options-list {
+      display: none;
+    }
+  }
+  &.selecting {
+    .customer-quick-edit-form-w {
+      display: none;
+    }
+    .customers-selector-w {
+    }
+    .customers-selector-search-w {
+    }
+    .customers-options-list {
+    }
+    .customer-info-create-btn,
+    .customer-info-load-btn {
+      opacity: 0;
+    }
+  }
+}
+.customers-selector-w {
+  margin-bottom: 20px;
+
+  .customers-selector-search-w {
+    position: relative;
+    background-color: $form-controls-background-color;
+    border: none;
+    margin-bottom: 10px;
+    border-radius: $form-controls-border-radius;
+    > .latepoint-icon {
+      position: absolute;
+      top: 50%;
+      left: 8px;
+      color: $color-faded;
+      transform: translateY(-50%);
+      font-size: 16px;
+    }
+    .customers-selector-search-input {
+      border: none;
+      background-color: transparent;
+      box-shadow: none;
+      display: block;
+      width: 100%;
+      padding: 10px;
+      padding-left: 35px;
+      font-size: $font-size-base;
+      &::placeholder {
+        opacity: 1;
+        color: $color-faded;
+      }
+    }
+    &.os-loading {
+      > .latepoint-icon {
+        display: none;
+      }
+      &:before {
+        @include loading-circle($brand-primary, 13px);
+        left: 16px;
+      }
+    }
+    .customers-selector-cancel {
+      position: absolute;
+      top: 48%;
+      right: 10px;
+      color: #C06363;
+      transform: translateY(-50%);
+      cursor: pointer;
+      i, span {
+        display: inline-block;
+        vertical-align: middle;
+      }
+      i {
+        font-size: 10px;
+      }
+    }
+  }
+  .customers-options-list {
+    max-height: 300px;
+    overflow-y: scroll;
+    .os-no-matched-customers {
+      text-align: center;
+      padding: 10px;
+      color: $color-faded;
+      font-weight: $body-font-weight-bold;
+    }
+    .customer-option {
+      display: flex;
+      align-items: center;
+      padding: 10px 0px 10px 10px;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      cursor: pointer;
+      &.os-loading {
+        .customer-option-avatar {
+          &:before {
+            @include loading-circle($brand-primary, 56px);
+          }
+        }
+      }
+      &:hover {
+        background-color: #f8f8f8;
+        border-bottom-color: transparent;
+      }
+      .customer-option-avatar {
+        flex: 0 0 44px;
+        height: 44px;
+        border-radius: 50px;
+        background-size: cover;
+        position: relative;
+      }
+      .customer-option-info {
+        padding-left: 20px;
+        .customer-option-info-name {
+          margin-top: 0px;
+          margin-bottom: 3px;
+          font-size: floor($font-size-base * 1);
+          color: $brand-primary;
+          a {
+            text-decoration: none;
+            margin-left: 5px;
+            display: inline-block;
+          }
+          span.os-query-match {
+            background-color: rgba(255, 231, 18, 0.62);
+          }
+        }
+        ul {
+          list-style: none;
+          margin: 0px;
+          color: lighten($body-color, 30%);
+          font-size: floor($font-size-base * 0.85);
+          strong {
+            color: $body-color;
+            span.os-query-match {
+              background-color: rgba(255, 231, 18, 0.62);
+            }
+          }
+          li {
+            margin-bottom: 3px;
+            &:last-child {
+              margin-bottom: 0px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+.customer-appointments {
+  .no-results-w {
+    padding: 10px;
+    color: $color-faded;
+    background-color: #f8f8f8;
+    border-radius: $border-radius;
+    text-align: center;
+  }
+}
+
+.customer-appointments-list {
+  .order-item {
+    padding: $order-item-padding;
+    border: 1px solid $border-color-main;
+    border-bottom-color: darken($border-color-main, 20%);
+    border-radius: $border-radius;
+    box-shadow: 0 2px 0 0 #eee;
+    display: flex;
+    gap: 15px;
+    cursor: pointer;
+    align-items: center;
+    margin-bottom: 10px;
+    .avatar-w {
+      @include avatar(40px);
+      position: relative;
+      .agent-info-tooltip {
+        display: none;
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        background-color: #111;
+        color: #fff;
+        font-size: floor($font-size-base * 0.8);
+        font-weight: $body-font-weight-bold;
+        padding: 5px 10px;
+        z-index: 9999;
+        transform: translate(-50%, -5px);
+        white-space: nowrap;
+        border-radius: 4px;
+      }
+      &:hover {
+        .agent-info-tooltip {
+          display: block;
+        }
+      }
+    }
+    .oi-info {
+      flex: 1;
+      .oi-service-name {
+        font-size: floor($font-size-base * 1.1);
+        color: $headings-color;
+        margin-bottom: 5px;
+      }
+      .oi-date-w {
+        color: $color-faded;
+      }
+    }
+    &:hover {
+      box-shadow: 0 0 0 2px $brand-primary;
+      border-color: transparent;
+    }
+  }
+}
+
+.customer-password-info {
+  background-color: #fbf6e9;
+  border: 1px solid #decfaa;
+  color: #736b60;
+  padding: 10px;
+  padding-left: 30px;
+  border-radius: $border-radius;
+  font-weight: $body-font-weight-bold;
+  margin-bottom: 15px;
+  position: relative;
+  font-size: floor($font-size-base * 0.8);
+  display: flex;
+  align-items: center;
+  a {
+    border-bottom: 1px dotted #111;
+    color: #111;
+    display: block;
+    align-items: center;
+    margin-left: 10px;
+    text-decoration: none;
+    margin-left: auto;
+    &:hover {
+      border-bottom-style: solid;
+    }
+  }
+  &:before {
+    font-size: 12px;
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+  }
+  &.password-set {
+    &:before {
+      @include latepointfont_admin('\e925');
+    }
+  }
+  &.password-not-set {
+    &:before {
+      @include latepointfont_admin('\e941');
+    }
+  }
+}
+.not-connected-pill {
+  width: 8px;
+  height: 8px;
+  background-color: #ff4343;
+  border-radius: 50%;
+  display: inline-block;
+  content: "";
+}
+
+.connected-wp-user-status {
+  background-color: #edf9ff;
+  border: 1px solid #7dcce4;
+  padding: 10px;
+  color: #0c6588;
+  border-radius: $border-radius;
+  position: relative;
+  padding-left: 30px;
+  display: flex;
+  gap: 10px;
+  font-size: floor($font-size-base * 0.8);
+  .connected-note {
+  }
+  .connected-buttons {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    > span, > a {
+      display: block;
+    }
+  }
+  &:before {
+    @include latepointfont_admin("\e95b");
+    font-size: 14px;
+    color: #1397dc;
+    position: absolute;
+    top: 50%;
+    left: 9px;
+    transform: translateY(-50%);
+    display: block;
+  }
+  a {
+    display: block;
+    border-bottom: 1px dotted $headings-color;
+    color: $headings-color;
+    text-decoration: none;
+    position: relative;
+    &:hover {
+      border-bottom-style: solid;
+    }
+    span {
+      margin-left: 5px;
+    }
+    i {
+    }
+    &.os-loading {
+      color: transparent;
+      &:after {
+        @include loading-circle($brand-primary);
+      }
+    }
+  }
+}
+
+.os-mini-customer-profile-w {
+  padding: 20px;
+  .os-mc-info-w {
+    display: flex;
+    align-items: flex-start;
+    .os-mc-avatar {
+      flex: 0 0 80px;
+      height: 80px;
+      border-radius: 80px;
+      background-size: cover;
+      background-position: center center;
+    }
+    .os-mc-info {
+      padding-left: 20px;
+      .mc-name {
+        font-size: floor($headings-font-size * 0.9);
+        font-weight: $body-font-weight-bold;
+        margin-bottom: 8px;
+        a {
+          text-decoration: none;
+          box-shadow: none;
+          outline: none;
+          font-size: 17px;
+          margin-left: 8px;
+        }
+      }
+      .mc-info-list-item {
+        margin-bottom: 3px;
+        span {
+          color: $color-faded;
+          margin-right: 2px;
+        }
+      }
+    }
+  }
+  .os-mc-sub-info {
+    display: flex;
+    border-top: 1px solid $border-color-sub;
+    padding-top: 15px;
+    margin-top: 10px;
+    .os-mc-heading {
+      color: $color-faded;
+      font-size: floor($font-size-base * 0.8);
+      margin-bottom: 2px;
+      text-transform: uppercase;
+      font-weight: $body-font-weight-bold;
+      letter-spacing: 1px;
+    }
+    .os-mc-upcoming-appointments-w {
+      padding-left: 20px;
+      margin-left: 5px;
+      border-left: 1px solid $border-color-sub;
+      flex: 1;
+    }
+    .os-nothing {
+      background-color: #eef1f9;
+      border-radius: 6px;
+      padding: 27px;
+      text-align: center;
+      color: $color-faded;
+      font-weight: $body-font-weight-bold;
+    }
+  }
+  .os-customer-donut-chart {
+    position: relative;
+  }
+  .os-mc-chart {
+    .os-mc-chart-i {
+      position: relative;
+    }
+    .os-mc-heading {
+      text-align: center;
+    }
+    .os-mc-totals {
+      display: block;
+      font-weight: $body-font-weight-bold;
+      font-size: floor($font-size-base * 1.8);
+      line-height: 1;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+  .os-mc-upcoming-appointments {
+    display: flex;
+    gap: 10px;
+    padding-top: 10px;
+  }
+  .os-upcoming-appointment {
+    padding: 7px 10px;
+    flex: 0 0 230px;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-bottom-color: rgba(0,0,0,0.2);
+    box-shadow: 0 2px 0 0 rgba(0,0,0,0.05);
+    border-radius: $border-radius;
+    position: relative;
+    cursor: pointer;
+    &:hover {
+      border-color: $brand-primary;
+      box-shadow: 0 0 0 1px $brand-primary;
+    }
+    .appointment-color-elem {
+      display: none;
+      position: absolute;
+      top: 13px;
+      left: 10px;
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+    }
+    .appointment-service-name {
+      font-weight: $body-font-weight-bold;
+      font-size: floor($font-size-base * 1);
+      margin-bottom: 5px;
+      color: $headings-color;
+    }
+
+    .appointment-date-w {
+      display: flex;
+      align-items: center;
+      .appointment-date {
+        font-size: floor($font-size-base * 0.8);
+        margin-bottom: 1px;
+        font-weight: $body-font-weight-bold;
+      }
+      .appointment-time {
+        color: $color-faded;
+        font-size: floor($font-size-base * 0.8);
+      }
+      .avatar-w {
+        margin-left: auto;
+        @include avatar(30px);
+        position: relative;
+        .agent-info-tooltip {
+          display: none;
+          position: absolute;
+          bottom: 100%;
+          left: 50%;
+          background-color: #111;
+          color: #fff;
+          font-size: floor($font-size-base * 0.8);
+          font-weight: $body-font-weight-bold;
+          padding: 5px 10px;
+          z-index: 9999;
+          transform: translate(-50%, -5px);
+          white-space: nowrap;
+          border-radius: 4px;
+        }
+        &:hover {
+          .agent-info-tooltip {
+            display: block;
+          }
+        }
+      }
+    }
+    .os-form-group {
+      margin-bottom: 0px;
+    }
+  }
+
+}
+
+.avatar-uploader-w {
+  .avatar-self {
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+  }
+}
+
+.fields-with-avatar {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+  .field-column {
+    flex: 1;
+  }
+}
+
+.payment-processor-customer-link-wrapper {
+  background-color: #eee;
+  border: 1px solid #bbb;
+  color: #333;
+  padding: 10px;
+  padding-left: 30px;
+  border-radius: $border-radius;
+  font-weight: $body-font-weight-bold;
+  margin-bottom: 15px;
+  position: relative;
+  font-size: floor($font-size-base * 0.8);
+  display: flex;
+  align-items: center;
+  a {
+    border-bottom: 1px dotted #111;
+    color: #111;
+    display: block;
+    align-items: center;
+    margin-left: 10px;
+    text-decoration: none;
+    margin-left: auto;
+    &:hover {
+      border-bottom-style: solid;
+    }
+  }
+  &:before {
+    font-size: 12px;
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    @include latepointfont_admin("\e91a");
+  }
+}

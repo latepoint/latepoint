@@ -1,0 +1,98 @@
+/*!
+ * Copyright (c) 2023 LatePoint LLC. All rights reserved.
+ */
+
+@media print {
+  .part-of-bundle-message {
+    display: none;
+  }
+  .qr-code-on-full-summary {
+  }
+  .summary-box .summary-box-content .os-avatar-w,
+  .summary-box .summary-box-content .os-location-image{
+    display: none;
+  }
+  .summary-box .summary-box-content .sbc-content-i {
+    margin-left: 0;
+  }
+  .summary-box .sbc-link-item {
+    display: none;
+  }
+  .summary-box .sbc-main-item a {
+    display: none;
+  }
+  .booking-full-summary-actions {
+    display: none;
+  }
+  .summary-attributes {
+    padding: 0;
+    background-color: transparent;
+  }
+  // PRINT BOOKING CONFIRMATION
+  .latepoint-print-summary-w {
+    padding: 40px;
+    max-width: 800px;
+    margin: 0px auto;
+    .full-summary-head-info {
+      margin-bottom: 50px;
+      position: relative;
+    }
+    .qr-code-on-full-summary {
+      .qr-show-trigger {
+        display: none;
+      }
+      .qr-code-booking-info {
+        display: none;
+      }
+      .qr-code-vevent {
+        margin-bottom: 40px;
+        padding-bottom: 30px;
+        border-bottom: 1px dashed #eee;
+        img {
+          width: 300px;
+          height: 300px;
+          display: block;
+          margin: 0px auto;
+        }
+        .qr-code-label {
+          text-align: center;
+          font-size: floor($font-size-base * 1);
+          font-weight: $body-font-weight-bold;
+          text-align: center;
+          font-size: 14px;
+          font-weight: 500;
+          padding: 10px 15px;
+          background: #fff1af;
+          color: #423d26;
+        }
+      }
+    }
+    .payment-summary-info {
+      .full-summary-info-w {
+        margin-top: 0px;
+      }
+    }
+    .full-summary-header {
+      margin-bottom: 0px;
+      margin-top: 0px;
+    }
+    .full-summary-number {
+      color: $color-faded;
+      padding-top: 0px;
+      margin-bottom: 8px;
+      font-size: floor($font-size-base * 0.9);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      font-weight: $body-font-weight-bold;
+      strong {
+        font-size: floor($font-size-base * 2.6);
+        letter-spacing: normal;
+        color: $headings-color;
+        display: block;
+        line-height: 1.1;
+      }
+    }
+  }
+}
+
+

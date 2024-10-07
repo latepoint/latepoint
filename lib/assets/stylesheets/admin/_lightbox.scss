@@ -1,0 +1,178 @@
+.latepoint-lightbox-w {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  transition: all 0.2s ease;
+  z-index: 10000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+
+  .latepoint-lightbox-close {
+    position: absolute;
+    line-height: 1;
+    top: 17px;
+    right: 19px;
+    font-size: 20px;
+    color: #333;
+    text-decoration: none;
+    display: block;
+    outline: none;
+    box-shadow: none;
+    padding: 5px;
+    border-radius: 6px;
+    i {
+      display: block;
+    }
+    &:focus {
+        outline: none;
+    }
+    &:hover {
+      background-color: rgba(0,0,0,0.05);
+      color: #000;
+    }
+  }
+
+  .latepoint-lightbox-shadow {
+    background-color: rgba(79, 107, 156, 0.61);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    z-index: 1;
+  }
+
+  .latepoint-lightbox-i {
+    max-height: 94vh;
+    transform-origin: center center;
+    transition: all 0.3s cubic-bezier(0.25, 1.1, 0.5, 1);
+    background-color: #fff;
+    width: 450px;
+    box-shadow: 0px 20px 60px rgba(0,0,0, 0.2), 0px 5px 30px rgba(0,0,0,0.4);
+    border-radius: $lightbox-border-radius;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    .latepoint-lightbox-wrapper-form {
+      display: flex;
+      flex-direction: column;
+      max-height: 94vh;
+    }
+    > .os-form-w {
+      padding: 20px;
+    }
+  }
+
+  &.width-400 .latepoint-lightbox-i{ width: 400px; }
+  &.width-500 .latepoint-lightbox-i{ width: 500px; }
+  &.width-600 .latepoint-lightbox-i{ width: 600px; }
+  &.width-700 .latepoint-lightbox-i{ width: 700px; }
+  &.width-800 .latepoint-lightbox-i{ width: 800px; }
+  &.width-1000 .latepoint-lightbox-i{ width: 1000px; }
+  &.width-max .latepoint-lightbox-i{ width: 90%; }
+
+
+
+  .latepoint-lightbox-heading {
+    padding: 15px 30px;
+    border-bottom: 1px solid $border-color-light;
+
+    &.os-loading {
+      &:before {
+        @include loading-circle($brand-primary);
+        top: 10px;
+        left: 10px;
+      }
+    }
+
+    h2 {
+      color: $headings-color;
+      margin: 0px;
+      font-size: floor($headings-font-size * 1);
+    }
+  }
+
+  .latepoint-lightbox-content {
+    padding: 30px;
+    flex: 1;
+    overflow: auto;
+    &.no-padding {
+      padding: 0;
+    }
+  }
+
+  .latepoint-lightbox-footer {
+    padding: 15px 30px;
+    border-top: 1px solid $border-color-light;
+    .os-form-group {
+      margin-bottom: 0;
+    }
+    .latepoint-btn:not(:last-child) {
+      margin-right: 10px;
+    }
+    &.right-aligned {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+  }
+
+  .os-form-w {
+    margin: 0px;
+    form > .os-form-group:last-child {
+      margin-bottom: 0px;
+    }
+  }
+}
+body.latepoint-lightbox-active {
+  .latepoint-lightbox-w {
+    display: flex;
+  }
+}
+
+
+@keyframes floatingPopupAnimation {
+  0% { transform: translate3d(-50%, -85%, 0) scale(0.8); opacity: 0; }
+  100% { transform: translate3d(-50%, -100%, 0) scale(1); opacity: 1; }
+}
+
+.os-floating-popup {
+  position: absolute;
+  background-color: #fff;
+  box-shadow: 0px 30px 60px -15px rgba(0,0,0,0.25), 0px 4px 22px -10px rgba(0,0,0,0.40);
+  border-radius: $lightbox-border-radius;
+  z-index: 9999;
+  min-width: 400px;
+  min-height: 200px;
+  transform: translate3d(-50%, -100%, 0);
+  animation: 0.3s cubic-bezier(0.05, 0.45, 0.1, 1) 0s floatingPopupAnimation;
+  animation-fill-mode: both;
+  &.os-loading {
+    &:before {
+      @include loading-circle($brand-primary, 30px);
+    }
+  }
+
+  .os-floating-popup-close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 18px;
+    color: #333;
+    text-decoration: none;
+    display: block;
+    transition: all 0.6s ease;
+    outline: none;
+    box-shadow: none;
+    &:focus {
+      outline: none;
+    }
+    &:hover {
+      transform: rotate(90deg);
+    }
+  }
+}

@@ -1,0 +1,524 @@
+.latepoint-side-panel-w {
+
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  transition: all 0.2s ease;
+  z-index: 9999;
+
+  .clear-missing-lateselect {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    background-color: #fff8dd;
+    border: 1px solid #d9c06e;
+    color: #604a1c;
+    a {
+      text-decoration: underline;
+      color: #111;
+      font-weight: $body-font-weight-bold;
+      margin-left: 5px;
+    }
+  }
+
+  .os-upload-file-input-w {
+    label {
+      margin-bottom: 3px;
+    }
+    input[type="file"]{
+      padding: 7px 6px 8px 6px;
+      border-radius: 6px;
+      border: 1px solid $border-color-strong;
+      width: 100%;
+      display: block;
+      line-height: 1;
+      &:hover {
+        border-color: $brand-primary;
+      }
+    }
+  }
+
+  .reloadable-field-wrapper {
+    &.os-loading {
+      opacity: 0.4;
+      position: relative;
+      &:before {
+        @include loading-circle($brand-primary, 12px);
+      }
+
+    }
+  }
+  
+  .os-time-group.as-period {
+    padding: 0;
+    display: block;
+    margin-bottom: 15px;
+    label {
+      padding: 0;
+      margin-bottom: 3px;
+    }
+    .os-time-input-fields {
+      justify-content: flex-start;
+      border: 1px solid $border-color-strong;
+      border-radius: $border-radius;
+      padding-right: 7px;
+      &:has(input:focus){
+        border-color: $brand-primary;
+      }
+      input.os-form-control {
+        transform-origin: left;
+        max-width: initial;
+        flex: 1;
+        margin-left: 0;
+        background-color: transparent;
+        border: none;
+        font-size: $font-size-base;
+        padding: 7px 8px 6px!important;
+        text-align: left;
+        font-weight: $body-font-weight-normal;
+      }
+      .time-ampm-w {
+        margin-left: auto;
+        background-color: #fff;
+        .time-ampm-select {
+          padding: 2px 5px 3px 5px;
+        }
+      }
+    }
+  }
+
+  .booking-order-info-wrapper {
+    margin-bottom: 20px;
+    position: relative;
+    .booking-order-info-inner {
+      z-index: 3;
+      position: relative;
+      .order-link {
+        cursor: pointer;
+        background-color: #fff;
+        border: 2px solid $brand-primary;
+        border-radius: $border-radius;
+        padding: 15px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: $body-font-weight-black;
+        font-size: floor($font-size-base * 1.1);
+        .latepoint-icon-arrow-left {
+          font-size: 20px;
+          color: $brand-primary;
+        }
+      }
+    }
+  }
+
+  .quick-booking-preselected-service-info {
+    background-color: $faded-bg;
+    border-radius: $border-radius;
+    padding: 10px;
+    font-size: $body-font-size-xs;
+    margin-bottom: 15px;
+    color: $color-faded;
+    span {
+      color: $headings-color;
+      font-weight: $body-font-weight-black;
+    }
+  }
+
+  .quick-booking-info {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid $border-color-lightest;
+    font-size: floor($font-size-base * 0.8);
+    display: flex;
+    align-items: center;
+    color: $headings-color;
+    span, strong, a {
+      display: inline-block;
+    }
+    span {
+      margin-right: 2px;
+      color: $color-faded;
+    }
+    strong {
+      margin-right: 6px;
+      font-weight: $body-font-weight-black;
+    }
+    a {
+      margin-left: auto;
+      color: $headings-color;
+      text-decoration: none;
+      border-bottom: 1px dotted $headings-color;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      position: relative;
+      &:hover {
+        border-bottom-style: solid;
+      }
+      &.os-loading {
+        color: transparent;
+        &:before {
+          @include loading-circle($headings-color, 10px);
+        }
+      }
+      i {
+        font-size: 10px;
+      }
+    }
+  }
+
+  .os-form-group.os-form-group-transparent {
+    margin-bottom: 15px;
+  }
+  .os-form-content,
+  .os-form-buttons,
+  .os-form-header {
+  }
+
+  &.os-loading {
+    .latepoint-side-panel-i {
+      &:before {
+        @include loading-circle($brand-primary, 40px);
+      }
+    }
+    .quick-order-form-w {
+      .os-form-content {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      .os-form-header {
+        opacity: 0;
+      }
+      .os-form-buttons {
+        opacity: 0;
+      }
+    }
+  }
+
+  .latepoint-side-panel-close {
+    line-height: 1;
+    font-size: 18px;
+    color: #333;
+    text-decoration: none;
+    display: block;
+    outline: none;
+    box-shadow: none;
+    z-index: 3;
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .latepoint-side-panel-shadow {
+    background-color: rgba(65,73,90,0.13);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    z-index: 1;
+  }
+
+  .latepoint-side-panel-i {
+    transition: all 0.2s ease;
+    position: absolute;
+    top: $side-panel-offset;
+    bottom: $side-panel-offset;
+    right: $side-panel-offset;
+    border-radius: $side-panel-border-radius;
+    background-color: #fff;
+    width: $side-panel-width;
+    box-shadow: 0px 10px 60px rgba(0,0,0, 0.15), 0px 2px 6px rgba(0,0,0,0.2);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    > .os-form-w {
+      max-height: 100%;
+      > form {
+        max-height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+
+  &.width-400 .latepoint-side-panel-i{ width: 400px; }
+  &.width-500 .latepoint-side-panel-i{ width: 500px; }
+  &.width-600 .latepoint-side-panel-i{ width: 600px; }
+  &.width-700 .latepoint-side-panel-i{ width: 700px; }
+  &.width-800 .latepoint-side-panel-i{ width: 800px; }
+  &.width-1000 .latepoint-side-panel-i{ width: 1000px; }
+  &.width-1200 .latepoint-side-panel-i{ width: 1200px; }
+  &.width-max .latepoint-side-panel-i{ width: 90%; }
+
+  .os-form-header {
+    padding: (22px + calc($side-panel-offset/2)) $side-panel-padding-x;
+    border-bottom: 1px solid $border-color-main;
+    margin-bottom: 0px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    h2 {
+      margin: 0px;
+      font-size: $headings-font-size-l;
+      line-height: 1;
+      font-weight: $body-font-weight-black;
+      flex: 1;
+    }
+  }
+
+  .os-form-sub-header-actions {
+    margin-top: 0px;
+    .latepoint-btn + .latepoint-btn {
+      margin-left: 5px;
+    }
+    .latepoint-btn.latepoint-btn-link {
+      span {
+        border-bottom: 1px dotted lighten($brand-primary, 10%);
+      }
+    }
+  }
+  .os-form-sub-header {
+    margin-bottom: 15px;
+    background-color: #fff;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-bottom: 2px solid $headings-color;
+    padding-bottom: 5px;
+    h3 {
+      color: $headings-color;
+      font-weight: $body-font-weight-black;
+      margin: 0px;
+      padding: 0px;
+      font-size: floor($font-size-base * 1.1);
+    }
+  }
+
+  .os-form-content {
+    padding: $side-panel-padding-y $side-panel-padding-x;
+    flex: 1;
+    max-height: 100%;
+    overflow-y: scroll;
+
+    &.no-padding {
+      padding: 0;
+    }
+    &.no-overflow {
+      overflow: hidden;
+    }
+  }
+
+  .os-form-buttons {
+    padding: 15px $side-panel-padding-x;
+    border-top: 1px solid $border-color-main;
+    background-color: #fff;
+    display: flex;
+    .latepoint-btn {
+    }
+    &.right-aligned {
+      justify-content: flex-end;
+      align-items: center;
+    }
+  }
+
+  .os-form-w {
+    margin: 0px;
+
+    .open-quick-availability-btn.latepoint-btn-white.latepoint-btn {
+      padding: 8px 10px;
+      text-align: center;
+      background-color: #fff;
+      text-decoration: none;
+      color: $brand-primary;
+      border: 1px dotted $brand-primary;
+      margin-top: 18px;
+      box-shadow: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: flex-start;
+      &:hover {
+        border-color: #08214c;
+        color: #08214c;
+      }
+      &:focus {
+        box-shadow: 0px 0px 0px 4px lighten($brand-primary, 40%);
+      }
+      i {
+        font-size: 13px;
+        margin-left: auto;
+      }
+      span {
+        font-weight: $body-font-weight-normal;
+      }
+    }
+  }
+
+  &.active {
+    .latepoint-side-panel-i {
+    }
+  }
+
+  .quick-add-transaction {
+    border: 2px dotted rgba(0, 0, 0, 0.1);
+    padding: 7px 10px;
+    text-align: center;
+    border-radius: 6px;
+    color: $brand-primary;
+    cursor: pointer;
+    position: relative;
+    &.os-loading {
+      color: transparent;
+      &:before {
+        @include loading-circle($brand-primary);
+      }
+    }
+    &:hover {
+      border: 2px solid $brand-primary;
+    }
+    i, span {
+      display: inline-block;
+      vertical-align: middle;
+    }
+    span {
+      margin-left: 5px;
+      font-weight: $body-font-weight-bold;
+    }
+  }
+
+  .quick-transaction-info-w {
+    background-color: #fff;
+    border: 1px solid $border-color-main;
+    box-shadow: 0 3px 0 0 #eee;
+    border-radius: $border-radius;
+    border-bottom-color: darken($border-color-main, 20%);
+    animation: 0.3s cubic-bezier(.45,1.1,.4,1.2) 0s wizardWrapperAnimation;
+    animation-fill-mode: both;
+    cursor: pointer;
+    margin-bottom: 15px;
+    &:hover {
+      border-color: $brand-primary;
+      box-shadow: 0px 0px 0px 1px $brand-primary;
+    }
+    .quick-transaction-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+    }
+    .quick-transaction-sub {
+      border-top: 1px solid rgba(0,0,0,0.1);
+      color: $color-faded;
+      font-size: floor($font-size-base * 0.8);
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      align-items: center;
+      background-color: #f9f9f9;
+      border-radius: 0 0 $border-radius $border-radius;
+    }
+
+    .lp-processor-logo {
+      margin-left: 5px;
+      margin-right: 10px;
+      width: 70px;
+      background-position: center right;
+      background-repeat: no-repeat;
+      overflow: hidden;
+    }
+
+    .lp-transaction-status {
+      padding: 4px 5px;
+      font-size: floor($font-size-base * 0.8);
+      margin-left: 10px;
+    }
+
+    .quick-transaction-amount {
+      font-weight: $body-font-weight-bold;
+      font-size: floor($font-size-base * 1.2);
+      margin-right: auto;
+    }
+
+    .lp-method-logo {
+      &.lp-method-logo-card {
+        &:before {
+          @include latepointfont_admin("\e916");
+        }
+        span {
+          display: none;
+        }
+      }
+    }
+
+  }
+
+  .quick-add-transaction-box-w {
+    animation: 0.3s cubic-bezier(.45,1.1,.4,1.2) 0s wizardWrapperAnimation;
+    animation-fill-mode: both;
+    margin-bottom: 15px;
+  }
+  .quick-add-transaction-box {
+    position: relative;
+    background-color: #fff;
+    border: 2px solid $brand-primary;
+    border-radius: 8px;
+    .quick-add-transaction-box-header {
+      padding: 5px 15px 7px 5px;
+      display: flex;
+      align-items: center;
+      border-radius: $border-radius $border-radius 0 0;
+      background-color: $brand-primary;
+      gap: 10px;
+      .transaction-fold-wrapper {
+        padding: 5px;
+        gap: 6px;
+        display: flex;
+        align-items: center;
+        flex: 1;
+        color: #fff;
+        font-size: floor($font-size-base * 1.1);
+        cursor: pointer;
+        border-radius: $border-radius;
+        &:hover {
+          background-color: rgba(255,255,255,0.1);
+        }
+      }
+    }
+    .quick-add-transaction-box-content {
+      padding: 20px;
+    }
+    .form-close-btn {
+      color: #fff;
+      font-size: 14px;
+      border-bottom: 1px dotted #fff;
+      text-decoration: none;
+      &:hover {
+        border-bottom-style: solid;
+      }
+    }
+    .os-form-group.os-form-group-transparent.os-form-textfield-group.has-value.no-label .os-form-control,
+    .os-form-group.os-form-group-transparent.os-form-textfield-group .os-form-control {
+    }
+  }
+}
+
+body.has-side-sub-panel {
+  .latepoint-side-panel-w {
+    .latepoint-side-panel-i {
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+      .os-form-header {
+        border-top-left-radius: 0;
+      }
+      .os-form-buttons {
+        border-bottom-left-radius: 0;
+      }
+    }
+  }
+}

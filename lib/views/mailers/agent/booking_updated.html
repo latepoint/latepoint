@@ -1,0 +1,20 @@
+<div style="font-size: 16px; margin-bottom: 20px; line-height: 1.6;">
+	Hi {{agent_full_name}},
+	<br/><br/>
+	Booking <strong>#{{booking_code}}</strong> was updated
+</div>
+<h4 style="margin-bottom: 10px; margin-top: 0px; font-size: 16px; font-weight: bold;">Appointment Information</h4>
+<ul>
+	<li>
+		<span>Status:</span> <strong>{{booking_status}}</strong>
+	</li>
+	<li>
+		<span>Service:</span> <strong>{{service_name}}</strong>
+	</li>
+	<li>
+		<span>Date, Time:</span> <strong>{{start_date}}, {{start_time}} - {{end_time}}</strong>
+	</li>
+</ul>
+<div style="margin-top: 25px;">
+	<a href="{{manage_booking_url_agent}}" style="display: block; text-decoration: none; padding: 10px; border-radius: 6px; text-align: center; font-size: 18px; color: #fff; background-color: #1e7bff; font-weight: 700;">Manage This Appointment</a>
+</div>
