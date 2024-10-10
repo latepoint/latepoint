@@ -16,6 +16,8 @@ class Latepoint_Bricks_Widget_Customer_Dashboard extends \Bricks\Element {
 	}
 
 	public function set_controls() {
+		$this->controls['_width']['default']   = '100%';
+
 		$this->controls['hide_new_appointment_ui'] = array(
 			'tab'         => 'content',
 			'label'       => esc_html__( 'Hide New Appointment UI', 'latepoint' ),

@@ -16,6 +16,8 @@ class Latepoint_Bricks_Widget_Calendar extends \Bricks\Element {
 	}
 
 	public function set_controls() {
+		$this->controls['_width']['default']   = '100%';
+
 		$this->controls['date'] = [
 			'tab'     => 'content',
 			'label'   => esc_html__( 'Date', 'latepoint' ),
