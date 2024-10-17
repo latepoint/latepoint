@@ -77,7 +77,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 								<div class="booking-time-left">
                                     <?php
                                     // translators: %s is time left
-                                    echo sprintf(__('in %s', 'latepoint'), $booking->time_left); ?>
+                                    echo sprintf(esc_html__('in %s', 'latepoint'), $booking->time_left); ?>
                                 </div>
 								<?php if($total_locations > 1) echo '<div class="booking-location">'.esc_html($booking->location->name).'</div>'; ?>
 								<div class="booking-attendees">

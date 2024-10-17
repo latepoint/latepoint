@@ -14,11 +14,11 @@ if ( ! defined( 'ABSPATH' ) ) {
         <h4 class="customer-option-info-name"><span><?php echo preg_replace("/($query)/i", "<span class='os-query-match'>$1</span>", esc_html($customer->full_name)); ?></span></h4>
         <ul>
           <li>
-            <?php _e('Email: ','latepoint'); ?>
+            <?php esc_html_e('Email: ','latepoint'); ?>
             <strong><?php echo preg_replace("/($query)/i", "<span class='os-query-match'>$1</span>", esc_html($customer->email)); ?></strong>
           </li>
           <li>
-            <?php _e('Phone: ','latepoint'); ?>
+            <?php esc_html_e('Phone: ','latepoint'); ?>
             <strong><?php echo preg_replace("/($query)/i", "<span class='os-query-match'>$1</span>", esc_html($customer->phone)); ?></strong>
           </li>
         </ul>

@@ -73,11 +73,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<?php
 				if($past_bookings){ ?>
 				<div class="latepoint-section-heading-w">
-					<h5 class="latepoint-section-heading"><?php _e('Past', 'latepoint'); ?></h5>
+					<h5 class="latepoint-section-heading"><?php esc_html_e('Past', 'latepoint'); ?></h5>
 					<div class="heading-extra">
                         <?php
                         // translators: %d is number of appointments
-                        printf( __('%d Appointments', 'latepoint'), count($past_bookings)); ?>
+                        esc_html(printf( __('%d Appointments', 'latepoint'), count($past_bookings))); ?>
                     </div>
 				</div>
 				<div class="customer-bookings-tiles">

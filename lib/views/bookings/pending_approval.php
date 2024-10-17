@@ -45,7 +45,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                     <div class="account-info-head">
                         <div class="avatar-w" style="background-image: url(<?php echo esc_url( $booking->customer->get_avatar_url() ); ?>);"></div>
                         <div class="account-name-w">
-                            <div class="account-info-label"><?php _e( 'Customer', 'latepoint' ); ?></div>
+                            <div class="account-info-label"><?php esc_html_e( 'Customer', 'latepoint' ); ?></div>
                             <div class="account-name"><?php echo esc_html( $booking->customer->full_name ); ?></div>
                         </div>
                     </div>
