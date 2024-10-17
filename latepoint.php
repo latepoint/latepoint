@@ -988,8 +988,8 @@ if ( ! class_exists( 'LatePoint' ) ) :
 					      </div>
 					      <div class="sub-section-content">
 						      <div class="os-row">
-										<div class="os-col-4">' . OsFormHelper::text_field( 'settings[notification_email_setting_from_name]', esc_html__( 'From Name', 'latepoint' ), OsSettingsHelper::get_settings_value( 'notification_email_setting_from_name', get_bloginfo( 'name' ) ), [ 'theme' => 'simple' ] ) . '</div>
-										<div class="os-col-8">' . OsFormHelper::text_field( 'settings[notification_email_setting_from_email]', esc_html__( 'From Email Address', 'latepoint' ), OsSettingsHelper::get_settings_value( 'notification_email_setting_from_email', get_bloginfo( 'admin_email' ) ), [ 'theme' => 'simple' ] ) . '</div>
+										<div class="os-col-4">' . OsFormHelper::text_field( 'settings[notification_email_setting_from_name]', __( 'From Name', 'latepoint' ), OsSettingsHelper::get_settings_value( 'notification_email_setting_from_name', get_bloginfo( 'name' ) ), [ 'theme' => 'simple' ] ) . '</div>
+										<div class="os-col-8">' . OsFormHelper::text_field( 'settings[notification_email_setting_from_email]', __( 'From Email Address', 'latepoint' ), OsSettingsHelper::get_settings_value( 'notification_email_setting_from_email', get_bloginfo( 'admin_email' ) ), [ 'theme' => 'simple' ] ) . '</div>
 									</div>
 								</div>
 							</div>';

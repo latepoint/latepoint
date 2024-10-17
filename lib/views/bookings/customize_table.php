@@ -13,14 +13,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<div class="table-fields-selector-column">
 				<?php foreach($available_columns['customer'] as $column_key => $column_label){
 					$selected = isset($selected_columns['customer']) ? in_array($column_key, $selected_columns['customer']) : false; 
-					echo OsFormHelper::toggler_field('selected_columns[customer]['.esc_attr($column_key).']', $column_label, $selected);
+					echo OsFormHelper::toggler_field('selected_columns[customer]['.$column_key.']', $column_label, $selected);
 				} ?>
 			</div>
 			<h3><span><?php esc_html_e('Booking Fields', 'latepoint'); ?></span><span></span></h3>
 			<div class="table-fields-selector-column">
 				<?php foreach($available_columns['booking'] as $column_key => $column_label){
 					$selected = isset($selected_columns['booking']) ? in_array($column_key, $selected_columns['booking']) : false;
-					echo OsFormHelper::toggler_field('selected_columns[booking]['.esc_attr($column_key).']', $column_label, $selected);
+					echo OsFormHelper::toggler_field('selected_columns[booking]['.$column_key.']', $column_label, $selected);
 				} ?>
 			</div>
 		</div>

@@ -274,6 +274,7 @@ class OsOrderIntentModel extends OsModel {
 					}
 				}
 				$order->determine_payment_status();
+				$order->items = OsOrdersHelper::get_items_for_order_id( $order->id );
 
 				/**
 				 * Order was created

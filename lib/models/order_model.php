@@ -456,8 +456,8 @@ class OsOrderModel extends OsModel {
 	/**
 	 * @return OsOrderItemModel[]
 	 */
-	public function get_items(): array {
-		if ( ! isset( $this->items ) ) {
+	public function get_items( bool $pull_from_db = false ): array {
+		if ( ! isset( $this->items ) || ($pull_from_db && $this->id) ) {
 			$this->items = OsOrdersHelper::get_items_for_order_id( $this->id );
 		}
 

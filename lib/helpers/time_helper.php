@@ -378,7 +378,7 @@ class OsTimeHelper {
     $structure = array();
 
     if ( empty( $selected_zone ) ) {
-      $structure[] = '<option selected="selected" value="">' . __( 'Select a city' ) . '</option>';
+      $structure[] = '<option selected="selected" value="">' . __( 'Select a city', 'latepoint' ) . '</option>';
     }
 
     foreach ( $zonen as $key => $zone ) {
@@ -423,12 +423,12 @@ class OsTimeHelper {
     }
 
     // Do UTC
-    $structure[] = '<optgroup label="' . esc_attr__( 'UTC' ) . '">';
+    $structure[] = '<optgroup label="' . esc_attr__( 'UTC', 'latepoint' ) . '">';
     $selected    = '';
     if ( 'UTC' === $selected_zone ) {
       $selected = 'selected="selected" ';
     }
-    $structure[] = '<option ' . $selected . 'value="' . esc_attr( 'UTC' ) . '">' . __( 'UTC' ) . '</option>';
+    $structure[] = '<option ' . $selected . 'value="' . esc_attr( 'UTC' ) . '">' . __( 'UTC', 'latepoint' ) . '</option>';
     $structure[] = '</optgroup>';
 
     return join( "\n", $structure );

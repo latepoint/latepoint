@@ -44,10 +44,10 @@ if($customers){ ?>
               <th><?php esc_html_e('Registered On', 'latepoint'); ?></th>
             </tr>
             <tr>
-              <th><?php echo OsFormHelper::text_field('filter[id]', false, '', ['style' => 'width: 40px;', 'class' => 'os-table-filter', 'placeholder' => esc_attr__('ID', 'latepoint')]); ?></th>
-              <th><?php echo OsFormHelper::text_field('filter[customer]', false, '', ['class' => 'os-table-filter', 'placeholder' => esc_attr__('Search by Name', 'latepoint')]); ?></th>
-              <th><?php echo OsFormHelper::text_field('filter[phone]', false, '', ['class' => 'os-table-filter', 'placeholder' => esc_attr__('Phone...', 'latepoint')]); ?></th>
-              <th><?php echo OsFormHelper::text_field('filter[email]', false, '', ['class' => 'os-table-filter', 'placeholder' => esc_attr__('Search by Email', 'latepoint')]); ?></th>
+              <th><?php echo OsFormHelper::text_field('filter[id]', false, '', ['style' => 'width: 40px;', 'class' => 'os-table-filter', 'placeholder' => __('ID', 'latepoint')]); ?></th>
+              <th><?php echo OsFormHelper::text_field('filter[customer]', false, '', ['class' => 'os-table-filter', 'placeholder' => __('Search by Name', 'latepoint')]); ?></th>
+              <th><?php echo OsFormHelper::text_field('filter[phone]', false, '', ['class' => 'os-table-filter', 'placeholder' => __('Phone...', 'latepoint')]); ?></th>
+              <th><?php echo OsFormHelper::text_field('filter[email]', false, '', ['class' => 'os-table-filter', 'placeholder' => __('Search by Email', 'latepoint')]); ?></th>
               <th></th>
               <th></th>
               <th></th>

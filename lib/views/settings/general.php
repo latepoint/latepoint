@@ -322,7 +322,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         <h3><?php esc_html_e( 'Authentication', 'latepoint' ) ?></h3>
                     </div>
                     <div class="sub-section-content">
-						<?php echo OsFormHelper::toggler_field( 'settings[wp_users_as_customers]', __( 'Use WordPress users as customers', 'latepoint' ), OsSettingsHelper::is_on( 'wp_users_as_customers' ), false, false, [ 'sub_label' => __( 'Customers can login using their WordPress credentials' ) ] ); ?>
+						<?php echo OsFormHelper::toggler_field( 'settings[wp_users_as_customers]', __( 'Use WordPress users as customers', 'latepoint' ), OsSettingsHelper::is_on( 'wp_users_as_customers' ), false, false, [ 'sub_label' => __( 'Customers can login using their WordPress credentials', 'latepoint' ) ] ); ?>
 						<?php echo OsFormHelper::toggler_field( 'settings[steps_require_setting_password]', __( 'Require customers to set password', 'latepoint' ), OsSettingsHelper::is_on( 'steps_require_setting_password' ), false, false, [ 'sub_label' => __( 'Shows password field on registration step', 'latepoint' ) ] ); ?>
 						<?php echo OsFormHelper::toggler_field( 'settings[steps_hide_login_register_tabs]', __( 'Remove login and register tabs', 'latepoint' ), OsSettingsHelper::is_on( 'steps_hide_login_register_tabs' ), false, false, [ 'sub_label' => __( 'This will disable ability for customers to login or register on booking form', 'latepoint' ) ] ); ?>
 						<?php echo OsFormHelper::toggler_field( 'settings[steps_hide_registration_prompt]', __( 'Hide "Create Account" prompt on confirmation step', 'latepoint' ), OsSettingsHelper::is_on( 'steps_hide_registration_prompt' ) ); ?>

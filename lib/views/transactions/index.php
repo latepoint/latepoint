@@ -44,15 +44,15 @@ if ($transactions) { ?>
 						<th><?php esc_html_e('Date', 'latepoint'); ?></th>
 					</tr>
           <tr>
-	          <th><?php echo OsFormHelper::text_field('filter[id]', false, '', ['placeholder' => esc_attr__('ID', 'latepoint'), 'class' => 'os-table-filter', 'style' => 'width: 60px;']); ?></th>
-	          <th><?php echo OsFormHelper::text_field('filter[token]', false, '', ['placeholder' => esc_attr__('Token', 'latepoint'), 'class' => 'os-table-filter']); ?></th>
-	          <th><?php echo OsFormHelper::text_field('filter[booking_id]', false, '', ['placeholder' => esc_attr__('Order ID', 'latepoint'), 'class' => 'os-table-filter']); ?></th>
-	          <th><?php echo OsFormHelper::text_field('filter[customer][full_name]', false, '', ['placeholder' => esc_attr__('Customer Name', 'latepoint'), 'class' => 'os-table-filter']); ?></th>
-	          <th><?php echo OsFormHelper::select_field('filter[processor]', false, OsPaymentsHelper::get_payment_processors_for_select(), '', ['placeholder' => esc_attr__('Show All', 'latepoint'),'class' => 'os-table-filter']); ?></th>
-	          <th><?php echo OsFormHelper::select_field('filter[payment_method]', false, OsPaymentsHelper::get_all_payment_methods_for_select(), '', ['placeholder' => esc_attr__('Show All', 'latepoint'),'class' => 'os-table-filter']); ?></th>
-	          <th><?php echo OsFormHelper::text_field('filter[amount]', false, '', ['placeholder' => esc_attr__('Amount', 'latepoint'), 'class' => 'os-table-filter']); ?></th>
-	          <th><?php echo OsFormHelper::select_field('filter[status]', false, OsPaymentsHelper::get_transaction_statuses_list(), '', ['placeholder' => esc_attr__('Show All', 'latepoint'),'class' => 'os-table-filter']); ?></th>
-	          <th><?php echo OsFormHelper::select_field('filter[kind]', false, OsPaymentsHelper::get_list_of_transaction_kinds(), '', ['placeholder' => esc_attr__('Show All', 'latepoint'),'class' => 'os-table-filter']); ?></th>
+	          <th><?php echo OsFormHelper::text_field('filter[id]', false, '', ['placeholder' => __('ID', 'latepoint'), 'class' => 'os-table-filter', 'style' => 'width: 60px;']); ?></th>
+	          <th><?php echo OsFormHelper::text_field('filter[token]', false, '', ['placeholder' => __('Token', 'latepoint'), 'class' => 'os-table-filter']); ?></th>
+	          <th><?php echo OsFormHelper::text_field('filter[booking_id]', false, '', ['placeholder' => __('Order ID', 'latepoint'), 'class' => 'os-table-filter']); ?></th>
+	          <th><?php echo OsFormHelper::text_field('filter[customer][full_name]', false, '', ['placeholder' => __('Customer Name', 'latepoint'), 'class' => 'os-table-filter']); ?></th>
+	          <th><?php echo OsFormHelper::select_field('filter[processor]', false, OsPaymentsHelper::get_payment_processors_for_select(), '', ['placeholder' => __('Show All', 'latepoint'),'class' => 'os-table-filter']); ?></th>
+	          <th><?php echo OsFormHelper::select_field('filter[payment_method]', false, OsPaymentsHelper::get_all_payment_methods_for_select(), '', ['placeholder' => __('Show All', 'latepoint'),'class' => 'os-table-filter']); ?></th>
+	          <th><?php echo OsFormHelper::text_field('filter[amount]', false, '', ['placeholder' => __('Amount', 'latepoint'), 'class' => 'os-table-filter']); ?></th>
+	          <th><?php echo OsFormHelper::select_field('filter[status]', false, OsPaymentsHelper::get_transaction_statuses_list(), '', ['placeholder' => __('Show All', 'latepoint'),'class' => 'os-table-filter']); ?></th>
+	          <th><?php echo OsFormHelper::select_field('filter[kind]', false, OsPaymentsHelper::get_list_of_transaction_kinds(), '', ['placeholder' => __('Show All', 'latepoint'),'class' => 'os-table-filter']); ?></th>
 	          <th>
 		          <div class="os-form-group">
 			          <div class="os-date-range-picker os-table-filter-datepicker" data-can-be-cleared="yes" data-no-value-label="<?php esc_attr_e('Filter By Date', 'latepoint'); ?>" data-clear-btn-label="<?php esc_attr_e('Reset Date Filtering', 'latepoint'); ?>">

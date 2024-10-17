@@ -52,13 +52,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 							<th><?php esc_html_e('Date', 'latepoint'); ?></th>
 						</tr>
 						<tr>
-							<th><?php echo OsFormHelper::text_field('filter[id]', false, '', ['placeholder' => esc_attr__('ID', 'latepoint'), 'class' => 'os-table-filter', 'style' => 'width: 60px;']); ?></th>
-							<th><?php echo OsFormHelper::text_field('filter[customer][full_name]', false, '', ['placeholder' => esc_attr__('Customer Name', 'latepoint'), 'class' => 'os-table-filter']); ?></th>
-							<th><?php echo OsFormHelper::text_field('filter[total]', false, '', ['placeholder' => esc_attr__('Total', 'latepoint'), 'class' => 'os-table-filter']); ?></th>
-							<th><?php echo OsFormHelper::select_field('filter[status]', false, OsOrdersHelper::get_order_statuses_list(), '', ['placeholder' => esc_attr__('Show All', 'latepoint'), 'class' => 'os-table-filter']); ?></th>
-							<th><?php echo OsFormHelper::select_field('filter[payment_status]', false, OsOrdersHelper::get_order_payment_statuses_list(), '', ['placeholder' => esc_attr__('Show All', 'latepoint'), 'class' => 'os-table-filter']); ?></th>
-							<th><?php echo OsFormHelper::select_field('filter[fulfillment_status]', false, OsOrdersHelper::get_fulfillment_statuses_list(), '', ['placeholder' => esc_attr__('Show All', 'latepoint'), 'class' => 'os-table-filter']); ?></th>
-							<th><?php echo OsFormHelper::text_field('filter[confirmation_code]', false, '', ['placeholder' => esc_attr__('Confirmation', 'latepoint'), 'class' => 'os-table-filter']); ?></th>
+							<th><?php echo OsFormHelper::text_field('filter[id]', false, '', ['placeholder' => __('ID', 'latepoint'), 'class' => 'os-table-filter', 'style' => 'width: 60px;']); ?></th>
+							<th><?php echo OsFormHelper::text_field('filter[customer][full_name]', false, '', ['placeholder' => __('Customer Name', 'latepoint'), 'class' => 'os-table-filter']); ?></th>
+							<th><?php echo OsFormHelper::text_field('filter[total]', false, '', ['placeholder' => __('Total', 'latepoint'), 'class' => 'os-table-filter']); ?></th>
+							<th><?php echo OsFormHelper::select_field('filter[status]', false, OsOrdersHelper::get_order_statuses_list(), '', ['placeholder' => __('Show All', 'latepoint'), 'class' => 'os-table-filter']); ?></th>
+							<th><?php echo OsFormHelper::select_field('filter[payment_status]', false, OsOrdersHelper::get_order_payment_statuses_list(), '', ['placeholder' => __('Show All', 'latepoint'), 'class' => 'os-table-filter']); ?></th>
+							<th><?php echo OsFormHelper::select_field('filter[fulfillment_status]', false, OsOrdersHelper::get_fulfillment_statuses_list(), '', ['placeholder' => __('Show All', 'latepoint'), 'class' => 'os-table-filter']); ?></th>
+							<th><?php echo OsFormHelper::text_field('filter[confirmation_code]', false, '', ['placeholder' => __('Confirmation', 'latepoint'), 'class' => 'os-table-filter']); ?></th>
 							<th>
 								<div class="os-form-group">
 									<div class="os-date-range-picker os-table-filter-datepicker" data-can-be-cleared="yes"

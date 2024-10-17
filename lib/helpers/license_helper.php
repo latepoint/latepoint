@@ -64,7 +64,7 @@ class OsLicenseHelper {
     if( !is_wp_error($request) || wp_remote_retrieve_response_code($request) === 200){ 
       $response = json_decode($request['body'], true);
       if(empty($response['status'])){
-        $message = __('Connection Error. Please try again in a few minutes or contact us at license@latepoint.com. Error Code: UDF732S83');
+        $message = __('Connection Error. Please try again in a few minutes or contact us at license@latepoint.com. Error Code: UDF732S83', 'latepoint');
       }else{
         $message = $response['message'];
         if( $response['status'] == 200){
@@ -73,7 +73,7 @@ class OsLicenseHelper {
       }
     }else{
 			if (is_wp_error($request)) OsDebugHelper::log('Update plugin error', 'update_plugin_error', ['error' => $request->get_error_messages()]);
-      $message = __('Connection Error. Please try again in a few minutes or contact us at license@latepoint.com. Error Code: SUYF8362');
+      $message = __('Connection Error. Please try again in a few minutes or contact us at license@latepoint.com. Error Code: SUYF8362', 'latepoint');
     }
 
     if($is_valid_license){

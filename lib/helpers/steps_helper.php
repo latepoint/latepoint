@@ -629,7 +629,7 @@ class OsStepsHelper {
 				// sometimes a rule is defined by the parent name, search for unflat list for parents
 				if ( ! in_array( $step_code, array_keys( self::unflatten_steps( $steps ) ) ) ) {
                     // translators: %s is the name of a step
-					$errors[] = sprintf( __( "Step %s is missing from steps array." ), $step_code );
+					$errors[] = sprintf( __( "Step %s is missing from steps array.", 'latepoint' ), $step_code );
 				}
 			}
 		}
@@ -638,7 +638,7 @@ class OsStepsHelper {
 		foreach ( $steps as $step_code ) {
 			if ( ! array_key_exists( $step_code, $rules ) ) {
                 // translators: %s is the name of a step
-				$errors[] = sprintf( __( "Step %s is not defined in the rules." ), $step_code );
+				$errors[] = sprintf( __( "Step %s is not defined in the rules.", 'latepoint' ), $step_code );
 			}
 		}
 
@@ -1182,105 +1182,109 @@ class OsStepsHelper {
 			case 'payment__methods':
 			case 'payment__processors':
 			case 'payment__pay':
-				if ( self::is_bundle_scheduling() || self::$cart_object->is_empty() || empty( OsPaymentsHelper::get_enabled_payment_times() ) ) {
+				if ( self::is_bundle_scheduling() || empty( OsPaymentsHelper::get_enabled_payment_times() ) ) {
 					// scheduling a bundle or no enabled payment times
 					$skip = true;
 					self::set_zero_cost_payment_fields();
 				} else {
-					$original_amount      = self::$cart_object->get_subtotal();
-					$after_coupons_amount = self::$cart_object->get_total();
-					$deposit_amount       = self::$cart_object->deposit_amount_to_charge();
-					if ( $original_amount > 0 && $after_coupons_amount <= 0 ) {
-						// original price was set, but coupon was applied and charge amount is now 0, we can skip step, even if deposit is not 0
-						$is_zero_cost = true;
-					} else {
-						if ( $after_coupons_amount <= 0 && $deposit_amount <= 0 ) {
-							$is_zero_cost = true;
-						} else {
-							$is_zero_cost = false;
-						}
-					}
-					// if nothing to charge - don't show it, no matter what
-					if ( $is_zero_cost && ! OsSettingsHelper::is_env_demo() ) {
-						$skip = true;
-						self::set_zero_cost_payment_fields();
-					} else {
-						if ( $step_code == 'payment__times' ) {
-							if ( ! empty( self::$cart_object->payment_time ) ) {
-								$skip = true;
-							} else {
-								// try to check if one only available and preset it
-								$enabled_payment_times = OsPaymentsHelper::get_enabled_payment_times();
-								if ( count( $enabled_payment_times ) == 1 ) {
-									$skip                                                = true;
-									self::$cart_object->payment_time                     = array_key_first( $enabled_payment_times );
-									self::$preset_fields['verify']['cart[payment_time]'] = OsFormHelper::hidden_field( 'cart[payment_time]', self::$cart_object->payment_time, [ 'skip_id' => true ] );
-									// assign preset field value for next step
-									self::$preset_fields['payment__portions']['cart[payment_time]'] = OsFormHelper::hidden_field( 'cart[payment_time]', self::$cart_object->payment_time, [ 'skip_id' => true ] );
-									self::carry_preset_fields_to_next_step( 'payment__times', 'payment__portions' );
-								}
-							}
-						}
-						if ( $step_code == 'payment__portions' ) {
-							if ( ! empty( self::$cart_object->payment_portion ) ) {
-								$skip = true;
-							} else {
-								if ( $is_zero_cost || ( self::$cart_object->payment_time == LATEPOINT_PAYMENT_TIME_LATER ) || ( $after_coupons_amount > 0 && $deposit_amount <= 0 ) ) {
-									// zero cost, pay later or 0 deposit, means it's a full portion payment preset
-									self::$cart_object->payment_portion = LATEPOINT_PAYMENT_PORTION_FULL;
-								} elseif ( $deposit_amount > 0 && $after_coupons_amount <= 0 ) {
-									self::$cart_object->payment_portion = LATEPOINT_PAYMENT_PORTION_DEPOSIT;
-								}
+                    if(self::$cart_object->is_empty()){
+                        $skip = true;
+                    }else{
+                        $original_amount      = self::$cart_object->get_subtotal();
+                        $after_coupons_amount = self::$cart_object->get_total();
+                        $deposit_amount       = self::$cart_object->deposit_amount_to_charge();
+                        if ( $original_amount > 0 && $after_coupons_amount <= 0 ) {
+                            // original price was set, but coupon was applied and charge amount is now 0, we can skip step, even if deposit is not 0
+                            $is_zero_cost = true;
+                        } else {
+                            if ( $after_coupons_amount <= 0 && $deposit_amount <= 0 ) {
+                                $is_zero_cost = true;
+                            } else {
+                                $is_zero_cost = false;
+                            }
+                        }
+                        // if nothing to charge - don't show it, no matter what
+                        if ( $is_zero_cost && ! OsSettingsHelper::is_env_demo() ) {
+                            $skip = true;
+                            self::set_zero_cost_payment_fields();
+                        } else {
+                            if ( $step_code == 'payment__times' ) {
+                                if ( ! empty( self::$cart_object->payment_time ) ) {
+                                    $skip = true;
+                                } else {
+                                    // try to check if one only available and preset it
+                                    $enabled_payment_times = OsPaymentsHelper::get_enabled_payment_times();
+                                    if ( count( $enabled_payment_times ) == 1 ) {
+                                        $skip                                                = true;
+                                        self::$cart_object->payment_time                     = array_key_first( $enabled_payment_times );
+                                        self::$preset_fields['verify']['cart[payment_time]'] = OsFormHelper::hidden_field( 'cart[payment_time]', self::$cart_object->payment_time, [ 'skip_id' => true ] );
+                                        // assign preset field value for next step
+                                        self::$preset_fields['payment__portions']['cart[payment_time]'] = OsFormHelper::hidden_field( 'cart[payment_time]', self::$cart_object->payment_time, [ 'skip_id' => true ] );
+                                        self::carry_preset_fields_to_next_step( 'payment__times', 'payment__portions' );
+                                    }
+                                }
+                            }
+                            if ( $step_code == 'payment__portions' ) {
+                                if ( ! empty( self::$cart_object->payment_portion ) ) {
+                                    $skip = true;
+                                } else {
+                                    if ( $is_zero_cost || ( self::$cart_object->payment_time == LATEPOINT_PAYMENT_TIME_LATER ) || ( $after_coupons_amount > 0 && $deposit_amount <= 0 ) ) {
+                                        // zero cost, pay later or 0 deposit, means it's a full portion payment preset
+                                        self::$cart_object->payment_portion = LATEPOINT_PAYMENT_PORTION_FULL;
+                                    } elseif ( $deposit_amount > 0 && $after_coupons_amount <= 0 ) {
+                                        self::$cart_object->payment_portion = LATEPOINT_PAYMENT_PORTION_DEPOSIT;
+                                    }
 
-								if ( ! empty( self::$cart_object->payment_portion ) ) {
-									$skip                                                             = true;
-									self::$preset_fields['verify']['cart[payment_portion]']           = OsFormHelper::hidden_field( 'cart[payment_portion]', self::$cart_object->payment_portion, [ 'skip_id' => true ] );
-									self::$preset_fields['payment__methods']['cart[payment_portion]'] = OsFormHelper::hidden_field( 'cart[payment_portion]', self::$cart_object->payment_portion, [ 'skip_id' => true ] );
+                                    if ( ! empty( self::$cart_object->payment_portion ) ) {
+                                        $skip                                                             = true;
+                                        self::$preset_fields['verify']['cart[payment_portion]']           = OsFormHelper::hidden_field( 'cart[payment_portion]', self::$cart_object->payment_portion, [ 'skip_id' => true ] );
+                                        self::$preset_fields['payment__methods']['cart[payment_portion]'] = OsFormHelper::hidden_field( 'cart[payment_portion]', self::$cart_object->payment_portion, [ 'skip_id' => true ] );
 
-									self::carry_preset_fields_to_next_step( 'payment__portions', 'payment__methods' );
-								}
-							}
-						}
-						if ( $step_code == 'payment__methods' ) {
-							if ( ! empty( self::$cart_object->payment_method ) ) {
-								$skip = true;
-							} else {
-								if ( self::$cart_object->payment_time ) {
-									$enabled_payment_methods = OsPaymentsHelper::get_enabled_payment_methods_for_payment_time( self::$cart_object->payment_time );
-									if ( count( $enabled_payment_methods ) <= 1 ) {
-										$skip                                                               = true;
-										self::$cart_object->payment_method                                  = array_key_first( $enabled_payment_methods );
-										self::$preset_fields['verify']['cart[payment_method]']              = OsFormHelper::hidden_field( 'cart[payment_method]', self::$cart_object->payment_method, [ 'skip_id' => true ] );
-										self::$preset_fields['payment__processors']['cart[payment_method]'] = OsFormHelper::hidden_field( 'cart[payment_method]', self::$cart_object->payment_method, [ 'skip_id' => true ] );
+                                        self::carry_preset_fields_to_next_step( 'payment__portions', 'payment__methods' );
+                                    }
+                                }
+                            }
+                            if ( $step_code == 'payment__methods' ) {
+                                if ( ! empty( self::$cart_object->payment_method ) ) {
+                                    $skip = true;
+                                } else {
+                                    if ( self::$cart_object->payment_time ) {
+                                        $enabled_payment_methods = OsPaymentsHelper::get_enabled_payment_methods_for_payment_time( self::$cart_object->payment_time );
+                                        if ( count( $enabled_payment_methods ) <= 1 ) {
+                                            $skip                                                               = true;
+                                            self::$cart_object->payment_method                                  = array_key_first( $enabled_payment_methods );
+                                            self::$preset_fields['verify']['cart[payment_method]']              = OsFormHelper::hidden_field( 'cart[payment_method]', self::$cart_object->payment_method, [ 'skip_id' => true ] );
+                                            self::$preset_fields['payment__processors']['cart[payment_method]'] = OsFormHelper::hidden_field( 'cart[payment_method]', self::$cart_object->payment_method, [ 'skip_id' => true ] );
 
-										self::carry_preset_fields_to_next_step( 'payment__methods', 'payment__processors' );
-									}
-								}
-							}
-						}
-						if ( $step_code == 'payment__processors' ) {
-							if ( ! empty( self::$cart_object->payment_processor ) ) {
-								$skip = true;
-							} else {
-								if ( self::$cart_object->payment_time && self::$cart_object->payment_method ) {
-									$enabled_payment_processors = OsPaymentsHelper::get_enabled_payment_processors_for_payment_time_and_method( self::$cart_object->payment_time, self::$cart_object->payment_method );
-									if ( count( $enabled_payment_processors ) <= 1 ) {
-										$skip                                                           = true;
-										self::$cart_object->payment_processor                           = array_key_first( $enabled_payment_processors );
-										self::$preset_fields['verify']['cart[payment_processor]']       = OsFormHelper::hidden_field( 'cart[payment_processor]', self::$cart_object->payment_processor, [ 'skip_id' => true ] );
-										self::$preset_fields['payment__pay']['cart[payment_processor]'] = OsFormHelper::hidden_field( 'cart[payment_processor]', self::$cart_object->payment_processor, [ 'skip_id' => true ] );
+                                            self::carry_preset_fields_to_next_step( 'payment__methods', 'payment__processors' );
+                                        }
+                                    }
+                                }
+                            }
+                            if ( $step_code == 'payment__processors' ) {
+                                if ( ! empty( self::$cart_object->payment_processor ) ) {
+                                    $skip = true;
+                                } else {
+                                    if ( self::$cart_object->payment_time && self::$cart_object->payment_method ) {
+                                        $enabled_payment_processors = OsPaymentsHelper::get_enabled_payment_processors_for_payment_time_and_method( self::$cart_object->payment_time, self::$cart_object->payment_method );
+                                        if ( count( $enabled_payment_processors ) <= 1 ) {
+                                            $skip                                                           = true;
+                                            self::$cart_object->payment_processor                           = array_key_first( $enabled_payment_processors );
+                                            self::$preset_fields['verify']['cart[payment_processor]']       = OsFormHelper::hidden_field( 'cart[payment_processor]', self::$cart_object->payment_processor, [ 'skip_id' => true ] );
+                                            self::$preset_fields['payment__pay']['cart[payment_processor]'] = OsFormHelper::hidden_field( 'cart[payment_processor]', self::$cart_object->payment_processor, [ 'skip_id' => true ] );
 
-										self::carry_preset_fields_to_next_step( 'payment__processors', 'payment__pay' );
-									}
-								}
-							}
-						}
-						if ( $step_code == 'payment__pay' ) {
-							if ( self::$cart_object->payment_time == LATEPOINT_PAYMENT_TIME_LATER || empty( OsPaymentsHelper::get_enabled_payment_times() ) ) {
-								$skip = true;
-							}
-						}
-					}
+                                            self::carry_preset_fields_to_next_step( 'payment__processors', 'payment__pay' );
+                                        }
+                                    }
+                                }
+                            }
+                            if ( $step_code == 'payment__pay' ) {
+                                if ( self::$cart_object->payment_time == LATEPOINT_PAYMENT_TIME_LATER || empty( OsPaymentsHelper::get_enabled_payment_times() ) ) {
+                                    $skip = true;
+                                }
+                            }
+                        }
+                    }
 				}
 				break;
 		}
@@ -1320,7 +1324,20 @@ class OsStepsHelper {
 			$next_step_code = self::get_next_step_code( $next_step_code );
 		}
 
-		return $next_step_code;
+        /**
+		 * Get the next step code, based on a current step
+		 *
+		 * @param {string} $next_step_code The next step code
+		 * @param {string} $current_step_code The current step code
+		 * @param {array} $all_step_codes List of all step codes
+		 * @param {array} $active_step_codes List of active step codes
+		 * @returns {string} The filtered next step code
+		 *
+		 * @since 5.0.16
+		 * @hook latepoint_get_next_step_code
+		 *
+		 */
+		return apply_filters('latepoint_get_next_step_code', $next_step_code, $current_step_code, $all_step_codes, $active_step_codes);
 	}
 
 	public static function get_prev_step_code( $current_step_code ) {
@@ -1337,7 +1354,19 @@ class OsStepsHelper {
 			$prev_step_code = self::get_prev_step_code( $prev_step_code );
 		}
 
-		return $prev_step_code;
+        /**
+		 * Get the next step code, based on a current step
+		 *
+		 * @param {string} $next_step_code The next step code
+		 * @param {string} $current_step_code The current step code
+		 * @param {array} $all_step_codes List of all step codes
+		 * @returns {string} The filtered next step code
+		 *
+		 * @since 5.0.16
+		 * @hook latepoint_get_previous_step_code
+		 *
+		 */
+		return apply_filters('latepoint_get_previous_step_code', $prev_step_code, $current_step_code, $all_step_codes);
 	}
 
 

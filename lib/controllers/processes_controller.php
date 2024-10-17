@@ -287,7 +287,7 @@ if ( ! class_exists( 'OsProcessesController' ) ) :
 			$action_settings_html.= OsFormHelper::hidden_field('action[type]', $action->type);
 			$action_settings_html.= OsFormHelper::hidden_field('action[event][type]', $action->event->type);
 			foreach($action->settings as $key => $setting){
-				$action_settings_html.= OsFormHelper::hidden_field('action[settings]['.$key.']', esc_attr($setting));
+				$action_settings_html.= OsFormHelper::hidden_field('action[settings]['.$key.']', $setting);
 			}
 			$preview_html = $action->generate_preview();
 
