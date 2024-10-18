@@ -40,13 +40,14 @@ class Latepoint_Bricks_Widget_List_Of_Resources extends \Bricks\Element {
 			'title' => esc_html__( 'Other Settings', 'latepoint' ),
 			'tab'   => 'content',
 		);
-		$this->control_groups['button_styling'] = array(
-			'title' => esc_html__( 'Button', 'latepoint' ),
-			'tab'   => 'style',
-		);
 
 		$this->control_groups['card_styling'] = array(
 			'title' => esc_html__( 'Card', 'latepoint' ),
+			'tab'   => 'style',
+		);
+
+		$this->control_groups['button_styling'] = array(
+			'title' => esc_html__( 'Button', 'latepoint' ),
 			'tab'   => 'style',
 		);
 
@@ -56,6 +57,7 @@ class Latepoint_Bricks_Widget_List_Of_Resources extends \Bricks\Element {
 
 	// Set builder controls
 	public function set_controls() {
+		$this->controls['_width']['default']   = '100%';
 
 		$this->controls['button_caption'] = array(
 			'label'       => esc_html__( 'Button Caption', 'latepoint' ),
@@ -335,6 +337,22 @@ class Latepoint_Bricks_Widget_List_Of_Resources extends \Bricks\Element {
 			'inline' => true,
 		];
 
+		$this->controls['button_full_width'] = array(
+			'tab'     => 'style',
+			'group'   => 'button_styling',
+			'label'   => esc_html__( 'Full Width', 'latepoint' ),
+			'type'    => 'checkbox',
+			'inline'  => true,
+			'default' => false,
+			'css'   => array(
+				array(
+					'property' => 'display',
+					'selector' => '.latepoint-book-button',
+					'value'    => 'block',
+				),
+			),
+		);
+
 		$this->controls['bg_color_separator'] = array(
 			'tab'    => 'style',
 			'group'  => 'button_styling',
@@ -424,25 +442,20 @@ class Latepoint_Bricks_Widget_List_Of_Resources extends \Bricks\Element {
 
 
 		#card settings
-		$this->controls['card_font'] = [
-			'tab'    => 'style',
-			'group'  => 'card_styling',
-			'label'  => esc_html__( 'Typography', 'latepoint' ),
-			'type'   => 'typography',
-			'exclude' => ['text-align', 'color'],
-			'css'    => [
-				[
-					'property' => 'typography',
-					'selector' => '.resource-item h3',
-				],
-			],
-			'inline' => true,
-		];
 
-		$this->controls['cbg_color_separator'] = array(
-			'tab'    => 'style',
-			'group'  => 'card_styling',
-			'type'     => 'separator',
+		$this->controls['align'] = array(
+			'tab'      => 'style',
+			'group'    => 'card_styling',
+			'label'   => esc_html__( 'Align', 'latepoint' ),
+			'type'    => 'text-align',
+			'inline'  => true,
+			'exclude' => 'justify',
+			'css'   => array(
+				array(
+					'property' => 'text-align',
+					'selector' => '.resource-item',
+				)
+			)
 		);
 
 		$this->controls['card_bg_color'] = array(
@@ -458,18 +471,56 @@ class Latepoint_Bricks_Widget_List_Of_Resources extends \Bricks\Element {
 			),
 		);
 
-		$this->controls['ctext_color'] = array(
-			'tab'      => 'style',
-			'group'    => 'card_styling',
-			'label'    => esc_html__( 'Text Color', 'latepoint' ),
-			'type'     => 'color',
-			'css'      => array(
-				array(
-					'property' => 'color',
-					'selector' => '.resource-item',
-				),
-			),
+		$this->controls['cbg_color_separator'] = array(
+			'tab'    => 'style',
+			'group'  => 'card_styling',
+			'type'     => 'separator',
 		);
+
+		$this->controls['card_title'] = [
+			'tab'    => 'style',
+			'group'  => 'card_styling',
+			'label'  => esc_html__( 'Title', 'latepoint' ),
+			'type'   => 'typography',
+			'exclude' => ['text-align'],
+			'css'    => [
+				[
+					'property' => 'typography',
+					'selector' => '.ri-name > h3, .ri-title',
+				],
+			],
+			'inline' => true,
+		];
+
+		$this->controls['card_price'] = [
+			'tab'    => 'style',
+			'group'  => 'card_styling',
+			'label'  => esc_html__( 'Price', 'latepoint' ),
+			'type'   => 'typography',
+			'exclude' => ['text-align'],
+			'css'    => [
+				[
+					'property' => 'typography',
+					'selector' => '.ri-price',
+				],
+			],
+			'inline' => true,
+		];
+
+		$this->controls['card_descr'] = [
+			'tab'    => 'style',
+			'group'  => 'card_styling',
+			'label'  => esc_html__( 'Description', 'latepoint' ),
+			'type'   => 'typography',
+			'exclude' => ['text-align'],
+			'css'    => [
+				[
+					'property' => 'typography',
+					'selector' => '.ri-description',
+				],
+			],
+			'inline' => true,
+		];
 
 		$this->controls['cborder_separator'] = array(
 			'tab'    => 'style',

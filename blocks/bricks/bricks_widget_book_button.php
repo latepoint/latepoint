@@ -50,6 +50,7 @@ class Latepoint_Bricks_Widget_Book_Button extends \Bricks\Element {
 
 	// Set builder controls
 	public function set_controls() {
+		$this->controls['_width']['default']   = '100%';
 
 		$this->controls['caption'] = array(
 			'label'       => esc_html__( 'Button Caption', 'latepoint' ),

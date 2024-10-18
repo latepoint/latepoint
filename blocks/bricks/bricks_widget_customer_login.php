@@ -10,8 +10,11 @@ class Latepoint_Bricks_Widget_Customer_Login extends \Bricks\Element {
 	public $name = 'latepoint_customer_login';
 	public $icon = 'ti-lock';
 
+	public function set_controls() {
+		$this->controls['_width']['default'] = '100%';
+	}
 
-	public function get_label(): string {
+		public function get_label(): string {
 		return esc_html__( 'Customer Login', 'latepoint' );
 	}
 
