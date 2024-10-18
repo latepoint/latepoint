@@ -283,7 +283,7 @@ class Latepoint_Elementor_Widget_Book_Button extends \Elementor\Widget_Base {
 		]);
 
 		$this->start_controls_tab( 'style_normal_tab', [
-				'label' => esc_html__( 'Normal', 'latepoint ' ),
+				'label' => esc_html__( 'Normal', 'latepoint' ),
 			]
 		);
 
@@ -315,7 +315,7 @@ class Latepoint_Elementor_Widget_Book_Button extends \Elementor\Widget_Base {
 
 
 		$this->start_controls_tab( 'style_hover_tab', [
-				'label' => esc_html__( 'Hover', 'latepoint ' ),
+				'label' => esc_html__( 'Hover', 'latepoint' ),
 			]
 		);
 		$this->add_control(

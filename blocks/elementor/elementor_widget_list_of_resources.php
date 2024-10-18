@@ -442,7 +442,7 @@ class Latepoint_Elementor_Widget_List_Of_Resources extends \Elementor\Widget_Bas
 		]);
 
 		$this->start_controls_tab( 'style_normal_tab', [
-				'label' => esc_html__( 'Normal', 'latepoint ' ),
+				'label' => esc_html__( 'Normal', 'latepoint' ),
 			]
 		);
 
@@ -472,7 +472,7 @@ class Latepoint_Elementor_Widget_List_Of_Resources extends \Elementor\Widget_Bas
 
 
 		$this->start_controls_tab( 'style_hover_tab', [
-				'label' => esc_html__( 'Hover', 'latepoint ' ),
+				'label' => esc_html__( 'Hover', 'latepoint' ),
 			]
 		);
 		$this->add_control(
@@ -623,7 +623,7 @@ class Latepoint_Elementor_Widget_List_Of_Resources extends \Elementor\Widget_Bas
 		]);
 
 		$this->start_controls_tab( 'card_style_normal_tab', [
-				'label' => esc_html__( 'Normal', 'latepoint ' ),
+				'label' => esc_html__( 'Normal', 'latepoint' ),
 			]
 		);
 
@@ -653,7 +653,7 @@ class Latepoint_Elementor_Widget_List_Of_Resources extends \Elementor\Widget_Bas
 
 
 		$this->start_controls_tab( 'card_style_hover_tab', [
-				'label' => esc_html__( 'Hover', 'latepoint ' ),
+				'label' => esc_html__( 'Hover', 'latepoint' ),
 			]
 		);
 		$this->add_control(

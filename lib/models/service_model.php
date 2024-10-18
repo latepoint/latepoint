@@ -379,7 +379,7 @@ class OsServiceModel extends OsModel{
 
   public function remove_agents_by_ids($ids_to_remove = array()){
     if($ids_to_remove){
-      $query = $this->db->prepare('DELETE FROM '.$this->services_agents_table_name.' WHERE service_id = %d AND agent_id IN ' . OsModel::where_in_array_to_string($ids_to_remove), $this->id);
+      $query = $this->db->prepare('DELETE FROM %i WHERE service_id = %d AND agent_id IN ' . OsModel::where_in_array_to_string($ids_to_remove), [$this->services_agents_table_name, $this->id]);
       $this->db->query( $query );
     }
   }

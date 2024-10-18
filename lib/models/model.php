@@ -1066,9 +1066,17 @@ class OsModel {
 	protected function validates_uniqueness( $property ) {
 		if ( isset( $this->$property ) && ! empty( $this->$property ) ) {
 			if ( $this->is_new_record() ) {
-				$query = $this->prepare( 'SELECT ' . $property . ' FROM ' . $this->table_name . ' WHERE ' . $property . ' = %s LIMIT 1', $this->$property );
+				$query = $this->prepare( 'SELECT %i FROM %i WHERE %i = %s LIMIT 1', [
+					$property,
+					$this->table_name,
+					$property,
+					$this->$property
+				] );
 			} else {
-				$query = $this->prepare( 'SELECT ' . $property . ' FROM ' . $this->table_name . ' WHERE ' . $property . ' = %s AND id != %d LIMIT 1', [
+				$query = $this->prepare( 'SELECT %i FROM %i WHERE %i = %s AND id != %d LIMIT 1', [
+					$property,
+					$this->table_name,
+					$property,
 					$this->$property,
 					$this->id
 				] );
