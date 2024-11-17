@@ -854,4 +854,37 @@
       }
     }
   }
+
+  .pro-upgrade-required {
+    border: 2px dotted #ffc428;
+    padding: 20px 50px 20px 20px;
+    display: block;
+    text-decoration: none;
+    border-radius: $border-radius;
+    position: relative;
+    background-color: #fff8e8;
+    color: $headings-color;
+    &:before {
+      @include latepointfont_admin("\e91a");
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      font-size: 16px;
+      transform: translateY(-50%);
+    }
+    .pur-heading {
+      font-weight: $body-font-weight-bold;
+      font-size: $body-font-size-s;
+      color: $headings-color;
+      margin-bottom: 5px;
+    }
+    .pur-desc {
+      font-size: $body-font-size-xs;
+      color: $color-faded;
+    }
+    &:hover {
+      border: 2px solid $brand-primary;
+      background-color: #fff;
+    }
+  }
 }

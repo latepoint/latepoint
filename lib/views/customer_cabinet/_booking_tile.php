@@ -78,4 +78,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</a>
 		</div>
 	</div>
+    <?php if(!$booking->is_part_of_bundle() && $booking->order->get_total_balance_due() > 0){ ?>
+    <div class="bt-payment-actions">
+        <div class="bt-balance-info">
+            <div class="bt-balance-label"><?php esc_html_e('Balance Due:', 'latepoint'); ?></div>
+            <div class="bt-balance-amount"><?php echo OsMoneyHelper::format_price($booking->order->get_total_balance_due(), true, false); ?></div>
+        </div>
+        <div class="bt-balance-pay-link"><a href="#"
+                  data-os-params="<?php echo esc_attr(http_build_query( [ 'order_id' => $booking->order->id ] )); ?>"
+                  data-os-action="<?php echo esc_attr(OsRouterHelper::build_route_name( 'orders', 'summary_before_payment' )); ?>"
+                  data-os-output-target="lightbox"
+                  data-os-lightbox-classes="width-500"
+            ><?php esc_html_e('Make Payment', 'latepoint'); ?></a></div>
+    </div>
+    <?php } ?>
 </div>

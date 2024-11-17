@@ -45,6 +45,7 @@ class OsPaymentsHelper {
 
 	public static function get_nice_payment_method_name( $code ) {
 		$payment_methods = OsPaymentsHelper::get_all_payment_methods_for_select();
+
 		return $payment_methods[ $code ] ?? $code;
 	}
 
@@ -80,6 +81,15 @@ class OsPaymentsHelper {
 
 	public static function is_payment_processor_enabled( $processor_code ) {
 		return OsSettingsHelper::is_on( 'enable_payment_processor_' . $processor_code );
+	}
+
+	public static function should_processor_handle_payment_for_transaction_intent( string $processor_code, OsTransactionIntentModel $transaction_intent ): bool {
+		if ( $transaction_intent->get_payment_data_value('processor') != $processor_code ) {
+			return false;
+		}
+		$payment_times = self::get_enabled_payment_times();
+
+		return ! empty( $payment_times[ LATEPOINT_PAYMENT_TIME_NOW ][ $transaction_intent->get_payment_data_value('method') ][ $transaction_intent->get_payment_data_value('processor' )] );
 	}
 
 	public static function should_processor_handle_payment_for_cart( string $processor_code, OsCartModel $cart ): bool {
@@ -321,7 +331,7 @@ class OsPaymentsHelper {
 				echo '<div class="lp-method-logo"><i class="latepoint-icon latepoint-icon-paypal"></i></div>';
 				break;
 			default:
-				echo '<div class="lp-method-name">' . esc_html($payment_method) . '</div>';
+				echo '<div class="lp-method-name">' . esc_html( $payment_method ) . '</div>';
 				break;
 		}
 	}
@@ -352,6 +362,43 @@ class OsPaymentsHelper {
 			$transaction->payment_portion = $order_intent->get_payment_data_value( 'portion' );
 			$transaction->amount          = $order_intent->charge_amount;
 			$transaction->customer_id     = $order_intent->customer_id;
+			$transaction->processor       = $payment_processing_result['processor'];
+			$transaction->kind            = $payment_processing_result['kind'] ?? LATEPOINT_TRANSACTION_KIND_CAPTURE;
+			$transaction->status          = LATEPOINT_TRANSACTION_STATUS_SUCCEEDED;
+		} else {
+			$transaction = false;
+		}
+
+		return $transaction;
+	}
+
+	public static function process_payment_for_transaction_intent( OsTransactionIntentModel $transaction_intent ) {
+		if ( ( $transaction_intent->charge_amount <= 0 ) || OsSettingsHelper::is_env_demo() ) {
+			return false;
+		}
+		$payment_processing_result = [];
+
+
+		/**
+		 * Hook to change a result of payment processing when transaction intent is being converted to transaction and payment is required
+		 *
+		 * @param {array} $result Array that holds result of payment processing
+		 * @param {OsTransactionIntentModel} $transaction_intent Transaction intent which is being converted to Transaction which payment is being processed
+		 *
+		 * @returns {array} Filtered array that holds result of payment processing
+		 * @since 5.0.0
+		 * @hook latepoint_process_payment_for_transaction_intent
+		 *
+		 */
+		$payment_processing_result = apply_filters( 'latepoint_process_payment_for_transaction_intent', $payment_processing_result, $transaction_intent );
+		if ( $payment_processing_result && $payment_processing_result['status'] == LATEPOINT_STATUS_SUCCESS ) {
+			$transaction                  = new OsTransactionModel();
+			$transaction->token           = $payment_processing_result['charge_id'];
+			$transaction->payment_method  = $transaction_intent->get_payment_data_value( 'method' );
+			$transaction->payment_portion = $transaction_intent->get_payment_data_value( 'portion' );
+			$transaction->amount          = $transaction_intent->charge_amount;
+			$transaction->order_id        = $transaction_intent->order_id;
+			$transaction->customer_id     = $transaction_intent->customer_id;
 			$transaction->processor       = $payment_processing_result['processor'];
 			$transaction->kind            = $payment_processing_result['kind'] ?? LATEPOINT_TRANSACTION_KIND_CAPTURE;
 			$transaction->status          = LATEPOINT_TRANSACTION_STATUS_SUCCEEDED;

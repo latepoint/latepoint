@@ -29,12 +29,21 @@ class OsDatabaseHelper {
 		foreach ($installed_addons as $installed_addon) {
 			$current_addon_db_version = get_option($installed_addon['name'] . '_addon_db_version');
 			if (!$current_addon_db_version || version_compare($current_addon_db_version, $installed_addon['db_version'])) {
-				OsAddonsHelper::save_addon_info($installed_addon['name'], $installed_addon['db_version']);
+				self::save_addon_info($installed_addon['name'], $installed_addon['db_version']);
 				$is_new_addon_db_version_available = true;
 			}
 		}
 		if ($is_new_addon_db_version_available) self::install_database_for_addons();
 	}
+
+
+	  public static function save_addon_info($name, $version){
+	    update_option( $name . '_addon_db_version', $version );
+	  }
+
+	  public static function delete_addon_info($name, $version){
+	    delete_option( $name . '_addon_db_version' );
+	  }
 
 
 	// Install queries for addons
@@ -267,8 +276,9 @@ class OsDatabaseHelper {
 		$sqls[] = "CREATE TABLE " . LATEPOINT_TABLE_ORDER_INVOICES . " (
       id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
       order_id int(11) NOT NULL,
-      invoice_data text,
+      data text,
       status varchar(30) DEFAULT '" . LATEPOINT_INVOICE_STATUS_NOT_PAID . "' NOT NULL,
+      charge_amount decimal(20,4),
       created_at datetime,
       updated_at datetime,
       PRIMARY KEY  (id),
@@ -672,6 +682,23 @@ class OsDatabaseHelper {
       created_at datetime,
       updated_at datetime,
       PRIMARY KEY  (id)
+    ) $charset_collate;";
+
+
+		$sqls[] = "CREATE TABLE " . LATEPOINT_TABLE_TRANSACTION_INTENTS . " (
+      id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+      intent_key varchar(55) NOT NULL,
+      order_id int(11) NOT NULL,
+      customer_id int(11),
+      transaction_id int(11),
+      payment_data text,
+      charge_amount decimal(20,4),
+      specs_charge_amount varchar(55),
+      status varchar(30) DEFAULT '" . LATEPOINT_TRANSACTION_INTENT_STATUS_NEW . "' NOT NULL,
+      created_at datetime,
+      updated_at datetime,
+      PRIMARY KEY  (id),
+      UNIQUE KEY intent_key_index (intent_key)
     ) $charset_collate;";
 
 		$sqls[] = "CREATE TABLE " . LATEPOINT_TABLE_TRANSACTIONS . " (

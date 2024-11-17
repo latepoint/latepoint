@@ -24,8 +24,9 @@
     }
 
     &.status-update-available {
-      box-shadow: inset 0px 0px 0px 2px #f5eab9;
-      background: #fff9d5;
+      box-shadow: inset 0px 0px 0px 2px #fce687;
+      background: #fff8cb;
+      border-color: #fce687;
       order: -1;
 
       .addon-name {
@@ -34,6 +35,9 @@
 
       .addon-desc {
         color: #8e7e4b;
+      }
+      .addon-media {
+        border-color: #fff;
       }
     }
   }
@@ -69,6 +73,7 @@
     margin: 20px;
     border-radius: $border-radius;
     border: 1px solid $border-color-main;
+    background-color: #fff;
   }
 
   .addon-header {

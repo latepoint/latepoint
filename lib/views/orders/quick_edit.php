@@ -252,6 +252,29 @@ if ( ! defined( 'ABSPATH' ) ) {
 		      <?php } ?>
 	      </div>
       <?php } ?>
+        <?php if(!apply_filters('latepoint_feature_invoices', false)){ ?>
+	      <div class="transactions-info-w">
+	        <div class="os-form-sub-header">
+	          <h3><?php esc_html_e('Invoices', 'latepoint'); ?></h3>
+	        </div>
+              <a href="#" class="pro-upgrade-required">
+                  <div class="pur-heading"><?php esc_html_e('Upgrade to PRO', 'latepoint'); ?></div>
+                  <div class="pur-desc"><?php esc_html_e('To unlock invoicing feature, you need to upgrade to a PRO version', 'latepoint'); ?></div>
+              </a>
+	      </div>
+        <?php } ?>
+        <?php
+        /**
+         * Content after order edit form
+         *
+         * @param {OsOrderModel} $order instance of order model that is being edited
+         *
+         * @since 5.0.15
+         * @hook latepoint_order_quick_edit_form_content_after
+         *
+         */
+        do_action('latepoint_order_quick_edit_form_content_after', $order);
+        ?>
     </div>
     <div class="os-form-buttons os-quick-form-buttons">
       <?php if($order->is_new_record()) { ?>

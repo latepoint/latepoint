@@ -94,7 +94,7 @@
       position: relative;
       padding: 30px 20px;
       min-height: 100px;
-      text-decoration: none;
+      text-decoration: none!important;
 
       i, span {
         display: block;
@@ -134,6 +134,38 @@
       color: #222;
       align-self: flex-start;
       position: relative;
+      .bt-payment-actions {
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid $border-color-light;
+        .bt-balance-info {
+          display: flex;
+          align-items: center;
+        }
+        .bt-balance-label {
+          color: $color-faded;
+        }
+        .bt-balance-amount {
+          margin-left: auto;
+          font-weight: $body-font-weight-bold;
+          color: $headings-color;
+          font-size: floor($font-size-base * 1.4);
+        }
+        .bt-balance-pay-link {
+          margin-left: auto;
+          display: flex;
+          padding-top: 5px;
+
+          a {
+            font-size: $font-size-base;
+            text-decoration: none;
+            margin-left: auto;
+            color: $brand-primary;
+            border-bottom: 1px dotted $brand-primary;
+            display: inline-block;
+          }
+        }
+      }
     }
 
     h6.customer-booking-service-name {
@@ -385,6 +417,50 @@
 
   .latepoint-lightbox-w {
 
+    .payment-confirmation-wrapper {
+      text-align: center;
+
+      .icon-w {
+        margin-bottom: 20px;
+
+        i {
+          background: #d1ffdd;
+          padding: 15px;
+          border-radius: 40px;
+          color: #18a35b;
+          font-size: 28px;
+          display: inline-block;
+        }
+      }
+
+      h2 {
+        margin: 0 0 20px 0;
+        font-size: floor($headings-font-size * 1.3);
+        color: $headings-color;
+      }
+
+      .payment-info {
+        border: 1px solid $border-color-light;
+        border-radius: 6px;
+
+        .payment-info-row {
+          display: flex;
+          justify-content: space-between;
+          border-bottom: 1px solid $border-color-light;
+          padding: 10px 15px;
+          &:last-child {
+            border-bottom: none;
+          }
+        }
+        .info-label {
+          color: $color-faded;
+        }
+
+        .info-value {
+          font-weight: $body-font-weight-bold;
+        }
+      }
+    }
     .reschedule-confirmation-wrapper {
       text-align: center;
 
@@ -676,3 +752,18 @@
       }
     }
   }
+
+.latepoint-transaction-payment-form {
+  .latepoint-lightbox-footer {
+    display: flex;
+    align-items: center;
+    .latepoint-btn-primary {
+      margin-left: auto;
+    }
+    .latepoint-btn {
+      &.latepoint-btn-block {
+        flex: 1;
+      }
+    }
+  }
+}
