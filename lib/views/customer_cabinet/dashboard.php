@@ -36,7 +36,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<div class="heading-extra">
                         <?php
                         // translators: %d is number of appointments
-                        esc_html(printf( __('%d Appointments', 'latepoint'), count($future_bookings))); ?>
+                        echo sprintf( esc_html__('%d Appointments', 'latepoint'), count($future_bookings)); ?>
                     </div>
 				</div>
 				<div class="customer-bookings-tiles">
@@ -57,7 +57,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<div class="heading-extra">
                         <?php
                         // translators: %d is number of bundles
-                        esc_html(printf( __('%d Bundles', 'latepoint'), count($not_scheduled_bundles))); ?>
+                        echo sprintf( esc_html__('%d Bundles', 'latepoint'), count($not_scheduled_bundles)); ?>
                     </div>
 				</div>
 				<div class="customer-bookings-tiles">
@@ -77,7 +77,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<div class="heading-extra">
                         <?php
                         // translators: %d is number of appointments
-                        esc_html(printf( __('%d Appointments', 'latepoint'), count($past_bookings))); ?>
+                        echo sprintf( esc_html__('%d Appointments', 'latepoint'), count($past_bookings)); ?>
                     </div>
 				</div>
 				<div class="customer-bookings-tiles">
@@ -98,7 +98,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<div class="heading-extra">
                         <?php
                         // translators: %d is number of appointments
-                        esc_html(printf( __('%d Appointments', 'latepoint'), count($cancelled_bookings))); ?>
+                        echo sprintf( esc_html__('%d Appointments', 'latepoint'), count($cancelled_bookings)); ?>
                     </div>
 				</div>
 				<div class="customer-bookings-tiles">

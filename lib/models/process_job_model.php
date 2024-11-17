@@ -43,7 +43,7 @@ class OsProcessJobModel extends OsModel{
         $attrs = OsBookingHelper::quick_booking_btn_html($this->object_id);
       break;
     }
-		$link = '<a href="'.$href.'" '.$attrs.'>'.$this->object_id.'</a>';
+		$link = '<a href="'.esc_url($href).'" '.$attrs.'>'.esc_html($this->object_id).'</a>';
 		return $link;
   }
 
