@@ -76,7 +76,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				   data-os-params="<?php echo esc_attr(OsUtilHelper::build_os_params(['id' => $process->id], 'destroy_process_'.$process->id)); ?>"><?php esc_html_e('Delete', 'latepoint'); ?>
 				</a>
 	      <a href="#" class="latepoint-btn latepoint-btn-secondary os-run-process" data-route="<?php echo esc_attr(OsRouterHelper::build_route_name('processes', 'test_preview')); ?>"><i class="latepoint-icon latepoint-icon-play-circle"></i><span><?php esc_html_e('Test this workflow', 'latepoint'); ?></span></a>
-			  <button type="submit" class="os-form-block-save-btn latepoint-btn latepoint-btn-primary"><span><?php _e('Save Workflow', 'latepoint'); ?></span></button>
+			  <button type="submit" class="os-form-block-save-btn latepoint-btn latepoint-btn-primary"><span><?php esc_html_e('Save Workflow', 'latepoint'); ?></span></button>
 		  </div>
 		</div>
 	</div>

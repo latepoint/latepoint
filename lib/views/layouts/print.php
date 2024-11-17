@@ -14,8 +14,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="latepoint-w">
 	<?php include($view); ?>
 </div>
-<script type="text/javascript">window.onload = function () {
-    window.print();
-  }</script>
 </body>
 </html>

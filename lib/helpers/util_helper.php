@@ -2,6 +2,16 @@
 
 class OsUtilHelper {
 
+	public static function add_auto_print_script(){
+		wp_register_script('latepoint-auto-print', false);
+	    wp_enqueue_script('latepoint-auto-print');
+	    wp_add_inline_script('latepoint-auto-print', '
+	        window.onload = function() {
+	            window.print();
+	        }
+	    ');
+	}
+
   public static function generate_missing_addon_link($label){
     $html = '<a target="_blank" href="'.esc_url(LATEPOINT_UPGRADE_URL).'" class="os-add-box" >
               <div class="add-box-graphic-w"><div class="add-box-plus"><i class="latepoint-icon latepoint-icon-plus4"></i></div></div>
