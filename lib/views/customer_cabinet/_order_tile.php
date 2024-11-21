@@ -22,20 +22,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div class="customer-order-bottom-actions">
 		<div class="load-booking-summary-btn-w">
 			<a href="#"
-			   class="latepoint-btn latepoint-btn-primary latepoint-btn-outline latepoint-btn-block"
+			   class="latepoint-btn latepoint-btn-primary latepoint-btn-outline latepoint-btn-block latepoint-btn-sm"
 			   data-os-after-call="latepoint_init_order_summary_lightbox"
 			   data-os-params="<?php echo esc_attr(OsUtilHelper::build_os_params(['order_id' => $order->id])); ?>"
 			   data-os-action="<?php echo esc_attr(OsRouterHelper::build_route_name('customer_cabinet', 'view_order_summary_in_lightbox')); ?>"
 			   data-os-output-target="lightbox"
 				data-os-lightbox-classes="width-500 customer-dashboard-booking-summary-lightbox">
 				<i class="latepoint-icon latepoint-icon-list"></i>
-				<span><?php esc_html_e('View Summary', 'latepoint'); ?></span>
+				<span><?php esc_html_e('Summary', 'latepoint'); ?></span>
 			</a>
 		</div>
 		<?php if(OsPaymentsHelper::is_accepting_payments()){ ?>
-			<?php if(OsSettingsHelper::is_on('show_pay_balance_button') && $order->get_total_balance_due()){ ?>
-				<a href="#" class="latepoint-btn latepoint-btn-primary latepoint-btn-outline latepoint-btn-block">
-					<i class="latepoint-icon latepoint-icon-calendar"></i>
+			<?php if($order->get_total_balance_due()){ ?>
+				<a href="#" class="latepoint-btn latepoint-btn-primary latepoint-btn-outline latepoint-btn-block latepoint-btn-sm"
+                data-os-params="<?php echo esc_attr(http_build_query( [ 'order_id' => $order->id ] )); ?>"
+                  data-os-action="<?php echo esc_attr(OsRouterHelper::build_route_name( 'orders', 'summary_before_payment' )); ?>"
+                  data-os-output-target="lightbox"
+                  data-os-lightbox-classes="width-500">
+					<i class="latepoint-icon latepoint-icon-credit-card"></i>
 					<span><?php esc_html_e('Pay Balance', 'latepoint'); ?></span>
 				</a>
 			<?php } ?>

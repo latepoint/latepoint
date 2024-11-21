@@ -16,6 +16,10 @@
     background-color: color-mix(in srgb,var(--latepoint-brand-primary),#000 10%);
     box-shadow: none;
   }
+  &.latepoint-btn-sm {
+    padding: 6px 8px;
+    font-size: $body-font-size-s;
+  }
   &.latepoint-btn-danger {
     background-color: #FB7F7F;
     color: #fff;

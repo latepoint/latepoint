@@ -8,6 +8,36 @@
   transition: all 0.2s ease;
   z-index: 9999;
 
+  .side-sub-panel-wrapper {
+    position: fixed;
+    bottom: 0px;
+    top: 0px;
+    right: $side-panel-width;
+    width: 550px;
+    background-color: #fff;
+    z-index: 9999;
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    .side-sub-panel-header {
+      
+    }
+    .side-sub-panel-content {
+      flex: 1;
+      overflow-y: auto;
+      max-height: 100%;
+      padding: 30px;
+      &.pattern-dotted {
+        background-image: radial-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 0);
+        background-size: 15px 15px;
+        background-color: #f1f1f1;
+      }
+    }
+    .side-sub-panel-footer {
+      padding: 15px 30px;
+    }
+  }
+
   .clear-missing-lateselect {
     padding: 10px;
     margin-bottom: 10px;
@@ -289,7 +319,7 @@
   .os-form-sub-header {
     margin-bottom: 15px;
     background-color: #fff;
-    margin-top: 10px;
+    margin-top: 20px;
     padding-top: 10px;
     border-bottom: 2px solid $headings-color;
     padding-bottom: 5px;
@@ -397,7 +427,7 @@
   .quick-transaction-info-w {
     background-color: #fff;
     border: 1px solid $border-color-main;
-    box-shadow: 0 3px 0 0 #eee;
+    box-shadow: 0 2px 0 0 #eee;
     border-radius: $border-radius;
     border-bottom-color: darken($border-color-main, 20%);
     animation: 0.3s cubic-bezier(.45,1.1,.4,1.2) 0s wizardWrapperAnimation;
@@ -422,7 +452,6 @@
       justify-content: space-between;
       padding: 10px;
       align-items: center;
-      background-color: #f9f9f9;
       border-radius: 0 0 $border-radius $border-radius;
     }
 

@@ -69,8 +69,9 @@ class OsTimeHelper {
 		return $today->format($date_format);
   }
 
-  public static function now_datetime_in_format($date_format = 'Y-m-d H:i:s'){
+  public static function now_datetime_in_format($date_format = 'Y-m-d H:i:s', string $timezone = 'UTC'){
 		$now = self::now_datetime_object();
+		$now->setTimezone(new DateTimeZone("UTC"));
 		return $now->format($date_format);
   }
 
@@ -177,6 +178,11 @@ class OsTimeHelper {
 
 	public static function get_readable_date(DateTime $date): string{
 		return self::format_date_with_locale(OsSettingsHelper::get_readable_date_format(), $date);
+	}
+
+	public static function get_readable_date_from_string(string $date): string{
+	  $date_obj = new OsWpDateTime($date);
+		return self::get_readable_date($date_obj);
 	}
 
   public static function get_wp_timezone() {

@@ -60,23 +60,13 @@ class OsPaymentsHelper {
 		return self::get_payment_processors( true );
 	}
 
-	public static function get_default_payment_method() {
-		$payment_methods = self::get_enabled_payment_methods();
-		if ( count( $payment_methods ) == 1 ) {
-			return reset( $payment_methods )['code'];
-		} else {
-			return null;
-		}
-	}
-
 	public static function is_local_payments_enabled() {
 		return OsSettingsHelper::is_on( 'enable_payments_local' );
 	}
 
-	public static function is_accepting_payments() {
-		$enabled_payment_methods = self::get_enabled_payment_methods( false );
-
-		return ( empty( $enabled_payment_methods ) ) ? false : true;
+	public static function is_accepting_payments(): bool {
+		$enabled_payment_methods = self::get_enabled_payment_methods_for_payment_time( LATEPOINT_PAYMENT_TIME_NOW );
+		return ! empty( $enabled_payment_methods );
 	}
 
 	public static function is_payment_processor_enabled( $processor_code ) {
@@ -197,26 +187,6 @@ class OsPaymentsHelper {
 		return apply_filters( 'latepoint_enabled_payment_processors_for_payment_time_and_method', $enabled_payment_processors_for_payment_time_and_method, $payment_time, $payment_method );
 	}
 
-
-	public static function get_enabled_payment_methods( $count_local = true ): array {
-		$enabled_payment_methods = [];
-		if ( $count_local && self::is_local_payments_enabled() ) {
-			$enabled_payment_methods[ LATEPOINT_PAYMENT_METHOD_LOCAL ] = self::get_local_payment_method_info();
-		}
-
-		/**
-		 * List of enabled payment methods
-		 *
-		 * @param {array} $enabled_payment_methods Array of enabled payment methods
-		 * @param {bool} $count_local whether to include local payment method or not
-		 *
-		 * @returns {array} Filtered array of enabled payment methods
-		 * @since 5.0.0
-		 * @hook latepoint_enabled_payment_methods
-		 *
-		 */
-		return apply_filters( 'latepoint_enabled_payment_methods', $enabled_payment_methods, $count_local );
-	}
 
 	public static function get_all_payment_times(): array {
 		$payment_times                                                                                = [

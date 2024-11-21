@@ -163,6 +163,17 @@
             color: $brand-primary;
             border-bottom: 1px dotted $brand-primary;
             display: inline-block;
+            position: relative;
+            &:hover {
+              border-bottom-style: solid;
+            }
+            &.os-loading {
+              border-bottom-color: transparent;
+              color: transparent;
+              &:before {
+                @include loading-circle($brand-primary, 15px);
+              }
+            }
           }
         }
       }
@@ -763,6 +774,13 @@
     .latepoint-btn {
       &.latepoint-btn-block {
         flex: 1;
+      }
+    }
+  }
+  &.os-loading {
+    .latepoint-lightbox-footer {
+      display: none;
+      .latepoint-btn {
       }
     }
   }

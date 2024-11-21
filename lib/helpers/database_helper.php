@@ -276,13 +276,16 @@ class OsDatabaseHelper {
 		$sqls[] = "CREATE TABLE " . LATEPOINT_TABLE_ORDER_INVOICES . " (
       id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
       order_id int(11) NOT NULL,
+      invoice_number varchar(10),
       data text,
       status varchar(30) DEFAULT '" . LATEPOINT_INVOICE_STATUS_NOT_PAID . "' NOT NULL,
       charge_amount decimal(20,4),
+      due_at datetime,
       created_at datetime,
       updated_at datetime,
       PRIMARY KEY  (id),
       KEY order_id_index (order_id)
+      UNIQUE KEY invoice_number_index (invoice_number)
     ) $charset_collate;";
 
 

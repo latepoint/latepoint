@@ -27,6 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
         </div>
     </div>
 </div>
+<?php if($order->get_total_balance_due() > 0){ ?>
 <div class="latepoint-lightbox-footer">
     <a href="#"
        data-os-params="<?php echo esc_attr( http_build_query( [ 'order_id' => $order->id ] ) ); ?>"
@@ -39,3 +40,4 @@ if ( ! defined( 'ABSPATH' ) ) {
        data-os-after-call="latepoint_init_transaction_payment_form"
        class="latepoint-btn latepoint-btn-block"><?php echo sprintf( __( 'Pay %s', 'latepoint' ), OsMoneyHelper::format_price( $order->get_total_balance_due(), true, false ) ); ?></a>
 </div>
+<?php } ?>

@@ -688,7 +688,8 @@ if ( ! class_exists( 'LatePoint' ) ) :
 
 			// Stripe Connect
 			if ( ! defined( 'LATEPOINT_STRIPE_CONNECT_URL' ) ) {
-				define( 'LATEPOINT_STRIPE_CONNECT_URL', 'https://app.latepoint.com' );
+//				define( 'LATEPOINT_STRIPE_CONNECT_URL', 'https://app.latepoint.com' );
+				define( 'LATEPOINT_STRIPE_CONNECT_URL', 'https://latepoint-laravel.test' );
 			}
 		}
 
