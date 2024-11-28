@@ -527,6 +527,7 @@
         }
         .latepoint-body {
           padding: 15px;
+          max-height: 100vh;  /* Fallback */
           max-height: 100dvh;
           &:after {
           }
@@ -602,11 +603,14 @@
     .latepoint-lightbox-i {
       transform: none;
       animation: 0.4s cubic-bezier(0, 1, 0.51, 1) 0s both osLightboxMobileAnimation;
+      max-height: 100vh;
       max-height: 100dvh;
+      height: 100vh;  /* Fallback */
       height: 100dvh;
     }
     &.front-lightbox {
       .latepoint-lightbox-i {
+        max-height: 100vh;  /* Fallback */
         max-height: 100dvh;
       }
     }

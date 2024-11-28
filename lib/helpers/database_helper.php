@@ -281,6 +281,7 @@ class OsDatabaseHelper {
       status varchar(30) DEFAULT '" . LATEPOINT_INVOICE_STATUS_NOT_PAID . "' NOT NULL,
       charge_amount decimal(20,4),
       due_at datetime,
+      access_key varchar(36),
       created_at datetime,
       updated_at datetime,
       PRIMARY KEY  (id),

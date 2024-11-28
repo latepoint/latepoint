@@ -50,7 +50,7 @@
     $block_class = (empty($form_prev_button) || empty($form_next_button)) ? 'latepoint-btn-block' : '';
     if(!empty($form_prev_button)) echo '<button type="button" class="latepoint-btn latepoint-btn-secondary '.$block_class.'">'.$form_prev_button.'</a>';
 	if(!empty($form_next_button)) echo '<button type="submit" class="latepoint-btn latepoint-btn-primary '.$block_class.'">'.$form_next_button.'</a>';
-	if(!empty($invoice_link)) echo '<a href="#" class="latepoint-btn latepoint-btn-primary '.$block_class.'"><span>'.__('View Invoice', 'latepoint').'</span><i class="latepoint-icon latepoint-icon-external-link"></i></a>';
+	if(!empty($invoice_link)) echo '<a href="'.esc_url($invoice_link).'" target="_blank" class="latepoint-btn latepoint-btn-primary '.$block_class.'"><span>'.__('View Invoice', 'latepoint').'</span><i class="latepoint-icon latepoint-icon-external-link"></i></a>';
     ?>
 </div>
 <?php } ?>

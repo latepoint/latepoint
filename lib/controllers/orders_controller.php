@@ -80,7 +80,7 @@ if ( ! class_exists( 'OsOrdersController' ) ) :
 				}else{
 			        $transaction_intent->payment_data_arr['processor'] = $selected_payment_processor;
 					$form_next_button = sprintf(esc_html__('Pay %s', 'latepoint'), OsMoneyHelper::format_price($transaction_intent->charge_amount, true, false));
-					$form_heading = __( 'Payment Processing', 'latepoint' );
+					$form_heading = __( 'Payment Form', 'latepoint' );
 					// hide prev button if we don't need to pick a payment method or processor
 					if(count($enabled_payment_methods) <= 1 && count($enabled_payment_processors) <= 1) $form_prev_button = false;
 					if(!$payment_token){
