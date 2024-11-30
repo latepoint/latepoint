@@ -4391,14 +4391,6 @@
       "oAP" : "\/lib\/views\/invoices\/payment_form\/_processors.php",
       "oF" : 0
     },
-    "\/lib\/views\/invoices\/summary_before_payment_lightbox.php" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/lib\/views\/invoices\/summary_before_payment_lightbox.php",
-      "oF" : 0
-    },
     "\/lib\/views\/invoices\/summary_before_payment.php" : {
       "cB" : 0,
       "ft" : 8192,

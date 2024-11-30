@@ -39,7 +39,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			if ( $unpaid_invoices ) {
 				foreach ( $unpaid_invoices as $invoice ) { ?>
                     <a href="#" class="latepoint-btn latepoint-btn-primary latepoint-btn-outline latepoint-btn-block latepoint-btn-sm"
-                       data-os-params="<?php echo esc_attr( http_build_query( [ 'key' => $invoice->access_key, 'layout' => 'lightbox' ] ) ); ?>"
+                       data-os-params="<?php echo esc_attr( http_build_query( [ 'key' => $invoice->access_key ] ) ); ?>"
                        data-os-action="<?php echo esc_attr( OsRouterHelper::build_route_name( 'invoices', 'summary_before_payment' ) ); ?>"
                        data-os-output-target="lightbox"
                        data-os-lightbox-classes="width-500">

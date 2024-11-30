@@ -658,6 +658,9 @@ if ( ! class_exists( 'LatePoint' ) ) :
 			if ( ! defined( 'LATEPOINT_PAYMENT_PORTION_DEPOSIT' ) ) {
 				define( 'LATEPOINT_PAYMENT_PORTION_DEPOSIT', 'deposit' );
 			}
+			if ( ! defined( 'LATEPOINT_PAYMENT_PORTION_CUSTOM' ) ) {
+				define( 'LATEPOINT_PAYMENT_PORTION_CUSTOM', 'custom' );
+			}
 
 			if ( ! defined( 'LATEPOINT_ANY_AGENT' ) ) {
 				define( 'LATEPOINT_ANY_AGENT', 'any' );

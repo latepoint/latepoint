@@ -12,6 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     <div class="quick-booking-info">
 		<?php echo '<span>' . esc_html__( 'Booking ID:', 'latepoint' ) . '</span><strong>' . esc_html($booking->id) . '</strong>'; ?>
 		<?php echo '<span>' . esc_html__( 'Code:', 'latepoint' ) . '</span><strong>' . esc_html($booking->booking_code) . '</strong>'; ?>
+        <?php echo '<a target="_blank" href="'.$booking->manage_by_key_url('customer').'"><i class="latepoint-icon latepoint-icon-link-2"></i>'.esc_html__('Share', 'latepoint').'</a>'; ?>
 		<?php if ( OsAuthHelper::get_current_user()->has_capability( 'activity__view' ) ) {
 			echo '<a href="#" data-booking-id="' . esc_attr($booking->id) . '" data-route="' . esc_attr(OsRouterHelper::build_route_name( 'bookings', 'view_booking_log' )) . '" class="quick-booking-form-view-log-btn"><i class="latepoint-icon latepoint-icon-clock"></i>' . esc_html__( 'History', 'latepoint' ) . '</a>';
 		} ?>

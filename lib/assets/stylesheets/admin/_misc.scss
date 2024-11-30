@@ -500,6 +500,27 @@
     }
   }
 }
+.initial-payment-data-wrapper {
+  margin-top: 15px;
+  display: flex;
+  padding: 8px;
+  border-radius: 6px;
+  background-color: #f3f3f3;
+  align-items: center;
+  gap: 6px;
+  > div:first-child {
+    margin-left: auto;
+  }
+  > div:last-child {
+    margin-right: auto;
+  }
+  .os-form-group.os-form-group-transparent {
+    margin-bottom: 0;
+    select.os-form-control {
+      padding: 5px 16px 4px 8px !important;
+    }
+  }
+}
 .balance-payment-info {
   border-radius: 6px;
   font-weight: $body-font-weight-bold;

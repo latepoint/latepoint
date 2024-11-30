@@ -78,7 +78,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</a>
 		</div>
 	</div>
-    <?php if(!$booking->is_part_of_bundle() && $booking->order->get_total_balance_due() > 0){ ?>
+    <?php if(false && !$booking->is_part_of_bundle() && $booking->order->get_total_balance_due() > 0){ ?>
     <div class="bt-payment-actions">
         <div class="bt-balance-info">
             <div class="bt-balance-label"><?php esc_html_e('Balance Due:', 'latepoint'); ?></div>

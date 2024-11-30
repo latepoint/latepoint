@@ -3,7 +3,7 @@
  * Copyright (c) 2024 LatePoint LLC. All rights reserved.
  */
 
-/* @var $layout string */
+/* @var $in_lightbox bool */
 /* @var $order OsOrderModel */
 /* @var $invoice OsInvoiceModel */
 /* @var $order_item OsOrderItemModel */
@@ -12,8 +12,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 ?>
-<?php if($layout == 'clean'){ ?><div class="clean-layout-content-wrapper"><?php } ?>
-	<div class="invoice-payment-form-wrapper <?php echo $layout == 'lightbox' ? 'latepoint-lightbox-content' : 'clean-layout-content-body'; ?> is-dotted">
+<?php if(!$in_lightbox){ ?><div class="clean-layout-content-wrapper"><?php } ?>
+    <?php if($in_lightbox) echo '<div class="latepoint-lightbox-heading"><h2>'.esc_html__('Balance Details', 'latepoint').'</h2></div>'; ?>
+	<div class="invoice-payment-form-wrapper <?php echo $in_lightbox ? 'latepoint-lightbox-content' : 'clean-layout-content-body'; ?> is-dotted">
         <div class="invoice-due-amount-wrapper">
             <div class="invoice-due-amount-inner">
                 <div class="id-amount"><?php echo OsMoneyHelper::format_price($invoice->charge_amount, true, false); ?></div>
@@ -48,4 +49,4 @@ if ( ! defined( 'ABSPATH' ) ) {
             </div>
         </div>
 	</div>
-<?php if($layout == 'clean'){ ?></div><?php } ?>
+<?php if(!$in_lightbox){ ?></div><?php } ?>

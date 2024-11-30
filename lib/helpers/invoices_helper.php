@@ -11,6 +11,12 @@ class OsInvoicesHelper {
 		return $statuses[ $status ] ?? __( 'n/a', 'latepoint-pro-features' );
 	}
 
+    public static function get_invoice_by_key(string $key): OsInvoiceModel {
+        if(empty($key)) return new OsInvoiceModel();
+        $invoice = new OsInvoiceModel();
+        return $invoice->where(['access_key' => $key])->set_limit(1)->get_results_as_models();
+    }
+
 	public static function invoice_document_html( OsInvoiceModel $invoice, bool $show_controls = false ) {
 		$invoice_data = json_decode( $invoice->data, true );
 		?>
@@ -178,8 +184,6 @@ class OsInvoicesHelper {
                               </div>';
 						echo '</div>';
 					}
-				} else {
-					echo '<div>' . __( 'No Invoices', 'latepoint-pro-features' ) . '</div>';
 				}
 				?>
 
@@ -240,8 +244,11 @@ class OsInvoicesHelper {
         if($order->get_payment_data_value('portion') == LATEPOINT_PAYMENT_PORTION_DEPOSIT){
             $invoice_for_remaining_balance = clone $invoice;
             $invoice->charge_amount = $order->get_payment_data_value('initial_charge_amount');
+            $invoice->payment_portion = LATEPOINT_PAYMENT_PORTION_DEPOSIT;
             $invoice_for_remaining_balance->charge_amount = $order->get_total() - $invoice->charge_amount;
+            $invoice_for_remaining_balance->payment_portion = LATEPOINT_PAYMENT_PORTION_REMAINING;
         }elseif($order->get_payment_data_value('portion') == LATEPOINT_PAYMENT_PORTION_FULL){
+            $invoice->payment_portion = LATEPOINT_PAYMENT_PORTION_FULL;
 			$invoice->charge_amount = $order->get_total();
         }
 
@@ -262,6 +269,7 @@ class OsInvoicesHelper {
 			 *
 			 */
 			do_action( 'latepoint_invoice_created', $invoice );
+            // TODO add setting field to enable this
             if(OsSettingsHelper::get_settings_value('create_invoice_for_remaining_balance_if_deposit_paid') && isset($invoice_for_remaining_balance)){
                 $invoice_for_remaining_balance->save();
                 /**

@@ -216,6 +216,9 @@
       align-items: center;
       gap: 5px;
       position: relative;
+      & + a {
+        margin-left: 15px;
+      }
       &:hover {
         border-bottom-style: solid;
       }
@@ -322,6 +325,9 @@
 
   .os-form-sub-header-actions {
     margin-top: 0px;
+    select.os-form-control {
+      padding: 5px 20px 4px 8px !important;
+    }
     .latepoint-btn + .latepoint-btn {
       margin-left: 5px;
     }

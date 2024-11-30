@@ -40,7 +40,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	    <div class="quick-booking-info">
 		    <?php echo '<span>'.esc_html__('Order ID:', 'latepoint').'</span><strong>'. esc_html($order->id).'</strong>'; ?>
 		    <?php echo '<span>'.esc_html__('Code:', 'latepoint').'</span><strong>'. esc_html($order->confirmation_code).'</strong>'; ?>
-            <a target="_blank" href="<?php echo $order->manage_by_key_url('customer'); ?>">Link</a>
+            <?php echo '<a target="_blank" href="'.$order->manage_by_key_url('customer').'"><i class="latepoint-icon latepoint-icon-link-2"></i>'.esc_html__('Share', 'latepoint').'</a>'; ?>
 		    <?php if(OsAuthHelper::get_current_user()->has_capability('activity__view')) echo '<a href="#" data-order-id="'.esc_attr($order->id).'" data-route="'.esc_attr(OsRouterHelper::build_route_name('orders', 'view_order_log')).'" class="quick-order-form-view-log-btn"><i class="latepoint-icon latepoint-icon-clock"></i>'.esc_html__('History', 'latepoint').'</a>'; ?>
 	    </div>
 	    <?php } ?>

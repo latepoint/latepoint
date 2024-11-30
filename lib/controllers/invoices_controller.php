@@ -23,11 +23,18 @@ if ( ! class_exists( 'OsInvoicesController' ) ) :
 
 
 		public function payment_form(){
-			if(!filter_var($this->params['order_id'], FILTER_VALIDATE_INT)) exit;
+			$invoice_access_key = sanitize_text_field($this->params['key']);
+			if(empty($invoice_access_key)) exit;
+
+			$invoice = OsInvoicesHelper::get_invoice_by_key($invoice_access_key);
+			if($invoice->is_new_record()) exit;
+
 			$errors = [];
-			$order = new OsOrderModel($this->params['order_id']);
+			$order = $invoice->get_order();
+
 	        $transaction_intent = new OsTransactionIntentModel();
-	        $transaction_intent->charge_amount = $order->get_total_balance_due();
+	        $transaction_intent->charge_amount = $invoice->charge_amount;
+	        $transaction_intent->invoice_id = $invoice->id;
 	        $transaction_intent->order_id = $order->id;
 	        $transaction_intent->customer_id = $order->customer_id;
 	        $transaction_intent->payment_data_arr['time'] = LATEPOINT_PAYMENT_TIME_NOW;
@@ -109,17 +116,22 @@ if ( ! class_exists( 'OsInvoicesController' ) ) :
 
 		public function summary_before_payment(){
 			$invoice_access_key = sanitize_text_field($this->params['key']);
-			$layout = !empty($this->params['layout']) && in_array(sanitize_text_field($this->params['layout']), ['clean', 'lightbox']) ? sanitize_text_field($this->params['layout']) : 'clean';
 
-			$invoice = new OsInvoiceModel();
-			$invoice = $invoice->where(['access_key' => $invoice_access_key])->set_limit(1)->get_results_as_models();
+			$invoice = OsInvoicesHelper::get_invoice_by_key($invoice_access_key);
 
 			$this->vars['invoice'] = $invoice;
 			$this->vars['order'] = $invoice->get_order();
-			$this->vars['layout'] = $layout;
 
-			if($layout == 'clean') $this->set_layout( 'clean' );
-			$this->format_render( __FUNCTION__ );
+			if ( $this->get_return_format() == 'json' ) {
+				$this->vars['in_lightbox'] = true;
+				$this->set_layout( 'none' );
+				$response_html = $this->format_render_return( __FUNCTION__ );
+				$this->send_json( [ 'status' => LATEPOINT_STATUS_SUCCESS, 'message' => $response_html ] );
+			}else{
+				$this->vars['in_lightbox'] = false;
+				$this->set_layout( 'clean' );
+				$this->format_render( __FUNCTION__ );
+			}
 		}
 
 

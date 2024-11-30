@@ -162,3 +162,11 @@
   0%   { background-position: 0 0; }
   100% { background-position: -200% 0; }
 }
+
+.clean-layout-content-wrapper {
+  animation: 0.5s cubic-bezier(.35, 1.2, .7, 1) 0s both up20;
+}
+
+.latepoint-clean-body .manage-booking-wrapper {
+  animation: 0.5s cubic-bezier(.35, 1.2, .7, 1) 0s both up20;
+}

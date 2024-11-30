@@ -8,6 +8,7 @@ class OsTransactionIntentModel extends OsModel {
 		$intent_key,
 		$order_id,
 		$customer_id,
+		$invoice_id,
 		$transaction_id,
 		$payment_data,
 		$payment_data_arr,
@@ -246,6 +247,7 @@ class OsTransactionIntentModel extends OsModel {
 			'intent_key',
 			'order_id',
 			'customer_id',
+			'invoice_id',
 			'transaction_id',
 			'status',
 		);
@@ -262,6 +264,7 @@ class OsTransactionIntentModel extends OsModel {
 			'specs_charge_amount',
 			'order_id',
 			'customer_id',
+			'invoice_id',
 			'transaction_id',
 			'status',
 		);

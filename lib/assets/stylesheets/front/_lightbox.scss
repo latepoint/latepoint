@@ -99,6 +99,22 @@
       padding: 30px;
       flex: 1;
       overflow: auto;
+      position: relative;
+      &.is-dotted {
+        padding-top: 50px;
+        &:before {
+          content: "";
+          height: 30px;
+          background-image: radial-gradient(#ccc 1px, transparent 0);
+          background-size: 10px 10px;
+          background-color: #fff;
+          display: block;
+          position: absolute;
+          top: 5px;
+          left: 5px;
+          right: 5px;
+        }
+      }
     }
 
     > .latepoint-lightbox-close {

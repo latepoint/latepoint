@@ -48,19 +48,31 @@ class OsOrderModel extends OsModel {
 		return $this->payment_data_arr[ $key ] ?? '';
 	}
 
+
+	public function get_nice_status_name(): string {
+		return OsOrdersHelper::get_nice_order_status_name( $this->status );
+	}
+
+	public function get_nice_fulfillment_status_name(): string {
+		return OsOrdersHelper::get_nice_order_fulfillment_status_name( $this->fulfillment_status );
+	}
+
 	/**
 	 * @param array $statuses
 	 *
 	 * @return OsInvoiceModel|OsInvoiceModel[]
 	 */
-	public function get_invoices(array $statuses = []){
+	public function get_invoices( array $statuses = [] ) {
 		$invoices = new OsInvoiceModel();
-		if(!empty($statuses)) $invoices = $invoices->where_in('status', $statuses);
-		return $invoices->where(['order_id' => $this->id])->get_results_as_models();
+		if ( ! empty( $statuses ) ) {
+			$invoices = $invoices->where_in( 'status', $statuses );
+		}
+
+		return $invoices->where( [ 'order_id' => $this->id ] )->get_results_as_models();
 	}
 
-	public function manage_by_key_url(string $for = 'customer'): string{
-		return OsOrdersHelper::generate_direct_manage_order_url($this, $for);
+	public function manage_by_key_url( string $for = 'customer' ): string {
+		return OsOrdersHelper::generate_direct_manage_order_url( $this, $for );
 	}
 
 	public function set_payment_data_value( string $key, string $value, bool $save = true ) {
@@ -160,10 +172,10 @@ class OsOrderModel extends OsModel {
 
 		if ( ! empty( $order_items ) ) {
 			foreach ( $order_items as $order_item ) {
-				$bookings = new OsBookingModel();
+				$bookings           = new OsBookingModel();
 				$bookings_to_delete = $bookings->where( [ 'order_item_id' => $order_item->id ] )->get_results_as_models();
-				if($bookings_to_delete){
-					foreach($bookings_to_delete as $booking_to_delete){
+				if ( $bookings_to_delete ) {
+					foreach ( $bookings_to_delete as $booking_to_delete ) {
 						$booking_id_to_delete = $booking_to_delete->id;
 
 						/**
@@ -227,9 +239,9 @@ class OsOrderModel extends OsModel {
 	public function determine_payment_status() {
 		if ( $this->total > 0 ) {
 			$total_paid = $this->get_total_amount_paid_from_transactions();
-			if(empty($total_paid)){
+			if ( empty( $total_paid ) ) {
 				$this->update_attributes( [ 'payment_status' => LATEPOINT_ORDER_PAYMENT_STATUS_NOT_PAID ] );
-			}else if ( $total_paid < $this->total ) {
+			} else if ( $total_paid < $this->total ) {
 				$this->update_attributes( [ 'payment_status' => LATEPOINT_ORDER_PAYMENT_STATUS_PARTIALLY_PAID ] );
 			} else {
 				$this->update_attributes( [ 'payment_status' => LATEPOINT_ORDER_PAYMENT_STATUS_FULLY_PAID ] );
@@ -308,6 +320,12 @@ class OsOrderModel extends OsModel {
 		return $this->subtotal;
 	}
 
+	public function get_deposit_amount_to_charge(array $options = []){
+		$cart = $this->view_as_cart();
+
+		return $cart->deposit_amount_to_charge($options);
+	}
+
 	public function recalculate_total() {
 		$cart = $this->view_as_cart();
 		$cart->calculate_prices();
@@ -325,9 +343,11 @@ class OsOrderModel extends OsModel {
 	public function view_as_cart(): OsCartModel {
 		$cart              = new OsCartModel();
 		$cart->coupon_code = $this->coupon_code ?? '';
-		if(!empty($this->id)) $cart->order_id = $this->id;
-		$cart->order_forced_customer_id = empty($this->customer_id) ? 'new' : $this->customer_id;
-		$items             = $this->get_items();
+		if ( ! empty( $this->id ) ) {
+			$cart->order_id = $this->id;
+		}
+		$cart->order_forced_customer_id = empty( $this->customer_id ) ? 'new' : $this->customer_id;
+		$items                          = $this->get_items();
 		foreach ( $items as $item ) {
 			$cart->add_item( $item->view_as_cart_item(), false );
 		}
@@ -335,8 +355,8 @@ class OsOrderModel extends OsModel {
 		return $cart;
 	}
 
-	public function generate_first_level_data_vars() : array{
-		$vars         = [
+	public function generate_first_level_data_vars(): array {
+		$vars = [
 			'id'                 => $this->id,
 			'confirmation_code'  => $this->confirmation_code,
 			'customer_comment'   => $this->customer_comment,
@@ -345,28 +365,29 @@ class OsOrderModel extends OsModel {
 			'payment_status'     => $this->payment_status,
 			'source_id'          => $this->source_id,
 			'source_url'         => $this->source_url,
-			'total'         => OsMoneyHelper::format_price($this->get_total()),
-			'subtotal'         => OsMoneyHelper::format_price($this->get_subtotal()),
+			'total'              => OsMoneyHelper::format_price( $this->get_total() ),
+			'subtotal'           => OsMoneyHelper::format_price( $this->get_subtotal() ),
 			'created_datetime'   => $this->format_created_datetime_rfc3339(),
 		];
+
 		return $vars;
 	}
 
 
 	public function properties_to_query(): array {
 		return [
-			'status'                => __( 'Order Status', 'latepoint' ),
-			'fulfillment_status'    => __( 'Fulfillment Status', 'latepoint' ),
-			'payment_status'        => __( 'Payment Status', 'latepoint' ),
+			'status'             => __( 'Order Status', 'latepoint' ),
+			'fulfillment_status' => __( 'Fulfillment Status', 'latepoint' ),
+			'payment_status'     => __( 'Payment Status', 'latepoint' ),
 		];
 	}
 
 
 	public function generate_data_vars(): array {
 
-		$vars = $this->get_first_level_data_vars();
-		$vars['customer'] = $this->customer->get_data_vars();
-		$vars['transactions']  = [];
+		$vars                 = $this->get_first_level_data_vars();
+		$vars['customer']     = $this->customer->get_data_vars();
+		$vars['transactions'] = [];
 
 		$transactions = $this->get_transactions();
 		if ( $transactions ) {
@@ -375,7 +396,7 @@ class OsOrderModel extends OsModel {
 			}
 		}
 		$order_items = $this->get_items();
-		if($order_items){
+		if ( $order_items ) {
 			foreach ( $order_items as $order_item ) {
 				$vars['order_items'][] = $order_item->get_data_vars();
 			}
@@ -493,7 +514,7 @@ class OsOrderModel extends OsModel {
 	 * @return OsOrderItemModel[]
 	 */
 	public function get_items( bool $pull_from_db = false ): array {
-		if ( ! isset( $this->items ) || ($pull_from_db && $this->id) ) {
+		if ( ! isset( $this->items ) || ( $pull_from_db && $this->id ) ) {
 			$this->items = OsOrdersHelper::get_items_for_order_id( $this->id );
 		}
 
