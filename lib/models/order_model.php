@@ -18,6 +18,8 @@ class OsOrderModel extends OsModel {
 		$customer_id,
 		$customer_comment,
 		$price_breakdown,
+		$payment_data,
+		$payment_data_arr,
 		$coupon_code,
 		$coupon_discount = 0,
 		$tax_total = 0,
@@ -36,6 +38,40 @@ class OsOrderModel extends OsModel {
 	public function should_not_be_cancelled() {
 		return $this->where( [ $this->table_name . '.status !=' => LATEPOINT_ORDER_STATUS_CANCELLED ] );
 	}
+
+
+	public function get_payment_data_value( string $key ): string {
+		if ( ! isset( $this->payment_data_arr ) ) {
+			$this->payment_data_arr = json_decode( $this->payment_data, true );
+		}
+
+		return $this->payment_data_arr[ $key ] ?? '';
+	}
+
+	/**
+	 * @param array $statuses
+	 *
+	 * @return OsInvoiceModel|OsInvoiceModel[]
+	 */
+	public function get_invoices(array $statuses = []){
+		$invoices = new OsInvoiceModel();
+		if(!empty($statuses)) $invoices = $invoices->where_in('status', $statuses);
+		return $invoices->where(['order_id' => $this->id])->get_results_as_models();
+	}
+
+	public function manage_by_key_url(string $for = 'customer'): string{
+		return OsOrdersHelper::generate_direct_manage_order_url($this, $for);
+	}
+
+	public function set_payment_data_value( string $key, string $value, bool $save = true ) {
+		$this->payment_data_arr         = json_decode( $this->payment_data, true );
+		$this->payment_data_arr[ $key ] = $value;
+		$this->payment_data             = wp_json_encode( $this->payment_data_arr );
+		if ( $save ) {
+			$this->update_attributes( [ 'payment_data' => $this->payment_data ] );
+		}
+	}
+
 
 	public function is_single_booking(): bool {
 		$order_items = $this->get_items();
@@ -486,6 +522,7 @@ class OsOrderModel extends OsModel {
 			'source_id',
 			'confirmation_code',
 			'source_url',
+			'payment_data',
 			'customer_id',
 			'customer_comment',
 			'coupon_code',
@@ -510,6 +547,7 @@ class OsOrderModel extends OsModel {
 			'source_id',
 			'confirmation_code',
 			'source_url',
+			'payment_data',
 			'customer_id',
 			'customer_comment',
 			'price_breakdown',

@@ -196,6 +196,9 @@ class OsOrderIntentModel extends OsModel {
 			$order->tax_total           = $this->tax_total;
 			$order->source_url          = $this->booking_form_page_url;
 			$order->customer_comment    = $this->customer->notes;
+			$payment_data_arr = json_decode( $this->payment_data, true );
+			$payment_data_arr['initial_charge_amount'] = $this->charge_amount;
+			$order->payment_data        = wp_json_encode($payment_data_arr);
 			// order's price breakdown should only hold cart items, and never holds total, subtotal, balance variables because those are stored on order model itself and/or generated on the fly
 			$order->price_breakdown = wp_json_encode( $cart_from_intent->generate_price_breakdown_rows(['balance', 'total', 'subtotal']));
 

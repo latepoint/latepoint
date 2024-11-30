@@ -2677,6 +2677,21 @@
       "pg" : 0,
       "sct" : 0
     },
+    "\/lib\/assets\/stylesheets\/shared\/_clean_layout.scss" : {
+      "aP" : 0,
+      "bl" : 0,
+      "co" : 0,
+      "dP" : 10,
+      "ec" : 1,
+      "ft" : 4,
+      "ma" : 0,
+      "oA" : 1,
+      "oAP" : "\/lib\/assets\/stylesheets\/shared\/_clean_layout.css",
+      "oF" : 0,
+      "oS" : 0,
+      "pg" : 0,
+      "sct" : 0
+    },
     "\/lib\/assets\/stylesheets\/shared\/_step_customer.scss" : {
       "aP" : 0,
       "bl" : 0,
@@ -2870,6 +2885,14 @@
       "hM" : 0,
       "oA" : 0,
       "oAP" : "\/lib\/controllers\/integrations_controller.php",
+      "oF" : 0
+    },
+    "\/lib\/controllers\/invoices_controller.php" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/controllers\/invoices_controller.php",
       "oF" : 0
     },
     "\/lib\/controllers\/manage_booking_by_key_controller.php" : {
@@ -3166,6 +3189,14 @@
       "hM" : 0,
       "oA" : 0,
       "oAP" : "\/lib\/helpers\/image_helper.php",
+      "oF" : 0
+    },
+    "\/lib\/helpers\/invoices_helper.php" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/helpers\/invoices_helper.php",
       "oF" : 0
     },
     "\/lib\/helpers\/license_helper.php" : {
@@ -3710,6 +3741,14 @@
       "hM" : 0,
       "oA" : 0,
       "oAP" : "\/lib\/models\/customer_model.php",
+      "oF" : 0
+    },
+    "\/lib\/models\/invoice_model.php" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/models\/invoice_model.php",
       "oF" : 0
     },
     "\/lib\/models\/join_bundles_services_model.php" : {
@@ -4312,6 +4351,78 @@
       "oAP" : "\/lib\/views\/integrations\/external_meeting_systems.php",
       "oF" : 0
     },
+    "\/lib\/views\/invoices\/payment_form.php" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/views\/invoices\/payment_form.php",
+      "oF" : 0
+    },
+    "\/lib\/views\/invoices\/payment_form\/_confirmation.php" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 1,
+      "oAP" : "\/lib\/views\/invoices\/payment_form\/_confirmation.php",
+      "oF" : 0
+    },
+    "\/lib\/views\/invoices\/payment_form\/_methods.php" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 1,
+      "oAP" : "\/lib\/views\/invoices\/payment_form\/_methods.php",
+      "oF" : 0
+    },
+    "\/lib\/views\/invoices\/payment_form\/_pay.php" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 1,
+      "oAP" : "\/lib\/views\/invoices\/payment_form\/_pay.php",
+      "oF" : 0
+    },
+    "\/lib\/views\/invoices\/payment_form\/_processors.php" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 1,
+      "oAP" : "\/lib\/views\/invoices\/payment_form\/_processors.php",
+      "oF" : 0
+    },
+    "\/lib\/views\/invoices\/summary_before_payment_lightbox.php" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/views\/invoices\/summary_before_payment_lightbox.php",
+      "oF" : 0
+    },
+    "\/lib\/views\/invoices\/summary_before_payment.php" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/views\/invoices\/summary_before_payment.php",
+      "oF" : 0
+    },
+    "\/lib\/views\/invoices\/view_by_key.php" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/views\/invoices\/view_by_key.php",
+      "oF" : 0
+    },
+    "\/lib\/views\/invoices\/view.php" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/views\/invoices\/view.php",
+      "oF" : 0
+    },
     "\/lib\/views\/layouts\/admin.php" : {
       "cB" : 0,
       "ft" : 8192,
@@ -4568,46 +4679,6 @@
       "oAP" : "\/lib\/views\/orders\/index.php",
       "oF" : 0
     },
-    "\/lib\/views\/orders\/payment_form.php" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/lib\/views\/orders\/payment_form.php",
-      "oF" : 0
-    },
-    "\/lib\/views\/orders\/payment_form\/_confirmation.php" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 1,
-      "oAP" : "\/lib\/views\/orders\/payment_form\/_confirmation.php",
-      "oF" : 0
-    },
-    "\/lib\/views\/orders\/payment_form\/_methods.php" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 1,
-      "oAP" : "\/lib\/views\/orders\/payment_form\/_methods.php",
-      "oF" : 0
-    },
-    "\/lib\/views\/orders\/payment_form\/_pay.php" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 1,
-      "oAP" : "\/lib\/views\/orders\/payment_form\/_pay.php",
-      "oF" : 0
-    },
-    "\/lib\/views\/orders\/payment_form\/_processors.php" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 1,
-      "oAP" : "\/lib\/views\/orders\/payment_form\/_processors.php",
-      "oF" : 0
-    },
     "\/lib\/views\/orders\/quick_edit.php" : {
       "cB" : 0,
       "ft" : 8192,
@@ -4630,14 +4701,6 @@
       "hM" : 0,
       "oA" : 0,
       "oAP" : "\/lib\/views\/orders\/reload_price_breakdown.php",
-      "oF" : 0
-    },
-    "\/lib\/views\/orders\/summary_before_payment.php" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/lib\/views\/orders\/summary_before_payment.php",
       "oF" : 0
     },
     "\/lib\/views\/orders\/view_order_log.php" : {

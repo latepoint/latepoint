@@ -4,9 +4,9 @@
  */
 
 class OsCartModel extends OsModel {
-	var $items; // should NOT be set by default, it means they are not loaded, to avoid queries to DB
+	public $items; // should NOT be set by default, it means they are not loaded, to avoid queries to DB
 
-	var $id,
+	public $id,
 		$uuid,
 		$order_id,
 		$coupon_code = '',

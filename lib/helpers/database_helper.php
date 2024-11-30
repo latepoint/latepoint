@@ -223,6 +223,7 @@ class OsDatabaseHelper {
       coupon_code varchar(100),
       coupon_discount decimal(20,4),
       tax_total decimal(20,4),
+      payment_data text,
       created_at datetime,
       updated_at datetime,
       PRIMARY KEY  (id),

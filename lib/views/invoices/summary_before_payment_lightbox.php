@@ -4,6 +4,7 @@
  */
 
 /* @var $order OsOrderModel */
+/* @var $invoice OsInvoiceModel */
 /* @var $order_item OsOrderItemModel */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -11,15 +12,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 <div class="latepoint-lightbox-heading">
-    <h2><?php esc_html_e( 'Order Summary', 'latepoint' ); ?></h2>
+    <h2><?php esc_html_e( 'Order Breakdown', 'latepoint' ); ?></h2>
 </div>
 <div class="latepoint-lightbox-content">
     <div class="full-summary-info-w">
         <div class="summary-price-breakdown-wrapper">
-            <div class="pb-heading">
-                <div class="pbh-label"><?php esc_html_e( 'Cost Breakdown', 'latepoint' ); ?></div>
-                <div class="pbh-line"></div>
-            </div>
 			<?php
 			$price_breakdown_rows = $order->generate_price_breakdown_rows();
 			OsPriceBreakdownHelper::output_price_breakdown( $price_breakdown_rows );
@@ -30,8 +27,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 <?php if($order->get_total_balance_due() > 0){ ?>
 <div class="latepoint-lightbox-footer">
     <a href="#"
-       data-os-params="<?php echo esc_attr( http_build_query( [ 'order_id' => $order->id ] ) ); ?>"
-       data-os-action="<?php echo esc_attr( OsRouterHelper::build_route_name( 'orders', 'payment_form' ) ); ?>"
+       data-os-params="<?php echo esc_attr( http_build_query( [ 'key' => $invoice->key ] ) ); ?>"
+       data-os-action="<?php echo esc_attr( OsRouterHelper::build_route_name( 'invoices', 'payment_form' ) ); ?>"
        data-os-output-target="lightbox"
        data-os-lightbox-classes="width-500"
        data-os-lightbox-inner-classes="latepoint-transaction-payment-form"

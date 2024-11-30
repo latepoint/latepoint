@@ -412,6 +412,34 @@
     }
   }
 
+
+  .quick-add-item-button {
+    border: 2px dotted rgba(0, 0, 0, 0.1);
+    padding: 7px 10px;
+    text-align: center;
+    border-radius: 6px;
+    color: $brand-primary;
+    cursor: pointer;
+    position: relative;
+    &.os-loading {
+      color: transparent;
+      &:before {
+        @include loading-circle($brand-primary);
+      }
+    }
+    &:hover {
+      border: 2px solid $brand-primary;
+    }
+    i, span {
+      display: inline-block;
+      vertical-align: middle;
+    }
+    span {
+      margin-left: 5px;
+      font-weight: $body-font-weight-bold;
+    }
+  }
+
   .quick-add-transaction {
     border: 2px dotted rgba(0, 0, 0, 0.1);
     padding: 7px 10px;

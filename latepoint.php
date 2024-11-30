@@ -728,6 +728,8 @@ if ( ! class_exists( 'LatePoint' ) ) :
 			include_once( LATEPOINT_ABSPATH . 'lib/controllers/manage_order_by_key_controller.php' );
 			include_once( LATEPOINT_ABSPATH . 'lib/controllers/events_controller.php' );
 			include_once( LATEPOINT_ABSPATH . 'lib/controllers/stripe_connect_controller.php' );
+			include_once( LATEPOINT_ABSPATH . 'lib/controllers/invoices_controller.php' );
+
 
 
 			// MODELS
@@ -764,6 +766,7 @@ if ( ! class_exists( 'LatePoint' ) ) :
 			include_once( LATEPOINT_ABSPATH . 'lib/models/process_model.php' );
 			include_once( LATEPOINT_ABSPATH . 'lib/models/process_job_model.php' );
 			include_once( LATEPOINT_ABSPATH . 'lib/models/join_bundles_services_model.php' );
+			include_once( LATEPOINT_ABSPATH . 'lib/models/invoice_model.php' );
 
 
 			// HELPERS
@@ -825,6 +828,7 @@ if ( ! class_exists( 'LatePoint' ) ) :
 			include_once( LATEPOINT_ABSPATH . 'lib/helpers/elementor_helper.php' );
 			include_once( LATEPOINT_ABSPATH . 'lib/helpers/bricks_helper.php' );
 			include_once( LATEPOINT_ABSPATH . 'lib/helpers/transaction_intent_helper.php' );
+			include_once( LATEPOINT_ABSPATH . 'lib/helpers/invoices_helper.php' );
 
 			// MISC
 			include_once( LATEPOINT_ABSPATH . 'lib/misc/router.php' );
@@ -930,6 +934,8 @@ if ( ! class_exists( 'LatePoint' ) ) :
 
 			add_action( 'latepoint_email_processor_settings', [ $this, 'email_processor_settings' ], 10, 2 );
 
+			// order invoices
+			add_action( 'latepoint_order_created', 'OsInvoicesHelper::create_invoice_for_new_order' );
 
 			// Auth
 			add_filter( 'login_redirect', [ $this, 'redirect_manager_and_agent_to_latepoint' ], 10, 3 );
@@ -979,6 +985,8 @@ if ( ! class_exists( 'LatePoint' ) ) :
 
 			OsActivitiesHelper::init_hooks();
 			OsProcessJobsHelper::init_hooks();
+
+			do_action('latepoint_init_hooks');
 		}
 
 
