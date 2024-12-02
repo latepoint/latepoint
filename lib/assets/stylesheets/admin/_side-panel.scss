@@ -349,7 +349,7 @@
       font-weight: $body-font-weight-black;
       margin: 0px;
       padding: 0px;
-      font-size: floor($font-size-base * 1.1);
+      font-size: $headings-font-size-m;
     }
   }
 

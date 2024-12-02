@@ -399,9 +399,15 @@ if ( ! class_exists( 'OsOrdersController' ) ) :
 
 		function reload_balance_and_payments() {
 			$order_params = $this->params['order'];
+			$order_items_params = $this->params['order_items'] ?? [];
 
 			$order = new OsOrderModel();
 			$order->set_data( $order_params );
+
+			foreach ( $order_items_params as $order_items_param ) {
+				$order->items[] = OsOrdersHelper::create_order_item_object( $order_items_param );
+			}
+
 
 
 			// Because price is not in allowed_params to bulk set, check if it's passed in params and set it, OTHERWISE CALCULATE IT

@@ -502,22 +502,38 @@
 }
 .initial-payment-data-wrapper {
   margin-top: 15px;
-  display: flex;
-  padding: 8px;
+  padding: 5px;
   border-radius: 6px;
   background-color: #f3f3f3;
-  align-items: center;
-  gap: 6px;
-  > div:first-child {
-    margin-left: auto;
-  }
-  > div:last-child {
-    margin-right: auto;
+  .os-form-group.os-form-toggler-group {
+    padding-left: 10px;
+    padding-right: 15px;
+    &:hover {
+      box-shadow: none;
+    }
+    label {
+      font-size: 14px;
+    }
   }
   .os-form-group.os-form-group-transparent {
     margin-bottom: 0;
-    select.os-form-control {
-      padding: 5px 16px 4px 8px !important;
+  }
+  #payNowPortionInfo {
+    margin-top: 5px;
+    padding: 10px;
+    padding-top: 15px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    .label-for-select {
+    }
+    .os-form-group {
+      margin-bottom: 0!important;
+      flex: 1;
+      &:last-child {
+        flex: 0 0 90px;
+      }
     }
   }
 }

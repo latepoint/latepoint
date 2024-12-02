@@ -24,6 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<?php
 			$total_paid     = $order->get_total_amount_paid_from_transactions();
 			$total_balance  = $order->get_total_balance_due();
+            ray($order->get_items());
 			$deposit_amount = $order->get_deposit_amount_to_charge();
 
 			?>
@@ -44,13 +45,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <?php if ( $order->is_new_record() ) { ?>
     <div class="initial-payment-data-wrapper">
-        <div class="initial-payment-data-label"><?php esc_html_e( 'Due now:', 'latepoint' ); ?></div>
-		<?php echo OsFormHelper::select_field( 'order[payment_data][portion]', false,
-			[
-				LATEPOINT_PAYMENT_PORTION_FULL    => sprintf( __( 'Full amount of %s' ), OsMoneyHelper::format_price( $total_balance, true, false ) ),
-				LATEPOINT_PAYMENT_PORTION_DEPOSIT => sprintf( __( 'Deposit of %s', 'latepoint' ), OsMoneyHelper::format_price( $deposit_amount, true, false ) ),
-				LATEPOINT_PAYMENT_PORTION_CUSTOM  => __( 'Custom Amount', 'latepoint' ),
-                '' => __( 'Nothing, pay on arrival', 'latepoint' ),
-			], LATEPOINT_PAYMENT_PORTION_FULL, [ 'class' => 'size-small' ] ); ?>
+        <?php echo OsFormHelper::toggler_field('instant_payment_request', esc_html__( 'Create Payment Request', 'latepoint' ), false, 'payNowPortionInfo'); ?>
+        <div id="payNowPortionInfo" style="display: none;">
+            <div class="label-for-select"><?php _e('Amount:', 'latepoint'); ?></div>
+            <?php
+            $payment_portions = [];
+            if($total_balance > 0) $payment_portions[LATEPOINT_PAYMENT_PORTION_FULL] = sprintf( __( 'Full Payment of %s' ), OsMoneyHelper::format_price( $total_balance, true, false ) );
+            if($deposit_amount > 0) $payment_portions[LATEPOINT_PAYMENT_PORTION_DEPOSIT] = sprintf( __( '%s Deposit', 'latepoint' ), OsMoneyHelper::format_price( $deposit_amount, true, false ) );
+            $payment_portions[LATEPOINT_PAYMENT_PORTION_CUSTOM] = __( 'Custom', 'latepoint' );
+            echo OsFormHelper::select_field( 'instant_payment_request[portion]', false, $payment_portions, LATEPOINT_PAYMENT_PORTION_FULL, [ 'class' => 'size-small', 'theme' => 'simple' ] );
+            echo OsFormHelper::money_field( 'instant_payment_request[charge_amount]', false, $total_balance, [ 'class' => 'size-small', 'theme' => 'simple' ] ); ?>
+        </div>
+
     </div>
 <?php } ?>

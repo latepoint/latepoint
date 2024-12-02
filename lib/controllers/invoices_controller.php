@@ -16,7 +16,7 @@ if ( ! class_exists( 'OsInvoicesController' ) ) :
 		function __construct() {
 			parent::__construct();
 
-			$this->action_access['public'] = array_merge( $this->action_access['public'], [ 'view_by_key' ] );
+			$this->action_access['public'] = array_merge( $this->action_access['public'], [ 'view_by_key', 'payment_form', 'summary_before_payment' ] );
 
 			$this->views_folder = LATEPOINT_VIEWS_ABSPATH . 'invoices/';
 		}

@@ -395,6 +395,21 @@ class OsFormHelper {
 	}
 
 	public static function select_field( $name, $label, $options = array(), $selected_value = '', $atts = array(), $wrapper_atts = array(), $add_value_if_not_present = false ) {
+		$extra_class = ' os-form-group-transparent';
+		if ( isset( $atts['theme'] ) ) {
+			switch ( $atts['theme'] ) {
+				case 'bordered':
+					$extra_class = ' os-form-group-bordered';
+					break;
+				case 'right-aligned':
+					$extra_class = ' os-form-group-right-aligned';
+					break;
+				case 'simple':
+					$extra_class = ' os-form-group-simple';
+					unset( $atts['theme'] );
+					break;
+			}
+		}
 		$html = '';
 		// generate id if not set
 		if ( ! $atts ) {
@@ -414,7 +429,7 @@ class OsFormHelper {
 		if ( ! empty( $wrapper_atts ) ) {
 			$html = '<div ' . self::atts_string_from_array( $wrapper_atts ) . '>';
 		}
-		$html .= '<div class="os-form-group os-form-select-group os-form-group-transparent">';
+		$html .= '<div class="os-form-group os-form-select-group '.esc_attr( $extra_class ).'">';
 		if ( $label ) {
 			$html .= '<label for="' . esc_attr($atts['id']) . '">' . esc_html($label) . '</label>';
 		}
