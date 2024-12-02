@@ -4,9 +4,9 @@
  */
 
 class OsOrderModel extends OsModel {
-	var $items;
+	public $items;
 
-	var $id,
+	public $id,
 		$subtotal = 0,
 		$total = 0,
 		$confirmation_code,
@@ -320,10 +320,10 @@ class OsOrderModel extends OsModel {
 		return $this->subtotal;
 	}
 
-	public function get_deposit_amount_to_charge(array $options = []){
+	public function get_deposit_amount_to_charge( array $options = [] ) {
 		$cart = $this->view_as_cart();
 
-		return $cart->deposit_amount_to_charge($options);
+		return $cart->deposit_amount_to_charge( $options );
 	}
 
 	public function recalculate_total() {
@@ -514,8 +514,13 @@ class OsOrderModel extends OsModel {
 	 * @return OsOrderItemModel[]
 	 */
 	public function get_items( bool $pull_from_db = false ): array {
-		if ( ! isset( $this->items ) || ( $pull_from_db && $this->id ) ) {
+		// only call DB when needed
+		if ( ( ! isset( $this->items ) || ( $pull_from_db ) && ! empty( $this->id ) ) ) {
 			$this->items = OsOrdersHelper::get_items_for_order_id( $this->id );
+		}
+
+		if ( empty( $this->items ) ) {
+			$this->items = [];
 		}
 
 		return $this->items;

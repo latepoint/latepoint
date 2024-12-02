@@ -35,37 +35,41 @@ class OsCartModel extends OsModel {
 	}
 
 
-	public function get_total(){
+	public function get_total() {
 
 		/**
 		 * Get total of a cart
 		 *
-		 * @since 5.0.0
-		 * @hook latepoint_cart_get_total
-		 *
 		 * @param {float} $total Total amount in database format 1999.0000
 		 * @param {OsCartModel} $cart Cart that total is assessed on
 		 * @returns {float} The filtered "total" amount
+		 *
+		 * @since 5.0.0
+		 * @hook latepoint_cart_get_total
+		 *
 		 */
 		$amount = apply_filters( 'latepoint_cart_get_total', $this->total, $this );
-		return OsMoneyHelper::pad_to_db_format($amount);
+
+		return OsMoneyHelper::pad_to_db_format( $amount );
 	}
 
 
-	public function get_subtotal(){
+	public function get_subtotal() {
 
 		/**
 		 * Get subtotal of a cart
 		 *
-		 * @since 5.0.0
-		 * @hook latepoint_cart_get_subtotal
-		 *
 		 * @param {float} $subtotal Subtotal amount in database format 1999.0000
 		 * @param {OsCartModel} $cart Cart that subtotal is assessed on
 		 * @returns {float} The filtered "subtotal" amount
+		 *
+		 * @since 5.0.0
+		 * @hook latepoint_cart_get_subtotal
+		 *
 		 */
 		$amount = apply_filters( 'latepoint_cart_get_subtotal', $this->subtotal, $this );
-		return OsMoneyHelper::pad_to_db_format($amount);
+
+		return OsMoneyHelper::pad_to_db_format( $amount );
 	}
 
 	public function get_coupon_discount() {
@@ -73,15 +77,17 @@ class OsCartModel extends OsModel {
 		/**
 		 * Get coupon discount of a cart
 		 *
-		 * @since 5.0.0
-		 * @hook latepoint_cart_get_coupon_discount
-		 *
 		 * @param {float} $discount_amount Coupon discount amount in database format 1999.0000
 		 * @param {OsCartModel} $cart Cart that coupon discount is assessed on
 		 * @returns {float} The filtered "coupon discount" amount
+		 *
+		 * @since 5.0.0
+		 * @hook latepoint_cart_get_coupon_discount
+		 *
 		 */
-		$amount = apply_filters('latepoint_cart_get_coupon_discount', $this->coupon_discount, $this);
-		return OsMoneyHelper::pad_to_db_format($amount);
+		$amount = apply_filters( 'latepoint_cart_get_coupon_discount', $this->coupon_discount, $this );
+
+		return OsMoneyHelper::pad_to_db_format( $amount );
 	}
 
 
@@ -90,41 +96,48 @@ class OsCartModel extends OsModel {
 		/**
 		 * Get Total Tax amount of a cart
 		 *
-		 * @since 5.0.0
-		 * @hook latepoint_cart_get_tax_total
-		 *
 		 * @param {float} $tax_total Total amount of tax for a cart in database format 1999.0000
 		 * @param {OsCartModel} $cart Cart that tax total is requested for
 		 * @returns {float} The filtered "tax_total" amount
+		 *
+		 * @since 5.0.0
+		 * @hook latepoint_cart_get_tax_total
+		 *
 		 */
 		$amount = apply_filters( 'latepoint_cart_get_tax_total', $this->tax_total, $this );
-		return OsMoneyHelper::pad_to_db_format($amount);
+
+		return OsMoneyHelper::pad_to_db_format( $amount );
 	}
 
 	public function get_coupon_code() {
 		/**
 		 * Get coupon code of a cart
 		 *
-		 * @since 5.0.0
-		 * @hook latepoint_cart_get_coupon_code
-		 *
 		 * @param {string} $coupon_code Coupon code
 		 * @param {OsCartItemModel} $cart Cart Item that coupon code is requested for
 		 * @returns {string} The filtered "coupon code" value
+		 *
+		 * @since 5.0.0
+		 * @hook latepoint_cart_get_coupon_code
+		 *
 		 */
-		return apply_filters('latepoint_cart_get_coupon_code', $this->coupon_code, $this);
+		return apply_filters( 'latepoint_cart_get_coupon_code', $this->coupon_code, $this );
 	}
 
 
-	public function set_coupon_code(string $coupon_code) {
+	public function set_coupon_code( string $coupon_code ) {
 		$this->coupon_code = $coupon_code;
-		if(!$this->is_new_record()) $this->update_attributes(['coupon_code' => $coupon_code]);
+		if ( ! $this->is_new_record() ) {
+			$this->update_attributes( [ 'coupon_code' => $coupon_code ] );
+		}
 	}
 
 
 	public function clear_coupon_code() {
 		$this->coupon_code = '';
-		if(!$this->is_new_record()) $this->update_attributes(['coupon_code' => '']);
+		if ( ! $this->is_new_record() ) {
+			$this->update_attributes( [ 'coupon_code' => '' ] );
+		}
 	}
 
 	/**
@@ -197,7 +210,7 @@ class OsCartModel extends OsModel {
 		foreach ( $this->get_items() as $cart_item ) {
 			$cart_item->delete();
 		}
-		unset($this->items); // important to unset, to avoid db queries
+		unset( $this->items ); // important to unset, to avoid db queries
 	}
 
 	/** ?
@@ -205,8 +218,13 @@ class OsCartModel extends OsModel {
 	 * @return OsCartItemModel[]
 	 */
 	public function get_items(): array {
-		if ( ! isset( $this->items ) ) {
+		// only call DB when needed
+		if ( ! isset( $this->items ) && ! empty( $this->id ) ) {
 			$this->items = OsCartsHelper::get_items_for_cart_id( $this->id );
+		}
+
+		if ( empty( $this->items ) ) {
+			$this->items = [];
 		}
 
 		return $this->items;
@@ -250,7 +268,7 @@ class OsCartModel extends OsModel {
 						'heading' => __( 'Service', 'latepoint' ),
 						'items'   => []
 					];
-					$item_subtotal            = OsBookingHelper::calculate_full_amount_for_service($booking);
+					$item_subtotal             = OsBookingHelper::calculate_full_amount_for_service( $booking );
 					$service_row_item          = [
 						'label'     => $booking->service->name,
 						'raw_value' => OsMoneyHelper::pad_to_db_format( $item_subtotal ),
@@ -268,7 +286,7 @@ class OsCartModel extends OsModel {
 						'heading' => __( 'Bundle', 'latepoint' ),
 						'items'   => []
 					];
-					$item_subtotal             = OsBundlesHelper::calculate_full_amount_for_bundle($bundle);
+					$item_subtotal             = OsBundlesHelper::calculate_full_amount_for_bundle( $bundle );
 					$service_row_item          = [
 						'label'     => $bundle->name,
 						'raw_value' => OsMoneyHelper::pad_to_db_format( $item_subtotal ),
@@ -375,15 +393,17 @@ class OsCartModel extends OsModel {
 		/**
 		 * Get full amount to charge
 		 *
-		 * @since 5.0.0
-		 * @hook latepoint_cart_full_amount_to_charge
-		 *
 		 * @param {float} $total Full amount to charge database format 1999.0000
 		 * @param {OsCartModel} $cart Cart that total is assessed on
 		 * @returns {float} The filtered full amount to charge
+		 *
+		 * @since 5.0.0
+		 * @hook latepoint_cart_full_amount_to_charge
+		 *
 		 */
 		$amount = apply_filters( 'latepoint_cart_full_amount_to_charge', $this->get_total(), $this, $options );
-		return OsMoneyHelper::pad_to_db_format($amount);
+
+		return OsMoneyHelper::pad_to_db_format( $amount );
 	}
 
 
@@ -452,12 +472,13 @@ class OsCartModel extends OsModel {
 		$this->set_payment_processor();
 	}
 
-	public function remove_item(OsCartItemModel $item){
-		if($item->id && $this->id == $item->cart_id){
+	public function remove_item( OsCartItemModel $item ) {
+		if ( $item->id && $this->id == $item->cart_id ) {
 			$item->delete();
 			$this->items = OsCartsHelper::get_items_for_cart_id( $this->id );
 		}
 		$this->calculate_prices();
+
 		return true;
 	}
 
@@ -469,12 +490,21 @@ class OsCartModel extends OsModel {
 			}
 			$item->cart_id = $this->id;
 			if ( $item->save() ) {
-				$this->items[] = $item;
+				// we are doing this - to modify a copy of $items, to avoid modifying the getter's return value
+				$items       = $this->get_items();
+				$items[]     = $item;
+				$this->items = $items;
 			}
 		} else {
-			$this->items[] = $item;
+			// we are doing this - to modify a copy of $items, to avoid modifying the getter's return value
+			$items       = $this->get_items();
+			$items[]     = $item;
+			$this->items = $items;
 		}
-		if($calculate_prices) $this->calculate_prices();
+		if ( $calculate_prices ) {
+			$this->calculate_prices();
+		}
+
 		return true;
 	}
 
@@ -483,7 +513,7 @@ class OsCartModel extends OsModel {
 		// calculate subtotal for all items
 		foreach ( $this->get_items() as $item ) {
 			$item->subtotal = $item->full_amount_to_charge();
-			$item->total = $item->subtotal;
+			$item->total    = $item->subtotal;
 		}
 
 
@@ -502,15 +532,15 @@ class OsCartModel extends OsModel {
 		/**
 		 * Triggers when cart prices are being calculated
 		 *
+		 * @param {OsCartModel} $cart Cart model for which prices are being generated
+		 *
 		 * @since 5.0.0
 		 * @hook latepoint_cart_calculate_prices
 		 *
-		 * @param {OsCartModel} $cart Cart model for which prices are being generated
 		 */
-		do_action('latepoint_cart_calculate_prices', $this);
+		do_action( 'latepoint_cart_calculate_prices', $this );
 
 	}
-
 
 
 	protected function allowed_params( $role = 'admin' ) {
