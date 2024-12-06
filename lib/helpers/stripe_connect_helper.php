@@ -29,6 +29,40 @@ class OsStripeConnectHelper {
 	}
 
 
+    public static function process_payment_for_transaction_intent( $result, OsTransactionIntentModel $transaction_intent ) {
+        if ( OsPaymentsHelper::should_processor_handle_payment_for_transaction_intent( self::$processor_code, $transaction_intent ) ) {
+            switch ( $transaction_intent->get_payment_data_value( 'method' ) ) {
+                case 'payment_element':
+                    if ( $transaction_intent->get_payment_data_value( 'token' ) ) {
+                        // since the payment is already processed on the frontend - we need to retrieve payment intent and verify if its paid
+                        $payment_intent_data = self::retrieve_payment_intent( $transaction_intent->get_payment_data_value( 'token' ) );
+                        if ( in_array( $payment_intent_data['status'], [ 'succeeded', 'requires_capture' ] ) ) {
+                            // success
+                            $result['status']    = LATEPOINT_STATUS_SUCCESS;
+                            $result['processor'] = self::$processor_code;
+                            $result['charge_id'] = $payment_intent_data['id'];
+                            $result['amount']    = $payment_intent_data['total'];
+                            $result['kind']      = $payment_intent_data['status'] == 'requires_capture' ? LATEPOINT_TRANSACTION_KIND_AUTHORIZATION : LATEPOINT_TRANSACTION_KIND_CAPTURE;
+                        } else {
+                            // payment error
+                            $result['status']  = LATEPOINT_STATUS_ERROR;
+                            $result['message'] = __( 'Payment Error', 'latepoint' );
+                            $transaction_intent->add_error( 'send_to_step', $result['message'], 'payment' );
+                        }
+                    } else {
+                        // payment token missing
+                        $result['status']  = LATEPOINT_STATUS_ERROR;
+                        $result['message'] = __( 'Payment Error 23JDF38', 'latepoint' );
+                        $transaction_intent->add_error( 'payment_error', $result['message'] );
+                    }
+                    break;
+            }
+        }
+
+        return $result;
+    }
+
+
 	public static function process_payment($result, OsOrderIntentModel $order_intent) {
 			if (OsPaymentsHelper::should_processor_handle_payment_for_order_intent(self::$processor_code, $order_intent)) {
 			switch ($order_intent->get_payment_data_value('method')) {
@@ -65,17 +99,31 @@ class OsStripeConnectHelper {
 
 	public static function convert_charge_amount_to_requirements($charge_amount, OsCartModel $cart) {
 		if (OsPaymentsHelper::should_processor_handle_payment_for_cart(self::$processor_code, $cart)) {
-			$iso_code = self::get_currency_iso_code();
-			if (in_array($iso_code, self::zero_decimal_currencies_list())) {
-				$charge_amount = round($charge_amount);
-			} else {
-				$number_of_decimals = OsSettingsHelper::get_settings_value('number_of_decimals', '2');
-				$charge_amount = number_format((float)$charge_amount, $number_of_decimals, '.', '') * pow(10, $number_of_decimals);
-			}
+			$charge_amount = self::convert_amount_to_specs($charge_amount);
 		}
 		return $charge_amount;
 	}
 
+    public static function convert_amount_to_specs($charge_amount){
+        $iso_code = self::get_currency_iso_code();
+        if (in_array($iso_code, self::zero_decimal_currencies_list())) {
+            $charge_amount = round($charge_amount);
+        } else {
+            $number_of_decimals = OsSettingsHelper::get_settings_value('number_of_decimals', '2');
+            $charge_amount = number_format((float)$charge_amount, $number_of_decimals, '.', '') * pow(10, $number_of_decimals);
+        }
+        return $charge_amount;
+    }
+
+
+	public static function output_order_payment_pay_contents(OsTransactionIntentModel $transaction_intent) {
+		if (!OsPaymentsHelper::should_processor_handle_payment_for_transaction_intent(self::$processor_code, $transaction_intent)) return;
+		echo '<div class="lp-payment-method-content" data-payment-method="payment_element">';
+		echo '<div class="lp-payment-method-content-i">';
+		echo '<div class="stripe-payment-element"></div>';
+		echo '</div>';
+		echo '</div>';
+	}
 
 	public static function output_payment_step_contents(OsCartModel $cart) {
 		if (!OsPaymentsHelper::should_processor_handle_payment_for_cart(self::$processor_code, $cart)) return;
@@ -517,7 +565,35 @@ class OsStripeConnectHelper {
 		return OsSettingsHelper::get_settings_value(OsSettingsHelper::append_payment_env_key('stripe_connect_account_id', $env), '');
 	}
 
-	public static function generate_payment_intent_id_and_secret_from_connect(OsOrderIntentModel $order_intent): array {
+	public static function generate_payment_intent_id_and_secret_for_transaction_intent(OsTransactionIntentModel $transaction_intent): array {
+        $order = new OsOrderModel($transaction_intent->order_id);
+		$customer_data = ['name' => $order->customer->full_name, 'email' => $order->customer->email];
+		$options = [
+			'amount' => $transaction_intent->specs_charge_amount,
+			'currency' => self::get_currency_iso_code(),
+			'stripe_customer_id' => self::get_stripe_customer_id($order->customer),
+			'metadata' => [
+				'transaction_intent_key' => $transaction_intent->intent_key
+			]
+		];
+
+
+		// pass customer data in case it needs to be created
+		$result = self::do_account_request('payment-intents', OsSettingsHelper::get_payments_environment(), '', 'POST', ['payment_intent_options' => $options, 'customer_data' => $customer_data]);
+		if (empty($result['data'])) {
+            // translators: %s is the payment error
+			$error_message = !empty($result['error']) ? sprintf(__('Payment Error: %s', 'latepoint'), esc_html($result['error'])) : __('Payment error', 'latepoint');
+			OsDebugHelper::log($error_message);
+			throw new Exception($error_message);
+		} else {
+			// make sure we use correct stripe customer id in case the one that was passed is invalid - a valid one will be returned in this call
+			if ($result['data']['stripe_customer_id'] != self::get_stripe_customer_id($order->customer)) self::save_stripe_customer_id($order->customer, $result['data']['stripe_customer_id']);
+
+			return ['id' => $result['data']['id'], 'client_secret' => $result['data']['client_secret']];
+		}
+	}
+
+	public static function generate_payment_intent_id_and_secret_for_order_intent(OsOrderIntentModel $order_intent): array {
 		$customer_data = ['name' => $order_intent->customer->full_name, 'email' => $order_intent->customer->email];
 		$options = [
 			'amount' => $order_intent->specs_charge_amount,

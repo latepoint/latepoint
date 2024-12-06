@@ -4,10 +4,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 <?php
-if(!$show_days_only) echo '<div class="quick-availability-per-day-w side-sub-panel" data-trigger-form-order-item-id="'.esc_attr($trigger_form_order_item_id).'" data-trigger-form-booking-id="'.esc_attr($trigger_form_booking_id).'" data-agent-id="'.esc_attr($booking->agent_id).'">'; ?>
-<div class="os-form-header">
+if(!$show_days_only) echo '<div class="quick-availability-per-day-w side-sub-panel-wrapper" data-trigger-form-order-item-id="'.esc_attr($trigger_form_order_item_id).'" data-trigger-form-booking-id="'.esc_attr($trigger_form_booking_id).'" data-agent-id="'.esc_attr($booking->agent_id).'">'; ?>
+<div class="side-sub-panel-header os-form-header">
 	<h2><?php esc_html_e('Availability', 'latepoint'); ?></h2>
-  <a href="#" class="latepoint-quick-availability-close"><i class="latepoint-icon latepoint-icon-x"></i></a>
+  <a href="#" class="latepoint-quick-availability-close  latepoint-side-sub-panel-close latepoint-side-sub-panel-close-trigger"><i class="latepoint-icon latepoint-icon-x"></i></a>
 </div>
 <?php
 	echo '<div class="separate-timeslots-w">';

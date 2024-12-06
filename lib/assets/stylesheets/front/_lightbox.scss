@@ -25,11 +25,38 @@
     padding: 15px 30px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     background-color: #f8f8f8;
+    display: flex;
+    align-items: center;
 
     h2 {
       color: $headings-color;
       margin: 0px;
       font-size: floor($headings-font-size * 1.7);
+      flex: 1;
+    }
+    .latepoint-lightbox-close {
+      position: relative;
+      line-height: 1;
+      font-size: 20px;
+      color: #333;
+      text-decoration: none;
+      display: block;
+      outline: none;
+      box-shadow: none;
+      padding: 5px;
+      i {
+        display: block;
+      }
+      .latepoint-icon-x:before {
+        content: "\e90a";
+      }
+      &:focus {
+          outline: none;
+      }
+      &:hover {
+        background-color: rgba(0,0,0,0.05);
+        color: #000;
+      }
     }
   }
   .latepoint-lightbox-footer {
@@ -56,13 +83,41 @@
     overflow: auto;
     display: flex;
     flex-direction: column;
+    &.os-loading {
+      .latepoint-lightbox-content {
+        min-height: 100px;
+        position: relative;
+        &:before {
+          @include loading-circle($brand-primary, 30px);
+        }
+        .lp-payment-method-content {
+          display: none;
+        }
+      }
+    }
     .latepoint-lightbox-content {
       padding: 30px;
       flex: 1;
       overflow: auto;
+      position: relative;
+      &.is-dotted {
+        padding-top: 50px;
+        &:before {
+          content: "";
+          height: 30px;
+          background-image: radial-gradient(#ccc 1px, transparent 0);
+          background-size: 10px 10px;
+          background-color: #fff;
+          display: block;
+          position: absolute;
+          top: 5px;
+          left: 5px;
+          right: 5px;
+        }
+      }
     }
 
-    .latepoint-lightbox-close {
+    > .latepoint-lightbox-close {
       position: absolute;
       line-height: 1;
       top: 17px;

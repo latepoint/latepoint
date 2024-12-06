@@ -360,6 +360,47 @@ input, select {
           }
         }
       }
+      input[type="text"].os-form-control {
+        &.size-small {
+          height: $form-controls-select-height-small;
+          min-height: $form-controls-select-height-small;
+          font-size: floor($font-size-base * 0.9);
+        }
+      }
+    }
+
+    &.os-form-select-group {
+      label {
+        margin-bottom: 3px;
+      }
+      .os-form-control {
+        background-color: #fff;
+        border: 1px solid #d6d6e1;
+        &:focus {
+          border-color: $brand-primary;
+        }
+        &:hover {
+          border-color: $brand-primary;
+        }
+      }
+      &.has-value {
+      }
+
+      &.os-invalid {
+        label {
+          color: $form-controls-label-color-error;
+        }
+        .os-form-control {
+          border-color: $form-controls-border-color-error;
+          color: $form-controls-color-error;
+          &::placeholder {
+            color: #d9a3a3;
+          }
+          &:focus {
+            border-color: $form-controls-border-color-error;
+          }
+        }
+      }
     }
   }
 
@@ -531,6 +572,12 @@ input, select {
         border-bottom: 1px solid $form-controls-border-color;
         &:focus {
           border-bottom-color: $brand-primary;
+        }
+
+        &.size-small {
+          height: $form-controls-select-height-small;
+          min-height: $form-controls-select-height-small;
+          font-size: floor($font-size-base * 0.9);
         }
       }
       textarea.os-form-control {

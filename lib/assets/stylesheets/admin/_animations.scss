@@ -279,12 +279,9 @@
   100% { transform: translateX(0px);  }
 }
 
-.booking-activity-log-panel-w {
-  animation: 0.2s cubic-bezier(0, 1, 0.51, 1) 0s both quickAvailability;
-}
 
 .latepoint-side-panel-w {
-  .latepoint-side-panel-i {
+  .latepoint-side-panels {
     transform-origin: center center;
     animation: 0.5s cubic-bezier(0, 1, 0.51, 1) 0s both osSidePanelAnimation;
   }
@@ -372,10 +369,6 @@
   animation-fill-mode: both;
 }
 
-.quick-availability-per-day-w {
-  animation: 0.2s cubic-bezier(0, 1, 0.51, 1) 0s quickAvailability;
-  animation-fill-mode: both;
-}
 
 
 /* Form Blocks */

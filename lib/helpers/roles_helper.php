@@ -44,6 +44,7 @@ class OsRolesHelper {
 			'OsBundleModel' => 'bundle',
 			'OsServiceCategoryModel' => 'service',
 			'OsTransactionModel' => 'transaction',
+			'OsInvoiceModel' => 'invoice',
 			'OsProcessJobModel' => 'settings',
 			'OsStepSettingsModel' => 'settings',
 			'OsProcessModel' => 'settings',
@@ -304,6 +305,8 @@ class OsRolesHelper {
 			'booking' => __('Bookings & Orders', 'latepoint'),
 			'customer' => __('Customers', 'latepoint'),
 			'transaction' => __('Payments', 'latepoint'),
+			'invoice' => __('Invoice', 'latepoint'),
+			'order' => __('Order', 'latepoint'),
 			'resource_schedule' => __('Resource Schedules', 'latepoint'),
 			'settings' => __('Settings', 'latepoint'),
 			'connection' => __('Connections', 'latepoint'),
@@ -333,6 +336,7 @@ class OsRolesHelper {
 			'booking__view', 'booking__delete' ,'booking__create', 'booking__edit',
 			'customer__view', 'customer__delete' ,'customer__create', 'customer__edit',
 			'transaction__view', 'transaction__delete' ,'transaction__create', 'transaction__edit',
+			'invoice__view', 'invoice__delete' ,'invoice__create', 'invoice__edit',
 			'activity__view', 'activity__delete' ,'activity__create', 'activity__edit',
 			'chat__edit', 'resource_schedule__edit'
 		];
@@ -358,6 +362,7 @@ class OsRolesHelper {
 			'booking__view', 'booking__delete' ,'booking__create', 'booking__edit' ,
 			'customer__view', 'customer__delete' ,'customer__create', 'customer__edit' ,
 			'transaction__view', 'transaction__delete' ,'transaction__create', 'transaction__edit' ,
+			'invoice__view', 'invoice__delete' ,'invoice__create', 'invoice__edit' ,
 			'activity__view', 'activity__delete' ,'activity__create', 'activity__edit' ,
 			'chat__edit', 'resource_schedule__edit', 'settings__edit', 'connection__edit'
 		];

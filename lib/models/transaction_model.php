@@ -3,6 +3,7 @@
 class OsTransactionModel extends OsModel {
 	public $id,
 		$token,
+		$invoice_id,
 		$order_id,
 		$customer_id,
 		$processor,

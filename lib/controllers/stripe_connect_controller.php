@@ -22,6 +22,52 @@ if ( ! class_exists( 'OsStripeConnectController' ) ) :
 			$this->views_folder              = LATEPOINT_VIEWS_ABSPATH . 'stripe_connect/';
 		}
 
+		public function create_payment_intent_for_transaction(){
+			if(!filter_var($this->params['order_id'], FILTER_VALIDATE_INT)) exit();
+			try {
+
+				$order = new OsOrderModel($this->params['order_id']);
+
+		        $transaction_intent = new OsTransactionIntentModel();
+		        $transaction_intent->charge_amount = $order->get_total_balance_due();
+		        $transaction_intent->specs_charge_amount = OsStripeConnectHelper::convert_amount_to_specs($transaction_intent->charge_amount);
+		        $transaction_intent->order_id = $order->id;
+		        $transaction_intent->set_payment_data_value('time', LATEPOINT_PAYMENT_TIME_NOW, false);
+		        $transaction_intent->set_payment_data_value('portion', sanitize_text_field($this->params['payment_portion']), false);
+		        $transaction_intent->set_payment_data_value('method', sanitize_text_field($this->params['payment_method']), false);
+		        $transaction_intent->set_payment_data_value('processor', sanitize_text_field($this->params['payment_processor']), false);
+				$transaction_intent->generate_intent_key();
+
+				if ( OsSettingsHelper::get_settings_value( OsSettingsHelper::append_payment_env_key( 'stripe_connect_account_id' ) ) ) {
+					$payment_intent_data          = OsStripeConnectHelper::generate_payment_intent_id_and_secret_for_transaction_intent( $transaction_intent );
+					$payment_intent_id            = $payment_intent_data['id'];
+					$payment_intent_client_secret = $payment_intent_data['client_secret'];
+				} else {
+					throw new Exception( __( 'Stripe connect account ID not set', 'latepoint' ) );
+				}
+
+
+				$transaction_intent->set_payment_data_value('token', $payment_intent_id, false);
+				if(!$transaction_intent->save()){
+					throw new Exception( __( 'Unable to save transaction intent', 'latepoint' ) );
+				}
+
+				if ( $this->get_return_format() == 'json' ) {
+					$this->send_json( [
+						'status'                    => LATEPOINT_STATUS_SUCCESS,
+						'continue_transaction_intent_url' => OsTransactionIntentHelper::generate_continue_intent_url( $transaction_intent->intent_key ),
+						'payment_intent_id'         => $payment_intent_id,
+						'payment_intent_secret'     => $payment_intent_client_secret,
+						'transaction_intent_key'    => $transaction_intent->intent_key
+					] );
+				}
+			} catch ( Exception $e ) {
+				if ( $this->get_return_format() == 'json' ) {
+					$this->send_json( array( 'status' => LATEPOINT_STATUS_ERROR, 'message' => $e->getMessage() ) );
+				}
+			}
+		}
+
 		public function webhook() {
 			$payload = @file_get_contents( 'php://input' );
 			$data    = json_decode( $payload, true );
@@ -138,7 +184,7 @@ if ( ! class_exists( 'OsStripeConnectController' ) ) :
 				}
 
 				if ( OsSettingsHelper::get_settings_value( OsSettingsHelper::append_payment_env_key( 'stripe_connect_account_id' ) ) ) {
-					$payment_intent_data          = OsStripeConnectHelper::generate_payment_intent_id_and_secret_from_connect( $order_intent );
+					$payment_intent_data          = OsStripeConnectHelper::generate_payment_intent_id_and_secret_for_order_intent( $order_intent );
 					$payment_intent_id            = $payment_intent_data['id'];
 					$payment_intent_client_secret = $payment_intent_data['client_secret'];
 				} else {

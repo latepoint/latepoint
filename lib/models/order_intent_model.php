@@ -11,7 +11,7 @@ class OsOrderIntentModel extends OsModel {
 		$cart_items_data,
 		$restrictions_data,
 		$presets_data,
-		$payment_data,
+		$payment_data = '',
 		$payment_data_arr,
 		$other_data,
 		$charge_amount,
@@ -34,6 +34,16 @@ class OsOrderIntentModel extends OsModel {
 		if ( $id ) {
 			$this->load_by_id( $id );
 		}
+	}
+
+
+	protected function params_to_sanitize() {
+		return [
+			'charge_amount'        => 'money',
+			'total'        => 'money',
+			'subtotal'        => 'money',
+			'tax_total'        => 'money',
+		];
 	}
 
 
@@ -196,6 +206,9 @@ class OsOrderIntentModel extends OsModel {
 			$order->tax_total           = $this->tax_total;
 			$order->source_url          = $this->booking_form_page_url;
 			$order->customer_comment    = $this->customer->notes;
+			$order_initial_payment_data_arr = json_decode( $this->payment_data, true );
+			$order_initial_payment_data_arr['charge_amount'] = $this->charge_amount;
+			$order->initial_payment_data        = wp_json_encode($order_initial_payment_data_arr);
 			// order's price breakdown should only hold cart items, and never holds total, subtotal, balance variables because those are stored on order model itself and/or generated on the fly
 			$order->price_breakdown = wp_json_encode( $cart_from_intent->generate_price_breakdown_rows(['balance', 'total', 'subtotal']));
 
@@ -214,6 +227,7 @@ class OsOrderIntentModel extends OsModel {
 
 			if ( $order->save() ) {
 				$this->mark_as_converted( $order );
+				OsInvoicesHelper::create_invoices_for_new_order($order);
 
 
 				foreach ( $cart_from_intent->get_items() as $cart_item ) {
@@ -224,8 +238,10 @@ class OsOrderIntentModel extends OsModel {
 
 				if ( $transaction ) {
 					$transaction->order_id = $order->id;
+					find invoice for this transaction
 					if ( $transaction->save() ) {
 						do_action( 'latepoint_transaction_created', $transaction );
+
 					} else {
 						OsDebugHelper::log( 'Error creating transaction', 'transaction_error', $transaction->get_error_messages() );
 					}

@@ -17,20 +17,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 ?>
 <div class="manage-booking-wrapper" data-route-name="<?php echo esc_attr(OsRouterHelper::build_route_name('manage_order_by_key', 'show')); ?>" data-key="<?php echo esc_attr($key); ?>">
-	<div class="manage-booking-controls status-<?php echo esc_attr($order->status); ?>">
-		<?php if($for == 'agent'){
-			echo '<div class="change-booking-status-trigger-wrapper" data-route-name="'.esc_attr(OsRouterHelper::build_route_name('manage_order_by_key', 'change_status')).'">';
-			echo OsFormHelper::select_field('booking[status]', __('Status:', 'latepoint'), OsBookingHelper::get_statuses_list(), $order->status, ['id' => 'booking_status_'.$order->id, 'class' => 'change-booking-status-trigger']);
-			echo '</div>'; ?>
-			<?php
-		}else{ ?>
-			<div class="manage-status-info">
-				<span class="status-info-label"><?php esc_html_e('Status:', 'latepoint'); ?></span>
-				<span class="status-info-value status-<?php echo esc_attr($order->status); ?>"><?php echo esc_html($order->nice_status); ?></span>
+		<?php
+        if($for == 'agent'){
+            echo '<div class="manage-booking-controls status-'.esc_attr($order->status).'">';
+                echo '<div class="change-booking-status-trigger-wrapper" data-route-name="'.esc_attr(OsRouterHelper::build_route_name('manage_order_by_key', 'change_status')).'">';
+                echo OsFormHelper::select_field('booking[status]', __('Status:', 'latepoint'), OsBookingHelper::get_statuses_list(), $order->status, ['id' => 'booking_status_'.$order->id, 'class' => 'change-booking-status-trigger']);
+                echo '</div>';
+			echo '</div>';
+		}else{
+            if($order->status == LATEPOINT_ORDER_STATUS_CANCELLED){ ?>
+            <div class="manage-booking-controls status-<?php echo esc_attr($order->status); ?>">
+                <div class="manage-status-info">
+                    <span class="status-info-value status-<?php echo esc_attr($order->status); ?>"><?php echo esc_html($order->get_nice_status_name()); ?></span>
+                </div>
 			</div>
 			<?php
+            }
 		}?>
-	</div>
 	<div class="manage-booking-inner">
 		<?php include(LATEPOINT_VIEWS_ABSPATH.'orders/_full_summary.php'); ?>
 	</div>

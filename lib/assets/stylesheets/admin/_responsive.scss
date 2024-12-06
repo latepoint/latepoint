@@ -685,17 +685,8 @@
   .latepoint-lightbox-w .latepoint-lightbox-i {
     border-radius: 6px;
   }
-  .side-sub-panel.booking-activity-log-panel-w {
-    right: auto;
-    left: 0;
-    width: 100%;
-    border-right: none;
-    animation-fill-mode: both;
+  .booking-activity-log-panel-w {
     .booking-activity-log-panel-i .booking-activities-list {
-      padding-left: 15px;
-      padding-right: 15px;
-    }
-    .os-form-header {
       padding-left: 15px;
       padding-right: 15px;
     }
@@ -1862,7 +1853,9 @@
     }
   }
   .latepoint-side-panel-w {
+    max-height: 100vh;  /* Fallback */
     max-height: 100dvh;
+    height: 100vh;  /* Fallback */
     height: 100dvh;
     bottom: auto;
     .os-form-sub-header {
@@ -1877,6 +1870,7 @@
     .latepoint-side-panel-i {
       max-width: 100%;
       width: 100%;
+      height: 100vh;  /* Fallback */
       height: 100dvh;
       .customer-info-w {
         .os-form-sub-header {

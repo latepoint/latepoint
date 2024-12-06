@@ -29,7 +29,7 @@ if ( ! class_exists( 'LatePoint' ) ) :
 		 *
 		 */
 		public $version = '5.0.15';
-		public $db_version = '2.1.4';
+		public $db_version = '2.1.5';
 
 
 		/**
@@ -314,6 +314,9 @@ if ( ! class_exists( 'LatePoint' ) ) :
 			if ( ! defined( 'LATEPOINT_TABLE_TRANSACTIONS' ) ) {
 				define( 'LATEPOINT_TABLE_TRANSACTIONS', $wpdb->prefix . 'latepoint_transactions' );
 			}
+			if ( ! defined( 'LATEPOINT_TABLE_TRANSACTION_INTENTS' ) ) {
+				define( 'LATEPOINT_TABLE_TRANSACTION_INTENTS', $wpdb->prefix . 'latepoint_transaction_intents' );
+			}
 			if ( ! defined( 'LATEPOINT_TABLE_AGENTS' ) ) {
 				define( 'LATEPOINT_TABLE_AGENTS', $wpdb->prefix . 'latepoint_agents' );
 			}
@@ -379,6 +382,9 @@ if ( ! class_exists( 'LatePoint' ) ) :
 			if ( ! defined( 'LATEPOINT_TABLE_ORDER_INVOICES' ) ) {
 				define( 'LATEPOINT_TABLE_ORDER_INVOICES', $wpdb->prefix . 'latepoint_order_invoices' );
 			}
+			if ( ! defined( 'LATEPOINT_TABLE_PAYMENT_REQUESTS' ) ) {
+				define( 'LATEPOINT_TABLE_PAYMENT_REQUESTS', $wpdb->prefix . 'latepoint_payment_requests' );
+			}
 			if ( ! defined( 'LATEPOINT_ORDER_INTENT_STATUS_NEW' ) ) {
 				define( 'LATEPOINT_ORDER_INTENT_STATUS_NEW', 'new' );
 			}
@@ -388,6 +394,17 @@ if ( ! class_exists( 'LatePoint' ) ) :
 			if ( ! defined( 'LATEPOINT_ORDER_INTENT_STATUS_PROCESSING' ) ) {
 				define( 'LATEPOINT_ORDER_INTENT_STATUS_PROCESSING', 'processing' );
 			}
+
+			if ( ! defined( 'LATEPOINT_TRANSACTION_INTENT_STATUS_NEW' ) ) {
+				define( 'LATEPOINT_TRANSACTION_INTENT_STATUS_NEW', 'new' );
+			}
+			if ( ! defined( 'LATEPOINT_TRANSACTION_INTENT_STATUS_CONVERTED' ) ) {
+				define( 'LATEPOINT_TRANSACTION_INTENT_STATUS_CONVERTED', 'converted' );
+			}
+			if ( ! defined( 'LATEPOINT_TRANSACTION_INTENT_STATUS_PROCESSING' ) ) {
+				define( 'LATEPOINT_TRANSACTION_INTENT_STATUS_PROCESSING', 'processing' );
+			}
+
 			if ( ! defined( 'LATEPOINT_BOOKING_STATUS_APPROVED' ) ) {
 				define( 'LATEPOINT_BOOKING_STATUS_APPROVED', 'approved' );
 			}
@@ -569,6 +586,9 @@ if ( ! class_exists( 'LatePoint' ) ) :
 			if ( ! defined( 'LATEPOINT_INVOICE_STATUS_PAID' ) ) {
 				define( 'LATEPOINT_INVOICE_STATUS_PAID', 'paid' );
 			}
+			if ( ! defined( 'LATEPOINT_INVOICE_STATUS_PARTIALLY_PAID' ) ) {
+				define( 'LATEPOINT_INVOICE_STATUS_PARTIALLY_PAID', 'partially_paid' );
+			}
 			if ( ! defined( 'LATEPOINT_INVOICE_STATUS_DRAFT' ) ) {
 				define( 'LATEPOINT_INVOICE_STATUS_DRAFT', 'draft' );
 			}
@@ -641,6 +661,9 @@ if ( ! class_exists( 'LatePoint' ) ) :
 			if ( ! defined( 'LATEPOINT_PAYMENT_PORTION_DEPOSIT' ) ) {
 				define( 'LATEPOINT_PAYMENT_PORTION_DEPOSIT', 'deposit' );
 			}
+			if ( ! defined( 'LATEPOINT_PAYMENT_PORTION_CUSTOM' ) ) {
+				define( 'LATEPOINT_PAYMENT_PORTION_CUSTOM', 'custom' );
+			}
 
 			if ( ! defined( 'LATEPOINT_ANY_AGENT' ) ) {
 				define( 'LATEPOINT_ANY_AGENT', 'any' );
@@ -671,7 +694,9 @@ if ( ! class_exists( 'LatePoint' ) ) :
 
 			// Stripe Connect
 			if ( ! defined( 'LATEPOINT_STRIPE_CONNECT_URL' ) ) {
-				define( 'LATEPOINT_STRIPE_CONNECT_URL', 'https://app.latepoint.com' );
+//				define( 'LATEPOINT_STRIPE_CONNECT_URL', 'https://app.latepoint.com' );
+//				define( 'LATEPOINT_STRIPE_CONNECT_URL', 'https://latepoint-laravel.test' );
+				define( 'LATEPOINT_STRIPE_CONNECT_URL', 'https://wp-latepoint.ngrok.io/' );
 			}
 		}
 
@@ -710,13 +735,15 @@ if ( ! class_exists( 'LatePoint' ) ) :
 			include_once( LATEPOINT_ABSPATH . 'lib/controllers/manage_order_by_key_controller.php' );
 			include_once( LATEPOINT_ABSPATH . 'lib/controllers/events_controller.php' );
 			include_once( LATEPOINT_ABSPATH . 'lib/controllers/stripe_connect_controller.php' );
+			include_once( LATEPOINT_ABSPATH . 'lib/controllers/invoices_controller.php' );
+			include_once( LATEPOINT_ABSPATH . 'lib/controllers/support_topics_controller.php' );
+
 
 
 			// MODELS
 			include_once( LATEPOINT_ABSPATH . 'lib/models/model.php' );
 			include_once( LATEPOINT_ABSPATH . 'lib/models/meta_model.php' );
 			include_once( LATEPOINT_ABSPATH . 'lib/models/bundle_model.php' );
-			include_once( LATEPOINT_ABSPATH . 'lib/models/invoice_model.php' );
 			include_once( LATEPOINT_ABSPATH . 'lib/models/cart_model.php' );
 			include_once( LATEPOINT_ABSPATH . 'lib/models/cart_meta_model.php' );
 			include_once( LATEPOINT_ABSPATH . 'lib/models/cart_item_model.php' );
@@ -734,6 +761,7 @@ if ( ! class_exists( 'LatePoint' ) ) :
 			include_once( LATEPOINT_ABSPATH . 'lib/models/booking_model.php' );
 			include_once( LATEPOINT_ABSPATH . 'lib/models/step_settings_model.php' );
 			include_once( LATEPOINT_ABSPATH . 'lib/models/transaction_model.php' );
+			include_once( LATEPOINT_ABSPATH . 'lib/models/transaction_intent_model.php' );
 			include_once( LATEPOINT_ABSPATH . 'lib/models/booking_meta_model.php' );
 			include_once( LATEPOINT_ABSPATH . 'lib/models/customer_meta_model.php' );
 			include_once( LATEPOINT_ABSPATH . 'lib/models/agent_meta_model.php' );
@@ -746,6 +774,8 @@ if ( ! class_exists( 'LatePoint' ) ) :
 			include_once( LATEPOINT_ABSPATH . 'lib/models/process_model.php' );
 			include_once( LATEPOINT_ABSPATH . 'lib/models/process_job_model.php' );
 			include_once( LATEPOINT_ABSPATH . 'lib/models/join_bundles_services_model.php' );
+			include_once( LATEPOINT_ABSPATH . 'lib/models/invoice_model.php' );
+			include_once( LATEPOINT_ABSPATH . 'lib/models/payment_request_model.php' );
 
 
 			// HELPERS
@@ -788,7 +818,6 @@ if ( ! class_exists( 'LatePoint' ) ) :
 			include_once( LATEPOINT_ABSPATH . 'lib/helpers/bundles_helper.php' );
 			include_once( LATEPOINT_ABSPATH . 'lib/helpers/carts_helper.php' );
 			include_once( LATEPOINT_ABSPATH . 'lib/helpers/orders_helper.php' );
-			include_once( LATEPOINT_ABSPATH . 'lib/helpers/invoices_helper.php' );
 			include_once( LATEPOINT_ABSPATH . 'lib/helpers/replacer_helper.php' );
 			include_once( LATEPOINT_ABSPATH . 'lib/helpers/payments_helper.php' );
 			include_once( LATEPOINT_ABSPATH . 'lib/helpers/resource_helper.php' );
@@ -807,9 +836,11 @@ if ( ! class_exists( 'LatePoint' ) ) :
 			include_once( LATEPOINT_ABSPATH . 'lib/helpers/pages_helper.php' );
 			include_once( LATEPOINT_ABSPATH . 'lib/helpers/elementor_helper.php' );
 			include_once( LATEPOINT_ABSPATH . 'lib/helpers/bricks_helper.php' );
+			include_once( LATEPOINT_ABSPATH . 'lib/helpers/transaction_intent_helper.php' );
+			include_once( LATEPOINT_ABSPATH . 'lib/helpers/invoices_helper.php' );
+			include_once( LATEPOINT_ABSPATH . 'lib/helpers/support_topics_helper.php' );
 
 			// MISC
-			include_once( LATEPOINT_ABSPATH . 'lib/misc/router.php' );
 			include_once( LATEPOINT_ABSPATH . 'lib/misc/time_period.php' );
 			include_once( LATEPOINT_ABSPATH . 'lib/misc/blocked_period.php' );
 			include_once( LATEPOINT_ABSPATH . 'lib/misc/booked_period.php' );
@@ -940,12 +971,15 @@ if ( ! class_exists( 'LatePoint' ) ) :
 			add_action( 'latepoint_model_save', [ $this, 'save_connected_wordpress_user' ] );
 
 			// Stripe Connect
+
 			add_filter( 'latepoint_payment_processors', 'OsStripeConnectHelper::register_payment_processor' );
 			add_action( 'latepoint_payment_processor_settings', 'OsStripeConnectHelper::add_settings_fields', 10 );
 			add_action( 'latepoint_step_payment__pay_content', 'OsStripeConnectHelper::output_payment_step_contents', 10 );
+			add_action( 'latepoint_order_payment__pay_content', 'OsStripeConnectHelper::output_order_payment_pay_contents', 10 );
 
 			add_filter( 'latepoint_convert_charge_amount_to_requirements', 'OsStripeConnectHelper::convert_charge_amount_to_requirements', 10, 2 );
 			add_filter( 'latepoint_process_payment_for_order_intent', 'OsStripeConnectHelper::process_payment', 10, 2 );
+			add_filter( 'latepoint_process_payment_for_transaction_intent', 'OsStripeConnectHelper::process_payment_for_transaction_intent', 10, 2 );
 
 			add_filter( 'latepoint_get_all_payment_times', 'OsStripeConnectHelper::add_all_payment_methods_to_payment_times' );
 			add_filter( 'latepoint_get_enabled_payment_times', 'OsStripeConnectHelper::add_enabled_payment_methods_to_payment_times' );
@@ -958,6 +992,8 @@ if ( ! class_exists( 'LatePoint' ) ) :
 
 			OsActivitiesHelper::init_hooks();
 			OsProcessJobsHelper::init_hooks();
+
+			do_action('latepoint_init_hooks');
 		}
 
 
@@ -1060,11 +1096,10 @@ if ( ! class_exists( 'LatePoint' ) ) :
 
 		public function init_addon( $addon_name, $addon_version ) {
 			OsDatabaseHelper::check_db_version_for_addons();
-//			LatePoint\Cerber\Router::trace($addon_name, $addon_version);
 		}
 
 		public function deactivate_addon( $addon_name, $addon_version ) {
-			OsAddonsHelper::delete_addon_info( $addon_name, $addon_version );
+			OsDatabaseHelper::delete_addon_info( $addon_name, $addon_version );
 		}
 
 
@@ -1291,7 +1326,8 @@ if ( ! class_exists( 'LatePoint' ) ) :
 				'check_order_intent_bookable_route'   => OsRouterHelper::build_route_name( 'steps', 'check_order_intent_bookable' ),
 				'payment_environment'   => OsSettingsHelper::get_payments_environment(),
 				'style_border_radius' => OsSettingsHelper::get_booking_form_border_radius(),
-				'datepicker_timeslot_selected_label' => __('Selected', 'latepoint')
+				'datepicker_timeslot_selected_label' => __('Selected', 'latepoint'),
+				'order_payment_form_route' => OsRouterHelper::build_route_name('orders', 'payment_form')
 			];
 
 			if ( OsPaymentsHelper::is_payment_processor_enabled( OsStripeConnectHelper::$processor_code ) ) {
@@ -1299,6 +1335,7 @@ if ( ! class_exists( 'LatePoint' ) ) :
 				$localized_vars['stripe_connected_account_id'] = OsStripeConnectHelper::get_connect_account_id();
 			}
 			$localized_vars['stripe_connect_route_create_payment_intent'] = OsRouterHelper::build_route_name( 'stripe_connect', 'create_payment_intent' );
+			$localized_vars['stripe_connect_route_create_payment_intent_for_transaction_intent'] = OsRouterHelper::build_route_name( 'stripe_connect', 'create_payment_intent_for_transaction' );
 
 			// Stylesheets
 			wp_enqueue_style( 'latepoint-main-front', $this->public_stylesheets() . 'front.css', false, $this->version );

@@ -359,6 +359,7 @@
     font-size: floor($font-size-base * 1.1);
     font-weight: $body-font-weight-bold;
     color: $body-color;
+    margin-bottom: 0;
     .spi-name, .spi-price {
       font-weight: $body-font-weight-bold;
     }
@@ -800,6 +801,14 @@ html.latepoint-clean {
         color: #fff;
         font-weight: $body-font-weight-bold;
         padding: 2px 6px;
+        &.status-open {
+          background-color: #fff;
+          color: #000;
+        }
+        &.status-not_fulfilled {
+          background-color: #fff;
+          color: #000;
+        }
         &.status-approved {
           background-color: #74ff60;
           color: #000;

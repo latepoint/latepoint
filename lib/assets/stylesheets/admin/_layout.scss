@@ -477,6 +477,7 @@ body.latepoint-admin {
 
   .latepoint-content-and-menu-w {
     display: flex;
+    min-height: 100vh;  /* Fallback */
     min-height: 100dvh;
   }
 
@@ -743,6 +744,7 @@ body.latepoint-admin {
 }
 
 .latepoint-not-authorized {
+  height: 100vh;  /* Fallback */
   height: 100dvh;
   display: flex;
   align-items: center;

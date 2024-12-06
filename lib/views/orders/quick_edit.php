@@ -40,6 +40,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	    <div class="quick-booking-info">
 		    <?php echo '<span>'.esc_html__('Order ID:', 'latepoint').'</span><strong>'. esc_html($order->id).'</strong>'; ?>
 		    <?php echo '<span>'.esc_html__('Code:', 'latepoint').'</span><strong>'. esc_html($order->confirmation_code).'</strong>'; ?>
+            <?php echo '<a target="_blank" href="'.$order->manage_by_key_url('customer').'"><i class="latepoint-icon latepoint-icon-link-2"></i>'.esc_html__('Share', 'latepoint').'</a>'; ?>
 		    <?php if(OsAuthHelper::get_current_user()->has_capability('activity__view')) echo '<a href="#" data-order-id="'.esc_attr($order->id).'" data-route="'.esc_attr(OsRouterHelper::build_route_name('orders', 'view_order_log')).'" class="quick-order-form-view-log-btn"><i class="latepoint-icon latepoint-icon-clock"></i>'.esc_html__('History', 'latepoint').'</a>'; ?>
 	    </div>
 	    <?php } ?>
@@ -242,7 +243,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	        ?>
 	        </div>
 		      <?php if(OsRolesHelper::can_user('transaction__create')){ ?>
-	        <div class="quick-add-transaction trigger-add-transaction-btn"
+	        <div class="quick-add-item-button"
 	             data-os-after-call="latepoint_init_quick_transaction_form"
 	             data-os-before-after="before"
 	             data-os-action="<?php echo esc_attr(OsRouterHelper::build_route_name('transactions', 'edit_form')); ?>">
@@ -252,6 +253,29 @@ if ( ! defined( 'ABSPATH' ) ) {
 		      <?php } ?>
 	      </div>
       <?php } ?>
+        <?php if(!apply_filters('latepoint_feature_invoices', false)){ ?>
+	      <div class="transactions-info-w">
+	        <div class="os-form-sub-header">
+	          <h3><?php esc_html_e('Invoices', 'latepoint'); ?></h3>
+	        </div>
+              <a href="#" class="pro-upgrade-required">
+                  <div class="pur-heading"><?php esc_html_e('Upgrade to PRO', 'latepoint'); ?></div>
+                  <div class="pur-desc"><?php esc_html_e('To unlock invoicing feature, you need to upgrade to a PRO version', 'latepoint'); ?></div>
+              </a>
+	      </div>
+        <?php } ?>
+        <?php
+        /**
+         * Content after order edit form
+         *
+         * @param {OsOrderModel} $order instance of order model that is being edited
+         *
+         * @since 5.0.15
+         * @hook latepoint_order_quick_edit_form_content_after
+         *
+         */
+        do_action('latepoint_order_quick_edit_form_content_after', $order);
+        ?>
     </div>
     <div class="os-form-buttons os-quick-form-buttons">
       <?php if($order->is_new_record()) { ?>

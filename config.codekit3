@@ -2677,6 +2677,21 @@
       "pg" : 0,
       "sct" : 0
     },
+    "\/lib\/assets\/stylesheets\/shared\/_clean_layout.scss" : {
+      "aP" : 0,
+      "bl" : 0,
+      "co" : 0,
+      "dP" : 10,
+      "ec" : 1,
+      "ft" : 4,
+      "ma" : 0,
+      "oA" : 1,
+      "oAP" : "\/lib\/assets\/stylesheets\/shared\/_clean_layout.css",
+      "oF" : 0,
+      "oS" : 0,
+      "pg" : 0,
+      "sct" : 0
+    },
     "\/lib\/assets\/stylesheets\/shared\/_step_customer.scss" : {
       "aP" : 0,
       "bl" : 0,
@@ -2872,6 +2887,14 @@
       "oAP" : "\/lib\/controllers\/integrations_controller.php",
       "oF" : 0
     },
+    "\/lib\/controllers\/invoices_controller.php" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/controllers\/invoices_controller.php",
+      "oF" : 0
+    },
     "\/lib\/controllers\/manage_booking_by_key_controller.php" : {
       "cB" : 0,
       "ft" : 8192,
@@ -2966,6 +2989,14 @@
       "hM" : 0,
       "oA" : 0,
       "oAP" : "\/lib\/controllers\/stripe_connect_controller.php",
+      "oF" : 0
+    },
+    "\/lib\/controllers\/support_topics_controller.php" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/controllers\/support_topics_controller.php",
       "oF" : 0
     },
     "\/lib\/controllers\/todos_controller.php" : {
@@ -3416,6 +3447,14 @@
       "oAP" : "\/lib\/helpers\/styles_helper.php",
       "oF" : 0
     },
+    "\/lib\/helpers\/support_topics_helper.php" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/helpers\/support_topics_helper.php",
+      "oF" : 0
+    },
     "\/lib\/helpers\/time_helper.php" : {
       "cB" : 0,
       "ft" : 8192,
@@ -3430,6 +3469,14 @@
       "hM" : 0,
       "oA" : 0,
       "oAP" : "\/lib\/helpers\/timeline_helper.php",
+      "oF" : 0
+    },
+    "\/lib\/helpers\/transaction_intent_helper.php" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/helpers\/transaction_intent_helper.php",
       "oF" : 0
     },
     "\/lib\/helpers\/util_helper.php" : {
@@ -3566,14 +3613,6 @@
       "hM" : 0,
       "oA" : 0,
       "oAP" : "\/lib\/misc\/role.php",
-      "oF" : 0
-    },
-    "\/lib\/misc\/router.php" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/lib\/misc\/router.php",
       "oF" : 0
     },
     "\/lib\/misc\/step.php" : {
@@ -3800,6 +3839,14 @@
       "oAP" : "\/lib\/models\/order_model.php",
       "oF" : 0
     },
+    "\/lib\/models\/payment_request_model.php" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/models\/payment_request_model.php",
+      "oF" : 0
+    },
     "\/lib\/models\/process_job_model.php" : {
       "cB" : 0,
       "ft" : 8192,
@@ -3862,6 +3909,14 @@
       "hM" : 0,
       "oA" : 0,
       "oAP" : "\/lib\/models\/step_settings_model.php",
+      "oF" : 0
+    },
+    "\/lib\/models\/transaction_intent_model.php" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/models\/transaction_intent_model.php",
       "oF" : 0
     },
     "\/lib\/models\/transaction_model.php" : {
@@ -4310,6 +4365,70 @@
       "hM" : 0,
       "oA" : 0,
       "oAP" : "\/lib\/views\/integrations\/external_meeting_systems.php",
+      "oF" : 0
+    },
+    "\/lib\/views\/invoices\/payment_form.php" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/views\/invoices\/payment_form.php",
+      "oF" : 0
+    },
+    "\/lib\/views\/invoices\/payment_form\/_confirmation.php" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 1,
+      "oAP" : "\/lib\/views\/invoices\/payment_form\/_confirmation.php",
+      "oF" : 0
+    },
+    "\/lib\/views\/invoices\/payment_form\/_methods.php" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 1,
+      "oAP" : "\/lib\/views\/invoices\/payment_form\/_methods.php",
+      "oF" : 0
+    },
+    "\/lib\/views\/invoices\/payment_form\/_pay.php" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 1,
+      "oAP" : "\/lib\/views\/invoices\/payment_form\/_pay.php",
+      "oF" : 0
+    },
+    "\/lib\/views\/invoices\/payment_form\/_processors.php" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 1,
+      "oAP" : "\/lib\/views\/invoices\/payment_form\/_processors.php",
+      "oF" : 0
+    },
+    "\/lib\/views\/invoices\/summary_before_payment.php" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/views\/invoices\/summary_before_payment.php",
+      "oF" : 0
+    },
+    "\/lib\/views\/invoices\/view_by_key.php" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/views\/invoices\/view_by_key.php",
+      "oF" : 0
+    },
+    "\/lib\/views\/invoices\/view.php" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/views\/invoices\/view.php",
       "oF" : 0
     },
     "\/lib\/views\/layouts\/admin.php" : {
@@ -5054,6 +5173,22 @@
       "hM" : 0,
       "oA" : 0,
       "oAP" : "\/lib\/views\/steps\/start.php",
+      "oF" : 0
+    },
+    "\/lib\/views\/support_topics\/partials\/payment_request.php" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/views\/support_topics\/partials\/payment_request.php",
+      "oF" : 0
+    },
+    "\/lib\/views\/support_topics\/view.php" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/views\/support_topics\/view.php",
       "oF" : 0
     },
     "\/lib\/views\/transactions\/_table_body.php" : {

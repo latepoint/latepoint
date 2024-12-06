@@ -429,6 +429,7 @@
   align-items: center;
   border-radius: 6px;
   padding-left: 15px;
+  margin-bottom: 15px;
   .os-zoom-meeting-info {
     padding: 10px 10px 10px 15px;
     flex: 1;
@@ -496,6 +497,107 @@
         @include loading-circle($brand-primary, 16px);
       }
       color: transparent!important;
+    }
+  }
+}
+.initial-payment-data-wrapper {
+  margin-top: 15px;
+  padding: 5px;
+  border-radius: 6px;
+  background-color: #f3f3f3;
+  .initial-payment-data-toggler-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    .os-form-group {
+      flex: 1;
+    }
+    .latepoint-element-info-trigger {
+      padding: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      color: #000;
+      position: relative;
+      i {
+        font-size: 18px;
+      }
+      &:hover {
+        color: $brand-primary;
+        i {
+        }
+      }
+      &.os-loading {
+        i {
+          opacity: 0;
+        }
+        &:before {
+          @include loading-circle($brand-primary, 16px);
+        }
+      }
+    }
+  }
+  .os-form-group.os-form-toggler-group {
+    padding-left: 10px;
+    padding-right: 15px;
+    &:hover {
+      box-shadow: none;
+    }
+    label {
+      font-size: 14px;
+    }
+  }
+  .os-form-group.os-form-group-transparent {
+    margin-bottom: 0;
+  }
+  #payNowPortionInfo {
+    margin: 10px;
+    margin-top: 5px;
+    padding-top: 15px;
+    border-top: 1px solid #ddd;
+    .payment-request-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      & + .payment-request-row {
+        margin-top: 10px;
+      }
+    }
+    .custom-charge-amount-wrapper {
+      flex: 0 0 90px;
+    }
+    .label-for-select {
+      color: $color-faded;
+      font-weight: $body-font-weight-bold;
+      border-radius: $form-controls-border-radius;
+      line-height: 1.4;
+      flex: 0 0 60px;
+      white-space: nowrap;
+    }
+
+    .os-date-range-picker {
+      flex: 1;
+      background-color: #fff;
+      border: 1px solid $border-color-strong;
+      padding: 7px 1px 6px 10px;
+      border-radius: $form-controls-border-radius;
+      line-height: 1.4;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      &:hover {
+        border-color: $brand-primary;
+      }
+      i {
+        font-size: 12px;
+      }
+      .range-picker-value {
+        flex: 1;
+      }
+    }
+    .os-form-group {
+      margin-bottom: 0!important;
+      flex: 1;
     }
   }
 }

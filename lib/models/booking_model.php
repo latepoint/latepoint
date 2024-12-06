@@ -66,6 +66,11 @@ class OsBookingModel extends OsModel {
 		return OsBookingHelper::calculate_deposit_amount_to_charge( $this );
 	}
 
+
+	public function manage_by_key_url(string $for = 'customer'): string{
+		return OsBookingHelper::generate_direct_manage_booking_url($this, $for);
+	}
+
 	public function get_service_name_for_summary() {
 		$service_name = $this->service_id ? $this->service->name : '';
 

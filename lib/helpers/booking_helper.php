@@ -1266,16 +1266,6 @@ class OsBookingHelper {
 		return $statuses;
 	}
 
-	public static function get_payment_methods_select_list() {
-		$payment_methods_list    = [];
-		$enabled_payment_methods = OsPaymentsHelper::get_enabled_payment_methods();
-		foreach ( $enabled_payment_methods as $payment_method_code => $payment_method ) {
-			$payment_methods_list[ $payment_method_code ] = $payment_method['label'];
-		}
-
-		return apply_filters( 'latepoint_payment_methods_for_select', $payment_methods_list );
-	}
-
 
 	public static function get_weekdays_arr( $full_name = false ) {
 		if ( $full_name ) {

@@ -10,12 +10,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 ?>
-<div class="booking-activity-log-panel-w side-sub-panel">
-	<div class="os-form-header">
+<div class="booking-activity-log-panel-w side-sub-panel-wrapper">
+	<div class="side-sub-panel-header os-form-header">
 		<h2><?php esc_html_e('Activity Log', 'latepoint'); ?></h2>
-		<a href="#" class="booking-activity-log-panel-close"><i class="latepoint-icon latepoint-icon-x"></i></a>
+		<a href="#" class="booking-activity-log-panel-close latepoint-side-sub-panel-close latepoint-side-sub-panel-close-trigger"><i class="latepoint-icon latepoint-icon-x"></i></a>
 	</div>
-	<div class="booking-activity-log-panel-i">
+	<div class="side-sub-panel-content booking-activity-log-panel-i">
 		<div class="booking-activities-list">
 			<div class="quick-booking-info">
 				<?php if($customer->created_at) echo '<span>'.esc_html__('Registered On: ', 'latepoint').'</span><strong>'.esc_html(OsTimeHelper::get_readable_date(new OsWpDateTime($customer->created_at))).'</strong>'; ?>

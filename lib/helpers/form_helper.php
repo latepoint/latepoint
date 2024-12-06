@@ -357,6 +357,15 @@ class OsFormHelper {
 		return apply_filters( 'latepoint_model_options_for_multi_select', $options, $model_name );
 	}
 
+	public static function date_picker_field(string $name, string $formatted_value = '', string $raw_value = '', array $atts = []) : string{
+		$html = '<div data-single-date="yes" '.self::atts_string_from_array($atts, ['class' => 'os-date-range-picker']).'>
+					<span class="range-picker-value">'.esc_html($formatted_value).'</span>
+					<i class="latepoint-icon latepoint-icon-chevron-down"></i>
+					<input type="hidden" name="'.esc_attr($name).'" value="'.esc_attr($raw_value).'"/>
+				</div>';
+        return $html;
+	}
+
 	public static function multi_select_field( $name, $label = false, $options = [], $selected_values = [], $atts = [], $wrapper_atts = [] ) {
 		$html = '';
 		if ( ! $selected_values ) {
@@ -395,6 +404,21 @@ class OsFormHelper {
 	}
 
 	public static function select_field( $name, $label, $options = array(), $selected_value = '', $atts = array(), $wrapper_atts = array(), $add_value_if_not_present = false ) {
+		$extra_class = ' os-form-group-transparent';
+		if ( isset( $atts['theme'] ) ) {
+			switch ( $atts['theme'] ) {
+				case 'bordered':
+					$extra_class = ' os-form-group-bordered';
+					break;
+				case 'right-aligned':
+					$extra_class = ' os-form-group-right-aligned';
+					break;
+				case 'simple':
+					$extra_class = ' os-form-group-simple';
+					unset( $atts['theme'] );
+					break;
+			}
+		}
 		$html = '';
 		// generate id if not set
 		if ( ! $atts ) {
@@ -414,7 +438,7 @@ class OsFormHelper {
 		if ( ! empty( $wrapper_atts ) ) {
 			$html = '<div ' . self::atts_string_from_array( $wrapper_atts ) . '>';
 		}
-		$html .= '<div class="os-form-group os-form-select-group os-form-group-transparent">';
+		$html .= '<div class="os-form-group os-form-select-group '.esc_attr( $extra_class ).'">';
 		if ( $label ) {
 			$html .= '<label for="' . esc_attr($atts['id']) . '">' . esc_html($label) . '</label>';
 		}

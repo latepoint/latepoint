@@ -1831,13 +1831,6 @@ class OsStepsHelper {
 
 	public static function prepare_step_payment__processors() {
 		$enabled_payment_processors = OsPaymentsHelper::get_enabled_payment_processors();
-		$enabled_payment_methods    = OsPaymentsHelper::get_enabled_payment_methods( false );
-
-		foreach ( $enabled_payment_methods as $payment_method_code => $payment_method ) {
-			if ( $payment_method_code != self::$cart_object->payment_method ) {
-				continue;
-			}
-		}
 		self::$vars_for_view['enabled_payment_processors'] = $enabled_payment_processors;
 	}
 

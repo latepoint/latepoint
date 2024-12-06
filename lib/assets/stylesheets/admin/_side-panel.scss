@@ -7,6 +7,65 @@
   right: 0px;
   transition: all 0.2s ease;
   z-index: 9999;
+  background-color: rgba(65,73,90,0.13);
+  display: flex;
+  align-items: stretch;
+  .latepoint-side-panel-shadow {
+    flex: 1;
+  }
+  .latepoint-side-panels {
+    display: flex;
+    flex-direction: row-reverse;
+    box-shadow: 0px 10px 60px rgba(0,0,0, 0.15), 0px 2px 6px rgba(0,0,0,0.2);
+  }
+
+  .side-sub-panel-wrapper {
+    right: $side-panel-width;
+    width: 550px;
+    background-color: #fff;
+    z-index: 9999;
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;  /* Fallback */
+    height: 100dvh;
+    .side-sub-panel-header {
+
+      select {
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 5px;
+      }
+      .latepoint-side-sub-panel-close {
+        line-height: 1;
+        font-size: 18px;
+        color: #333;
+        text-decoration: none;
+        display: block;
+        outline: none;
+        box-shadow: none;
+        z-index: 3;
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+    .side-sub-panel-content {
+      flex: 1;
+      overflow-y: auto;
+      max-height: 100%;
+      padding: 30px;
+      &.pattern-dotted {
+        background-image: radial-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 0);
+        background-size: 15px 15px;
+        background-color: #f1f1f1;
+      }
+    }
+    .side-sub-panel-footer {
+      border-top: 1px solid $border-color-main;
+      padding: 15px 30px;
+    }
+  }
 
   .clear-missing-lateselect {
     padding: 10px;
@@ -157,6 +216,9 @@
       align-items: center;
       gap: 5px;
       position: relative;
+      & + a {
+        margin-left: 15px;
+      }
       &:hover {
         border-bottom-style: solid;
       }
@@ -214,33 +276,21 @@
     }
   }
 
-  .latepoint-side-panel-shadow {
-    background-color: rgba(65,73,90,0.13);
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    bottom: 0px;
-    right: 0px;
-    z-index: 1;
-  }
-
   .latepoint-side-panel-i {
     transition: all 0.2s ease;
-    position: absolute;
-    top: $side-panel-offset;
-    bottom: $side-panel-offset;
-    right: $side-panel-offset;
     border-radius: $side-panel-border-radius;
     background-color: #fff;
     width: $side-panel-width;
-    box-shadow: 0px 10px 60px rgba(0,0,0, 0.15), 0px 2px 6px rgba(0,0,0,0.2);
     z-index: 2;
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 100vh;  /* Fallback */
+    height: 100dvh;
     > .os-form-w {
       max-height: 100%;
+      min-height: 100%;
       > form {
+        min-height: 100%;
         max-height: 100%;
         display: flex;
         flex-direction: column;
@@ -275,6 +325,9 @@
 
   .os-form-sub-header-actions {
     margin-top: 0px;
+    select.os-form-control {
+      padding: 5px 20px 4px 8px !important;
+    }
     .latepoint-btn + .latepoint-btn {
       margin-left: 5px;
     }
@@ -287,7 +340,7 @@
   .os-form-sub-header {
     margin-bottom: 15px;
     background-color: #fff;
-    margin-top: 10px;
+    margin-top: 20px;
     padding-top: 10px;
     border-bottom: 2px solid $headings-color;
     padding-bottom: 5px;
@@ -296,7 +349,7 @@
       font-weight: $body-font-weight-black;
       margin: 0px;
       padding: 0px;
-      font-size: floor($font-size-base * 1.1);
+      font-size: $headings-font-size-m;
     }
   }
 
@@ -365,6 +418,34 @@
     }
   }
 
+
+  .quick-add-item-button {
+    border: 2px dotted rgba(0, 0, 0, 0.1);
+    padding: 7px 10px;
+    text-align: center;
+    border-radius: 6px;
+    color: $brand-primary;
+    cursor: pointer;
+    position: relative;
+    &.os-loading {
+      color: transparent;
+      &:before {
+        @include loading-circle($brand-primary);
+      }
+    }
+    &:hover {
+      border: 2px solid $brand-primary;
+    }
+    i, span {
+      display: inline-block;
+      vertical-align: middle;
+    }
+    span {
+      margin-left: 5px;
+      font-weight: $body-font-weight-bold;
+    }
+  }
+
   .quick-add-transaction {
     border: 2px dotted rgba(0, 0, 0, 0.1);
     padding: 7px 10px;
@@ -395,7 +476,7 @@
   .quick-transaction-info-w {
     background-color: #fff;
     border: 1px solid $border-color-main;
-    box-shadow: 0 3px 0 0 #eee;
+    box-shadow: 0 2px 0 0 #eee;
     border-radius: $border-radius;
     border-bottom-color: darken($border-color-main, 20%);
     animation: 0.3s cubic-bezier(.45,1.1,.4,1.2) 0s wizardWrapperAnimation;
@@ -420,7 +501,6 @@
       justify-content: space-between;
       padding: 10px;
       align-items: center;
-      background-color: #f9f9f9;
       border-radius: 0 0 $border-radius $border-radius;
     }
 

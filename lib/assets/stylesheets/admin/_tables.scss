@@ -651,8 +651,9 @@
   }
   &.has-scrollable-table {
     margin-right: -$content-padding;
-    border-radius: $border-radius 0 0 $border-radius;
     @include white-box();
+    border-radius: $border-radius 0 0 $border-radius;
+    border-right: none;
     .os-scrollable-table-w {
     }
     &.no-overflow {
