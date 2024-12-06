@@ -223,7 +223,7 @@ class OsDatabaseHelper {
       coupon_code varchar(100),
       coupon_discount decimal(20,4),
       tax_total decimal(20,4),
-      payment_data text,
+      initial_payment_data text,
       created_at datetime,
       updated_at datetime,
       PRIMARY KEY  (id),
@@ -289,6 +289,20 @@ class OsDatabaseHelper {
       PRIMARY KEY  (id),
       KEY order_id_index (order_id)
       UNIQUE KEY invoice_number_index (invoice_number)
+    ) $charset_collate;";
+
+
+		$sqls[] = "CREATE TABLE " . LATEPOINT_TABLE_PAYMENT_REQUESTS . " (
+      id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+      order_id int(11) NOT NULL,
+      invoice_id int(11) NOT NULL,
+      charge_amount decimal(20,4),
+      due_at datetime,
+      created_at datetime,
+      updated_at datetime,
+      PRIMARY KEY  (id)
+      KEY invoice_id_index (invoice_id)
+      KEY order_id_index (order_id)
     ) $charset_collate;";
 
 

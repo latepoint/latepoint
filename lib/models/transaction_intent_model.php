@@ -10,7 +10,7 @@ class OsTransactionIntentModel extends OsModel {
 		$customer_id,
 		$invoice_id,
 		$transaction_id,
-		$payment_data,
+		$payment_data = '',
 		$payment_data_arr,
 		$other_data,
 		$charge_amount,
@@ -26,6 +26,12 @@ class OsTransactionIntentModel extends OsModel {
 		if ( $id ) {
 			$this->load_by_id( $id );
 		}
+	}
+
+	protected function params_to_sanitize() {
+		return [
+			'charge_amount'        => 'money',
+		];
 	}
 
 

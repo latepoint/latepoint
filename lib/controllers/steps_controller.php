@@ -252,7 +252,6 @@ if ( ! class_exists( 'OsStepsController' ) ) :
 			$this->set_layout( 'none' );
 
 
-			LatePoint\Cerber\Router::smell();
 
 			if ( $output ) {
 				$this->format_render( __FUNCTION__, [], [ 'step' => $current_step->code ] );

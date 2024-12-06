@@ -2991,6 +2991,14 @@
       "oAP" : "\/lib\/controllers\/stripe_connect_controller.php",
       "oF" : 0
     },
+    "\/lib\/controllers\/support_topics_controller.php" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/controllers\/support_topics_controller.php",
+      "oF" : 0
+    },
     "\/lib\/controllers\/todos_controller.php" : {
       "cB" : 0,
       "ft" : 8192,
@@ -3439,6 +3447,14 @@
       "oAP" : "\/lib\/helpers\/styles_helper.php",
       "oF" : 0
     },
+    "\/lib\/helpers\/support_topics_helper.php" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/helpers\/support_topics_helper.php",
+      "oF" : 0
+    },
     "\/lib\/helpers\/time_helper.php" : {
       "cB" : 0,
       "ft" : 8192,
@@ -3597,14 +3613,6 @@
       "hM" : 0,
       "oA" : 0,
       "oAP" : "\/lib\/misc\/role.php",
-      "oF" : 0
-    },
-    "\/lib\/misc\/router.php" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/lib\/misc\/router.php",
       "oF" : 0
     },
     "\/lib\/misc\/step.php" : {
@@ -3829,6 +3837,14 @@
       "hM" : 0,
       "oA" : 0,
       "oAP" : "\/lib\/models\/order_model.php",
+      "oF" : 0
+    },
+    "\/lib\/models\/payment_request_model.php" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/models\/payment_request_model.php",
       "oF" : 0
     },
     "\/lib\/models\/process_job_model.php" : {
@@ -5157,6 +5173,22 @@
       "hM" : 0,
       "oA" : 0,
       "oAP" : "\/lib\/views\/steps\/start.php",
+      "oF" : 0
+    },
+    "\/lib\/views\/support_topics\/partials\/payment_request.php" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/views\/support_topics\/partials\/payment_request.php",
+      "oF" : 0
+    },
+    "\/lib\/views\/support_topics\/view.php" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/views\/support_topics\/view.php",
       "oF" : 0
     },
     "\/lib\/views\/transactions\/_table_body.php" : {

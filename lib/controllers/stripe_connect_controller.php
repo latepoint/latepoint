@@ -32,10 +32,10 @@ if ( ! class_exists( 'OsStripeConnectController' ) ) :
 		        $transaction_intent->charge_amount = $order->get_total_balance_due();
 		        $transaction_intent->specs_charge_amount = OsStripeConnectHelper::convert_amount_to_specs($transaction_intent->charge_amount);
 		        $transaction_intent->order_id = $order->id;
-		        $transaction_intent->payment_data_arr['time'] = LATEPOINT_PAYMENT_TIME_NOW;
-		        $transaction_intent->payment_data_arr['portion'] = sanitize_text_field($this->params['payment_portion']);
-		        $transaction_intent->payment_data_arr['method'] = sanitize_text_field($this->params['payment_method']);
-		        $transaction_intent->payment_data_arr['processor'] = sanitize_text_field($this->params['payment_processor']);
+		        $transaction_intent->set_payment_data_value('time', LATEPOINT_PAYMENT_TIME_NOW, false);
+		        $transaction_intent->set_payment_data_value('portion', sanitize_text_field($this->params['payment_portion']), false);
+		        $transaction_intent->set_payment_data_value('method', sanitize_text_field($this->params['payment_method']), false);
+		        $transaction_intent->set_payment_data_value('processor', sanitize_text_field($this->params['payment_processor']), false);
 				$transaction_intent->generate_intent_key();
 
 				if ( OsSettingsHelper::get_settings_value( OsSettingsHelper::append_payment_env_key( 'stripe_connect_account_id' ) ) ) {
@@ -47,7 +47,7 @@ if ( ! class_exists( 'OsStripeConnectController' ) ) :
 				}
 
 
-				$transaction_intent->payment_data_arr['token'] = $payment_intent_id;
+				$transaction_intent->set_payment_data_value('token', $payment_intent_id, false);
 				if(!$transaction_intent->save()){
 					throw new Exception( __( 'Unable to save transaction intent', 'latepoint' ) );
 				}

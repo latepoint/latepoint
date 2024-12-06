@@ -180,7 +180,7 @@ class OsInvoicesHelper {
                               </div>
                               <div class="quick-invoice-sub">
                                 <div class="lp-invoice-number"><span>' . esc_html__( 'Invoice Number:', 'latepoint-pro-features' ) . '</span> <strong>' . esc_html( $invoice->invoice_number ) . '</strong></div>
-                                <div class="lp-invoice-date">' . esc_html( OsTimeHelper::get_readable_date( new OsWpDateTime( $invoice->created_at ) ) ) . '</div>
+                                <div class="lp-invoice-date">' . sprintf(esc_html__('Due: %s', 'latepoint-pro-features'), OsTimeHelper::get_readable_date( new OsWpDateTime( $invoice->due_at ) ) ) . '</div>
                               </div>';
 						echo '</div>';
 					}
@@ -202,7 +202,7 @@ class OsInvoicesHelper {
 	}
 
 
-	public static function create_invoice_for_new_order( OsOrderModel $order ) {
+	public static function create_invoices_for_new_order( OsOrderModel $order, ?OsPaymentRequestModel $payment_request = null) {
 		$invoice           = new OsInvoiceModel();
 		$invoice->order_id = $order->id;
 
@@ -241,22 +241,31 @@ class OsInvoicesHelper {
 
 		$invoice->data = json_encode( $data );
 
-        if($order->get_payment_data_value('portion') == LATEPOINT_PAYMENT_PORTION_DEPOSIT){
-            $invoice_for_remaining_balance = clone $invoice;
-            $invoice->charge_amount = $order->get_payment_data_value('initial_charge_amount');
-            $invoice->payment_portion = LATEPOINT_PAYMENT_PORTION_DEPOSIT;
-            $invoice_for_remaining_balance->charge_amount = $order->get_total() - $invoice->charge_amount;
-            $invoice_for_remaining_balance->payment_portion = LATEPOINT_PAYMENT_PORTION_REMAINING;
-        }elseif($order->get_payment_data_value('portion') == LATEPOINT_PAYMENT_PORTION_FULL){
+        if($order->get_initial_payment_data_value('time') == LATEPOINT_PAYMENT_TIME_NOW){
+            // need to pay now, portion will depend on what customer/booker selected
+            $invoice->payment_portion = $order->get_initial_payment_data_value('portion');
+            $invoice->charge_amount = $order->get_initial_payment_data_value('charge_amount');
+            if($order->get_initial_payment_data_value('portion') != LATEPOINT_PAYMENT_PORTION_FULL){
+                // since we are not paying full balance, create invoice for the remaining amount
+                $invoice_for_remaining_balance = clone $invoice;
+                $invoice_for_remaining_balance->charge_amount = $order->get_total() - $invoice->charge_amount;
+                $invoice_for_remaining_balance->payment_portion = LATEPOINT_PAYMENT_PORTION_REMAINING;
+            }
+        }else{
+            // will pay later, need to generate full price invoice
+            $invoice->charge_amount = $order->get_total();
             $invoice->payment_portion = LATEPOINT_PAYMENT_PORTION_FULL;
-			$invoice->charge_amount = $order->get_total();
         }
 
-		$total_paid = $order->get_total_amount_paid_from_transactions();
-		if ( $total_paid == $invoice->charge_amount ) {
-			// since the order has just been created - any transactions that were made - are part of the time of creation, so should be on the invoice
-			$invoice->status        = LATEPOINT_INVOICE_STATUS_PAID;
-		}
+
+        if ( $order->get_total_amount_paid_from_transactions() == $invoice->charge_amount ) {
+            // since the order has just been created - any transactions that were made - are part of the time of creation, so should be on the invoice
+            $invoice->status        = LATEPOINT_INVOICE_STATUS_PAID;
+            $transactions = $order->get_transactions();
+        }
+
+
+
 
 		if ( $invoice->save() ) {
 			/**
@@ -269,8 +278,30 @@ class OsInvoicesHelper {
 			 *
 			 */
 			do_action( 'latepoint_invoice_created', $invoice );
-            // TODO add setting field to enable this
-            if(OsSettingsHelper::get_settings_value('create_invoice_for_remaining_balance_if_deposit_paid') && isset($invoice_for_remaining_balance)){
+            if(!empty($payment_request)){
+                // if we have payment request, update it with created invoice
+                $payment_request->invoice_id = $invoice->id;
+                /**
+                 * Invoice was created
+                 *
+                 * @param {OsInvoiceModel} $payment_request instance of payment request model that was created
+                 *
+                 * @since 5.0.15
+                 * @hook latepoint_payment_request_created
+                 *
+                 */
+                do_action( 'latepoint_payment_request_created', $payment_request );
+                $payment_request->save();
+            }
+            if(isset($invoice_for_remaining_balance)){
+                $order_items = $order->get_items();
+                foreach($order_items as $item){
+                    if($item->is_booking()){
+                        $booking                   = $item->build_original_object_from_item_data();
+                        $invoice_for_remaining_balance->due_at = $booking->start_datetime_utc;
+                        break;
+                    }
+                }
                 $invoice_for_remaining_balance->save();
                 /**
                  * Invoice was created

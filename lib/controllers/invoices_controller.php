@@ -37,8 +37,8 @@ if ( ! class_exists( 'OsInvoicesController' ) ) :
 	        $transaction_intent->invoice_id = $invoice->id;
 	        $transaction_intent->order_id = $order->id;
 	        $transaction_intent->customer_id = $order->customer_id;
-	        $transaction_intent->payment_data_arr['time'] = LATEPOINT_PAYMENT_TIME_NOW;
-	        $transaction_intent->payment_data_arr['portion'] = ($order->get_total_amount_paid_from_transactions() > 0) ? LATEPOINT_PAYMENT_PORTION_REMAINING : LATEPOINT_PAYMENT_PORTION_FULL;
+	        $transaction_intent->set_payment_data_value('time', LATEPOINT_PAYMENT_TIME_NOW, false);
+	        $transaction_intent->set_payment_data_value('portion', ($order->get_total_amount_paid_from_transactions() > 0) ? LATEPOINT_PAYMENT_PORTION_REMAINING : LATEPOINT_PAYMENT_PORTION_FULL, false);
 
 			$form_prev_button = esc_html__('Back', 'latepoint');
 			$form_next_button = esc_html__('Next', 'latepoint');
@@ -62,7 +62,7 @@ if ( ! class_exists( 'OsInvoicesController' ) ) :
 				$form_heading = __( 'Payment Methods', 'latepoint' );
 				$form_prev_button = false;
 			}else{
-		        $transaction_intent->payment_data_arr['method'] = $selected_payment_method;
+		        $transaction_intent->set_payment_data_value('method', $selected_payment_method, false);
 				if(!$selected_payment_processor){
 					$current_step = 'processors';
 					$form_heading = __( 'Payment Processors', 'latepoint' );
@@ -70,7 +70,7 @@ if ( ! class_exists( 'OsInvoicesController' ) ) :
 					// hide prev button if we don't need to pick a payment methods
 					if(count($enabled_payment_methods) <= 1) $form_prev_button = false;
 				}else{
-			        $transaction_intent->payment_data_arr['processor'] = $selected_payment_processor;
+			        $transaction_intent->set_payment_data_value('processor', $selected_payment_processor, false);
 					$form_next_button = sprintf(esc_html__('Pay %s', 'latepoint'), OsMoneyHelper::format_price($transaction_intent->charge_amount, true, false));
 					$form_heading = __( 'Payment Form', 'latepoint' );
 					// hide prev button if we don't need to pick a payment method or processor
@@ -78,7 +78,7 @@ if ( ! class_exists( 'OsInvoicesController' ) ) :
 					if(!$payment_token){
 						$current_step = 'pay';
 					}else{
-				        $transaction_intent->payment_data_arr['token'] = $payment_token;
+				        $transaction_intent->set_payment_data_value('token', $payment_token, false);
 						$transaction_id = $transaction_intent->convert_to_transaction();
 						if($transaction_id){
 							$transaction = new OsTransactionModel($transaction_id);

@@ -235,6 +235,23 @@ if ( ! class_exists( 'OsOrdersController' ) ) :
 				$order->price_breakdown = wp_json_encode( OsOrdersHelper::generate_price_breakdown_from_params($this->params['price_breakdown']) );
 			}
 
+			// Check if we have to create a payment request
+			$create_payment_request = (sanitize_text_field($this->params['create_payment_request']) == LATEPOINT_VALUE_ON);
+			if($create_payment_request){
+				$payment_request_portion = sanitize_text_field($this->params['payment_request']['portion']);
+				$order->set_initial_payment_data_value('time', LATEPOINT_PAYMENT_TIME_NOW, false);
+				$order->set_initial_payment_data_value('portion', $payment_request_portion, false);
+				$order->set_initial_payment_data_value('charge_amount', OsMoneyHelper::convert_amount_from_money_input_to_db_format(sanitize_text_field($this->params['payment_request']['charge_amount_'.$payment_request_portion]), false));
+
+				$payment_request = new OsPaymentRequestModel();
+				$payment_request = $payment_request->set_data($this->params['payment_request']);
+				$payment_request->order_id = $order->id;
+
+			}else{
+				$order->set_initial_payment_data_value('time', LATEPOINT_PAYMENT_TIME_LATER);
+				$payment_request = null;
+			}
+
 			if ( $order->save() ) {
 
 				// save transactions
@@ -346,6 +363,7 @@ if ( ! class_exists( 'OsOrdersController' ) ) :
 					 *
 					 */
 					do_action( 'latepoint_order_created', $order );
+					OsInvoicesHelper::create_invoices_for_new_order($order, $payment_request);
 				}
 
 				$status        = LATEPOINT_STATUS_SUCCESS;

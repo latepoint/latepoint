@@ -357,6 +357,15 @@ class OsFormHelper {
 		return apply_filters( 'latepoint_model_options_for_multi_select', $options, $model_name );
 	}
 
+	public static function date_picker_field(string $name, string $formatted_value = '', string $raw_value = '', array $atts = []) : string{
+		$html = '<div data-single-date="yes" '.self::atts_string_from_array($atts, ['class' => 'os-date-range-picker']).'>
+					<span class="range-picker-value">'.esc_html($formatted_value).'</span>
+					<i class="latepoint-icon latepoint-icon-chevron-down"></i>
+					<input type="hidden" name="'.esc_attr($name).'" value="'.esc_attr($raw_value).'"/>
+				</div>';
+        return $html;
+	}
+
 	public static function multi_select_field( $name, $label = false, $options = [], $selected_values = [], $atts = [], $wrapper_atts = [] ) {
 		$html = '';
 		if ( ! $selected_values ) {

@@ -382,6 +382,9 @@ if ( ! class_exists( 'LatePoint' ) ) :
 			if ( ! defined( 'LATEPOINT_TABLE_ORDER_INVOICES' ) ) {
 				define( 'LATEPOINT_TABLE_ORDER_INVOICES', $wpdb->prefix . 'latepoint_order_invoices' );
 			}
+			if ( ! defined( 'LATEPOINT_TABLE_PAYMENT_REQUESTS' ) ) {
+				define( 'LATEPOINT_TABLE_PAYMENT_REQUESTS', $wpdb->prefix . 'latepoint_payment_requests' );
+			}
 			if ( ! defined( 'LATEPOINT_ORDER_INTENT_STATUS_NEW' ) ) {
 				define( 'LATEPOINT_ORDER_INTENT_STATUS_NEW', 'new' );
 			}
@@ -692,7 +695,8 @@ if ( ! class_exists( 'LatePoint' ) ) :
 			// Stripe Connect
 			if ( ! defined( 'LATEPOINT_STRIPE_CONNECT_URL' ) ) {
 //				define( 'LATEPOINT_STRIPE_CONNECT_URL', 'https://app.latepoint.com' );
-				define( 'LATEPOINT_STRIPE_CONNECT_URL', 'https://latepoint-laravel.test' );
+//				define( 'LATEPOINT_STRIPE_CONNECT_URL', 'https://latepoint-laravel.test' );
+				define( 'LATEPOINT_STRIPE_CONNECT_URL', 'https://wp-latepoint.ngrok.io/' );
 			}
 		}
 
@@ -732,6 +736,7 @@ if ( ! class_exists( 'LatePoint' ) ) :
 			include_once( LATEPOINT_ABSPATH . 'lib/controllers/events_controller.php' );
 			include_once( LATEPOINT_ABSPATH . 'lib/controllers/stripe_connect_controller.php' );
 			include_once( LATEPOINT_ABSPATH . 'lib/controllers/invoices_controller.php' );
+			include_once( LATEPOINT_ABSPATH . 'lib/controllers/support_topics_controller.php' );
 
 
 
@@ -770,6 +775,7 @@ if ( ! class_exists( 'LatePoint' ) ) :
 			include_once( LATEPOINT_ABSPATH . 'lib/models/process_job_model.php' );
 			include_once( LATEPOINT_ABSPATH . 'lib/models/join_bundles_services_model.php' );
 			include_once( LATEPOINT_ABSPATH . 'lib/models/invoice_model.php' );
+			include_once( LATEPOINT_ABSPATH . 'lib/models/payment_request_model.php' );
 
 
 			// HELPERS
@@ -832,9 +838,9 @@ if ( ! class_exists( 'LatePoint' ) ) :
 			include_once( LATEPOINT_ABSPATH . 'lib/helpers/bricks_helper.php' );
 			include_once( LATEPOINT_ABSPATH . 'lib/helpers/transaction_intent_helper.php' );
 			include_once( LATEPOINT_ABSPATH . 'lib/helpers/invoices_helper.php' );
+			include_once( LATEPOINT_ABSPATH . 'lib/helpers/support_topics_helper.php' );
 
 			// MISC
-			include_once( LATEPOINT_ABSPATH . 'lib/misc/router.php' );
 			include_once( LATEPOINT_ABSPATH . 'lib/misc/time_period.php' );
 			include_once( LATEPOINT_ABSPATH . 'lib/misc/blocked_period.php' );
 			include_once( LATEPOINT_ABSPATH . 'lib/misc/booked_period.php' );
@@ -937,8 +943,6 @@ if ( ! class_exists( 'LatePoint' ) ) :
 
 			add_action( 'latepoint_email_processor_settings', [ $this, 'email_processor_settings' ], 10, 2 );
 
-			// order invoices
-			add_action( 'latepoint_order_created', 'OsInvoicesHelper::create_invoice_for_new_order' );
 
 			// Auth
 			add_filter( 'login_redirect', [ $this, 'redirect_manager_and_agent_to_latepoint' ], 10, 3 );

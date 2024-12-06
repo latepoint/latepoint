@@ -27,6 +27,13 @@ class OsInvoiceModel extends OsModel {
 	}
 
 
+	protected function params_to_sanitize() {
+		return [
+			'charge_amount'        => 'money',
+		];
+	}
+
+
 	protected function before_save() {
 
 		if ( empty( $this->invoice_number ) ) {

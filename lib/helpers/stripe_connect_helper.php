@@ -46,13 +46,13 @@ class OsStripeConnectHelper {
                         } else {
                             // payment error
                             $result['status']  = LATEPOINT_STATUS_ERROR;
-                            $result['message'] = __( 'Payment Error', 'latepoint-payments-stripe' );
+                            $result['message'] = __( 'Payment Error', 'latepoint' );
                             $transaction_intent->add_error( 'send_to_step', $result['message'], 'payment' );
                         }
                     } else {
                         // payment token missing
                         $result['status']  = LATEPOINT_STATUS_ERROR;
-                        $result['message'] = __( 'Payment Error 23JDF38', 'latepoint-payments-stripe' );
+                        $result['message'] = __( 'Payment Error 23JDF38', 'latepoint' );
                         $transaction_intent->add_error( 'payment_error', $result['message'] );
                     }
                     break;

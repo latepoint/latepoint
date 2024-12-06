@@ -45,16 +45,38 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <?php if ( $order->is_new_record() ) { ?>
     <div class="initial-payment-data-wrapper">
-        <?php echo OsFormHelper::toggler_field('instant_payment_request', esc_html__( 'Create Payment Request', 'latepoint' ), false, 'payNowPortionInfo'); ?>
+        <div class="initial-payment-data-toggler-wrapper">
+            <?php echo OsFormHelper::toggler_field('create_payment_request', esc_html__( 'Create a Payment Request', 'latepoint' ), false, 'payNowPortionInfo'); ?>
+            <a href="#"
+               data-os-params="<?php echo esc_attr(OsUtilHelper::build_os_params( [ 'topic' => 'payment_request' ] )); ?>"
+			   data-os-action="<?php echo esc_attr(OsRouterHelper::build_route_name( 'support_topics', 'view' )); ?>"
+			   data-os-output-target="lightbox"
+               class="latepoint-element-info-trigger"><i class="latepoint-icon latepoint-icon-info"></i></a>
+        </div>
         <div id="payNowPortionInfo" style="display: none;">
-            <div class="label-for-select"><?php _e('Amount:', 'latepoint'); ?></div>
+            <div class="payment-request-row">
             <?php
             $payment_portions = [];
-            if($total_balance > 0) $payment_portions[LATEPOINT_PAYMENT_PORTION_FULL] = sprintf( __( 'Full Payment of %s' ), OsMoneyHelper::format_price( $total_balance, true, false ) );
-            if($deposit_amount > 0) $payment_portions[LATEPOINT_PAYMENT_PORTION_DEPOSIT] = sprintf( __( '%s Deposit', 'latepoint' ), OsMoneyHelper::format_price( $deposit_amount, true, false ) );
+            if($total_balance > 0) $payment_portions[LATEPOINT_PAYMENT_PORTION_FULL] = sprintf( __( 'Full Price [%s]' ), OsMoneyHelper::format_price( $total_balance, true, false ) );
+            if($deposit_amount > 0) $payment_portions[LATEPOINT_PAYMENT_PORTION_DEPOSIT] = sprintf( __( 'Deposit Only [%s]', 'latepoint' ), OsMoneyHelper::format_price( $deposit_amount, true, false ) );
             $payment_portions[LATEPOINT_PAYMENT_PORTION_CUSTOM] = __( 'Custom', 'latepoint' );
-            echo OsFormHelper::select_field( 'instant_payment_request[portion]', false, $payment_portions, LATEPOINT_PAYMENT_PORTION_FULL, [ 'class' => 'size-small', 'theme' => 'simple' ] );
-            echo OsFormHelper::money_field( 'instant_payment_request[charge_amount]', false, $total_balance, [ 'class' => 'size-small', 'theme' => 'simple' ] ); ?>
+
+            $selected_portion = array_key_first($payment_portions);
+            echo '<div class="label-for-select">'.esc_html__('Amount:', 'latepoint').'</div>';
+            echo OsFormHelper::select_field( 'payment_request[portion]', false, $payment_portions, $selected_portion, [ 'class' => 'size-small', 'theme' => 'simple' ] );
+            echo '<div class="custom-charge-amount-wrapper" style="'.(($selected_portion != LATEPOINT_PAYMENT_PORTION_CUSTOM) ? 'display: none;' : '').'">';
+            echo OsFormHelper::money_field( 'payment_request[charge_amount_custom]', false, $total_balance, [ 'class' => 'size-small', 'theme' => 'simple' ] );
+            echo OsFormHelper::hidden_field('payment_request[charge_amount_full]', $total_balance);
+            echo OsFormHelper::hidden_field('payment_request[charge_amount_deposit]', $deposit_amount);
+            echo '</div>';
+            ?>
+            </div>
+            <div class="payment-request-row">
+                <?php
+                    echo '<div class="label-for-select">'.esc_html__('Due Date:', 'latepoint').'</div>';
+                    echo OsFormHelper::date_picker_field( 'payment_request[due_at]', OsTimeHelper::get_readable_date_from_string(OsTimeHelper::today_date('Y-m-d')), OsTimeHelper::today_date('Y-m-d'), [ 'class' => 'size-small', 'theme' => 'simple' ] );
+                ?>
+            </div>
         </div>
 
     </div>

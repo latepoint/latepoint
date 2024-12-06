@@ -18,8 +18,8 @@ class OsOrderModel extends OsModel {
 		$customer_id,
 		$customer_comment,
 		$price_breakdown,
-		$payment_data,
-		$payment_data_arr,
+		$initial_payment_data = '',
+		$initial_payment_data_arr,
 		$coupon_code,
 		$coupon_discount = 0,
 		$tax_total = 0,
@@ -40,12 +40,12 @@ class OsOrderModel extends OsModel {
 	}
 
 
-	public function get_payment_data_value( string $key ): string {
-		if ( ! isset( $this->payment_data_arr ) ) {
-			$this->payment_data_arr = json_decode( $this->payment_data, true );
+	public function get_initial_payment_data_value( string $key ): string {
+		if ( ! isset( $this->initial_payment_data_arr ) ) {
+			$this->initial_payment_data_arr = json_decode( $this->initial_payment_data, true );
 		}
 
-		return $this->payment_data_arr[ $key ] ?? '';
+		return $this->initial_payment_data_arr[ $key ] ?? '';
 	}
 
 
@@ -75,12 +75,12 @@ class OsOrderModel extends OsModel {
 		return OsOrdersHelper::generate_direct_manage_order_url( $this, $for );
 	}
 
-	public function set_payment_data_value( string $key, string $value, bool $save = true ) {
-		$this->payment_data_arr         = json_decode( $this->payment_data, true );
-		$this->payment_data_arr[ $key ] = $value;
-		$this->payment_data             = wp_json_encode( $this->payment_data_arr );
-		if ( $save ) {
-			$this->update_attributes( [ 'payment_data' => $this->payment_data ] );
+	public function set_initial_payment_data_value( string $key, string $value, bool $save = true ) {
+		$this->initial_payment_data_arr         = json_decode( $this->initial_payment_data, true );
+		$this->initial_payment_data_arr[ $key ] = $value;
+		$this->initial_payment_data             = wp_json_encode( $this->initial_payment_data_arr );
+		if ( $save && !$this->is_new_record() ) {
+			$this->update_attributes( [ 'initial_payment_data' => $this->initial_payment_data ] );
 		}
 	}
 
@@ -548,7 +548,7 @@ class OsOrderModel extends OsModel {
 			'source_id',
 			'confirmation_code',
 			'source_url',
-			'payment_data',
+			'initial_payment_data',
 			'customer_id',
 			'customer_comment',
 			'coupon_code',
@@ -573,7 +573,7 @@ class OsOrderModel extends OsModel {
 			'source_id',
 			'confirmation_code',
 			'source_url',
-			'payment_data',
+			'initial_payment_data',
 			'customer_id',
 			'customer_comment',
 			'price_breakdown',
