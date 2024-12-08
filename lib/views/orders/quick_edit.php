@@ -270,7 +270,7 @@ if ( ! defined( 'ABSPATH' ) ) {
          *
          * @param {OsOrderModel} $order instance of order model that is being edited
          *
-         * @since 5.0.15
+         * @since 5.1.0
          * @hook latepoint_order_quick_edit_form_content_after
          *
          */

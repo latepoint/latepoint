@@ -14,7 +14,7 @@
  *
  * @param {OsTransactionIntentModel} transaction intent for a payment
  *
- * @since 5.0.15
+ * @since 5.1.0
  * @hook latepoint_order_payment__pay_content
  *
  */

@@ -155,7 +155,7 @@ class OsInvoicesHelper {
 		 * @param {array} $statuses Array of invoice statuses
 		 *
 		 * @returns {array} Filtered array of invoice statuses
-		 * @since 5.0.15
+		 * @since 5.1.0
 		 * @hook latepoint_invoices_statuses_for_select
 		 *
 		 */
@@ -273,7 +273,7 @@ class OsInvoicesHelper {
 			 *
 			 * @param {OsInvoiceModel} $invoice instance of invoice model that was created
 			 *
-			 * @since 5.0.15
+			 * @since 5.1.0
 			 * @hook latepoint_invoice_created
 			 *
 			 */
@@ -286,7 +286,7 @@ class OsInvoicesHelper {
                  *
                  * @param {OsInvoiceModel} $payment_request instance of payment request model that was created
                  *
-                 * @since 5.0.15
+                 * @since 5.1.0
                  * @hook latepoint_payment_request_created
                  *
                  */
@@ -308,12 +308,42 @@ class OsInvoicesHelper {
                  *
                  * @param {OsInvoiceModel} $invoice instance of invoice model that was created
                  *
-                 * @since 5.0.15
+                 * @since 5.1.0
                  * @hook latepoint_invoice_created
                  *
                  */
                 do_action( 'latepoint_invoice_created', $invoice_for_remaining_balance );
             }
 		}
+	}
+
+	/**
+     *
+     * Tries to get a matching invoice for a transaction, this is only useful when a new order is created and a transaction needs to find an invoice to attach to
+     *
+	 * @param OsTransactionModel $transaction
+	 *
+	 * @return OsInvoiceModel
+	 */
+	public static function get_matching_invoice_for_transaction( OsTransactionModel $transaction ) : OsInvoiceModel {
+        $invoice = new OsInvoiceModel();
+        $invoice->where(['order_id' => $transaction->order_id]);
+        $invoice->where(['payment_portion' => $transaction->payment_portion]);
+        $invoice->where(['charge_amount' => $transaction->amount]);
+        $invoice->where(['status' => LATEPOINT_INVOICE_STATUS_NOT_PAID]);
+        $invoice = $invoice->set_limit(1)->get_results_as_models();
+        if(empty($invoice)) $invoice = new OsInvoiceModel();
+
+		/**
+		 * Try to get a matching invoice for a transaction
+		 *
+		 * @since 5.1.0
+		 * @hook latepoint_invoice_get_matching_invoice_for_transaction
+		 *
+		 * @param {OsTransactionModel} $transaction transaction to match invoice to
+		 *
+		 * @returns {OsInvoiceModel} Filtered invoice model
+		 */
+        return apply_filters('latepoint_invoice_get_matching_invoice_for_transaction', $invoice, $transaction);
 	}
 }

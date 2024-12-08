@@ -19,8 +19,8 @@ if ( ! defined( 'ABSPATH' ) ) {
             <div class="invoice-due-amount-inner">
                 <div class="id-amount"><?php echo OsMoneyHelper::format_price($invoice->charge_amount, true, false); ?></div>
                 <div class="id-sub-info">
-                    <?php esc_html_e('Order:', 'latepoint-pro-features'); ?>
-                    <a href="#"><span><?php echo $order->confirmation_code; ?></span><i class="latepoint-icon latepoint-icon-external-link"></i></a>
+                    <?php esc_html_e('Order:', 'latepoint'); ?>
+                    <a href="<?php echo $order->manage_by_key_url('customer') ?>" target="_blank"><span><?php echo $order->confirmation_code; ?></span><i class="latepoint-icon latepoint-icon-external-link"></i></a>
                 </div>
             </div>
             <?php if($order->get_total_balance_due() > 0){ ?>
@@ -31,7 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                    data-os-after-call="latepoint_init_transaction_payment_form"
                    data-os-output-target=".invoice-payment-form-wrapper"
                    class="latepoint-btn latepoint-btn-block invoice-make-payment-btn">
-                    <span><?php echo sprintf( __( 'Pay Now', 'latepoint-pro-features' ), OsMoneyHelper::format_price( $order->get_total_balance_due(), true, false ) ); ?></span>
+                    <span><?php echo sprintf( __( 'Pay Now', 'latepoint' ), OsMoneyHelper::format_price( $order->get_total_balance_due(), true, false ) ); ?></span>
                     <i class="latepoint-icon latepoint-icon-arrow-right1"></i>
                 </a>
             <?php } ?>
@@ -39,7 +39,7 @@ if ( ! defined( 'ABSPATH' ) ) {
         <div class="full-summary-info-w">
             <div class="summary-price-breakdown-wrapper">
                 <div class="pb-heading">
-                    <div class="pbh-label"><?php esc_html_e( 'Order Breakdown', 'latepoint-pro-features' ); ?></div>
+                    <div class="pbh-label"><?php esc_html_e( 'Order Breakdown', 'latepoint' ); ?></div>
                     <div class="pbh-line"></div>
                 </div>
                 <?php

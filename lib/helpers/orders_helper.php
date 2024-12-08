@@ -176,11 +176,7 @@ class OsOrdersHelper {
 		if ( ! in_array( $for, [ 'agent', 'customer' ] ) ) {
 			return '';
 		}
-		$key = OsMetaHelper::get_order_meta_by_key( 'key_to_manage_for_' . $for, $order->id );
-		if ( empty( $key ) ) {
-			$key = bin2hex( random_bytes( 18 ) );
-			OsMetaHelper::save_order_meta_by_key( 'key_to_manage_for_' . $for, $key, $order->id );
-		}
+		$key = $order->get_key_to_manage_for($for);
 		$url = OsRouterHelper::build_admin_post_link( [ 'manage_order_by_key', 'show' ], [ 'key' => $key ] );
 
 		return $url;

@@ -40,7 +40,7 @@
  *
  * @param {OsTransactionModel} transaction model
  *
- * @since 5.0.15
+ * @since 5.1.0
  * @hook latepoint_order_payment__confirmation_content
  *
  */

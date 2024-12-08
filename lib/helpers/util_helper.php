@@ -452,4 +452,8 @@ class OsUtilHelper {
             <div class="add-box-label">'.esc_html($label).'</div>
           </a>';
 	}
+
+	public static function generate_key_to_manage() : string {
+		return bin2hex( random_bytes( 18 ) );
+	}
 }

@@ -23,6 +23,7 @@ class OsOrderModel extends OsModel {
 		$coupon_code,
 		$coupon_discount = 0,
 		$tax_total = 0,
+		$keys_to_manage = [],
 		$created_at,
 		$updated_at;
 
@@ -403,6 +404,19 @@ class OsOrderModel extends OsModel {
 		}
 
 		return $vars;
+	}
+
+
+	public function get_key_to_manage_for(string $for): string {
+		if($this->is_new_record()) return '';
+		if(!empty($this->keys_to_manage[$for])) return $this->keys_to_manage[$for];
+		$key = OsMetaHelper::get_order_meta_by_key( 'key_to_manage_for_' . $for, $this->id );
+		if ( empty( $key ) ) {
+			$key = OsUtilHelper::generate_key_to_manage();
+			OsMetaHelper::save_order_meta_by_key( 'key_to_manage_for_' . $for, $key, $this->id );
+		}
+		$this->keys_to_manage[$for] = $key;
+		return $key;
 	}
 
 

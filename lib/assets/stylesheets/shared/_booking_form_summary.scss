@@ -122,16 +122,14 @@
     margin-bottom: 10px;
     gap: 10px;
     .pbh-label {
-      text-transform: uppercase;
       color: $color-faded;
       font-weight: $body-font-weight-bold;
-      letter-spacing: 1px;
       position: relative;
-      font-size: $headings-font-size-xxs;
+      font-size: $headings-font-size-s;
     }
     .pbh-line {
-      height: 1px;
-      background-color: #f1f1f1;
+      height: 10px;
+      background-color: rgba(0, 0, 0, 0.03);
       flex: 1;
     }
   }
@@ -147,7 +145,7 @@
 .summary-box-heading {
   display: flex;
   align-items: center;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   margin-top: 10px;
   .sbh-item {
     color: $color-faded;
@@ -169,8 +167,8 @@
     }
   }
   .sbh-line {
-    height: 1px;
-    background-color: #f1f1f1;
+    height: 10px;
+    background-color: rgba(0, 0, 0, 0.03);
     flex: 1;
     margin-left: 10px;
   }
@@ -188,12 +186,61 @@
     margin-top: 0;
   }
 }
+
 .summary-box {
-  padding: 4px 0;
+  padding: 5px 0;
   &.main-box {
-    padding: 10px 0;
+    padding: 20px 0;
+    display: flex;
+    gap: 20px;
     & + .summary-box.main-box {
       border-top: 1px solid $border-color-light;
+    }
+    .summary-box-inner {
+      flex: 1;
+    }
+    .summary-box-booking-date-box {
+      text-align: center;
+      flex: 0;
+      background-color: #f1f1f1;
+      .summary-box-booking-date-day {
+        font-size: $body-font-size-xxl;
+        line-height: 1.2;
+        font-weight: $body-font-weight-bold;
+        color: $headings-color;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        padding: 5px 15px;
+      }
+      .summary-box-booking-date-month {
+        color: $color-faded;
+        padding: 5px 15px;
+      }
+    }
+    .qr-show-trigger {
+      flex: 0 1 80px;
+      text-align: center;
+      padding-top: 10px;
+      cursor: pointer;
+      white-space: nowrap;
+      &:hover {
+
+      }
+      .latepoint-icon {
+        font-size: 30px;
+        color: #111;
+      }
+      .qr-code-trigger-label {
+        display: inline-block;
+        line-height: 1.2;
+        color: #111;
+        border-bottom: 1px dotted #111;
+        font-weight: $body-font-weight-bold;
+        margin-top: 5px;
+        font-size: $body-font-size-s;
+        &:hover {
+          border-bottom-style: solid;
+        }
+      }
     }
   }
   .summary-box-content {
@@ -276,6 +323,7 @@
     a {
       text-decoration: none;
       color: $brand-primary;
+      font-size: $body-font-size-xxs;
     }
   }
   .sbc-sub-item {
@@ -292,18 +340,20 @@
     display: inline-block;
   }
   .sbc-big-item {
-    font-size: floor($font-size-base * 1.2);
-    font-weight: $body-font-weight-bold;
+    font-family: $headings-font-family;
+    font-size: $headings-font-size-xl;
+    font-weight: $headings-font-weight-bold;
     color: $headings-color;
-    margin-bottom: 5px;
+    line-height: 1.3;
   }
   .sbc-highlighted-item {
-    color: $color-faded;
-    font-size: $body-font-size-xs;
+    color: $headings-color;
+    font-size: $body-font-size-m;
+    font-weight: $body-font-weight-bold;
     span:not(.os-timezone-info) {
       white-space: nowrap;
       color: $color-faded;
-      font-size: floor($font-size-base * 0.8);
+      font-size: $body-font-size-xs;
       font-weight: $body-font-weight-normal;
       display: none;
       margin-top: 3px;
@@ -356,7 +406,7 @@
     border-top: 3px solid $body-color;
     padding-top: 10px;
     margin-top: 10px;
-    font-size: floor($font-size-base * 1.1);
+    font-size: $body-font-size-m;
     font-weight: $body-font-weight-bold;
     color: $body-color;
     margin-bottom: 0;
@@ -390,7 +440,7 @@
 .summary-attributes {
   color: $color-faded;
   font-size: $body-font-size-xs;
-  margin: 10px 0;
+  margin: 5px 0;
   line-height: 1.5;
   &:last-child {
     margin-bottom: 0;
@@ -697,8 +747,6 @@
       }
     }
     .summary-box{
-      .sbc-big-item {
-      }
       &.main-box {
         padding-bottom: 10px;
         &:first-child {
@@ -877,10 +925,9 @@ html.latepoint-clean {
 .bundle-scheduled-summary-lightbox,
 .manage-booking-wrapper {
   .summary-box-heading .sbh-item {
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    color: $color-faded;
     font-weight: $body-font-weight-bold;
-    font-size: floor($font-size-base * 0.8);
+    font-size: $body-font-size-s;
   }
   .order-summary-main-section {
     margin-bottom: 20px;
@@ -991,35 +1038,41 @@ html.latepoint-clean {
       line-height: 1.1;
     }
   }
-  .print-booking-btn,
+  .booking-summary-action-btn,
   .ical-download-btn {
-    margin-bottom: 5px;
-    padding: 2px 7px 3px 6px;
-    border: 1px solid #ad3d12;
+    padding: 0;
     text-decoration: none;
-    color: #ad3d12;
-    border-radius: 4px;
-    display: inline-block;
-    font-size: floor($font-size-base * 0.95);
+    color: #111;
+    font-size: $body-font-size-s;
     font-weight: $body-font-weight-bold;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    position: relative;
     span, i {
-      display: inline-block;
-      vertical-align: middle;
-    }
-    i {
+      display: block;
     }
     span {
-      margin-left: 7px;
+      border-bottom: 1px dotted #111;
     }
-    & + a {
+    &:hover span {
+      border-bottom-style: solid;
+    }
+    &.os-loading {
+      &:before {
+        @include loading-circle(#111, 14px);
+        left: 7px;
+      }
+      i {
+        color: transparent;
+      }
     }
   }
-  .ical-download-btn {
-    margin-right: 5px;
-  }
-  .print-booking-btn {
-    border-color: #111;
-    color: #111;
+  .cancel-appointment-btn {
+    color: #ad3d12;
+    span {
+      border-bottom-color: #ad3d12;
+    }
   }
 }
 

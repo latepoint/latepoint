@@ -5,6 +5,7 @@
 
 /* @var $order OsOrderModel */
 /* @var $booking OsBookingModel */
+/* @var $key ?string */
 ?>
 <?php
 if ( ! defined( 'ABSPATH' ) ) {
@@ -16,6 +17,39 @@ if ( ! defined( 'ABSPATH' ) ) {
 <?php
 echo '<div class="summary-box-wrapper">';
 	echo OsBookingHelper::generate_summary_for_booking($booking, false);
+
+    ?>
+	  <div class="booking-full-summary-actions">
+		  <div class="add-to-calendar-wrapper">
+		    <a href="#" class="open-calendar-types ical-download-btn"><i class="latepoint-icon latepoint-icon-calendar"></i><span><?php esc_html_e('Add to Calendar', 'latepoint'); ?></span></a>
+			  <?php echo OsBookingHelper::generate_add_to_calendar_links($booking, $key ?? $booking->get_key_to_manage_for('customer')); ?>
+		  </div>
+	    <a href="<?php echo esc_url($booking->get_print_link($key ?? $booking->get_key_to_manage_for('customer'))); ?>" class="print-booking-btn booking-summary-action-btn" target="_blank"><i class="latepoint-icon latepoint-icon-printer"></i><span><?php esc_html_e('Print', 'latepoint'); ?></span></a>
+          <?php
+			if($booking->is_upcoming()){
+				if(OsCustomerHelper::can_reschedule_booking($booking)){ ?>
+					<a href="#" class="latepoint-request-booking-reschedule booking-summary-action-btn" data-os-after-call="latepoint_init_reschedule" data-os-lightbox-classes="width-400 reschedule-calendar-wrapper" data-os-action="<?php echo esc_attr(OsRouterHelper::build_route_name('manage_booking_by_key', 'request_reschedule_calendar')); ?>" data-os-params="<?php echo esc_attr(OsUtilHelper::build_os_params(['key' => $key ?? $booking->get_key_to_manage_for('customer')])); ?>" data-os-output-target="lightbox">
+						<i class="latepoint-icon latepoint-icon-calendar"></i>
+						<span><?php esc_html_e('Reschedule', 'latepoint'); ?></span>
+					</a>
+					<?php
+				}
+				if(OsCustomerHelper::can_cancel_booking($booking)){ ?>
+					<a href="#" class="booking-summary-action-btn cancel-appointment-btn"
+					   data-os-prompt="<?php esc_attr_e('Are you sure you want to cancel this appointment?', 'latepoint'); ?>"
+					   data-os-success-action="reload"
+					   data-os-action="<?php echo esc_attr(OsRouterHelper::build_route_name('manage_booking_by_key', 'request_cancellation')); ?>"
+					   data-os-params="<?php echo esc_attr(OsUtilHelper::build_os_params(['key' => $key ?? $booking->get_key_to_manage_for('customer')])); ?>">
+						<i class="latepoint-icon latepoint-icon-ui-24"></i>
+						<span><?php esc_html_e('Cancel', 'latepoint'); ?></span>
+					</a>
+					<?php
+				}
+			}
+            do_action('latepoint_booking_summary_after_booking_actions', $booking);
+            ?>
+	  </div>
+    <?php
 	ob_start();
 	OsAgentHelper::generate_summary_for_agent($booking);
 	OsLocationHelper::generate_summary_for_location($booking);

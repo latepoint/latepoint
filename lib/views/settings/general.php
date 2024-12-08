@@ -333,7 +333,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				/**
 				 * Plug after customer general settings output
 				 *
-				 * @since 5.0.15
+				 * @since 5.1.0
 				 * @hook latepoint_settings_general_customer_after
 				 *
 				 */

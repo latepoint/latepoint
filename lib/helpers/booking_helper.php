@@ -1656,11 +1656,7 @@ class OsBookingHelper {
 		if ( ! in_array( $for, [ 'agent', 'customer' ] ) ) {
 			return '';
 		}
-		$key = OsMetaHelper::get_booking_meta_by_key( 'key_to_manage_for_' . $for, $booking->id );
-		if ( empty( $key ) ) {
-			$key = bin2hex( random_bytes( 18 ) );
-			OsMetaHelper::save_booking_meta_by_key( 'key_to_manage_for_' . $for, $key, $booking->id );
-		}
+		$key = $booking->get_key_to_manage_for($for);
 		$url = OsRouterHelper::build_admin_post_link( [ 'manage_booking_by_key', 'show' ], [ 'key' => $key ] );
 
 		return $url;
@@ -1669,6 +1665,11 @@ class OsBookingHelper {
 
 	public static function generate_summary_for_booking( OsBookingModel $booking, $cart_item_id = false ): string {
 		$summary_html     = '<div class="summary-box main-box" ' . ( ( $cart_item_id ) ? 'data-cart-item-id="' . $cart_item_id . '"' : '' ) . '>';
+        $summary_html.= '<div class="summary-box-booking-date-box">';
+        $summary_html.= '<div class="summary-box-booking-date-day">'.$booking->start_datetime_in_format('j', OsTimeHelper::get_timezone_name_from_session()).'</div>';
+        $summary_html.= '<div class="summary-box-booking-date-month">'.OsUtilHelper::get_month_name_by_number($booking->start_datetime_in_format('n', OsTimeHelper::get_timezone_name_from_session()), true).'</div>';
+        $summary_html .= '</div>';
+        $summary_html.= '<div class="summary-box-inner">';
 		$service_headings = [];
 		$service_headings = apply_filters( 'latepoint_booking_summary_service_headings', $service_headings, $booking );
 		if ( $service_headings ) {
@@ -1704,6 +1705,8 @@ class OsBookingHelper {
 			}
 			$summary_html .= '</div>';
 		}
+		$summary_html .= '</div>';
+		$summary_html .= apply_filters( 'latepoint_booking_summary_after_summary_box_inner', '', $booking );
 		$summary_html .= '</div>';
 
 		return $summary_html;

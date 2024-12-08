@@ -31,7 +31,7 @@
     h2 {
       color: $headings-color;
       margin: 0px;
-      font-size: floor($headings-font-size * 1.7);
+      font-size: $headings-font-size-xl;
       flex: 1;
     }
     .latepoint-lightbox-close {

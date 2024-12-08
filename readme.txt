@@ -4,7 +4,7 @@ Donate link: https://latepoint.com
 Tags: appointments, booking, scheduling, events
 Requires at least: 6.5
 Tested up to: 6.6
-Stable tag: 5.0.15
+Stable tag: 5.1.0
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html

@@ -238,9 +238,35 @@ class OsOrderIntentModel extends OsModel {
 
 				if ( $transaction ) {
 					$transaction->order_id = $order->id;
-					find invoice for this transaction
+					$invoice = OsInvoicesHelper::get_matching_invoice_for_transaction($transaction);
+					if(!$invoice->is_new_record()) $transaction->invoice_id = $invoice->id;
 					if ( $transaction->save() ) {
+
+						/**
+						 * Transaction was created
+						 *
+						 * @param {OsTransactionModel} $transaction instance of transaction model that was created
+						 *
+						 * @since 5.1.0
+						 * @hook latepoint_transaction_created
+						 *
+						 */
 						do_action( 'latepoint_transaction_created', $transaction );
+						if(!$invoice->is_new_record()){
+							$old_invoice = clone $invoice;
+							$invoice->update_attributes(['status' => LATEPOINT_INVOICE_STATUS_PAID]);
+							/**
+							 * Invoice was updated
+							 *
+							 * @param {OsInvoiceModel} $invoice instance of invoice model after it was updated
+							 * @param {OsInvoiceModel} $old_invoice instance of invoice model before it was updated
+							 *
+							 * @since 5.1.0
+							 * @hook latepoint_invoice_updated
+							 *
+							 */
+							do_action( 'latepoint_invoice_updated', $invoice, $old_invoice );
+						}
 
 					} else {
 						OsDebugHelper::log( 'Error creating transaction', 'transaction_error', $transaction->get_error_messages() );
