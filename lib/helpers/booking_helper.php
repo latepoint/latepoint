@@ -1686,13 +1686,11 @@ class OsBookingHelper {
 														</div>';
 		}
 		$summary_html .= '<div class="sbc-big-item">' . $booking->get_service_name_for_summary() . '</div>';
-		if ( $booking->start_date ) {
-			$booking_start_datetime = $booking->get_nice_start_datetime();
-			$booking_start_datetime = apply_filters( 'latepoint_booking_summary_formatted_booking_start_datetime', $booking_start_datetime, $booking, $timezone_name ?? '' );
-			if ( $booking_start_datetime ) {
-				$summary_html .= '<div class="sbc-highlighted-item">' . $booking_start_datetime . '</div>';
-			}
-		}
+
+        $show_end_time = OsSettingsHelper::is_on( 'show_booking_end_time') && $booking->get_nice_start_time();
+        if ($booking_time = OsBookingHelper::get_booking_start_and_end_datetime($booking, $show_end_time, $timezone_name ?? '')) {
+	        $summary_html .= '<div class="sbc-highlighted-item">' . $booking_time . '</div>';
+        }
 		$summary_html .= '</div>';
 
 		$service_attributes = [];
@@ -1707,6 +1705,38 @@ class OsBookingHelper {
 		$summary_html .= '</div>';
 
 		return $summary_html;
+	}
+
+
+	/**
+     * Get booking start and end datetime in format - Dec 13, 2024, 12:30 am - 12:30 am (+00:00)
+	 *
+	 * @param OsBookingModel $booking
+	 * @param bool $show_end_time
+	 * @param string $timezone_name
+	 *
+	 * @return string
+	 */
+	public static function get_booking_start_and_end_datetime( OsBookingModel $booking, bool $show_end_time = false, string $timezone_name = '' ): string {
+		#format should be like: Dec 13, 2024, 12:30 am - 12:30 am (+00:00)
+		$start_and_end_date = "";
+		if ( $booking->start_date ) {
+			$booking_start_datetime = $booking->get_nice_start_datetime();
+			$booking_start_datetime = apply_filters( 'latepoint_booking_summary_formatted_booking_start_datetime', $booking_start_datetime, $booking, $timezone_name );
+
+			$booking_end_datetime = "";
+			if ( $show_end_time ) {
+				#remove timezone info from start date to not duplicate it
+				$booking_start_datetime = preg_replace( '/<span class="os-timezone-info">\([^)]+\)<\/span>/', '', $booking_start_datetime );
+				$booking_end_datetime   = $booking->get_nice_end_time();
+				$booking_end_datetime   = apply_filters( 'latepoint_booking_summary_formatted_booking_end_datetime', $booking_end_datetime, $booking, $timezone_name, $short_format = true );
+			}
+			$start_and_end_date = $show_end_time
+				? $booking_start_datetime . " - " . $booking_end_datetime
+				: $booking_start_datetime;
+		}
+
+		return $start_and_end_date;
 	}
 
 
