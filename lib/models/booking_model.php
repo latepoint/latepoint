@@ -665,6 +665,10 @@ class OsBookingModel extends OsModel {
 		return $this->format_start_date_and_time( OsSettingsHelper::get_readable_datetime_format(), false, $this->customer->get_selected_timezone_obj() );
 	}
 
+	public function get_nice_end_datetime_for_customer(  ) {
+		return $this->format_end_date_and_time( OsSettingsHelper::get_readable_datetime_format(), false, $this->customer->get_selected_timezone_obj() );
+	}
+
 	public function get_nice_start_time() {
 		return OsTimeHelper::minutes_to_hours_and_minutes( $this->start_time );
 	}
