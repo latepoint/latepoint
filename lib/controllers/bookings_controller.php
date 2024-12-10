@@ -108,7 +108,7 @@ if ( ! class_exists( 'OsBookingsController' ) ) :
 			$selected_columns = OsSettingsHelper::get_selected_columns_for_bookings_table();
 			$available_columns = OsSettingsHelper::get_available_columns_for_bookings_table();
 
-      $filter = isset($this->params['filter']) ? $this->params['filter'] : false;
+      $filter = $this->params['filter'] ?? false;
 
 			$order_by = ['key' => 'booking_id', 'direction' => 'desc', 'column' => 'id'];
 
@@ -163,29 +163,35 @@ if ( ! class_exists( 'OsBookingsController' ) ) :
 
 				$selected_columns = OsSettingsHelper::get_selected_columns_for_bookings_table();
         if(!empty($filter['customer'])){
-					$bookings->select(LATEPOINT_TABLE_BOOKINGS.'.*');
-					if(!empty($filter['customer']['full_name'])){
-	          $bookings->select(LATEPOINT_TABLE_CUSTOMERS.'.first_name, '.LATEPOINT_TABLE_CUSTOMERS.'.last_name');
-	          $query_args['concat_ws(" ", '.LATEPOINT_TABLE_CUSTOMERS.'.first_name,'.LATEPOINT_TABLE_CUSTOMERS.'.last_name) LIKE'] = '%'.$filter['customer']['full_name'].'%';
-	          $this->vars['customer_name_query'] = $filter['customer']['full_name'];
-					}
-          $bookings->join(LATEPOINT_TABLE_CUSTOMERS, ['id' => LATEPOINT_TABLE_BOOKINGS.'.customer_id']);
-					if(!empty($selected_columns['customer'])){
-	          foreach($selected_columns['customer'] as $customer_column_key){
-	            if(!empty($available_columns['customer'][$customer_column_key]) && !empty($filter['customer'][$customer_column_key])){
-			          $bookings->select(LATEPOINT_TABLE_CUSTOMERS.'.'.$customer_column_key);
-								$query_args[LATEPOINT_TABLE_CUSTOMERS.'.'.$customer_column_key.' LIKE'] = '%'.$filter['customer'][$customer_column_key].'%';
-	            }
-	          }
-		      }
+	        $bookings->select( LATEPOINT_TABLE_BOOKINGS . '.*' );
+	        if ( ! empty( $filter['customer']['full_name'] ) ) {
+		        $bookings->select( LATEPOINT_TABLE_CUSTOMERS . '.first_name, ' . LATEPOINT_TABLE_CUSTOMERS . '.last_name' );
+		        $query_args[ 'concat_ws(" ", ' . LATEPOINT_TABLE_CUSTOMERS . '.first_name,' . LATEPOINT_TABLE_CUSTOMERS . '.last_name) LIKE' ] = '%' . $filter['customer']['full_name'] . '%';
+		        $this->vars['customer_name_query'] = $filter['customer']['full_name'];
+	        }
+	        $bookings->join( LATEPOINT_TABLE_CUSTOMERS, [ 'id' => LATEPOINT_TABLE_BOOKINGS . '.customer_id' ] );
+
+
+	        if ( ! empty( $selected_columns['customer'] ) ) {
+		        $meta_filter = [];
+		        foreach ( $selected_columns['customer'] as $customer_column_key ) {
+			        if ( isset( $available_columns['customer'][ $customer_column_key ] ) && ! empty( $filter['customer'][ $customer_column_key ] ) ) {
+				        $meta_filter[$customer_column_key] = $filter['customer'][ $customer_column_key ];
+			        }
+		        }
+		        if (count($meta_filter)){
+					$customers_ids = OsMetaHelper::get_customers_by_filter($meta_filter) ?: [-1];
+			        $query_args[ LATEPOINT_TABLE_CUSTOMERS . '.id  IN' ] = $customers_ids;
+		        }
+	        }
         }
 				// filters for custom selected columns, only related to booking fields
-	      if(!empty($selected_columns['booking'])){
-          foreach($selected_columns['booking'] as $booking_column_key){
-            if(!empty($available_columns['booking'][$booking_column_key]) && !empty($filter[$booking_column_key])){
-							$query_args[$booking_column_key.' LIKE'] = '%'.$filter[$booking_column_key].'%';
-            }
-          }
+	      if ( ! empty( $selected_columns['booking'] ) ) {
+		      foreach ( $selected_columns['booking'] as $booking_column_key ) {
+			      if ( ! empty( $available_columns['booking'][ $booking_column_key ] ) && ! empty( $filter[ $booking_column_key ] ) ) {
+				      $query_args[ $booking_column_key . ' LIKE' ] = '%' . $filter[ $booking_column_key ] . '%';
+			      }
+		      }
 	      }
       }
 

@@ -75,7 +75,25 @@ class OsMetaHelper {
     return $meta->save_by_key($meta_key, $meta_value, $customer_id);
   }
 
+	/**
+	 * Get Customers By Filter
+	 * @param $filters
+	 * @return array
+	 */
+	public static function get_customers_by_filter( $filters ): array {
+		$meta  = new OsCustomerMetaModel();
+		$where = [];
+		foreach ( $filters as $filter_key => $filter_value ) {
+			$where['OR'][] = [ 'AND' => [ 'meta_key' => $filter_key, 'meta_value LIKE' => '%' . esc_sql( $filter_value ) . '%' ] ];
+		}
+		$customers = $meta->select( 'object_id' )
+		                  ->where( $where )
+		                  ->group_by( 'object_id' )
+		                  ->having( 'COUNT(DISTINCT meta_key)=' . count( $filters ) )
+		                  ->get_results();
 
+		return array_column( $customers, 'object_id' );
+	}
 
   public static function get_booking_id_by_meta_value($meta_key, $meta_value){
     $meta = new OsBookingMetaModel();

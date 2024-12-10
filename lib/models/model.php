@@ -14,6 +14,7 @@ class OsModel {
 	protected $select_args = [];
 	protected $order_args = false;
 	protected $group_args = false;
+	protected $having_args = false;
 	protected $joins = [];
 	public $data_vars = [];
 	public $first_level_data_vars = [];
@@ -94,6 +95,30 @@ class OsModel {
 		} else {
 			return '';
 		}
+	}
+
+	public function clear_having(): OsModel {
+		$this->having_args = '';
+
+		return $this;
+	}
+
+
+	public function get_having_args(): string {
+		if ( $this->having_args ) {
+			return 'HAVING ' . $this->having_args;
+		}
+		return '';
+	}
+
+	public function having( $having_args ) {
+		if ( $this->having_args ) {
+			$this->having_args = implode( ',', array( $this->having_args, $having_args ) );
+		} else {
+			$this->having_args = $having_args;
+		}
+
+		return $this;
 	}
 
 	public function order_by( $order_args ) {
@@ -286,7 +311,7 @@ class OsModel {
 	}
 
 	public function count() {
-		$count = $this->clear_select()->clear_group_by()->select( 'COUNT(DISTINCT(' . $this->table_name . '.id)) as total' )->set_limit( 1 )->get_results();
+		$count = $this->clear_select()->clear_group_by()->clear_having()->select( 'COUNT(DISTINCT(' . $this->table_name . '.id)) as total' )->set_limit( 1 )->get_results();
 		$total = ( $count ) ? $count->total : 0;
 
 		return $total;
@@ -419,7 +444,7 @@ class OsModel {
 			$offset_query = '';
 		}
 
-		$query = 'SELECT ' . $this->build_select_args_string() . ' FROM ' . $this->table_name . ' ' . $this->get_join_string() . ' ' . $where_query . ' ' . $this->get_group_args() . ' ' . $this->get_order_args() . ' ' . $limit_query . ' ' . $offset_query;
+		$query = 'SELECT ' . $this->build_select_args_string() . ' FROM ' . $this->table_name . ' ' . $this->get_join_string() . ' ' . $where_query . ' ' . $this->get_group_args() . ' ' . $this->get_having_args() . ' ' . $this->get_order_args() . ' ' . $limit_query . ' ' . $offset_query;
 
 		$this->last_query = vsprintf( $query, $conditions_and_values[1] );
 		OsDebugHelper::log_query( $this->last_query );
