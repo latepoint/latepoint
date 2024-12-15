@@ -67,32 +67,6 @@ class OsBookingModel extends OsModel {
 		return OsBookingHelper::calculate_deposit_amount_to_charge( $this );
 	}
 
-	public function get_readable_status_title_for_summary() : string{
-		$titles = OsSettingsHelper::get_settings_value('booking_summary_status_titles', []);
-
-		switch($this->status){
-            case LATEPOINT_BOOKING_STATUS_APPROVED:
-				$title = $titles[LATEPOINT_BOOKING_STATUS_APPROVED] ?? __( 'Appointment Confirmed', 'latepoint' );
-                break;
-            case LATEPOINT_BOOKING_STATUS_PENDING:
-				$title = $titles[LATEPOINT_BOOKING_STATUS_PENDING] ?? __( 'Pending Confirmation', 'latepoint' );
-                break;
-			default:
-				$title = $titles[$this->status] ?? sprintf(__('Status: %s', 'latepoint'), $this->status);
-				break;
-        }
-		return $title;
-	}
-
-	public function get_readable_status_description_for_summary() : string{
-		$description = '';
-		switch($this->status){
-            case LATEPOINT_BOOKING_STATUS_PENDING:
-				$description = __( 'Your appointment is pending confirmation. We\'ll notify you once it\'s approved.', 'latepoint' );
-                break;
-        }
-		return $description;
-	}
 
 	public function get_key_to_manage_for(string $for): string {
 		if($this->is_new_record()) return '';
@@ -860,6 +834,7 @@ class OsBookingModel extends OsModel {
 	}
 
 	public function start_datetime_in_format( string $format, string $output_in_timezone_name ) : string {
+		if(empty($this->start_datetime_utc)) return '';
 		$booking_start_datetime = OsTimeHelper::date_from_db( $this->start_datetime_utc, false, new DateTimeZone( 'UTC' ) );
 		$booking_start_datetime->setTimezone( new DateTimeZone($output_in_timezone_name) );
 		return $booking_start_datetime->format( $format );

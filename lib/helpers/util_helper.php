@@ -256,6 +256,7 @@ class OsUtilHelper {
                     __('Nov', 'latepoint'),
                     __('Dec', 'latepoint')];
 
+	if(empty($month_number)) return '';
     if($short){
 	    $month_name = isset($short_names[$month_number - 1]) ? $short_names[$month_number - 1] : 'n/a';
     }else{

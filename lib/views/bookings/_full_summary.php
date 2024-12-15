@@ -18,6 +18,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	 * @param {OsBookingModel} $booking instance of booking model
 	 */
 	do_action('latepoint_booking_full_summary_before', $booking); ?>
+    <div class="booking-status-info-wrapper">
+        <div class="booking-status-icon"></div>
+        <div class="booking-status-label"><?php echo $booking->get_nice_status(); ?></div>
+        <div class="booking-confirmation"><?php echo sprintf(esc_html__('Order #%s', 'latepoint'), '<strong>'.$booking->order->confirmation_code.'</strong>'); ?></div>
+    </div>
 	<div class="full-summary-head-info">
 	  <?php
 		/**
@@ -29,18 +34,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 		 * @param {OsBookingModel} $booking instance of booking model
 		 */
 	  do_action('latepoint_booking_full_summary_head_info_before', $booking); ?>
-        <div class="summary-status-wrapper summary-status-<?php echo esc_attr($booking->status); ?>">
-            <div class="summary-status-inner">
-                <div class="ss-icon"></div>
-                <div class="ss-title"><?php esc_html_e($booking->get_readable_status_title_for_summary()); ?></div>
-                <div class="ss-confirmation-number"><span><?php esc_html_e('#', 'latepoint'); ?></span><strong><?php echo esc_html($booking->booking_code); ?></strong></div>
-            </div>
-        <?php
-        if($booking->get_readable_status_description_for_summary()){
-            echo '<div class="summary-status-description">'.esc_html($booking->get_readable_status_description_for_summary()).'</div>';
-        }
-        ?>
-        </div>
 	  <?php
 		/**
 		 * Order Summary Head Section - after

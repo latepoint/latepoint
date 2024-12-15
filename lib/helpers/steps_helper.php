@@ -21,6 +21,8 @@ class OsStepsHelper {
 	public static $restrictions = [];
 	public static $presets = [];
 
+    public static $params = [];
+
 
 	public static function get_step_codes_with_rules(): array {
 		$step_codes_with_rules = [
@@ -269,7 +271,7 @@ class OsStepsHelper {
 
 	public static function init_step_actions() {
 		add_action( 'latepoint_process_step', 'OsStepsHelper::process_step', 10, 2 );
-		add_action( 'latepoint_load_step', 'OsStepsHelper::load_step', 10, 2 );
+		add_action( 'latepoint_load_step', 'OsStepsHelper::load_step', 10, 3 );
 		add_action( 'rest_api_init', function () {
 			register_rest_route( 'latepoint', '/booking/bite-force/', array(
 				'methods'             => 'POST',
@@ -440,7 +442,8 @@ class OsStepsHelper {
 		<?php
 	}
 
-	public static function load_step( $step_code, $format = 'json' ) {
+	public static function load_step( $step_code, $format = 'json', $params = [] ) {
+        self::$params = $params;
 
 		$step_code = self::check_step_code_access( $step_code );
 		if ( OsAuthHelper::is_customer_logged_in() && OsSettingsHelper::get_settings_value( 'max_future_bookings_per_customer' ) ) {
@@ -1838,6 +1841,8 @@ class OsStepsHelper {
 	}
 
 	public static function prepare_step_payment__pay() {
+        $booking_form_page_url = self::$params['booking_form_page_url'] ?? wp_get_original_referer();
+        $order_intent         = OsOrderIntentHelper::create_or_update_order_intent( self::$cart_object, self::$restrictions, self::$presets, $booking_form_page_url );
 	}
 
 
@@ -2009,10 +2014,10 @@ class OsStepsHelper {
 	public static function get_step_settings_edit_form_html( string $selected_step_code ): string {
 		$step_settings_html = '';
 		switch ( $selected_step_code ) {
-			case 'booking__services';
+            case 'booking__services':
 				$step_settings_html .= OsFormHelper::toggler_field( 'settings[steps_show_service_categories]', __( 'Show service categories', 'latepoint' ), OsSettingsHelper::steps_show_service_categories(), false, false, [ 'sub_label' => __( 'If turned on, services will be displayed in categories', 'latepoint' ) ] );
 				break;
-			case 'booking__agents':
+            case 'booking__agents':
 				$step_settings_html .= OsFormHelper::toggler_field( 'settings[steps_show_agent_bio]', __( 'Show Learn More about agents', 'latepoint' ), OsSettingsHelper::is_on( 'steps_show_agent_bio' ), false, false, [ 'sub_label' => __( 'A link to open information about agent will be added to each agent tile', 'latepoint' ) ] );
 				$step_settings_html .= OsFormHelper::toggler_field( 'settings[steps_hide_agent_info]', __( 'Hide agent name from summary and confirmation', 'latepoint' ), OsSettingsHelper::is_on( 'steps_hide_agent_info' ), false, false, [ 'sub_label' => __( 'Check if you want to hide agent name from showing up', 'latepoint' ) ] );
 				$step_settings_html .= OsFormHelper::toggler_field( 'settings[allow_any_agent]', __( 'Add "Any Agent" option to agent selection', 'latepoint' ), OsSettingsHelper::is_on( 'allow_any_agent' ), 'lp-any-agent-settings', false, [ 'sub_label' => __( 'Customers can pick "Any agent" and system will find a matching agent', 'latepoint' ) ] );
@@ -2020,7 +2025,7 @@ class OsStepsHelper {
 				$step_settings_html .= OsFormHelper::select_field( 'settings[any_agent_order]', __( 'If "Any Agent" is selected then assign booking to', 'latepoint' ), OsSettingsHelper::get_order_types_list_for_any_agent_logic(), OsSettingsHelper::get_any_agent_order() );
 				$step_settings_html .= '</div>';
 				break;
-			case 'booking__datepicker';
+            case 'booking__datepicker':
 				$step_settings_html .= OsFormHelper::select_field( 'steps_settings[booking__datepicker][time_pick_style]', __( 'Show Time Slots as', 'latepoint' ), [
 					'timebox'  => 'Time Boxes',
 					'timeline' => 'Timeline'
@@ -2029,6 +2034,9 @@ class OsStepsHelper {
 				$step_settings_html .= OsFormHelper::toggler_field( 'steps_settings[booking__datepicker][hide_slot_availability_count]', __( 'Hide slot availability count', 'latepoint' ), OsStepsHelper::hide_slot_availability_count(), false, false, [ 'sub_label' => __( 'Slot counter tooltip will not appear when hovering a day.', 'latepoint' ) ] );
 				$step_settings_html .= OsFormHelper::toggler_field( 'steps_settings[booking__datepicker][hide_unavailable_slots]', __( 'Hide slots that are not available (time boxes)', 'latepoint' ), OsStepsHelper::hide_unavailable_slots(), false, false, [ 'sub_label' => __( 'Hides time boxes that are not available, instead of showing them in gray.', 'latepoint' ) ] );
 				break;
+            case 'confirmation':
+                $step_settings_html .= OsFormHelper::select_field( 'steps_settings[confirmation][order_confirmation_message_style]', __( 'Message Style', 'latepoint' ), ['green' => __('Green', 'latepoint'), 'yellow' => __('Yellow', 'latepoint')], self::get_step_setting_value($selected_step_code, 'order_confirmation_message_style', 'green') );
+                break;
 		}
 		/**
 		 * Generates HTML for step settings form in the preview
@@ -2282,6 +2290,17 @@ class OsStepsHelper {
 			case 'payment__pay':
 				echo '<div class="booking-preview-step-skipped-message">' . esc_html__( "Payment form generated by selected payment processor will appear here", 'latepoint' ) . '</div>';
 				break;
+            case 'confirmation':
+                echo '<div class="summary-status-wrapper summary-status-style-'.esc_attr(OsStepsHelper::get_step_setting_value($selected_step_code, 'order_confirmation_message_style', 'green')).'">';
+                    echo '<div class="summary-status-inner">';
+                        echo '<div class="ss-icon"></div>';
+                        echo '<div class="ss-title bf-side-heading editable-setting" data-setting-key="['. esc_attr($selected_step_code).'][order_confirmation_message_title]" contenteditable="true">'.esc_html(OsStepsHelper::get_step_setting_value($selected_step_code, 'order_confirmation_message_title', __('Appointment Confirmed', 'latepoint'))).'</div>';
+                        echo '<div class="ss-description bf-side-heading editable-setting" data-setting-key="['. esc_attr($selected_step_code).'][order_confirmation_message_content]" contenteditable="true">'.esc_html(OsStepsHelper::get_step_setting_value($selected_step_code, 'order_confirmation_message_content', __('We look forward to seeing you.', 'latepoint'))).'</div>';
+                        echo '<div class="ss-confirmation-number"><span>'.esc_html__('Order #', 'latepoint').'</span><strong>KDFJ934K</strong></div>';
+                    echo '</div>';
+                echo '</div>';
+				echo '<div class="booking-preview-step-skipped-message">' . esc_html__( "Order information will appear here.", 'latepoint' ) . '</div>';
+                break;
 		}
 		do_action( 'latepoint_get_step_content_preview', $selected_step_code );
 	}

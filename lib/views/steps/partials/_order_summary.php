@@ -55,6 +55,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		foreach ($order_bookings as $order_item_id => $order_booking) {
 			echo '<div class="summary-box-wrapper">';
 			echo OsBookingHelper::generate_summary_for_booking($order_booking, false);
+            OsBookingHelper::generate_summary_actions_for_booking($order_booking);
 			if (!$same_agent || !$same_location) {
 				echo '<div class="booking-summary-info-w">';
 				echo '<div class="summary-boxes-columns">';

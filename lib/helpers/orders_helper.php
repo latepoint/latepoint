@@ -172,12 +172,28 @@ class OsOrdersHelper {
 	}
 
 
-	public static function generate_direct_manage_order_url( OsOrderModel $order, string $for ): string {
+
+    public static function generate_confirmation_message(OsOrderModel $order) : string{
+        $html = '<div class="summary-status-wrapper summary-status-style-'.esc_attr(OsStepsHelper::get_step_setting_value('confirmation', 'order_confirmation_message_style', 'green')).'">
+                    <div class="summary-status-inner">
+                        <div class="ss-icon"></div>
+                        <div class="ss-title">'.OsStepsHelper::get_step_setting_value('confirmation', 'order_confirmation_message_title', esc_html__('Appointment Confirmed', 'latepoint')).'</div>
+                        <div class="ss-description">'.OsStepsHelper::get_step_setting_value('confirmation', 'order_confirmation_message_content', esc_html__('We look forward to seeing you.', 'latepoint')).'</div>
+                        <div class="ss-confirmation-number"><span>'.esc_html__('Order #', 'latepoint').'</span><strong>'.esc_html($order->confirmation_code).'</strong></div>
+                    </div>
+                </div>';
+        return $html;
+    }
+
+
+	public static function generate_direct_manage_order_url( OsOrderModel $order, string $for, string $action = 'show' ): string {
 		if ( ! in_array( $for, [ 'agent', 'customer' ] ) ) {
 			return '';
 		}
+		$actions = ['show', 'list_payments'];
+		if(!in_array($action, $actions)) $action = $actions[0];
 		$key = $order->get_key_to_manage_for($for);
-		$url = OsRouterHelper::build_admin_post_link( [ 'manage_order_by_key', 'show' ], [ 'key' => $key ] );
+		$url = OsRouterHelper::build_admin_post_link( [ 'manage_order_by_key', $action ], [ 'key' => $key ] );
 
 		return $url;
 	}

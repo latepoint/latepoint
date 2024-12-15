@@ -100,11 +100,11 @@ $element_classes[] = ((!$cart->is_empty() || $booking->is_ready_for_summary()) &
             <div class="latepoint-body">
 				<?php if ( ! empty( $step_codes_to_preload ) ) {
 					foreach ( $step_codes_to_preload as $step_code_to_preload ) {
-						do_action( 'latepoint_load_step', $step_code_to_preload, 'html' );
+						do_action( 'latepoint_load_step', $step_code_to_preload, 'html', [] );
 					}
 				}
 				?>
-				<?php do_action( 'latepoint_load_step', $current_step->code, 'html' ); ?>
+				<?php do_action( 'latepoint_load_step', $current_step->code, 'html', [] ); ?>
             </div>
             <div class="latepoint-footer">
                 <a href="#" class="latepoint-btn latepoint-btn-white latepoint-prev-btn disabled" tabindex="0" role="button"><i

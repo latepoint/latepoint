@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 ?>
-<div class="booking-form-preview latepoint-w">
+<div class="booking-form-preview latepoint-w booking-form-preview-step-<?php echo esc_attr($selected_step_code); ?>">
 	<div class="latepoint-booking-form-element <?php echo 'latepoint-color-'.esc_attr(OsSettingsHelper::get_booking_form_color_scheme()); ?> latepoint-border-radius-<?php echo esc_attr(OsSettingsHelper::get_booking_form_border_radius()); ?>">
 		<div class="bf-side-panel">
 			<div class="side-panel-main">

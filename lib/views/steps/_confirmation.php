@@ -27,10 +27,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<?php do_action('latepoint_full_summary_before', $booking); ?>
 			<div class="full-summary-head-info">
 			  <?php do_action('latepoint_full_summary_head_info_before', $booking); ?>
-			  <div class="full-summary-number"><?php esc_html_e('Confirmation #', 'latepoint'); ?> <strong><?php echo esc_html($booking->booking_code); ?></strong></div>
+			  <div class="full-summary-number"><?php esc_html_e('Order #', 'latepoint'); ?> <strong><?php echo esc_html($booking->booking_code); ?></strong></div>
 			  <div class="booking-full-summary-actions">
 				  <div class="add-to-calendar-wrapper">
-				    <a href="#" class="open-calendar-types ical-download-btn"><i class="latepoint-icon latepoint-icon-calendar"></i><span><?php esc_html_e('Add to Calendar', 'latepoint'); ?></span></a>
+				    <a href="#" class="open-calendar-types booking-summary-action-btn"><i class="latepoint-icon latepoint-icon-calendar"></i><span><?php esc_html_e('Add to Calendar', 'latepoint'); ?></span></a>
 					  <?php echo OsBookingHelper::generate_add_to_calendar_links($booking, $key ?? ''); ?>
 				  </div>
 			    <a href="<?php echo esc_url($booking->get_print_link($key ?? '')); ?>" class="print-booking-btn" target="_blank"><i class="latepoint-icon latepoint-icon-printer"></i><span><?php esc_html_e('Print', 'latepoint'); ?></span></a>
@@ -59,26 +59,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</div>
 	<?php } else { ?>
 		<?php do_action('latepoint_step_confirmation_before', $order); ?>
-		<div class="confirmation-head-info">
-			<?php do_action('latepoint_step_confirmation_head_info_before', $order); ?>
-			<div class="confirmation-number">
-                    <div><?php esc_html_e('Confirmation #', 'latepoint'); ?></div>
-                    <strong><?php echo esc_html($order->confirmation_code); ?></strong>
-            </div>
-			<div class="booking-confirmation-actions">
-				<?php if ($order->is_single_booking()) { ?>
-					<div class="add-to-calendar-wrapper">
-						<a href="#" class="open-calendar-types ical-download-btn"><i
-								class="latepoint-icon latepoint-icon-calendar"></i><span><?php esc_html_e('Add to Calendar', 'latepoint'); ?></span></a>
-						<?php echo OsBookingHelper::generate_add_to_calendar_links(reset($order_bookings)); ?>
-					</div>
-				<?php } ?>
-				<a href="<?php echo esc_url($order->get_print_link()); ?>" class="print-booking-btn" target="_blank"><i
-						class="latepoint-icon latepoint-icon-printer"></i><span><?php esc_html_e('Print', 'latepoint'); ?></span></a>
-			</div>
-			<?php do_action('latepoint_step_confirmation_head_info_after', $order); ?>
-		</div>
 		<div class="confirmation-info-w">
+            <div class="confirmation-head-info">
+                <?php do_action('latepoint_step_confirmation_head_info_before', $order); ?>
+
+                <?php echo OsOrdersHelper::generate_confirmation_message($order); ?>
+
+                <?php do_action('latepoint_step_confirmation_head_info_after', $order); ?>
+            </div>
 			<?php include('partials/_order_summary.php'); ?>
 		</div>
 		<?php

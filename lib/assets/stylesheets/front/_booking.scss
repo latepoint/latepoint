@@ -213,6 +213,23 @@
       display: block;
     }
   }
+  &.current-step-confirmation {
+    .latepoint-form-w .latepoint-heading-w {
+      border-bottom: none;
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      z-index: 99999;
+      padding: 0;
+      .os-heading-text {
+        display: none;
+      }
+      .latepoint-lightbox-close {
+        margin-left: 0;
+        padding: 5px;
+      }
+    }
+  }
 
   .latepoint-progress {
     text-align: center;
@@ -765,6 +782,16 @@
         margin-bottom: 5px;
       }
     }
+    .lp-payment-charge-amount {
+      background-color: #fbf6e1;
+      color: #877865;
+      margin-bottom: 20px;
+      padding: 15px;
+      text-align: center;
+      strong {
+        color: #000;
+      }
+    }
   }
 
   .lp-demo-mode-msg {
@@ -1171,11 +1198,14 @@
 // Verify
 .latepoint-booking-form-element {
   .step-verify-w {
+    .summary-box.main-box .summary-box-booking-date-box {
+      display: none;
+    }
     .cart-item-wrapper {
       position: relative;
-      margin-bottom: 15px;
+      margin-bottom: 25px;
       &.multi-item {
-        padding: 12px 15px;
+        padding: 15px;
         border: 1px solid #e2e2e2;
         border-bottom-color: #d2d2d2;
         box-shadow: 0 2px rgba(0,0,0,0.05);
@@ -1186,6 +1216,21 @@
           .sbh-line {
             display: none;
           }
+        }
+        .summary-box .sbc-big-item {
+          font-size: $headings-font-size-m;
+        }
+        .summary-box-heading {
+          display: none;
+        }
+        .summary-box-heading .sbh-item {
+          font-size: $body-font-size-xs;
+          font-weight: $body-font-weight-normal;
+        }
+        .summary-boxes-columns {
+          border-top: 1px solid rgba(0,0,0,0.05);
+          padding-top: 10px;
+          margin-top: 15px;
         }
       }
       &.single-item {
@@ -1281,7 +1326,7 @@
         line-height: 1;
         a {
           border-bottom: 1px solid $brand-primary;
-          font-size: floor($font-size-base * 0.95);
+          font-size: $body-font-size-xs;
           color: $brand-primary;
         }
       }
@@ -1422,7 +1467,6 @@
         padding-top: 10px;
     }
     .confirmation-head-info {
-      margin-bottom: 20px;
       position: relative;
     }
     .add-to-calendar-wrapper {
@@ -1560,52 +1604,125 @@
 
 .full-summary-wrapper, .confirmation-info-w {
 
+  .booking-status-info-wrapper {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    .booking-status-icon {
+      width: 15px;
+      height: 15px;
+      background-color: #eee;
+    }
+    .booking-status-label {
+      font-weight: $body-font-weight-bold;
+      font-size: $body-font-size-s;
+    }
+    .booking-confirmation {
+      margin-left: auto;
+      font-size: $body-font-size-xs;
+      color: $color-faded;
+      strong {
+        color: $headings-color;
+      }
+    }
+    &.status-approved {
+      .booking-status-icon {
+        background-color: #bdff84;
+        &:before {
+          @include latepointfont("\e928");
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
 .summary-status-wrapper {
-  padding: 10px;
+  padding: 0 0 30px 0;
   color: $headings-color;
   font-size: $body-font-size-s;
   margin-bottom: 10px;
+  border-bottom: 10px solid rgba(0,0,0,0.03);
   .summary-status-inner {
     display: flex;
+    flex-direction: column;
     align-items: center;
+    .ss-title {
+      font-size: $headings-font-size-xl;
+      font-weight: $headings-font-weight-bold;
+      font-family: $headings-font-family;
+      text-align: center;
+    }
+    .ss-description {
+      color: $color-faded;
+      font-weight: $body-font-weight-normal;
+      font-size: $body-font-size-s;
+      margin-top: 3px;
+      text-align: center;
+    }
     .ss-icon {
-      display: none;
-      margin-right: 10px;
+      margin-bottom: 25px;
+      animation: 1s cubic-bezier(0.05, 0.45, 0.1, 1) 0.1s statusIconPop;
+      animation-fill-mode: both;
     }
     .ss-confirmation-number {
-      margin-left: auto;
+      font-size: $body-font-size-xs;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: $color-faded;
+      margin-top: 15px;
+      padding: 3px 5px;
+      background-color: rgba(0,0,0,0.03);
       span {
-        color: rgba(0,0,0,0.4);
+      }
+      strong {
+        color: $headings-color;
       }
     }
   }
-  &.summary-status-approved {
-    background-color: #DBFFDC;
-    font-weight: $body-font-weight-bold;
+  &.summary-status-style-green {
     .ss-icon {
       display: block;
+      padding: 15px;
+      background-color: #98ff96;
+      border-radius: 50%;
+      box-shadow: 0 0 0 10px #e1ffe0;
       &:before {
         @include latepointfont('\e928');
         color: #000;
-        padding: 5px;
-        line-height: 16px;
-        width: 26px;
+        line-height: 24px;
         display: block;
-        font-size: 16px;
-        border-radius: 50%;
-        text-align: center;
+        font-size: 24px;
       }
     }
   }
+
+    &.summary-status-style-yellow {
+      .ss-icon {
+        display: block;
+        padding: 10px;
+        background-color: #ffe196;
+        border-radius: 50%;
+        box-shadow: 0 0 0 10px #fff2e0;
+        width: 44px;
+        text-align: center;
+
+        &:before {
+          content: "i";
+          color: #000;
+          line-height: 24px;
+          display: block;
+          font-size: 24px;
+        }
+      }
+    }
 }
   
-  .booking-full-summary-actions {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    margin-bottom: 30px;
-    margin-top: 10px;
-  }
+
   .summary-price-item-w.spi-sub {
     padding-left: 20px;
     position: relative;
@@ -1684,15 +1801,19 @@
     .sbh-line {
     }
   }
+  .summary-box {
+    padding-bottom: 0;
+  }
   .summary-box .sbc-main-item {
     color: $headings-color;
-    font-size: $body-font-size-m;
+    font-size: $body-font-size-s;
     font-weight: $body-font-weight-bold;
   }
 }
 
 // Confirmation & Verification list of label-value pairs
 .confirmation-info-w {
+  position: relative;
   
   .price-breakdown-unfold {
     display: none;

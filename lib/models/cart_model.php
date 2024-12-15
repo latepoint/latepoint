@@ -53,6 +53,10 @@ class OsCartModel extends OsModel {
 		return OsMoneyHelper::pad_to_db_format( $amount );
 	}
 
+	public function get_order_intent() : OsOrderIntentModel {
+		return new OsOrderIntentModel($this->order_intent_id);
+	}
+
 
 	public function get_subtotal() {
 

@@ -24,7 +24,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<?php
 			$total_paid     = $order->get_total_amount_paid_from_transactions();
 			$total_balance  = $order->get_total_balance_due();
-            ray($order->get_items());
 			$deposit_amount = $order->get_deposit_amount_to_charge();
 
 			?>

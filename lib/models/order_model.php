@@ -54,6 +54,10 @@ class OsOrderModel extends OsModel {
 		return OsOrdersHelper::get_nice_order_status_name( $this->status );
 	}
 
+	public function get_nice_payment_status_name(): string {
+		return OsOrdersHelper::get_nice_order_payment_status_name( $this->payment_status );
+	}
+
 	public function get_nice_fulfillment_status_name(): string {
 		return OsOrdersHelper::get_nice_order_fulfillment_status_name( $this->fulfillment_status );
 	}

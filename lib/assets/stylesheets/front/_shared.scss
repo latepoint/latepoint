@@ -39,3 +39,93 @@
 		display: block;
 	}
 }
+
+
+.order-payments-form-wrapper {
+  .total-order-payments-info {
+    margin-bottom: 30px;
+    .topi-amount {
+      font-size: $headings-font-size-xxl + 10;
+      font-weight: $headings-font-weight-black;
+      font-family: $headings-font-family;
+      color: $headings-color;
+    }
+
+    .topi-sub-info {
+      color: $color-faded;
+
+      a {
+        display: inline-flex;
+        margin-left: 5px;
+        text-decoration: none;
+        align-items: center;
+        gap: 5px;
+
+        span {
+          border-bottom: 1px dotted $brand-primary;
+        }
+      }
+    }
+  }
+  .topi-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+	font-size: $headings-font-size-l;
+	font-weight: $headings-font-weight-black;
+	font-family: $headings-font-family;
+	color: $headings-color;
+    line-height: 1.1;
+    margin-bottom: 15px;
+	.topih-line {
+	  height: 10px;
+	  background-color: #eee;
+	  flex: 1;
+	}
+  }
+
+  .topi-transaction {
+    padding: 15px;
+    border: 1px solid #eee;
+    border-bottom-color: #aaa;
+    position: relative;
+    .topit-amount {
+	  font-size: $headings-font-size-m;
+	  font-weight: $headings-font-weight-black;
+	  font-family: $headings-font-family;
+      color: $headings-color;
+    }
+    .topit-sub-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: $body-font-size-xs;
+      color: $color-faded;
+    }
+    .topit-transaction-status {
+      position: absolute;
+      top: 0px;
+      right: 0;
+      padding: 2px;
+      background-color: #eee;
+      font-size: $body-font-size-xxs;
+    }
+  }
+}
+
+
+  .order-summary-items-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+	font-size: $headings-font-size-s;
+	font-weight: $headings-font-weight-black;
+	font-family: $headings-font-family;
+	color: $color-faded;
+    line-height: 1.1;
+	.osih-line {
+	  height: 10px;
+	  background-color: rgba(0, 0, 0, 0.03);
+	  flex: 1;
+	}
+  }

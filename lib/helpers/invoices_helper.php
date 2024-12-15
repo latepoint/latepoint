@@ -104,7 +104,7 @@ class OsInvoicesHelper {
                     <?php } ?>
                     <?php if($invoice->status == LATEPOINT_INVOICE_STATUS_PAID){ ?>
                     <div class="invoice-due-pay-link-w">
-                        <a href="#"><?php esc_html_e( 'View Payments', 'latepoint-pro-features' ); ?></a>
+                        <a target="_blank" href="<?php echo OsOrdersHelper::generate_direct_manage_order_url($invoice->get_order(), 'customer', 'list_payments') ?>"><?php esc_html_e( 'View Payments', 'latepoint-pro-features' ); ?></a>
                     </div>
                     <?php } ?>
                 </div>

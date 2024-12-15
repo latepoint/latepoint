@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 ?>
-<div class="manage-booking-wrapper" data-route-name="<?php echo esc_attr(OsRouterHelper::build_route_name('manage_order_by_key', 'show')); ?>" data-key="<?php echo esc_attr($key); ?>">
+<div class="manage-order-wrapper" data-route-name="<?php echo esc_attr(OsRouterHelper::build_route_name('manage_order_by_key', 'show')); ?>" data-key="<?php echo esc_attr($key); ?>">
 		<?php
         if($for == 'agent'){
             echo '<div class="manage-booking-controls status-'.esc_attr($order->status).'">';

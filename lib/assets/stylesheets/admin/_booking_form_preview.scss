@@ -453,11 +453,22 @@ $rounded-borders-radius: 4px;
     }
   }
 
+  &.booking-form-preview-step-confirmation {
+    .bf-main-heading {
+      display: none;
+    }
+    .bf-main-panel .bf-main-panel-buttons {
+      .bf-next-btn {
+        display: none;
+      }
+    }
+  }
+
   .booking-preview-step-skipped-message {
     padding: 10px;
     background-color: #fbf6e9;
     color: #111;
-
+    text-align: center;
   }
 
 
@@ -614,6 +625,104 @@ $rounded-borders-radius: 4px;
 
       .bf-main-panel-content {
         padding: 0px 40px;
+      }
+    }
+
+    .summary-status-wrapper {
+      padding: 0 0 40px 0;
+      color: $headings-color;
+      font-size: $body-font-size-s;
+      margin-bottom: 20px;
+      border-bottom: 10px solid rgba(0, 0, 0, 0.03);
+      margin-top: 20px;
+
+      .summary-status-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .ss-title {
+          font-size: $headings-font-size-xl;
+          font-weight: $headings-font-weight-bold;
+          font-family: $headings-font-family;
+          min-width: 30px;
+          min-height: $headings-font-size-xl;
+          border: 1px dotted #ccc;
+          text-align: center;
+        }
+
+        .ss-description {
+          color: $color-faded;
+          font-weight: $body-font-weight-normal;
+          font-size: $body-font-size-s;
+          margin-top: 3px;
+          min-width: 30px;
+          min-height: $body-font-size-s;
+          border: 1px dotted #ccc;
+          text-align: center;
+        }
+
+        .ss-icon {
+          margin-bottom: 25px;
+        }
+
+        .ss-confirmation-number {
+          font-size: $body-font-size-xs;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          color: $color-faded;
+          margin-top: 15px;
+          padding: 3px 5px;
+          background-color: rgba(0, 0, 0, 0.03);
+
+          span {
+          }
+
+          strong {
+            color: $headings-color;
+          }
+        }
+      }
+
+      &.summary-status-style-green {
+        .ss-icon {
+          display: block;
+          padding: 10px;
+          background-color: #98ff96;
+          border-radius: 50%;
+          box-shadow: 0 0 0 10px #e1ffe0;
+          width: 44px;
+          text-align: center;
+          animation: 1s cubic-bezier(0.05, 0.45, 0.1, 1) 0.1s statusIconPop;
+          animation-fill-mode: both;
+
+          &:before {
+            @include latepointfont_admin('\e910');
+            color: #000;
+            line-height: 24px;
+            display: block;
+            font-size: 24px;
+          }
+        }
+      }
+      &.summary-status-style-yellow {
+        .ss-icon {
+          display: block;
+          padding: 10px;
+          background-color: #ffe196;
+          border-radius: 50%;
+          box-shadow: 0 0 0 10px #fff2e0;
+          width: 44px;
+          text-align: center;
+
+          &:before {
+            content: "i";
+            color: #000;
+            line-height: 24px;
+            display: block;
+            font-size: 24px;
+          }
+        }
       }
     }
 

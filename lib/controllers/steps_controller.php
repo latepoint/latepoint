@@ -284,7 +284,7 @@ if ( ! class_exists( 'OsStepsController' ) ) :
 					break;
 			}
 			if ( $step_code_to_load ) {
-				do_action( 'latepoint_load_step', $step_code_to_load, 'json' );
+				do_action( 'latepoint_load_step', $step_code_to_load, 'json', $this->params );
 			}
 		}
 

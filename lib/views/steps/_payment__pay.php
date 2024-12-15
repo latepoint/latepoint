@@ -19,6 +19,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php
 	do_action('latepoint_before_step_content', $current_step_code);
 	echo OsStepsHelper::get_formatted_extra_step_content($current_step_code, 'before');
+
+    $order_intent = $cart->get_order_intent();
+    if(!$order_intent->is_new_record()) echo '<div class="lp-payment-charge-amount">'.sprintf(esc_html__('Charge Amount: %s', 'latepoint'), '<strong>'.OsMoneyHelper::format_price($order_intent->charge_amount, true, false).'</strong>').'</div>';
+
 	do_action('latepoint_step_payment__pay_content', $cart);
 	echo OsStepsHelper::get_formatted_extra_step_content($current_step_code, 'after');
 	do_action('latepoint_after_step_content', $current_step_code);

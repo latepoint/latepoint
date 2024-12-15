@@ -40,10 +40,25 @@ if ( ! class_exists( 'OsManageOrderByKeyController' ) ) :
 			$this->action_access['public'] = array_merge( $this->action_access['public'], [
 				'show',
 				'print_order_info',
+				'list_payments'
 			] );
 
 			$this->set_order_by_key();
 
+		}
+
+		function list_payments(){
+			if ( empty( $this->order->id ) ) {
+				return;
+			}
+
+			$transactions = $this->order->get_transactions();
+
+			$this->vars['order'] = $this->order;
+			$this->vars['transactions'] = $transactions;
+
+				$this->set_layout( 'clean' );
+			$this->format_render(__FUNCTION__);
 		}
 
 

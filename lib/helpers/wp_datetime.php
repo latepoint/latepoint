@@ -2,7 +2,12 @@
 class OsWpDateTime extends DateTime {
   function __construct($time = 'now', $timezone = false){
 		$timezone = ($timezone instanceof DateTimeZone) ? $timezone : OsTimeHelper::get_wp_timezone();
-    parent::__construct($time, $timezone);
+		try{
+		    parent::__construct($time, $timezone);
+		}catch(Exception $e){
+			OsDebugHelper::log('Error parsing date: '.$e->getMessage() , 'date_parsing' );
+			return parent::__construct('now', $timezone);
+		}
   }
 
 	public static function datetime_in_utc(DateTime $datetime, $format = false){

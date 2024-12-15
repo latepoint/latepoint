@@ -572,6 +572,7 @@ class OsStripeConnectHelper {
 			'amount' => $transaction_intent->specs_charge_amount,
 			'currency' => self::get_currency_iso_code(),
 			'stripe_customer_id' => self::get_stripe_customer_id($order->customer),
+            'transaction_description' => esc_html__('Payment for Appointment', 'latepoint'),
 			'metadata' => [
 				'transaction_intent_key' => $transaction_intent->intent_key
 			]
@@ -599,6 +600,7 @@ class OsStripeConnectHelper {
 			'amount' => $order_intent->specs_charge_amount,
 			'currency' => self::get_currency_iso_code(),
 			'stripe_customer_id' => self::get_stripe_customer_id($order_intent->customer),
+            'transaction_description' => esc_html__('Payment for Appointment', 'latepoint'),
 			'metadata' => [
 				'order_intent_key' => $order_intent->intent_key
 			]
