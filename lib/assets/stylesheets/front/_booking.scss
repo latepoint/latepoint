@@ -1607,12 +1607,16 @@
   .booking-status-info-wrapper {
     display: flex;
     gap: 10px;
-    padding: 10px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 15px 30px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    margin: -30px;
+    margin-bottom: 10px;
+    align-items: center;
     .booking-status-icon {
-      width: 15px;
-      height: 15px;
+      width: 24px;
+      height: 24px;
       background-color: #eee;
+      position: relative;
     }
     .booking-status-label {
       font-weight: $body-font-weight-bold;
@@ -1628,14 +1632,14 @@
     }
     &.status-approved {
       .booking-status-icon {
-        background-color: #bdff84;
+        background-color: #a0ffa4;
         &:before {
           @include latepointfont("\e928");
           position: absolute;
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
-          font-size: 14px;
+          font-size: 16px;
         }
       }
     }
