@@ -15,38 +15,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 	$order_bookings = $order->get_bookings_from_order_items();
 	$order_bundles = $order->get_bundles_from_order_items();
 
-	if ($order_bookings && $order_bundles) {
 		?>
-		<div class="summary-heading summary-variant-heading">
-			<div class="pb-heading">
-				<div class="pbh-label"><?php esc_html_e('Service Bundles', 'latepoint'); ?></div>
-				<div class="pbh-line"></div>
-			</div>
-		</div>
+
+        <div class="order-summary-items-heading">
+            <?php esc_html_e( 'Order Items', 'latepoint' ); ?>
+            <div class="osih-line"></div>
+        </div>
 		<?php
-	}
 
 	if ($order_bundles) {
 		foreach ($order_bundles as $order_item_id => $bundle) {
 			echo '<div class="summary-box-wrapper">';
-				echo OsBundlesHelper::generate_summary_for_bundle($bundle);
-				echo '<div class="schedule-bundle-booking-btn-wrapper">';
-				echo '<div class="schedule-bundle-booking-btn" '.OsCustomerHelper::generate_bundle_scheduling_btn($order_item_id).'><span>'.esc_html__('Start Scheduling', 'latepoint').'</span><i class="latepoint-icon latepoint-icon-arrow-2-right"></i></div>';
-				echo '</div>';
+                echo '<div class="order-item-bundle-info-wrapper">';
+                    echo '<div class="bundle-icon"><i class="latepoint-icon latepoint-icon-layers"></i></div>';
+                    echo OsBundlesHelper::generate_summary_for_bundle($bundle);
+                echo '</div>';
+                echo '<div class="schedule-bundle-booking-btn-wrapper">';
+                echo '<div class="schedule-bundle-booking-btn" '.OsCustomerHelper::generate_bundle_scheduling_btn($order_item_id).'><span>'.esc_html__('Start Scheduling', 'latepoint').'</span><i class="latepoint-icon latepoint-icon-arrow-2-right"></i></div>';
+                echo '</div>';
 			echo '</div>';
 		}
 	}
 
-	if ($order_bookings && $order_bundles) {
-		?>
-		<div class="summary-heading summary-variant-heading">
-			<div class="pb-heading">
-				<div class="pbh-label"><?php esc_html_e('Individual Services', 'latepoint'); ?></div>
-				<div class="pbh-line"></div>
-			</div>
-		</div>
-		<?php
-	}
 	if ($order_bookings) {
 
 		$same_location = OsBookingHelper::bookings_have_same_location($order_bookings);

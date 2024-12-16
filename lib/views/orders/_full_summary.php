@@ -76,10 +76,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 		do_action( 'latepoint_order_full_summary_head_info_after', $order ); ?>
     </div>
     <div class="full-summary-info-w">
-        <div class="order-summary-items-heading">
-            <?php esc_html_e( 'Order Items', 'latepoint' ); ?>
-            <div class="osih-line"></div>
-        </div>
 		<?php include( LATEPOINT_VIEWS_ABSPATH . 'steps/partials/_order_summary.php' ); ?>
     </div>
 </div>

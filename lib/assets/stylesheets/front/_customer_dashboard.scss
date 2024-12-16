@@ -621,6 +621,7 @@
     .summary-box {
       &.main-box {
         padding: 0;
+        display: block;
       }
       .sbc-big-item {
         font-size: floor($font-size-base * 1.8);

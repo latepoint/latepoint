@@ -1751,6 +1751,24 @@
       }
     }
   }
+  .order-item-bundle-info-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 15px 0;
+
+    .bundle-icon {
+      padding: 10px;
+      line-height: 20px;
+      font-size: 20px;
+      background-color: color-mix(in srgb, $brand-primary 10%, transparent);
+      border-radius: 30px;
+      color: $brand-primary;
+    }
+    .summary-box.main-box {
+      padding: 0;
+    }
+  }
   .schedule-bundle-booking-btn-wrapper {
     padding-bottom: 20px;
   }
