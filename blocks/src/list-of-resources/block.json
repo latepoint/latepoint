@@ -43,6 +43,9 @@
     "selected_location": {
       "type": "string"
     },
+    "selected_bundle": {
+      "type": "string"
+    },
     "selected_start_date": {
       "type": "string"
     },

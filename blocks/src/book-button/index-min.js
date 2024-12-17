@@ -4,7 +4,7 @@ var _blocks = require("@wordpress/blocks");
 var _edit = _interopRequireDefault(require("./edit"));
 var _save = _interopRequireDefault(require("./save"));
 var _block = _interopRequireDefault(require("./block.json"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 /*
  * Copyright (c) 2023 LatePoint LLC. All rights reserved.
  */
@@ -25,7 +25,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
  */
 
-var test = (0, _blocks.registerBlockType)(_block.default.name, {
+let test = (0, _blocks.registerBlockType)(_block.default.name, {
   edit: _edit.default,
   save: _save.default
 });

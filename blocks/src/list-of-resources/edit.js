@@ -218,6 +218,9 @@ export default function Edit({attributes, setAttributes}) {
             case 'locations':
                 resources = latepoint_helper.locations.filter((location) => isIncludedInIds(location.id, attributes.item_ids) && isIncludedInIds(location.category_id, attributes.group_ids))
                 break;
+            case 'bundles':
+                resources = latepoint_helper.bundles.filter((bundle) => isIncludedInIds(bundle.id, attributes.item_ids))
+                break;
         }
         if (resources.length) {
             if (attributes.limit) resources = resources.slice(0, attributes.limit)
@@ -294,7 +297,8 @@ export default function Edit({attributes, setAttributes}) {
                                                     options={[
                                                         {value: 'services', label: __('Services', 'latepoint')},
                                                         {value: 'agents', label: __('Agents', 'latepoint')},
-                                                        {value: 'locations', label: __('Locations', 'latepoint')}]}
+                                                        {value: 'locations', label: __('Locations', 'latepoint')},
+                                                        {value: 'bundles', label: __('Bundles', 'latepoint')}]}
                                                 />
                                             </PanelRowBlock>
                                             <PanelRowBlock>
@@ -340,7 +344,7 @@ export default function Edit({attributes, setAttributes}) {
                                                     options={latepoint_helper.selected_agents_options}
                                                 />
                                             </PanelRowBlock>}
-                                            {attributes.items != 'services' && <PanelRowBlock>
+                                            {(attributes.items != 'services' && attributes.items != 'bundles') && <PanelRowBlock>
                                                 <SelectControl
                                                     value={attributes.selected_service}
                                                     label={__('Preselected Service', 'latepoint')}
@@ -348,7 +352,7 @@ export default function Edit({attributes, setAttributes}) {
                                                     options={latepoint_helper.selected_services_options}
                                                 />
                                             </PanelRowBlock>}
-                                            {attributes.items != 'services' && <PanelRowBlock>
+                                            {(attributes.items != 'services' && attributes.items != 'bundles') && <PanelRowBlock>
                                                 <SelectControl
                                                     value={attributes.selected_service_category}
                                                     label={__('Preselected Service Category', 'latepoint')}
@@ -415,7 +419,8 @@ export default function Edit({attributes, setAttributes}) {
                                                     onChange={(value) => setAttributes({item_ids: value})}
                                                 />
                                             </PanelRow>
-                                            <PanelRow>
+
+                                            { attributes.items != 'bundles' && <PanelRow>
                                                 <TextControl
                                                     label="Show Selected Categories"
                                                     placeholder="Comma separated category IDs"
@@ -423,6 +428,7 @@ export default function Edit({attributes, setAttributes}) {
                                                     onChange={(value) => setAttributes({group_ids: value})}
                                                 />
                                             </PanelRow>
+                                            }
                                         </PanelBody>
                                     </Panel>
                                     <Panel>
@@ -442,7 +448,7 @@ export default function Edit({attributes, setAttributes}) {
                                                     onChange={(value) => setAttributes({calendar_start_date: value})}
                                                 />
                                             </PanelRow>
-                                            {attributes.items != 'services' && <PanelRow>
+                                            {(attributes.items != 'services' && attributes.items != 'bundles') && <PanelRow>
                                                 <TextControl
                                                     label="Show Services"
                                                     placeholder="Comma separated service IDs"
@@ -450,7 +456,7 @@ export default function Edit({attributes, setAttributes}) {
                                                     onChange={(value) => setAttributes({show_services: value})}
                                                 />
                                             </PanelRow>}
-                                            {attributes.items != 'services' &&
+                                            {(attributes.items != 'services' && attributes.items != 'bundles') &&
                                                 <PanelRow>
                                                     <TextControl
                                                         label="Show Service Categories"

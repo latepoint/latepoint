@@ -238,7 +238,7 @@ class OsOrderIntentModel extends OsModel {
 
 				if ( $transaction ) {
 					$transaction->order_id = $order->id;
-					find invoice for this transaction
+//					find invoice for this transaction
 					if ( $transaction->save() ) {
 						do_action( 'latepoint_transaction_created', $transaction );
 

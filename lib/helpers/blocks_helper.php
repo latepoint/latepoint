@@ -84,6 +84,15 @@ class OsBlockHelper {
 					'category_id' => $location->category_id];
 			}
 		}
+
+		$localized_block_vars['bundles'] = [];
+		$bundles = (new OsBundleModel())->should_be_active()->get_results_as_models();
+		if ($bundles) {
+			foreach ( $bundles as $bundle ) {
+				$localized_block_vars['bundles'][] = ['name' => $bundle->name, 'id' => $bundle->id];
+			}
+		}
+
 		return $localized_block_vars;
 	}
 
@@ -370,6 +379,31 @@ class OsBlockHelper {
 		}
 
 		return $styling_css;
+	}
+
+	/**
+	 * Retrieve Ids by resources
+	 * @param string $resource
+	 * @param array $settings
+	 *
+	 * @return string
+	 */
+	public static function get_ids_from_resources(string $resource, array $settings): array
+	{
+		$resourceMap = [
+			'services'   => 'item_ids_services',
+			'locations'  => 'item_ids_locations',
+			'agents'     => 'item_ids_agents',
+			'bundles'    => 'item_ids_bundles',
+		];
+
+		if (!array_key_exists($resource, $resourceMap)) {
+			return [];
+		}
+
+		$idsKey = $resourceMap[$resource];
+
+		return $settings[$idsKey] ?? [];
 	}
 
 }

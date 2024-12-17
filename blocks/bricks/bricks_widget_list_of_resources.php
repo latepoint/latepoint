@@ -94,6 +94,7 @@ class Latepoint_Bricks_Widget_List_Of_Resources extends \Bricks\Element {
 				'services'  => esc_html__( 'Services', 'latepoint' ),
 				'agents'    => esc_html__( 'Agents', 'latepoint' ),
 				'locations' => esc_html__( 'Locations', 'latepoint' ),
+				'bundles'   => esc_html__( 'Bundles', 'latepoint' ),
 			],
 			'default' => 'services'
 		];
@@ -249,6 +250,19 @@ class Latepoint_Bricks_Widget_List_Of_Resources extends \Bricks\Element {
 			'required'   => array( 'items', '=', 'locations' ),
 		];
 
+		$this->controls['item_ids_bundles'] = [
+			'tab'        => 'content',
+			'group'      => 'items_settings',
+			'label'      => esc_html__( 'Show Selected Bundles', 'latepoint' ),
+			'type'       => 'select',
+			'options'    => OsBricksHelper::get_data( 'bundles' ),
+			'placeholder' => esc_html__( 'Show Selected Bundles', 'latepoint' ),
+			'multiple'   => true,
+			'searchable' => true,
+			'clearable'  => true,
+			'required'   => array( 'items', '=', 'bundles' ),
+		];
+
 		#other settings
 		$this->controls['source_id'] = [
 			'tab'    => 'content',
@@ -279,7 +293,7 @@ class Latepoint_Bricks_Widget_List_Of_Resources extends \Bricks\Element {
 			'multiple'    => true,
 			'searchable'  => true,
 			'clearable'   => true,
-			'required'   => array( 'items', '!=', 'services' ),
+			'required'   => array( 'items', '!=', ['services', 'bundles'] ),
 		];
 
 		$this->controls['show_service_categories'] = [
@@ -292,7 +306,7 @@ class Latepoint_Bricks_Widget_List_Of_Resources extends \Bricks\Element {
 			'multiple'    => true,
 			'searchable'  => true,
 			'clearable'   => true,
-			'required'   => array( 'items', '!=', 'services' ),
+			'required'   => array( 'items', '!=', ['services', 'bundles'] ),
 		];
 		$this->controls['show_agents'] = [
 			'tab'         => 'content',
@@ -318,8 +332,6 @@ class Latepoint_Bricks_Widget_List_Of_Resources extends \Bricks\Element {
 			'clearable'   => true,
 			'required'   => array( 'items', '!=', 'locations' ),
 		];
-
-
 
 
 		$this->controls['btn_font'] = [
@@ -584,7 +596,7 @@ class Latepoint_Bricks_Widget_List_Of_Resources extends \Bricks\Element {
 	// Render element HTML
 	public function render() {
 
-		$this->settings['item_ids'] = $this->settings['item_ids_services'] ?? $this->settings['item_ids_locations'] ?? $this->settings['item_ids_agents'] ?? [];
+		$this->settings['item_ids'] = OsBlockHelper::get_ids_from_resources($this->settings['items'], $this->settings);
 		$this->settings['group_ids'] = $this->settings['services_categories_ids'] ?? $this->settings['location_categories_ids'] ?? [];
 
 		$allowed_params = [

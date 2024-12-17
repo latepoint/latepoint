@@ -556,6 +556,10 @@ class OsStepsHelper {
 
 	public static function remove_preset_steps(): void {
 
+//        if (! empty( self::$presets['selected_bundle'] )) {
+//	        $bundle = new OsBundleModel( self::$presets['selected_bundle'] );
+//        }
+
 		// if current step is agents or services selection and we have it preselected - skip to next step
 		if ( ! empty( self::$presets['selected_service'] ) ) {
 			$service = new OsServiceModel( self::$presets['selected_service'] );
@@ -939,6 +943,11 @@ class OsStepsHelper {
 		// preselected service
 		if ( isset( $presets['selected_service'] ) && is_numeric( $presets['selected_service'] ) ) {
 			self::$presets['selected_service'] = $presets['selected_service'];
+		}
+
+		// preselected bundle
+		if ( isset( $presets['selected_bundle'] ) && is_numeric( $presets['selected_bundle'] ) ) {
+			self::$presets['selected_bundle'] = $presets['selected_bundle'];
 		}
 
 		// preselected duration
