@@ -108,6 +108,7 @@ class Latepoint_Elementor_Widget_List_Of_Resources extends \Elementor\Widget_Bas
 					'services' => esc_html__('Services', 'latepoint'),
 					'agents' => esc_html__('Agents', 'latepoint'),
 					'locations' => esc_html__('Locations', 'latepoint'),
+					'bundles' => esc_html__('Bundles', 'latepoint'),
 				]
 			]
 		);
@@ -293,6 +294,20 @@ class Latepoint_Elementor_Widget_List_Of_Resources extends \Elementor\Widget_Bas
 				'multiple' => true,
 				'condition' => [
 					'items' => [ 'locations' ],
+				],
+			]
+		);
+
+		$this->add_control(
+			'item_ids_bundles',
+			[
+				'label' => esc_html__('Show Selected Bundles', 'latepoint'),
+				'type' => \Elementor\Controls_Manager::SELECT2,
+				'default' => '',
+				'options' => $this->widget_data['bundles'],
+				'multiple' => true,
+				'condition' => [
+					'items' => 'bundles',
 				],
 			]
 		);
@@ -753,7 +768,7 @@ class Latepoint_Elementor_Widget_List_Of_Resources extends \Elementor\Widget_Bas
 	protected function render(): void {
 		$settings = $this->get_settings_for_display();
 
-		$settings['item_ids'] = $settings['item_ids_services'] ?? $settings['item_ids_locations'] ?? $settings['item_ids_agents'] ?? [];
+		$settings['item_ids'] = OsBlockHelper::get_ids_from_resources($settings['items'], $settings);
 		$settings['group_ids'] = $settings['services_categories_ids'] ?? $settings['location_categories_ids'] ?? [];
 
 		$allowed_params = [

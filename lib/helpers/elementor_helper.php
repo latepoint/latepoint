@@ -100,6 +100,7 @@ class OsElementorHelper {
 		$result['locations'] = array_column($localized_vars['locations'], 'name', 'id');
 		$result['location_categories'] = OsLocationHelper::get_location_categories();
 		$result['service_categories'] = array_column($localized_vars['service_categories'], 'name', 'id');
+		$result['bundles'] = array_column($localized_vars['bundles'], 'name', 'id');
 		return $result;
 	}
 

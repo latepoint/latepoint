@@ -75,6 +75,7 @@ class OsBricksHelper {
 		self::$data['agents'] = array_column($localized_vars['agents'], 'name', 'id');
 		self::$data['services'] = array_column($localized_vars['services'], 'name', 'id');;
 		self::$data['locations'] = array_column($localized_vars['locations'], 'name', 'id');
+		self::$data['bundles'] = array_column($localized_vars['bundles'], 'name', 'id');
 		self::$data['location_categories'] = OsLocationHelper::get_location_categories();
 		self::$data['service_categories'] = array_column($localized_vars['service_categories'], 'name', 'id');
 		self::$data['selected_agents'] = array_column($localized_vars['selected_agents_options'], 'label', 'value');

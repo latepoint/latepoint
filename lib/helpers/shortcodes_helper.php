@@ -37,8 +37,8 @@ class OsShortcodesHelper {
 	public static function shortcode_latepoint_resources( $atts ) {
 		$atts = shortcode_atts( array(
 			'id'                        => false,
-			'button_caption'            => __( 'Book Now', 'latepoint' ),
-			'items'                     => 'services',
+			'button_caption'            => esc_html__( 'Book Now', 'latepoint' ),
+			'items'                     => 'services', // services, agents, locations, bundles
 			'item_ids'                  => '',
 			'group_ids'                 => '',
 			'columns'                   => 4,
@@ -221,6 +221,46 @@ class OsShortcodesHelper {
 					</div>';
 					$output .= '</div>';
 				}
+				break;
+			case 'bundles':
+				$bundles = new OsBundleModel();
+
+				if ( $clean_item_ids ) {
+					$bundles->where( [ 'id' => $clean_item_ids ] );
+				}
+
+				if ( $atts['limit'] && is_numeric( $atts['limit'] ) ) {
+					$bundles->set_limit( $atts['limit'] );
+				}
+
+				$bundles = $bundles->should_be_active()->order_by( 'order_number asc' )->get_results_as_models();
+                $bundles = is_array($bundles) ? $bundles : [$bundles];
+
+				ob_start();
+				foreach ( $bundles as $bundle ) {
+				?>
+                    <div class="resource-item ri-centered <?php echo $resource_item_classes; ?>">
+                        <div class="ri-name">
+                            <h3><?php echo $bundle->name; ?></h3>
+                        </div>
+                        <?php if ($price = $bundle->get_formatted_charge_amount()) { ?>
+                            <div class="ri-price"><?php echo $price; ?></div>
+                        <?php } ?>
+
+						<?php if ( $description = $bundle->short_description ) { ?>
+                            <div class="ri-description"><?php echo $description; ?></div>
+						<?php } ?>
+                        <div class="ri-buttons <?php echo $btn_wrapper_classes ?>">
+                            <a href="#" <?php echo $data_atts ?>
+                               class="latepoint-book-button os_trigger_booking latepoint-btn-block <?php echo $btn_classes; ?>"
+                               data-selected-bundle="<?php echo $bundle->id; ?>" >
+								<?php echo $atts['button_caption']; ?>
+                            </a>
+                        </div>
+                    </div>
+				<?php }
+
+				$output .= ob_get_clean();
 				break;
 		}
 		$output .= '</div>';
